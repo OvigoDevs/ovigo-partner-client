@@ -1,11 +1,13 @@
+import IconWrapper from "@/components/core/icon-wrapper/icon-wrapper";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { Typewriter } from "react-simple-typewriter";
 
 const HeroSection = () => {
   return (
-    <div className="py-10 grid md:grid-cols-2 gap-10 md:gap-4 px-20">
+    <div className="section-p grid grid-cols-1 lg:grid-cols-2 gap-10 section-m-b">
       {/* Text Container */}
       <div className="flex items-center">
         <div className="space-y-3">
@@ -42,31 +44,42 @@ const HeroSection = () => {
         <div className="text-start space-y-3 p-5 border border-primary rounded-md">
           <h3 className="text-2xl font-bold">Create Your Listing</h3>
           <ul className="space-y-1">
-            <li className="flex items-center gap-2">
-              <Check className="text-green-600" /> More than 6.4 million
-              vacation rentals already listed
+            <li className="flex items-start gap-2">
+              <IconWrapper>
+                <Check className="text-green-600 mt-[4px]" />
+              </IconWrapper>{" "}
+              More than 6.4 million vacation rentals already listed
             </li>
             <li className="flex items-center gap-2">
-              <Check className="text-green-600" /> Over 1 billion vacation
-              rental guest arrivals{" "}
+              <IconWrapper>
+                <Check className="text-green-600 mt-[4px]" />
+              </IconWrapper>{" "}
+              Over 1 billion vacation rental guest arrivals{" "}
             </li>
-            <li className="flex items-center gap-2">
-              <Check className="text-green-600" />
+            <li className="flex items-start gap-2">
+              <IconWrapper>
+                <Check className="text-green-600 mt-[4px]" />
+              </IconWrapper>
               More than 40% of new vacation rental listings get their first
               booking within a week
             </li>
           </ul>
-          <div className="w-full border border-black"></div>
+          <hr />
           <h3 className="font-bold">
             Create a partner account to get started:
           </h3>
-          <p>
+          <p className="pb-10">
             By continuing, you agree to let Ovigo.net email you regarding your
             property registration.
           </p>
-          <Button className="flex items-center gap-2 w-full">
-            Get Started <ArrowRight />
-          </Button>
+          <Link href="/register/with-email">
+            <Button className="flex items-center gap-2 w-full">
+              Get Started{" "}
+              <IconWrapper>
+                <ArrowRight />
+              </IconWrapper>
+            </Button>
+          </Link>
         </div>
       </div>
     </div>

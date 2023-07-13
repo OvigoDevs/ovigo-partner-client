@@ -3,16 +3,16 @@ import { Input } from "@/components/ui/input";
 
 const RegisterWithEmail = () => {
   return (
-    <div className="py-10 lg:w-2/5 mx-auto">
+    <div className="py-10 max-w-[450px] mx-auto">
       <div className="space-y-4 border border-primary p-5 rounded-md">
         <h2 className="text-2xl font-bold">Create your partner account</h2>
         <p>Create an account to list and manage your service.</p>
         <form className="text-start pt-5 space-y-2">
           <label>Email Address</label>
           <Input />
-          <Button className="w-full" >Continue</Button>
+          <Button className="w-full">Continue</Button>
         </form>
-        <div className="w-full border border-black"></div>
+        <hr />
         <p className="w-3/4">
           Check out Partner Help or ask another partner in the Partner
           Community.
@@ -20,8 +20,8 @@ const RegisterWithEmail = () => {
         <Button variant="outline" className="w-full">
           Sign In
         </Button>
-        <div className="w-full border border-black"></div>
-        <p>
+        <hr />
+        <p className="font-medium">
           By signing in or creating an account, you agree with our Terms &
           Conditions and Privacy Statement
         </p>
