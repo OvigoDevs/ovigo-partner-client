@@ -1,1 +1,1 @@
-### **Ovigo Partner Client **
+### Ovigo Partner Client
