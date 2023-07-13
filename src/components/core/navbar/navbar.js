@@ -10,7 +10,7 @@ const Navbar = () => {
     },
   ];
   return (
-    <nav className="container flex items-center justify-between gap-5 py-2">
+    <nav className="container-d flex items-center justify-between gap-5 py-2 backdrop-blur shadow">
       <Link href="/">
         <div className="font-black cursor-default lg:cursor-pointer">Ovigo</div>
       </Link>

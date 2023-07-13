@@ -92,6 +92,9 @@
 .container {
   @apply max-w-[100vw] px-[2%] md:px-[4%] lg:px-[8%] xl:px-[13%] 2xl:px-[18%];
 }
+.container-d {
+  @apply max-w-[100vw] px-[1rem];
+}
 
 .container-l {
   @apply max-w-[100vw] pl-[2%] md:pl-[4%] lg:pl-[8%] xl:pl-[13%] 2xl:pl-[18%];
@@ -103,6 +106,9 @@
 // custom section style with padding
 .section-p {
   @apply py-5 lg:py-10 xl:py-16;
+}
+.section-d {
+  @apply py-[1rem];
 }
 .section-p-t {
   @apply pt-5 lg:pt-10 xl:pt-16;
