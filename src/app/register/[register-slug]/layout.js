@@ -5,7 +5,6 @@ const RegisterLayout = ({ children }) => {
   const pathname = usePathname();
   return (
     <div>
-      layout
       {children}
     </div>
   );

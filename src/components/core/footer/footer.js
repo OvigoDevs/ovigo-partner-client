@@ -1,6 +1,8 @@
 const Footer = () => {
     return (
-        <div>Footer</div>
+        <div className="bg-primary text-white py-5">
+            <h2 className="text-center">All right reserved by Ovigo</h2>
+        </div>
     )
 }
 
