@@ -1,6 +1,6 @@
-import BenefitSection from "./LandingPage/BenefitSection";
-import HeroSection from "./LandingPage/HeroSection";
-import KnowGuestsSection from "./LandingPage/KnowGuestsSection";
+import BenefitSection from "./benefit-section";
+import HeroSection from "./hero-section";
+import KnowGuestsSection from "./know-guests-section";
 
 
 const RegisterLanding = () => {

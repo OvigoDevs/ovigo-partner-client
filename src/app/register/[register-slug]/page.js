@@ -1,8 +1,8 @@
 "use client";
 
-import RegisterLanding from "@/components/pages/register/RegisterLanding";
-import RegisterWithEmail from "@/components/pages/register/RegisterWithEmail";
-import Test from "@/components/pages/register/test";
+import RegisterLanding from "@/components/pages/register/landing-page/register-landing";
+import RegisterInfo from "@/components/pages/register/register-info/register-info";
+import RegisterWithEmail from "@/components/pages/register/register-with-email/register-with-email";
 import { usePathname } from "next/navigation";
 
 const RegisterDynamicComps = () => {
@@ -13,8 +13,8 @@ const RegisterDynamicComps = () => {
         <RegisterLanding />
       ) : pathname.includes("with-email") ? (
         <RegisterWithEmail />
-      ) : pathname.includes("test") ? (
-        <Test />
+      ) : pathname.includes("register-info") ? (
+        <RegisterInfo />
       ) : (
         "404 | No component found"
       )}
