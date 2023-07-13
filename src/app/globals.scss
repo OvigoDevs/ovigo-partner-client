@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-dark-bg: 222.2 84% 4.9%;
+  --color-light-blue: 214.3 31.8% 91.4%;
+  --color-dark-blue: 217.2 32.6% 17.5%;
+  --color-white: 210 40% 98%;
+  --color-white-muted: 210 40% 96.1%;
+  --color-sweet-red: 351 97% 57%;
+  --color-purple: 230 92% 65%;
+}
+
+// theming
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: var(--color-dark-bg);
+
+    --muted: var(--color-white-muted);
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: var(--color-dark-bg);
+
+    --card: 0 0% 100%;
+    --card-foreground: var(--color-dark-bg);
+
+    --border: var(--color-light-blue);
+    --input: var(--color-light-blue);
+
+    --primary: var(--color-sweet-red);
+    --primary-foreground: var(--color-white);
+
+    --secondary: var(--color-purple);
+    --secondary-foreground: var(--color-white);
+
+    --accent: var(--color-white-muted);
+    --accent-foreground: var(--color-dark-blue);
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: var(--color-white);
+
+    --ring: 215 20.2% 65.1%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: var(--color-dark-bg);
+    --foreground: var(--color-white);
+
+    --muted: var(--color-dark-blue);
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --popover: var(--color-dark-bg);
+    --popover-foreground: var(--color-white);
+
+    --card: var(--color-dark-bg);
+    --card-foreground: var(--color-white);
+
+    --border: var(--color-dark-blue);
+    --input: var(--color-dark-blue);
+
+    --primary: var(--color-white);
+    --primary-foreground: var(--color-dark-blue);
+
+    --secondary: var(--color-purple);
+    --secondary-foreground: var(--color-white);
+
+    --accent: var(--color-dark-blue);
+    --accent-foreground: var(--color-white);
+
+    --destructive: 0 62.8% 40.6%;
+    --destructive-foreground: 0 85.7% 97.3%;
+
+    --ring: var(--color-dark-blue);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+// custom container style with padding
+.container {
+  @apply max-w-[100vw] px-[2%] md:px-[4%] lg:px-[8%] xl:px-[13%] 2xl:px-[18%];
+}
+
+.container-l {
+  @apply max-w-[100vw] pl-[2%] md:pl-[4%] lg:pl-[8%] xl:pl-[13%] 2xl:pl-[18%];
+}
+.container-r {
+  @apply max-w-[100vw] pr-[2%] md:pr-[4%] lg:pr-[8%] xl:pr-[13%] 2xl:pr-[18%];
+}
+
+// custom section style with padding
+.section-p {
+  @apply py-5 lg:py-10 xl:py-16;
+}
+.section-p-t {
+  @apply pt-5 lg:pt-10 xl:pt-16;
+}
+.section-p-b {
+  @apply pb-5 lg:pb-10 xl:pb-16;
+}
+
+// custom section style with margin
+.section-m {
+  @apply my-5 lg:my-10 xl:my-16;
+}
+.section-m-t {
+  @apply mt-5 lg:mt-10 xl:mt-16;
+}
+.section-m-b {
+  @apply mb-5 lg:mb-10 xl:mb-16;
+}
+
+// custom scroll bar
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  @apply bg-muted;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @apply bg-muted-foreground rounded-full;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
