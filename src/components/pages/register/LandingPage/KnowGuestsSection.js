@@ -4,7 +4,7 @@ import { CheckCircle } from "lucide-react";
 
 const KnowGuestsSection = () => {
   return (
-    <div className="py-10 space-y-3 px-20">
+    <div className="section-p space-y-3 container">
       <h2 className="text-3xl font-bold">Get to know your guests</h2>
       <p>
         No matter where they&apos;re from, our guests share a few similarities.

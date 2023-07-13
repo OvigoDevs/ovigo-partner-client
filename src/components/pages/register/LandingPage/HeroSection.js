@@ -5,7 +5,7 @@ import { Typewriter } from "react-simple-typewriter";
 
 const HeroSection = () => {
   return (
-    <div className="py-10 grid md:grid-cols-2 gap-10 md:gap-4 px-20">
+    <div className="section-p grid md:grid-cols-2 gap-10 md:gap-4 container">
       {/* Text Container */}
       <div className="flex items-center">
         <div className="space-y-3">

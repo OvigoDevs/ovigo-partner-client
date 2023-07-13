@@ -3,8 +3,8 @@ import benefitIcon from "../../../../images/benefit-icon.svg";
 
 const BenefitSection = () => {
   return (
-    <div className="py-10 px-20">
-      <h2 className="text-3xl font-bold">Benefit of working with us</h2>
+    <div className="container section-p">
+      <h2 className="text-4xl font-bold">Benefit of working with us</h2>
       {/* Benefit Container */}
       <div className="grid md:grid-cols-2 gap-6 md:gap-14 py-10">
         {/* Card 1 */}
