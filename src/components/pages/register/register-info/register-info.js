@@ -4,14 +4,14 @@ import Link from "next/link";
 const RegisterInfo = () => {
   return (
     <div className="section-d">
-      <div>
+      <div className="max-w-[500px]">
         <h1 className="font-bold mb-5">Registration information</h1>
-        <div className="grid grid-cols-3 gap-2">
-          <div className="col-span-2 grid grid-cols-1 gap-2">
+        <div className="grid grid-cols-1 gap-2">
+          <div className="grid grid-cols-1 gap-1">
             <label>Firstname</label>
             <input />
           </div>
-          <div className="col-span-1 grid grid-cols-1 gap-1">
+          <div className="grid grid-cols-1 gap-1">
             <label>Lastname</label>
             <input />
           </div>

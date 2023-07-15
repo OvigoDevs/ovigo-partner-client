@@ -103,7 +103,7 @@ const HotelCategories = () => {
           place?
         </p>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2 my-10">
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 my-10">
         {hotels.map((item) => {
           const { id, title, description } = item;
           return (

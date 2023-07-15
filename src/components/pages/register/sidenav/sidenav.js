@@ -8,7 +8,11 @@ import { List } from "lucide-react";
 import { Hotel } from "lucide-react";
 import { ListTodo } from "lucide-react";
 import { Check } from "lucide-react";
+import { Newspaper } from "lucide-react";
 import { Key } from "lucide-react";
+import { ShowerHead } from "lucide-react";
+import { MapPin } from "lucide-react";
+import { Briefcase } from "lucide-react";
 import { CrossIcon } from "lucide-react";
 import { Home } from "lucide-react";
 import Link from "next/link";
@@ -80,6 +84,16 @@ const SideNav = ({ setOpenSideNav }) => {
       ),
     },
     {
+      id: 6,
+      text: "Service Category",
+      link: "/register/service-category",
+      icon: (
+        <IconWrapper>
+          <Briefcase />
+        </IconWrapper>
+      ),
+    },
+    {
       id: 7,
       text: "Hotel categories",
       link: "/register/hotel-categories",
@@ -91,11 +105,41 @@ const SideNav = ({ setOpenSideNav }) => {
     },
     {
       id: 8,
+      text: "Hotels",
+      link: "/register/no-of-hotel",
+      icon: (
+        <IconWrapper>
+          <Newspaper />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 9,
       text: "Hotel Type",
       link: "/register/hotel-type-confirmation",
       icon: (
         <IconWrapper>
           <ListTodo />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 10,
+      text: "Hotel Address",
+      link: "/register/hotel-address",
+      icon: (
+        <IconWrapper>
+          <MapPin />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 12,
+      text: "Popular Facilities",
+      link: "/register/popular-facilities",
+      icon: (
+        <IconWrapper>
+          <ShowerHead />
         </IconWrapper>
       ),
     },
