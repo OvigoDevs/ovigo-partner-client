@@ -13,7 +13,7 @@ const HeroSection = () => {
         <div className="space-y-3">
           <h3 className="lg:text-5xl text-3xl font-bold">
             List Your{" "}
-            <span className="text-primary block">
+            <span className="text-primary block lg:text-5xl text-3xl">
               <Typewriter
                 words={[
                   "Hotel",

@@ -4,6 +4,15 @@ import IconWrapper from "@/components/core/icon-wrapper/icon-wrapper";
 import { UserPlus } from "lucide-react";
 import { Text } from "lucide-react";
 import { CheckCircle2Icon } from "lucide-react";
+import { List } from "lucide-react";
+import { Hotel } from "lucide-react";
+import { ListTodo } from "lucide-react";
+import { Check } from "lucide-react";
+import { Newspaper } from "lucide-react";
+import { Key } from "lucide-react";
+import { ShowerHead } from "lucide-react";
+import { MapPin } from "lucide-react";
+import { Briefcase } from "lucide-react";
 import { CrossIcon } from "lucide-react";
 import { Home } from "lucide-react";
 import Link from "next/link";
@@ -36,11 +45,101 @@ const SideNav = ({ setOpenSideNav }) => {
     },
     {
       id: 2,
-      text: "Register",
+      text: "Verification",
+      link: "/register/verification",
+      icon: (
+        <IconWrapper>
+          <Check />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 3,
+      text: "Register info",
       link: "/register/register-info",
       icon: (
         <IconWrapper>
           <Text />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 4,
+      text: "Contact details",
+      link: "/register/contact-details",
+      icon: (
+        <IconWrapper>
+          <List />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 5,
+      text: "Create password",
+      link: "/register/create-password",
+      icon: (
+        <IconWrapper>
+          <Key />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 6,
+      text: "Service Category",
+      link: "/register/service-category",
+      icon: (
+        <IconWrapper>
+          <Briefcase />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 7,
+      text: "Hotel categories",
+      link: "/register/hotel-categories",
+      icon: (
+        <IconWrapper>
+          <Hotel />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 8,
+      text: "Hotels",
+      link: "/register/no-of-hotel",
+      icon: (
+        <IconWrapper>
+          <Newspaper />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 9,
+      text: "Hotel Type",
+      link: "/register/hotel-type-confirmation",
+      icon: (
+        <IconWrapper>
+          <ListTodo />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 10,
+      text: "Hotel Address",
+      link: "/register/hotel-address",
+      icon: (
+        <IconWrapper>
+          <MapPin />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 12,
+      text: "Popular Facilities",
+      link: "/register/popular-facilities",
+      icon: (
+        <IconWrapper>
+          <ShowerHead />
         </IconWrapper>
       ),
     },
@@ -50,8 +149,11 @@ const SideNav = ({ setOpenSideNav }) => {
     const filteredLink = links.filter((item) => pathname.includes(item.link));
     filteredLink.length && setCurrentLink(filteredLink[0].id);
   }, [pathname]);
+
   return (
-    <div className={`relative h-full min-h-screen min-w-[250px] backdrop-blur py-5 rounded-md`}>
+    <div
+      className={`relative h-full min-h-screen min-w-[250px] backdrop-blur py-5 rounded-md`}
+    >
       <div className="md:hidden">
         <IconWrapper>
           <CrossIcon
