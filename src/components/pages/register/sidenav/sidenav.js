@@ -4,6 +4,10 @@ import IconWrapper from "@/components/core/icon-wrapper/icon-wrapper";
 import { UserPlus } from "lucide-react";
 import { Text } from "lucide-react";
 import { CheckCircle2Icon } from "lucide-react";
+import { Hotel } from "lucide-react";
+import { ShowerHead } from "lucide-react";
+import { MapPin } from "lucide-react";
+import { Briefcase } from "lucide-react";
 import { CrossIcon } from "lucide-react";
 import { Home } from "lucide-react";
 import Link from "next/link";
@@ -44,6 +48,46 @@ const SideNav = ({ setOpenSideNav }) => {
         </IconWrapper>
       ),
     },
+    {
+      id: 6,
+      text: "Service Category",
+      link: "/register/service-category",
+      icon: (
+        <IconWrapper>
+          <Briefcase />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 8,
+      text: "No Of Hotel",
+      link: "/register/no-of-hotel",
+      icon: (
+        <IconWrapper>
+          <Hotel />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 10,
+      text: "Hotel Address",
+      link: "/register/hotel-address",
+      icon: (
+        <IconWrapper>
+          <MapPin />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 12,
+      text: "Popular Facilities",
+      link: "/register/popular-facilities",
+      icon: (
+        <IconWrapper>
+          <ShowerHead />
+        </IconWrapper>
+      ),
+    },
   ];
 
   useEffect(() => {
@@ -51,7 +95,9 @@ const SideNav = ({ setOpenSideNav }) => {
     filteredLink.length && setCurrentLink(filteredLink[0].id);
   }, [pathname]);
   return (
-    <div className={`relative h-full min-h-screen min-w-[250px] backdrop-blur py-5 rounded-md`}>
+    <div
+      className={`relative h-full min-h-screen min-w-[250px] backdrop-blur py-5 rounded-md`}
+    >
       <div className="md:hidden">
         <IconWrapper>
           <CrossIcon
