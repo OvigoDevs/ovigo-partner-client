@@ -6,6 +6,7 @@ import { Text } from "lucide-react";
 import { CheckCircle2Icon } from "lucide-react";
 import { List } from "lucide-react";
 import { Hotel } from "lucide-react";
+import { ListTodo } from "lucide-react";
 import { Check } from "lucide-react";
 import { Key } from "lucide-react";
 import { CrossIcon } from "lucide-react";
@@ -88,12 +89,23 @@ const SideNav = ({ setOpenSideNav }) => {
         </IconWrapper>
       ),
     },
+    {
+      id: 8,
+      text: "Hotel Type",
+      link: "/register/hotel-type-confirmation",
+      icon: (
+        <IconWrapper>
+          <ListTodo />
+        </IconWrapper>
+      ),
+    },
   ];
 
   useEffect(() => {
     const filteredLink = links.filter((item) => pathname.includes(item.link));
     filteredLink.length && setCurrentLink(filteredLink[0].id);
   }, [pathname]);
+
   return (
     <div
       className={`relative h-full min-h-screen min-w-[250px] backdrop-blur py-5 rounded-md`}
