@@ -5,8 +5,8 @@ import { UserPlus } from "lucide-react";
 import { Text } from "lucide-react";
 import { CheckCircle2Icon } from "lucide-react";
 import { List } from "lucide-react";
+import { Hotel } from "lucide-react";
 import { Check } from "lucide-react";
-import { ListOrdered } from "lucide-react";
 import { Key } from "lucide-react";
 import { CrossIcon } from "lucide-react";
 import { Home } from "lucide-react";
@@ -75,6 +75,16 @@ const SideNav = ({ setOpenSideNav }) => {
       icon: (
         <IconWrapper>
           <Key />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 7,
+      text: "Hotel categories",
+      link: "/register/hotel-categories",
+      icon: (
+        <IconWrapper>
+          <Hotel />
         </IconWrapper>
       ),
     },

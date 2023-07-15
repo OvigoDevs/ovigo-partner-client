@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const RegisterInfo = () => {
   return (
-    <div className="container-d section-d">
+    <div className="section-d">
       <div>
         <h1 className="font-bold mb-5">Registration information</h1>
         <div className="grid grid-cols-3 gap-2">

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const CreatePassword = () => {
   return (
-    <div className="container-d section-d">
+    <div className="section-d">
       <div>
         <h1 className="font-bold mb-5">Create password</h1>
         <div className="grid grid-cols-2 gap-2">
@@ -17,7 +17,7 @@ const CreatePassword = () => {
           </div>
         </div>
       </div>
-      <Link href="/register/contact-details">
+      <Link href="/register/hotel-categories">
         <Button className="mt-10 min-w-[100px]">Next</Button>
       </Link>
     </div>
