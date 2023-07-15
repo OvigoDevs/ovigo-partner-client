@@ -134,6 +134,16 @@ const SideNav = ({ setOpenSideNav }) => {
       ),
     },
     {
+      id: 11,
+      text: "Hotel Address",
+      link: "/register/hotel-address",
+      icon: (
+        <IconWrapper>
+          <MapPin />
+        </IconWrapper>
+      ),
+    },
+    {
       id: 12,
       text: "Popular Facilities",
       link: "/register/popular-facilities",
