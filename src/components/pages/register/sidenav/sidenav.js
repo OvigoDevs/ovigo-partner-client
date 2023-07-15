@@ -8,6 +8,7 @@ import { List } from "lucide-react";
 import { Hotel } from "lucide-react";
 import { ListTodo } from "lucide-react";
 import { Check } from "lucide-react";
+import { Newspaper } from "lucide-react";
 import { Key } from "lucide-react";
 import { ShowerHead } from "lucide-react";
 import { MapPin } from "lucide-react";
@@ -104,11 +105,11 @@ const SideNav = ({ setOpenSideNav }) => {
     },
     {
       id: 8,
-      text: "No Of Hotel",
+      text: "Hotels",
       link: "/register/no-of-hotel",
       icon: (
         <IconWrapper>
-          <Hotel />
+          <Newspaper />
         </IconWrapper>
       ),
     },

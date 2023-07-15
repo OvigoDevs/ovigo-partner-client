@@ -4,9 +4,9 @@ import Link from "next/link";
 const CreatePassword = () => {
   return (
     <div className="section-d">
-      <div>
+      <div className="max-w-[500px]">
         <h1 className="font-bold mb-5">Create password</h1>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-1 gap-2">
           <div className="grid grid-cols-1 gap-2">
             <label>Password</label>
             <input />

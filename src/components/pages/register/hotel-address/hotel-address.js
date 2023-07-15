@@ -1,3 +1,4 @@
+import IconWrapper from "@/components/core/icon-wrapper/icon-wrapper";
 import { Button } from "@/components/ui/button";
 import { Lightbulb } from "lucide-react";
 import { ThumbsUp } from "lucide-react";
@@ -34,23 +35,14 @@ const HotelAddress = () => {
     <div className="py-5">
       <p>Where is the property that you are listing?</p>
 
-      {/* Container */}
       <div className="grid md:grid-cols-2">
-        {/* Form Container */}
         <div>
-          <div className="border border-primary p-5 rounded-md mt-5 space-y-3">
-            {/* Country */}
-            <div className="space-y-1">
+          <div className="border p-5 rounded-md mt-5 space-y-3">
+            <div className="grid grid-cols-1 gap-2">
               <label>Country/Region</label>
-              <input
-                name="country"
-                readOnly
-                defaultValue={address.country}
-                className="block border p-2 rounded-md w-full"
-              />
+              <input name="country" readOnly defaultValue={address.country} />
             </div>
-            {/* Street Name and House Number */}
-            <div className="space-y-1">
+            <div className="grid grid-cols-1 gap-2">
               <label>Street Name and House Number</label>
               <input
                 name="streetAddress"
@@ -58,11 +50,9 @@ const HotelAddress = () => {
                 value={address.streetAddress}
                 onChange={handleInputChange}
                 placeholder="Enter Hotel Address"
-                className="block border p-2 rounded-md w-full"
               />
             </div>
-            {/* ZIP Code */}
-            <div className="space-y-1">
+            <div className="grid grid-cols-1 gap-2">
               <label>ZIP Code</label>
               <input
                 name="zipCode"
@@ -70,11 +60,9 @@ const HotelAddress = () => {
                 value={address.zipCode}
                 onChange={handleInputChange}
                 placeholder="ZIP Code of the location"
-                className="block border p-2 rounded-md w-full"
               />
             </div>
-            {/* City */}
-            <div className="space-y-1">
+            <div className="grid grid-cols-1 gap-2">
               <label>City</label>
               <input
                 name="city"
@@ -82,7 +70,6 @@ const HotelAddress = () => {
                 value={address.city}
                 onChange={handleInputChange}
                 placeholder="Enter Hotel City"
-                className="block border p-2 rounded-md w-full"
               />
             </div>
           </div>
@@ -91,13 +78,13 @@ const HotelAddress = () => {
             Submit
           </Button>
         </div>
-        {/* Suggestion Box's */}
-        <div className="grid grid-cols-1 gap-4 p-5">
-          {/* Suggestion 1 */}
-          <div className="flex gap-3 p-2 border border-black rounded-md">
-            <ThumbsUp className="w-10 h-10" />
+        <div className="grid grid-cols-1 gap-4 py-5 pl-5">
+          <div className="flex gap-3 p-2 border rounded-md">
+            <IconWrapper>
+              <ThumbsUp className="mt-[4px]" />
+            </IconWrapper>
             <div className="space-y-3">
-              <h3 className="text-lg font-semibold">
+              <h3 className="font-semibold">
                 What needs to be included in my address?
               </h3>
               <ul className="list-disc space-y-1">
@@ -116,11 +103,12 @@ const HotelAddress = () => {
               </ul>
             </div>
           </div>
-          {/* Suggestion 2 */}
-          <div className="flex gap-3 p-2 border border-black rounded-md">
-            <Lightbulb className="w-10 h-10" />
+          <div className="flex gap-3 p-2 border rounded-md">
+            <IconWrapper>
+              <Lightbulb className="mt-[4px]" />
+            </IconWrapper>
             <div className="space-y-3">
-              <h3 className="text-lg font-semibold">
+              <h3 className="font-semibold">
                 Why do i need to add my address?
               </h3>
               <p>

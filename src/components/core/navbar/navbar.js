@@ -11,7 +11,7 @@ const Navbar = () => {
     },
   ];
   return (
-    <nav className="container flex items-center justify-between gap-5 py-2 backdrop-blur sticky top-0 z-50 border-b">
+    <nav className="container-d flex items-center justify-between gap-5 py-2 backdrop-blur sticky top-0 z-50 border-b">
       <Link href="/">
         <div className="cursor-default lg:cursor-pointer flex items-center justify-start gap-2">
           <Image
