@@ -128,6 +128,12 @@
   @apply mb-5 lg:mb-10 xl:mb-16;
 }
 
+input,
+textarea,
+select {
+  @apply border border-gray-200 dark:border-gray-600 px-2 py-1 rounded-md focus:outline-none focus:border-gray-400;
+}
+
 // custom scroll bar
 /* width */
 ::-webkit-scrollbar {

@@ -1,18 +1,18 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-const RegisterInfo = () => {
+const CreatePassword = () => {
   return (
     <div className="container-d section-d">
       <div>
-        <h1 className="font-bold mb-5">Registration information</h1>
-        <div className="grid grid-cols-3 gap-2">
-          <div className="col-span-2 grid grid-cols-1 gap-2">
-            <label>Firstname</label>
+        <h1 className="font-bold mb-5">Create password</h1>
+        <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 gap-2">
+            <label>Password</label>
             <input />
           </div>
-          <div className="col-span-1 grid grid-cols-1 gap-1">
-            <label>Lastname</label>
+          <div className="grid grid-cols-1 gap-1">
+            <label>Confirm Password</label>
             <input />
           </div>
         </div>
@@ -24,4 +24,4 @@ const RegisterInfo = () => {
   );
 };
 
-export default RegisterInfo;
+export default CreatePassword;
