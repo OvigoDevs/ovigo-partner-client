@@ -17,6 +17,9 @@ import HotelInformation from "@/components/pages/register/hotel-information/hote
 import BreakfastDetails from "@/components/pages/register/breakfast-details/breakfast-details";
 import RoomDetails from "@/components/pages/register/room-details/room-details";
 import Languages from "@/components/pages/register/languages/languages";
+import ParkingDetails from "@/components/pages/register/parking-details/parking-details";
+import HouseRules from "@/components/pages/register/house-rules/house-rules";
+import RoomPrice from "@/components/pages/register/room-price/room-price";
 
 const RegisterDynamicComps = () => {
   const pathname = usePathname();
@@ -54,6 +57,14 @@ const RegisterDynamicComps = () => {
         <RoomDetails />
       ) : pathname.includes("languages") ? (
         <Languages />
+      ) : pathname.includes("parking-details") ? (
+        <ParkingDetails />
+      ) : pathname.includes("house-rules") ? (
+        <HouseRules />
+      ) : pathname.includes("room-details") ? (
+        <RoomDetails />
+      ) : pathname.includes("room-price") ? (
+        <RoomPrice />
       ) : (
         "404 | No component found"
       )}

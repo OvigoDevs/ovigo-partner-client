@@ -13,12 +13,15 @@ import { Languages } from "lucide-react";
 import { X } from "lucide-react";
 import { Scroll } from "lucide-react";
 import { Salad } from "lucide-react";
+import { Car } from "lucide-react";
+import { Bed } from "lucide-react";
+import { CircleDollarSign } from "lucide-react";
+import { Scale } from "lucide-react";
 import { Newspaper } from "lucide-react";
 import { Key } from "lucide-react";
 import { ShowerHead } from "lucide-react";
 import { MapPin } from "lucide-react";
 import { Briefcase } from "lucide-react";
-import { CrossIcon } from "lucide-react";
 import { Home } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -169,6 +172,16 @@ const SideNav = ({ setOpenSideNav }) => {
       ),
     },
     {
+      id: 14,
+      text: "Parking Details",
+      link: "/register/parking-details",
+      icon: (
+        <IconWrapper>
+          <Car />
+        </IconWrapper>
+      ),
+    },
+    {
       id: 15,
       text: "Languages",
       link: "/register/languages",
@@ -179,12 +192,42 @@ const SideNav = ({ setOpenSideNav }) => {
       ),
     },
     {
+      id: 16,
+      text: "House Rules",
+      link: "/register/house-rules",
+      icon: (
+        <IconWrapper>
+          <Scale />
+        </IconWrapper>
+      ),
+    },
+    {
       id: 17,
       text: "Room details",
       link: "/register/room-details",
       icon: (
         <IconWrapper>
           <Scroll />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 18,
+      text: "Room Details",
+      link: "/register/room-details",
+      icon: (
+        <IconWrapper>
+          <Bed />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 22,
+      text: "Room Price",
+      link: "/register/room-price",
+      icon: (
+        <IconWrapper>
+          <CircleDollarSign />
         </IconWrapper>
       ),
     },
