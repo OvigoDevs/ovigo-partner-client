@@ -8,6 +8,11 @@ import { List } from "lucide-react";
 import { Hotel } from "lucide-react";
 import { ListTodo } from "lucide-react";
 import { Check } from "lucide-react";
+import { Building2 } from "lucide-react";
+import { Languages } from "lucide-react";
+import { X } from "lucide-react";
+import { Scroll } from "lucide-react";
+import { Salad } from "lucide-react";
 import { Newspaper } from "lucide-react";
 import { Key } from "lucide-react";
 import { ShowerHead } from "lucide-react";
@@ -135,11 +140,11 @@ const SideNav = ({ setOpenSideNav }) => {
     },
     {
       id: 11,
-      text: "Hotel Address",
-      link: "/register/hotel-address",
+      text: "Hotel Information",
+      link: "/register/hotel-information",
       icon: (
         <IconWrapper>
-          <MapPin />
+          <Building2 />
         </IconWrapper>
       ),
     },
@@ -150,6 +155,36 @@ const SideNav = ({ setOpenSideNav }) => {
       icon: (
         <IconWrapper>
           <ShowerHead />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 13,
+      text: "Breakfast details",
+      link: "/register/breakfast-details",
+      icon: (
+        <IconWrapper>
+          <Salad />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 15,
+      text: "Languages",
+      link: "/register/languages",
+      icon: (
+        <IconWrapper>
+          <Languages />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 17,
+      text: "Room details",
+      link: "/register/room-details",
+      icon: (
+        <IconWrapper>
+          <Scroll />
         </IconWrapper>
       ),
     },
@@ -166,8 +201,8 @@ const SideNav = ({ setOpenSideNav }) => {
     >
       <div className="md:hidden">
         <IconWrapper>
-          <CrossIcon
-            className="absolute top-0 right-0 m-2 rotate-[45deg] md:hidden"
+          <X
+            className="absolute top-0 right-0 m-2 md:hidden"
             onClick={() => setOpenSideNav(false)}
           />
         </IconWrapper>
