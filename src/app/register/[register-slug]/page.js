@@ -13,6 +13,10 @@ import RegisterWithEmail from "@/components/pages/register/register-with-email/r
 import Verification from "@/components/pages/register/verification/verification";
 import ServiceCategory from "@/components/pages/register/service-category/service-category";
 import { usePathname } from "next/navigation";
+import ParkingDetails from "@/components/pages/register/parking-details/parking-details";
+import HouseRules from "@/components/pages/register/house-rules/house-rules";
+import RoomDetails from "@/components/pages/register/room-details/room-details";
+import RoomPrice from "@/components/pages/register/room-price/room-price";
 
 const RegisterDynamicComps = () => {
   const pathname = usePathname();
@@ -42,6 +46,14 @@ const RegisterDynamicComps = () => {
         <HotelAddress />
       ) : pathname.includes("popular-facilities") ? (
         <PopularFacilities />
+      ) : pathname.includes("parking-details") ? (
+        <ParkingDetails />
+      ) : pathname.includes("house-rules") ? (
+        <HouseRules />
+      ) : pathname.includes("room-details") ? (
+        <RoomDetails />
+      ) : pathname.includes("room-price") ? (
+        <RoomPrice />
       ) : (
         "404 | No component found"
       )}

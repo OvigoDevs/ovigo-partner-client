@@ -8,6 +8,10 @@ import { List } from "lucide-react";
 import { Hotel } from "lucide-react";
 import { ListTodo } from "lucide-react";
 import { Check } from "lucide-react";
+import { Car } from "lucide-react";
+import { Bed } from "lucide-react";
+import { CircleDollarSign } from "lucide-react";
+import { Scale } from "lucide-react";
 import { Newspaper } from "lucide-react";
 import { Key } from "lucide-react";
 import { ShowerHead } from "lucide-react";
@@ -150,6 +154,46 @@ const SideNav = ({ setOpenSideNav }) => {
       icon: (
         <IconWrapper>
           <ShowerHead />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 14,
+      text: "Parking Details",
+      link: "/register/parking-details",
+      icon: (
+        <IconWrapper>
+          <Car />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 16,
+      text: "House Rules",
+      link: "/register/house-rules",
+      icon: (
+        <IconWrapper>
+          <Scale />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 18,
+      text: "Room Details",
+      link: "/register/room-details",
+      icon: (
+        <IconWrapper>
+          <Bed />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 22,
+      text: "Room Price",
+      link: "/register/room-price",
+      icon: (
+        <IconWrapper>
+          <CircleDollarSign />
         </IconWrapper>
       ),
     },
