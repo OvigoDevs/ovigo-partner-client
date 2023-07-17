@@ -8,12 +8,25 @@ import { List } from "lucide-react";
 import { Hotel } from "lucide-react";
 import { ListTodo } from "lucide-react";
 import { Check } from "lucide-react";
+import { Building2 } from "lucide-react";
+import { Languages } from "lucide-react";
+import { X } from "lucide-react";
+import { Scroll } from "lucide-react";
+import { ScrollText } from "lucide-react";
+import { LucideListChecks } from "lucide-react";
+import { ListTree } from "lucide-react";
+import { DollarSign } from "lucide-react";
+import { ImageIcon } from "lucide-react";
+import { FolderEdit } from "lucide-react";
+import { Salad } from "lucide-react";
+import { Car } from "lucide-react";
+import { CircleDollarSign } from "lucide-react";
+import { Scale } from "lucide-react";
 import { Newspaper } from "lucide-react";
 import { Key } from "lucide-react";
 import { ShowerHead } from "lucide-react";
 import { MapPin } from "lucide-react";
 import { Briefcase } from "lucide-react";
-import { CrossIcon } from "lucide-react";
 import { Home } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -105,11 +118,11 @@ const SideNav = ({ setOpenSideNav }) => {
     },
     {
       id: 8,
-      text: "Hotels",
+      text: "Hotel number",
       link: "/register/no-of-hotel",
       icon: (
         <IconWrapper>
-          <Newspaper />
+          <Building2 />
         </IconWrapper>
       ),
     },
@@ -134,12 +147,142 @@ const SideNav = ({ setOpenSideNav }) => {
       ),
     },
     {
+      id: 11,
+      text: "Hotel Information",
+      link: "/register/hotel-information",
+      icon: (
+        <IconWrapper>
+          <Newspaper />
+        </IconWrapper>
+      ),
+    },
+    {
       id: 12,
       text: "Popular Facilities",
       link: "/register/popular-facilities",
       icon: (
         <IconWrapper>
           <ShowerHead />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 13,
+      text: "Breakfast details",
+      link: "/register/breakfast-details",
+      icon: (
+        <IconWrapper>
+          <Salad />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 14,
+      text: "Parking Details",
+      link: "/register/parking-details",
+      icon: (
+        <IconWrapper>
+          <Car />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 15,
+      text: "Languages",
+      link: "/register/languages",
+      icon: (
+        <IconWrapper>
+          <Languages />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 16,
+      text: "House Rules",
+      link: "/register/house-rules",
+      icon: (
+        <IconWrapper>
+          <Scale />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 17,
+      text: "Hotel Details Completion",
+      link: "/register/hotel-details-completion",
+      icon: (
+        <IconWrapper>
+          <LucideListChecks />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 18,
+      text: "Room details",
+      link: "/register/room-details",
+      icon: (
+        <IconWrapper>
+          <Scroll />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 19,
+      text: "Bathroom details",
+      link: "/register/bath-details",
+      icon: (
+        <IconWrapper>
+          <ScrollText />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 20,
+      text: "Room features",
+      link: "/register/room-features",
+      icon: (
+        <IconWrapper>
+          <ListTree />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 21,
+      text: "Room name",
+      link: "/register/room-name",
+      icon: (
+        <IconWrapper>
+          <FolderEdit />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 22,
+      text: "Room price",
+      link: "/register/room-price",
+      icon: (
+        <IconWrapper>
+          <CircleDollarSign />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 23,
+      text: "Rate plan",
+      link: "/register/rate-plan",
+      icon: (
+        <IconWrapper>
+          <DollarSign />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 24,
+      text: "Add photos",
+      link: "/register/add-photos",
+      icon: (
+        <IconWrapper>
+          <ImageIcon />
         </IconWrapper>
       ),
     },
@@ -152,17 +295,17 @@ const SideNav = ({ setOpenSideNav }) => {
 
   return (
     <div
-      className={`relative h-full min-h-screen min-w-[250px] backdrop-blur py-5 rounded-md`}
+      className={`relative h-full max-h-[90vh] overflow-scroll min-w-[240px] backdrop-blur rounded-md`}
     >
       <div className="md:hidden">
         <IconWrapper>
-          <CrossIcon
-            className="absolute top-0 right-0 m-2 rotate-[45deg] md:hidden"
+          <X
+            className="absolute top-0 right-0 m-2 md:hidden text-gray-800 dark:text-gray-400"
             onClick={() => setOpenSideNav(false)}
           />
         </IconWrapper>
       </div>
-      <div className="flex flex-col pt-10 md:pt-0">
+      <div className="flex flex-col py-10 md:pt-0 md:pb-20">
         {links.map((item) => {
           const { id, text, link, icon } = item;
           return (

@@ -137,15 +137,15 @@ label {
 }
 
 input,
-textarea,
-select {
-  @apply border border-gray-200 dark:border-gray-600 px-2 py-1 rounded-md focus:outline-none focus:border-gray-400;
+textarea {
+  @apply border border-gray-200 dark:border-gray-600 px-2 py-[9px] rounded-md focus:outline-none focus:border-gray-400 dark:bg-[#00000000];
 }
 
 // custom scroll bar
 /* width */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 0;
+  height: 0;
 }
 
 /* Track */

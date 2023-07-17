@@ -42,7 +42,7 @@ const NoOfHotel = () => {
             <div
               key={id}
               className={`relative flex gap-4 border p-2 cursor-pointer rounded-md items-center ${
-                id === selectedOption ? "border-primary hover:bg-gray-50" : "hover:border-gray-400"
+                id === selectedOption ? "border-primary hover:bg-gray-50 dark:hover:bg-[#ffffff20]" : "hover:border-gray-400"
               }`}
               onClick={() => setSelectedOption(id)}
             >
