@@ -20,6 +20,8 @@ import { LucideBadgeDollarSign } from "lucide-react";
 import { DollarSign } from "lucide-react";
 import { ImageIcon } from "lucide-react";
 import { FolderEdit } from "lucide-react";
+import { CalendarPlusIcon } from "lucide-react";
+import { BadgeDollarSign } from "lucide-react";
 import { Salad } from "lucide-react";
 import { Car } from "lucide-react";
 import { CircleDollarSign } from "lucide-react";
@@ -300,11 +302,31 @@ const SideNav = ({ setOpenSideNav }) => {
     },
     {
       id: 26,
+      text: "Invoice Info",
+      link: "/register/invoice-info",
+      icon: (
+        <IconWrapper>
+          <BadgeDollarSign />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 27,
       text: "Important info",
       link: "/register/important-info",
       icon: (
         <IconWrapper>
           <Info />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 28,
+      text: "Confirm Hotel",
+      link: "/register/confirm-hotel",
+      icon: (
+        <IconWrapper>
+          <CalendarPlusIcon />
         </IconWrapper>
       ),
     },
