@@ -23,6 +23,9 @@ import RoomPrice from "@/components/pages/register/room-price/room-price";
 import BathroomDetails from "@/components/pages/register/bathroom-details/bathroom-details";
 import HotelDetailsCompletion from "@/components/pages/register/hotel-details-completion/hotel-details-completions";
 import RoomFeatures from "@/components/pages/register/room-features/room-features";
+import RoomName from "@/components/pages/register/room-name/room-name";
+import RatePlan from "@/components/pages/register/rate-plan/rate-plan";
+import AddPhotos from "@/components/pages/register/add-photos/add-photos";
 
 const RegisterDynamicComps = () => {
   const pathname = usePathname();
@@ -74,6 +77,12 @@ const RegisterDynamicComps = () => {
         <HotelDetailsCompletion />
       ) : pathname.includes("room-features") ? (
         <RoomFeatures />
+      ) : pathname.includes("room-name") ? (
+        <RoomName />
+      ) : pathname.includes("rate-plan") ? (
+        <RatePlan />
+      ) : pathname.includes("add-photos") ? (
+        <AddPhotos />
       ) : (
         "404 | No component found"
       )}

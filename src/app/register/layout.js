@@ -23,8 +23,8 @@ const RegisterLayout = ({ children }) => {
         <SideNav setOpenSideNav={setOpenSideNav} />
       </div>
       <div
-        className={`fixed top-[76px] md:hidden right-0 backdrop-blur p-1 z-9 transition ease-in-out duration-500 rounded-md border mr-1 z-10 ${
-          !openSideNav ? "translate-x-0" : "translate-x-[100%] md:translate-x-0"
+        className={`fixed top-[76px] md:hidden right-0 backdrop-blur p-2 z-9 transition ease-in-out duration-500 rounded-md border m-[1rem] z-10 ${
+          !openSideNav ? "translate-x-0" : "translate-x-[150%] md:translate-x-0"
         }`}
       >
         <IconWrapper>
