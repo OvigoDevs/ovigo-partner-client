@@ -26,6 +26,8 @@ import RoomFeatures from "@/components/pages/register/room-features/room-feature
 import RoomName from "@/components/pages/register/room-name/room-name";
 import RatePlan from "@/components/pages/register/rate-plan/rate-plan";
 import AddPhotos from "@/components/pages/register/add-photos/add-photos";
+import GuestPayment from "@/components/pages/register/guest-payment/guest-payment";
+import ImportantInfo from "@/components/pages/register/important-info/important-info";
 
 const RegisterDynamicComps = () => {
   const pathname = usePathname();
@@ -83,6 +85,10 @@ const RegisterDynamicComps = () => {
         <RatePlan />
       ) : pathname.includes("add-photos") ? (
         <AddPhotos />
+      ) : pathname.includes("guest-payment") ? (
+        <GuestPayment />
+      ) : pathname.includes("important-info") ? (
+        <ImportantInfo />
       ) : (
         "404 | No component found"
       )}
