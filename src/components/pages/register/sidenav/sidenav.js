@@ -15,9 +15,13 @@ import { Scroll } from "lucide-react";
 import { ScrollText } from "lucide-react";
 import { LucideListChecks } from "lucide-react";
 import { ListTree } from "lucide-react";
+import { Info } from "lucide-react";
+import { LucideBadgeDollarSign } from "lucide-react";
 import { DollarSign } from "lucide-react";
 import { ImageIcon } from "lucide-react";
 import { FolderEdit } from "lucide-react";
+import { CalendarPlusIcon } from "lucide-react";
+import { BadgeDollarSign } from "lucide-react";
 import { Salad } from "lucide-react";
 import { Car } from "lucide-react";
 import { CircleDollarSign } from "lucide-react";
@@ -283,6 +287,46 @@ const SideNav = ({ setOpenSideNav }) => {
       icon: (
         <IconWrapper>
           <ImageIcon />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 25,
+      text: "Guest payment",
+      link: "/register/guest-payment",
+      icon: (
+        <IconWrapper>
+          <LucideBadgeDollarSign />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 26,
+      text: "Invoice Info",
+      link: "/register/invoice-info",
+      icon: (
+        <IconWrapper>
+          <BadgeDollarSign />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 27,
+      text: "Important info",
+      link: "/register/important-info",
+      icon: (
+        <IconWrapper>
+          <Info />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 28,
+      text: "Confirm Hotel",
+      link: "/register/confirm-hotel",
+      icon: (
+        <IconWrapper>
+          <CalendarPlusIcon />
         </IconWrapper>
       ),
     },

@@ -7,3 +7,5 @@
 
 
 * Created Parking details, house rules, room details and room price page.
+
+* Created Invoice Info Page and Confirm Hotel Page.

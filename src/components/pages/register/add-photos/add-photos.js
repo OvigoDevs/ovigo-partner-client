@@ -18,7 +18,6 @@ const AddPhotos = () => {
         <UploadImages
           func={handleOnChange}
           name="main-image"
-        //   defaultValue={[]}
         />
       </div>
     </div>
