@@ -14,6 +14,8 @@ import { X } from "lucide-react";
 import { Scroll } from "lucide-react";
 import { ScrollText } from "lucide-react";
 import { LucideListChecks } from "lucide-react";
+import { CalendarPlusIcon } from "lucide-react";
+import { BadgeDollarSign } from "lucide-react";
 import { CheckSquare } from "lucide-react";
 import { Salad } from "lucide-react";
 import { Car } from "lucide-react";
@@ -261,6 +263,26 @@ const SideNav = ({ setOpenSideNav }) => {
       icon: (
         <IconWrapper>
           <CircleDollarSign />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 26,
+      text: "Invoice Info",
+      link: "/register/invoice-info",
+      icon: (
+        <IconWrapper>
+          <BadgeDollarSign />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 28,
+      text: "Confirm Hotel",
+      link: "/register/confirm-hotel",
+      icon: (
+        <IconWrapper>
+          <CalendarPlusIcon />
         </IconWrapper>
       ),
     },
