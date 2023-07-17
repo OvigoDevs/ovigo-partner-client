@@ -20,13 +20,20 @@ const Navbar = () => {
             width={30}
             height={30}
           />
-          <span className="text-primary text-2xl font-black">Ovigo</span>
+          <span className="text-primary hidden md:flex text-2xl font-black">
+            Ovigo
+          </span>
         </div>
       </Link>
       <ul>
         {Links.map((item) => (
           <li key={item.id}>
-            <Link href={item.link} className="hover:text-primary dark:hover:text-gray-300">{item.text}</Link>
+            <Link
+              href={item.link}
+              className="hover:text-primary dark:hover:text-gray-300"
+            >
+              {item.text}
+            </Link>
           </li>
         ))}
       </ul>

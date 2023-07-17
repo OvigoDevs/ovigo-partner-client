@@ -111,15 +111,15 @@ const HotelCategories = () => {
               key={id}
               className={`relative p-4 rounded-md border ${
                 id === selectedHotel
-                  ? "border-primary hover:bg-gray-50"
-                  : "border-gray-200 hover:border-gray-400"
+                  ? "border-primary hover:bg-gray-50 dark:hover:bg-[#ffffff20]"
+                  : "border-gray-200 dark:border-gray-800 hover:border-gray-400 dark:hover:border-gray-200"
               } pb-auto justify-start lg:cursor-pointer`}
               onClick={() => setSelectedHotel(id)}
             >
               {id === selectedHotel ? (
                 <div className="absolute top-0 right-0 -m-[5px]">
                   <IconWrapper>
-                    <Check className="bg-primary rounded-full p-[2px] text-white max-w-[13px] max-h-[13px] min-w-[13px] min-h-[13px] w-[13px] h-[13px]" />
+                    <Check className="bg-primary rounded-full p-[2px] text-white dark:text-gray-800 max-w-[13px] max-h-[13px] min-w-[13px] min-h-[13px] w-[13px] h-[13px]" />
                   </IconWrapper>
                 </div>
               ) : null}
