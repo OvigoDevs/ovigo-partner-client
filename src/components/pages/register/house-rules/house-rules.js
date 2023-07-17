@@ -1,3 +1,4 @@
+import CustomRadio from "@/components/core/custom-radio/custom-radio";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -7,7 +8,6 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -135,27 +135,25 @@ const HouseRules = () => {
       label: "11:00 PM",
     },
   ];
+
+  const handleOnChange = (e) => {
+    console.log(e);
+  };
   return (
     <div className="py-5">
       <h4 className="font-bold">House Rules</h4>
-
-      {/* House Rule Container */}
       <div className="grid md:grid-cols-2 gap-4 my-5">
-        {/* Rules */}
-        <div className="p-5 rounded-md border space-y-3">
+        <div className="p-5 rounded-md border grid grid-cols-1 gap-5">
           <h4 className="font-bold">
             What are your check-in and check-out times?
           </h4>
-
-          {/* Check In */}
           <div className="space-y-1 py-3">
-            <p className="font-semibold">Check-in</p>
+            <p className="">Check-in</p>
             <div className="grid md:grid-cols-2 gap-4">
-              {/* Check In FROM */}
               <div className="space-y-2">
-                <p className="font-semibold">From</p>
+                <p className="">From</p>
                 <Select>
-                  <SelectTrigger className="w-[180px]">
+                  <SelectTrigger className="">
                     <SelectValue placeholder="Select Time" />
                   </SelectTrigger>
                   <SelectContent>
@@ -169,11 +167,10 @@ const HouseRules = () => {
                   </SelectContent>
                 </Select>
               </div>
-              {/* Check In UNTIL */}
               <div className="space-y-2">
-                <p className="font-semibold">Until</p>
+                <p className="">Until</p>
                 <Select>
-                  <SelectTrigger className="w-[180px]">
+                  <SelectTrigger className="">
                     <SelectValue placeholder="Select Time" />
                   </SelectTrigger>
                   <SelectContent>
@@ -190,15 +187,13 @@ const HouseRules = () => {
             </div>
           </div>
 
-          {/* Check Out */}
           <div className="space-y-1 py-3">
-            <p className="font-semibold">Check-out</p>
+            <p className="">Check-out</p>
             <div className="grid md:grid-cols-2 gap-4">
-              {/* Check In FROM */}
               <div className="space-y-2">
-                <p className="font-semibold">From</p>
+                <p className="">From</p>
                 <Select>
-                  <SelectTrigger className="w-[180px]">
+                  <SelectTrigger className="">
                     <SelectValue placeholder="Select Time" />
                   </SelectTrigger>
                   <SelectContent>
@@ -212,11 +207,11 @@ const HouseRules = () => {
                   </SelectContent>
                 </Select>
               </div>
-              {/* Check In UNTIL */}
+
               <div className="space-y-2">
-                <p className="font-semibold">Until</p>
+                <p className="">Until</p>
                 <Select>
-                  <SelectTrigger className="w-[180px]">
+                  <SelectTrigger className="">
                     <SelectValue placeholder="Select Time" />
                   </SelectTrigger>
                   <SelectContent>
@@ -235,60 +230,30 @@ const HouseRules = () => {
 
           <hr className="py-2" />
 
-          {/* Do you allow children? */}
-          <div className="space-y-2 py-2">
-            <h4 className="font-semibold">Do you allow children?</h4>
-            <RadioGroup defaultValue="" className="space-y-1">
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="yes" id="r1" />
-                <Label htmlFor="r1">Yes</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="no" id="r2" />
-                <Label htmlFor="r2">No</Label>
-              </div>
-            </RadioGroup>
-          </div>
+          <CustomRadio
+            label="Do you allow children?"
+            name="parking-type"
+            handleOnChange={handleOnChange}
+            options={["Yes", "No"]}
+          />
 
-          {/* Do you allow pets? */}
-          <div className="space-y-2 py-2">
-            <h4 className="font-semibold">Do you allow pets?</h4>
-            <RadioGroup defaultValue="" className="space-y-1">
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="yes" id="r1" />
-                <Label htmlFor="r1">Yes</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="upon request" id="r2" />
-                <Label htmlFor="r2">Upon Request</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="no" id="r3" />
-                <Label htmlFor="r3">No</Label>
-              </div>
-            </RadioGroup>
-          </div>
-
-          {/* Are there any additional fees for pets? */}
-          <div className="space-y-2 py-2">
-            <h4 className="font-semibold">Do you allow pets?</h4>
-            <RadioGroup defaultValue="" className="space-y-1">
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="no" id="r1" />
-                <Label htmlFor="r1">Pets can stay for free</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="yes" id="r2" />
-                <Label htmlFor="r2">Fees may apply</Label>
-              </div>
-            </RadioGroup>
-            <div className="pt-1">
-              <Input
-                type="number"
-                placeholder="Price in BDT per night (If applicable)"
-              />
-            </div>
-          </div>
+          <CustomRadio
+            label="Do you allow pets?"
+            name="parking-type"
+            handleOnChange={handleOnChange}
+            options={["Yes", "Upon request", "No"]}
+          />
+          <CustomRadio
+            label="Do you allow pets for free?"
+            name="parking-type"
+            handleOnChange={handleOnChange}
+            options={["Yes, pets can stay for free", "No"]}
+          />
+          <input
+            type="number"
+            placeholder="Price in BDT per night (If applicable)"
+            className="mx-2"
+          />
 
           <hr className="py-2" />
 

@@ -1,3 +1,5 @@
+import CustomCheckbox from "@/components/core/custom-checkbox/custom-checkbox";
+import CustomRadio from "@/components/core/custom-radio/custom-radio";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -186,6 +188,9 @@ const RoomDetails = () => {
   const [sofaBed, setSofaBed] = useState(0);
 
   const [guests, setGuests] = useState(0);
+  const handleOnChange = (e) => {
+    console.log(e);
+  };
   return (
     <div className="py-5">
       <h4 className="font-bold">Room Details</h4>
@@ -211,7 +216,7 @@ const RoomDetails = () => {
           <h4 className="font-bold">
             How many rooms of this type do you have?
           </h4>
-          <Input
+          <input
             type="number"
             className="w-full"
             placeholder="Enter the quantity of this type of room"
@@ -545,24 +550,16 @@ const RoomDetails = () => {
             </div>
           </div>
 
-          <div className="space-y-1">
-            <h4 className="font-bold">Is smoking allowed in this room?</h4>
-            <RadioGroup defaultValue="" className="space-y-1 flex gap-4">
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="yes, free" id="r1" />
-                <Label htmlFor="r1">Yes</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="no" id="r2" />
-                <Label htmlFor="r2">No</Label>
-              </div>
-            </RadioGroup>
-          </div>
+          <CustomRadio
+            options={["Yes", "No"]}
+            label="Is smoking allowed in this room?"
+            handleOnChange={handleOnChange}
+          />
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-4 mt-5">
-        <Button className='w-full'>Submit</Button>
+        <Button className="w-full">Submit</Button>
       </div>
     </div>
   );

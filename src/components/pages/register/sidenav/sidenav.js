@@ -12,6 +12,9 @@ import { Building2 } from "lucide-react";
 import { Languages } from "lucide-react";
 import { X } from "lucide-react";
 import { Scroll } from "lucide-react";
+import { ScrollText } from "lucide-react";
+import { LucideListChecks } from "lucide-react";
+import { CheckSquare } from "lucide-react";
 import { Salad } from "lucide-react";
 import { Car } from "lucide-react";
 import { Bed } from "lucide-react";
@@ -113,11 +116,11 @@ const SideNav = ({ setOpenSideNav }) => {
     },
     {
       id: 8,
-      text: "Hotels",
+      text: "Hotel number",
       link: "/register/no-of-hotel",
       icon: (
         <IconWrapper>
-          <Newspaper />
+          <Building2 />
         </IconWrapper>
       ),
     },
@@ -147,7 +150,7 @@ const SideNav = ({ setOpenSideNav }) => {
       link: "/register/hotel-information",
       icon: (
         <IconWrapper>
-          <Building2 />
+          <Newspaper />
         </IconWrapper>
       ),
     },
@@ -203,6 +206,16 @@ const SideNav = ({ setOpenSideNav }) => {
     },
     {
       id: 17,
+      text: "Hotel Details Completion",
+      link: "/register/hotel-details-completion",
+      icon: (
+        <IconWrapper>
+          <LucideListChecks />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 18,
       text: "Room details",
       link: "/register/room-details",
       icon: (
@@ -212,18 +225,38 @@ const SideNav = ({ setOpenSideNav }) => {
       ),
     },
     {
-      id: 18,
-      text: "Room Details",
-      link: "/register/room-details",
+      id: 19,
+      text: "Bathroom details",
+      link: "/register/bath-details",
       icon: (
         <IconWrapper>
-          <Bed />
+          <ScrollText />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 20,
+      text: "Room features",
+      link: "/register/room-features",
+      icon: (
+        <IconWrapper>
+          <CircleDollarSign />
+        </IconWrapper>
+      ),
+    },
+    {
+      id: 21,
+      text: "Room name",
+      link: "/register/room-price",
+      icon: (
+        <IconWrapper>
+          <CircleDollarSign />
         </IconWrapper>
       ),
     },
     {
       id: 22,
-      text: "Room Price",
+      text: "Room price",
       link: "/register/room-price",
       icon: (
         <IconWrapper>
@@ -240,17 +273,17 @@ const SideNav = ({ setOpenSideNav }) => {
 
   return (
     <div
-      className={`relative h-full min-h-screen min-w-[250px] backdrop-blur py-5 rounded-md`}
+      className={`relative h-full max-h-[90vh] overflow-scroll min-w-[240px] backdrop-blur rounded-md`}
     >
       <div className="md:hidden">
         <IconWrapper>
           <X
-            className="absolute top-0 right-0 m-2 md:hidden"
+            className="absolute top-0 right-0 m-2 md:hidden text-gray-800 dark:text-gray-400"
             onClick={() => setOpenSideNav(false)}
           />
         </IconWrapper>
       </div>
-      <div className="flex flex-col pt-10 md:pt-0">
+      <div className="flex flex-col py-10 md:pt-0 md:pb-20">
         {links.map((item) => {
           const { id, text, link, icon } = item;
           return (

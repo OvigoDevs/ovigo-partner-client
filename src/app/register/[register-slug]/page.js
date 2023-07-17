@@ -20,6 +20,9 @@ import Languages from "@/components/pages/register/languages/languages";
 import ParkingDetails from "@/components/pages/register/parking-details/parking-details";
 import HouseRules from "@/components/pages/register/house-rules/house-rules";
 import RoomPrice from "@/components/pages/register/room-price/room-price";
+import BathroomDetails from "@/components/pages/register/bathroom-details/bathroom-details";
+import HotelDetailsCompletion from "@/components/pages/register/hotel-details-completion/hotel-details-completions";
+import RoomFeatures from "@/components/pages/register/room-features/room-features";
 
 const RegisterDynamicComps = () => {
   const pathname = usePathname();
@@ -63,8 +66,14 @@ const RegisterDynamicComps = () => {
         <HouseRules />
       ) : pathname.includes("room-details") ? (
         <RoomDetails />
+      ) : pathname.includes("bath-details") ? (
+        <BathroomDetails />
       ) : pathname.includes("room-price") ? (
         <RoomPrice />
+      ) : pathname.includes("hotel-details-completion") ? (
+        <HotelDetailsCompletion />
+      ) : pathname.includes("room-features") ? (
+        <RoomFeatures />
       ) : (
         "404 | No component found"
       )}

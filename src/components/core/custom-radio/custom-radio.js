@@ -45,7 +45,7 @@ const CustomRadio = ({ options, handleOnChange, defaultValue, name, label }) => 
             }}
           >
             <IconWrapper>
-              {option.value ? <CheckCircle className="text-primary"/> : <Circle className="text-primary"/>}
+              {option.value ? <CheckCircle /> : <Circle />}
             </IconWrapper>
             <span className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
               {option.text}

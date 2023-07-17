@@ -5,12 +5,12 @@ import { Check } from "lucide-react";
 
 const RoomPrice = () => {
   return (
-    <div className="py-5">
-      <h4 className="font-bold">Set the price per night for this room</h4>
+    <div className="section-d max-w-[400px]">
+      <h4 className="">Set the price per night for this room</h4>
 
-      <div className="grid grid-cols-2 gap-4 pt-5">
-        <div className="border rounded-md p-5 space-y-3">
-          <h4 className="font-bold">
+      <div className="grid grid-cols-1 gap-4 pt-5">
+        <div className="space-y-3">
+          <h4 className="">
             How much do you want to charge per night?
           </h4>
           <div className="space-y-1">
@@ -50,7 +50,7 @@ const RoomPrice = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 pt-5">
+      <div className="pt-5">
         <Button className='w-full'>Submit</Button>
       </div>
     </div>

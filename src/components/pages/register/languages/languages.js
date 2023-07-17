@@ -8,8 +8,8 @@ const Languages = () => {
     <div className="section-d max-w-[500px]">
       <h3 className="font-bold">Languages</h3>
       <div className="grid grid-cols-1 gap-3 py-5">
-        <label>What languages you or your staff speak?</label>
         <CustomCheckbox
+        label="What languages you or your staff speak?"
           options={[
             "English",
             "Bangla",
