@@ -1,5 +1,3 @@
-
-
 import "./globals.scss";
 import { Inter } from "next/font/google";
 
@@ -9,6 +7,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import Navbar from "@/components/core/navbar/navbar";
 import Footer from "@/components/core/footer/footer";
+import StoreProvider from "@/redux/store-provider";
 
 const APP_NAME = "Ovigo";
 const APP_DEFAULT_TITLE = "Ovigo";
@@ -36,6 +35,7 @@ const RootLayout = ({ children }) => {
   return (
     <html lang="en">
       <body className={inter.className}>
+        <StoreProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <>
               <Navbar />
@@ -44,9 +44,10 @@ const RootLayout = ({ children }) => {
               <Footer />
             </>
           </ThemeProvider>
+        </StoreProvider>
       </body>
     </html>
   );
-}
+};
 
-export default RootLayout
+export default RootLayout;
