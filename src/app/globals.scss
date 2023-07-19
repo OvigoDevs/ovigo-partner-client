@@ -141,6 +141,10 @@ textarea {
   @apply border border-gray-200 dark:border-gray-600 px-2 py-[9px] rounded-md focus:outline-none focus:border-gray-400 dark:bg-[#00000000];
 }
 
+.input-error {
+  @apply px-2 py-1 text-red-600 rounded-md flex items-center gap-2 inline-block;
+}
+
 // custom scroll bar
 /* width */
 ::-webkit-scrollbar {
