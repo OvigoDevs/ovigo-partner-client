@@ -1,13 +1,13 @@
-import Image from "next/image";
-
-import singleHotel from "@/images/service-category-icons/bus.png";
-import multipleHotel from "@/images/service-category-icons/hotel.svg";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Check } from "lucide-react";
 import IconWrapper from "@/components/core/icon-wrapper/icon-wrapper";
 import { Hotel } from "lucide-react";
 import { Newspaper } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
+import { noOfHotels } from "@/redux/features/register_slice";
+import { setCookie } from "@/lib/cookie";
 
 const NoOfHotel = () => {
   const options = [
@@ -30,7 +30,30 @@ const NoOfHotel = () => {
       ),
     },
   ];
-  const [selectedOption, setSelectedOption] = useState(0);
+  const router = useRouter();
+  const { hotelData } = useSelector((state) => state.registerData);
+  console.log(hotelData);
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  const dispatch = useDispatch();
+  const handleOnNext = () => {
+    const data = options.filter((item) => item.id === selectedOption)[0];
+    const toSet = { id: data.id, text: data.text };
+    console.log(data);
+    dispatch(
+      noOfHotels({
+        noOfHotels: toSet,
+      })
+    );
+    setCookie("hotelData", { ...hotelData, noOfHotels: toSet }, "1h");
+    router.push("/register/hotel-type-confirmation");
+  };
+
+  useEffect(() => {
+    if (hotelData.noOfHotels) {
+      setSelectedOption(hotelData.noOfHotels.id);
+    }
+  }, []);
   return (
     <div className="section-d max-w-[500px]">
       <p>How many hotel are you listing?</p>
@@ -42,7 +65,9 @@ const NoOfHotel = () => {
             <div
               key={id}
               className={`relative flex gap-4 border p-2 cursor-pointer rounded-md items-center ${
-                id === selectedOption ? "border-primary hover:bg-gray-50 dark:hover:bg-[#ffffff20]" : "hover:border-gray-400"
+                id === selectedOption
+                  ? "border-primary hover:bg-gray-50 dark:hover:bg-[#ffffff20]"
+                  : "hover:border-gray-400"
               }`}
               onClick={() => setSelectedOption(id)}
             >
@@ -62,7 +87,9 @@ const NoOfHotel = () => {
         })}
       </div>
       <hr className="my-5" />
-      <Button className="w-full">Continue</Button>
+      <Button className="w-full" onClick={handleOnNext}>
+        Continue
+      </Button>
     </div>
   );
 };

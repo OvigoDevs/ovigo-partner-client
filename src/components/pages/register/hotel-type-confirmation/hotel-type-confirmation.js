@@ -1,6 +1,7 @@
 import IconWrapper from "@/components/core/icon-wrapper/icon-wrapper";
 import { Button } from "@/components/ui/button";
 import { Home } from "lucide-react";
+import Link from "next/link";
 
 const HotelTypeConfirmation = () => {
   return (
@@ -14,7 +15,9 @@ const HotelTypeConfirmation = () => {
       </div>
       <div className="grid grid-cols-1 gap-3 text-center">
         <p>Does this sound like your property?</p>
-        <Button>Confirm</Button>
+        <Link href="/register/hotel-address" >
+          <Button className="w-full">Confirm</Button>
+        </Link>
         <Button variant="outline">No, I need to make a change</Button>
       </div>
     </div>

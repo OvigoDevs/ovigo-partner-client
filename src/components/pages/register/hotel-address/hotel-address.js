@@ -1,41 +1,78 @@
+"use client";
+
 import IconWrapper from "@/components/core/icon-wrapper/icon-wrapper";
+import InputError from "@/components/core/input-error/input-error";
 import { Button } from "@/components/ui/button";
+import { setCookie } from "@/lib/cookie";
+import { hotelAddress } from "@/redux/features/register_slice";
 import { Lightbulb } from "lucide-react";
 import { ThumbsUp } from "lucide-react";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const HotelAddress = () => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const { hotelData } = useSelector((state) => state.registerData);
   const [address, setAddress] = useState({
     country: "Bangladesh",
     streetAddress: "",
     zipCode: "",
     city: "",
   });
+  const [edited, setEdited] = useState(false);
+  const [errors, setErrors] = useState(edited ? address : {});
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setAddress((prevAddress) => ({
-      ...prevAddress,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = () => {
-    if (isFormValid()) {
-      console.log("Address:", address);
-    } else {
-      console.log("Error: Please fill in all fields.");
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setAddress({ ...address, [name]: value });
+    if (!edited) {
+      setEdited(true);
     }
   };
 
-  const isFormValid = () => {
-    return Object.values(address).every((value) => value !== "");
+  const handleSubmit = () => {
+    setErrors(validator(address));
   };
+  const validator = (data) => {
+    let obj = {};
+    if (!data.streetAddress.trim()) {
+      obj.streetAddress = "Street address is required!";
+    }
+    if (!data.zipCode.trim()) {
+      obj.zipCode = "Street address is required!";
+    }
+    if (!data.city.trim()) {
+      obj.city = "Street address is required!";
+    }
+
+    return obj;
+  };
+
+  useEffect(() => {
+    if (Object.keys(errors).length === 0 && edited) {
+      // submit form
+      dispatch(
+        hotelAddress({
+          hotelAddress: address,
+        })
+      );
+      setCookie("hotelData", { ...hotelData, hotelAddress: address }, "1h");
+      router.push("/register/hotel-information");
+    }
+  }, [errors]);
+  useEffect(() => {
+    setEdited(true);
+    if (hotelData.hotelAddress) {
+      setAddress(hotelData.hotelAddress);
+    }
+  }, []);
   return (
     <div className="py-5">
       <p>Where is the property that you are listing?</p>
 
-      <div className="grid md:grid-cols-2">
+      <div className="grid grid-cols-1 lg:grid-cols-2">
         <div>
           <div className="border p-5 rounded-md mt-5 space-y-3">
             <div className="grid grid-cols-1 gap-2">
@@ -51,6 +88,7 @@ const HotelAddress = () => {
                 onChange={handleInputChange}
                 placeholder="Enter Hotel Address"
               />
+              <InputError error={errors.streetAddress} />
             </div>
             <div className="grid grid-cols-1 gap-2">
               <label>ZIP Code</label>
@@ -61,6 +99,7 @@ const HotelAddress = () => {
                 onChange={handleInputChange}
                 placeholder="ZIP Code of the location"
               />
+              <InputError error={errors.zipCode} />
             </div>
             <div className="grid grid-cols-1 gap-2">
               <label>City</label>
@@ -71,11 +110,12 @@ const HotelAddress = () => {
                 onChange={handleInputChange}
                 placeholder="Enter Hotel City"
               />
+              <InputError error={errors.city} />
             </div>
           </div>
           <hr className="my-5" />
           <Button className="w-full" onClick={handleSubmit}>
-            Submit
+            Next
           </Button>
         </div>
         <div className="grid grid-cols-1 gap-4 py-5 pl-5">

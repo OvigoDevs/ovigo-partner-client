@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import IconWrapper from "../icon-wrapper/icon-wrapper";
 import { Square } from "lucide-react";
 import { CheckSquare } from "lucide-react";
@@ -10,6 +10,8 @@ const CustomCheckbox = ({
   defaultValue,
   label,
 }) => {
+  const checkSquareID = useId();
+  const squareID = useId();
   const [selectedOptions, setSelectedOptions] = useState(
     defaultValue ? defaultValue : []
   );
@@ -44,7 +46,11 @@ const CustomCheckbox = ({
             }}
           >
             <IconWrapper>
-              {selectedOptions.includes(option) ? <CheckSquare /> : <Square />}
+              {selectedOptions.includes(option) ? (
+                <CheckSquare key={checkSquareID} />
+              ) : (
+                <Square key={squareID} />
+              )}
             </IconWrapper>
             <label htmlFor={option} className="md:cursor-pointer">
               {option}
