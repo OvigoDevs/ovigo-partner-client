@@ -27,10 +27,17 @@ export const registerSlice = createSlice({
     },
     registerInfo: (state, action) => {
       state.registerData.registerInfo = action.payload.registerInfo;
-    }
+    },
+    registerPhoneInfo: (state, action) => {
+      state.registerData.phone = action.payload.phone;
+    },
   },
 });
 
-export const { registerWithEmail, verification, registerInfo } =
-  registerSlice.actions;
+export const {
+  registerWithEmail,
+  verification,
+  registerInfo,
+  registerPhoneInfo,
+} = registerSlice.actions;
 export default registerSlice.reducer;
