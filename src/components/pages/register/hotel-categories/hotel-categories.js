@@ -1,9 +1,11 @@
 import IconWrapper from "@/components/core/icon-wrapper/icon-wrapper";
 import { Button } from "@/components/ui/button";
+import { setCookie } from "@/lib/cookie";
+import { hotelCategories } from "@/redux/features/register_slice";
 import { Check } from "lucide-react";
-import { CheckCircle } from "lucide-react";
-import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const HotelCategories = () => {
   const hotels = [
@@ -93,7 +95,27 @@ const HotelCategories = () => {
         "Traditional Japanese-style accommodations with meal options",
     },
   ];
+  const router = useRouter();
+  const { hotelData } = useSelector((state) => state.registerData);
   const [selectedHotel, setSelectedHotel] = useState(null);
+
+  const dispatch = useDispatch();
+  const handleOnNext = () => {
+    const data = hotels.filter((item) => item.id === selectedHotel)[0];
+    dispatch(
+      hotelCategories({
+        hotelCategories: data,
+      })
+    );
+    setCookie("hotelData", { ...hotelData, hotelCategories: data }, "1h");
+    router.push("/register/no-of-hotel");
+  };
+
+  useEffect(() => {
+    if (hotelData.hotelCategories) {
+      setSelectedHotel(hotelData.hotelCategories.id);
+    }
+  }, []);
   return (
     <div className="section-d">
       <div className="grid grid-cols-1 gap-2">
@@ -132,9 +154,7 @@ const HotelCategories = () => {
         })}
       </div>
 
-      <Link href="/register/">
-        <Button>Next</Button>
-      </Link>
+      <Button onClick={handleOnNext}>Next</Button>
     </div>
   );
 };

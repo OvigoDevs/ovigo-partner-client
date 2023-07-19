@@ -48,7 +48,7 @@ const RegisterWithEmail = () => {
         <div className="grid grid-cols-1 gap-2 mb-10">
           <h2 className="text-xl font-bold">Create your partner account</h2>
           <p>Create an account to list and manage your service.</p>
-          <dev className="grid grid-cols-1 gap-2">
+          <div className="grid grid-cols-1 gap-2">
             <label>Email Address</label>
             <Input
               placeholder="e.g. john@example.com"
@@ -59,7 +59,7 @@ const RegisterWithEmail = () => {
             <Button className="w-full" onClick={handleOnSubmit}>
               Continue
             </Button>
-          </dev>
+          </div>
         </div>
         <div className="grid grid-cols-1 gap-2">
           <p>

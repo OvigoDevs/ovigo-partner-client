@@ -1,19 +1,20 @@
 import { getCookie } from "@/lib/cookie";
 import { createSlice } from "@reduxjs/toolkit";
 
-// is in client side
+// is in client side ?
 const doc = typeof document !== "undefined";
 // default values
 let registerData = {};
+let hotelData = {};
 
 if (doc) {
   registerData = getCookie("registerData") ? getCookie("registerData") : {};
+  hotelData = getCookie("hotelData") ? getCookie("hotelData") : {};
 }
 const initialState = {
   registerData,
+  hotelData,
 };
-
-console.log(initialState);
 
 export const registerSlice = createSlice({
   name: "registerData",
@@ -27,10 +28,33 @@ export const registerSlice = createSlice({
     },
     registerInfo: (state, action) => {
       state.registerData.registerInfo = action.payload.registerInfo;
-    }
+    },
+    createPassword: (state, action) => {
+      state.registerData.createPassword = action.payload.createPassword;
+    },
+    hotelCategories: (state, action) => {
+      state.hotelData.hotelCategories = action.payload.hotelCategories;
+    },
+    noOfHotels: (state, action) => {
+      state.hotelData.noOfHotels = action.payload.noOfHotels;
+    },
+    hotelAddress: (state, action) => {
+      state.hotelData.hotelAddress = action.payload.hotelAddress;
+    },
+    hotelInformation: (state, action) => {
+      state.hotelData.hotelInformation = action.payload.hotelInformation;
+    },
   },
 });
 
-export const { registerWithEmail, verification, registerInfo } =
-  registerSlice.actions;
+export const {
+  registerWithEmail,
+  verification,
+  registerInfo,
+  createPassword,
+  hotelCategories,
+  noOfHotels,
+  hotelAddress,
+  hotelInformation,
+} = registerSlice.actions;
 export default registerSlice.reducer;

@@ -1,13 +1,21 @@
+
+
 import { CheckCircle } from "lucide-react";
 import { Circle } from "lucide-react";
 import { useState } from "react";
 import IconWrapper from "../icon-wrapper/icon-wrapper";
 
-const CustomRadio = ({ options, handleOnChange, defaultValue, name, label }) => {
+const CustomRadio = ({
+  options,
+  handleOnChange,
+  defaultValue,
+  name,
+  label,
+}) => {
   const [nativeOptions, setNativeOptions] = useState(
     options
       ? options.map((item) => {
-          return { text: item, value: defaultValue ? true : false };
+          return { text: item, value: defaultValue === item ? true : false };
         })
       : { text: "", value: false }
   );
@@ -28,10 +36,10 @@ const CustomRadio = ({ options, handleOnChange, defaultValue, name, label }) => 
                       text: item.text,
                       value: item.value ? false : true,
                     };
-                  }else{
+                  } else {
                     return {
                       text: item.text,
-                      value: false
+                      value: false,
                     };
                   }
                 }),
