@@ -50,6 +50,9 @@ export const registerSlice = createSlice({
     popularFacilities: (state, action) => {
       state.hotelData.popularFacilities = action.payload.popularFacilities;
     },
+    breakfastDetails: (state, action) => {
+      state.hotelData.breakfastDetails = action.payload.breakfastDetails;
+    },
     registerLanguages: (state, action) => {
       state.registerData.languages = action.payload.languages;
     },
@@ -67,6 +70,7 @@ export const {
   hotelInformation,
   registerPhoneInfo,
   registerLanguages,
-  popularFacilities
+  popularFacilities,
+  breakfastDetails,
 } = registerSlice.actions;
 export default registerSlice.reducer;
