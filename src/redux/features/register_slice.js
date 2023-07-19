@@ -29,6 +29,9 @@ export const registerSlice = createSlice({
     registerInfo: (state, action) => {
       state.registerData.registerInfo = action.payload.registerInfo;
     },
+    registerPhoneInfo: (state, action) => {
+      state.registerData.phone = action.payload.phone;
+    },
     createPassword: (state, action) => {
       state.registerData.createPassword = action.payload.createPassword;
     },
@@ -44,8 +47,11 @@ export const registerSlice = createSlice({
     hotelInformation: (state, action) => {
       state.hotelData.hotelInformation = action.payload.hotelInformation;
     },
-    registerPhoneInfo: (state, action) => {
-      state.registerData.phone = action.payload.phone;
+    popularFacilities: (state, action) => {
+      state.hotelData.popularFacilities = action.payload.popularFacilities;
+    },
+    breakfastDetails: (state, action) => {
+      state.hotelData.breakfastDetails = action.payload.breakfastDetails;
     },
     registerLanguages: (state, action) => {
       state.registerData.languages = action.payload.languages;
@@ -64,5 +70,7 @@ export const {
   hotelInformation,
   registerPhoneInfo,
   registerLanguages,
+  popularFacilities,
+  breakfastDetails,
 } = registerSlice.actions;
 export default registerSlice.reducer;

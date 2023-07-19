@@ -36,8 +36,10 @@ const ContactDetails = () => {
       );
       setCookie(
         "registerData",
-        registerData ? { ...registerData, phone } : { phone }
+        { ...registerData, phone }
       );
+
+      router.push("/register/create-password")
     }
   };
 
@@ -47,7 +49,7 @@ const ContactDetails = () => {
         <h1 className="font-bold mb-5">Registration information</h1>
         <div className="col-span-2 grid grid-cols-1 gap-2">
           <label>Phone</label>
-          <Input
+          <input
             placeholder="e.g. +880**********"
             onChange={(e) => setPhone(e.target.value)}
             defaultValue={phone}
