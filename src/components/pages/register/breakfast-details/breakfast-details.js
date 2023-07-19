@@ -1,12 +1,15 @@
 import CustomRadio from "@/components/core/custom-radio/custom-radio";
 import IconWrapper from "@/components/core/icon-wrapper/icon-wrapper";
+import InputError from "@/components/core/input-error/input-error";
+import { Button } from "@/components/ui/button";
+import { setCookie } from "@/lib/cookie";
+import { breakfastDetails } from "@/redux/features/register_slice";
 import { X } from "lucide-react";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const BreakfastDetails = () => {
-  const handleOnChange = (e) => {
-    console.log(e);
-  };
   const breakfasts = [
     {
       id: 0,
@@ -64,26 +67,124 @@ const BreakfastDetails = () => {
 
   const [selected, setSelected] = useState([]);
 
-  console.log(selected);
+  // router
+  const router = useRouter();
+  // redux
+  const { hotelData } = useSelector((state) => state.registerData);
+  // dispatch
+  const dispatch = useDispatch();
+  // formdata
+  const [formData, setFormData] = useState(
+    hotelData.breakfastDetails
+      ? hotelData.breakfastDetails
+      : {
+          serveToGuest: "",
+          priceIncluded: "",
+          pricePerPersonAndDay: "",
+          breakfastsTypes: selected,
+        }
+  );
+  // setFormData(hotelData.breakfastDetails);
+  // edited
+  const [edited, setEdited] = useState(false);
+  // errors
+  const [errors, setErrors] = useState(edited ? formData : {});
+  // onchange
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    if (!edited) {
+      setEdited(true);
+    }
+  };
+  // onsubmit
+  const handleOnSubmit = () => {
+    setErrors(validator(formData));
+  };
+  // validation
+  const validator = (data) => {
+    let obj = {};
+    // serveToGuest: "",
+    // priceIncluded: "",
+    // pricePerPersonAndDay: "",
+    // breakfastsTypes: selected,
+    if (!data.serveToGuest.trim()) {
+      obj.serveToGuest = "This input is required!";
+    }
+    if (!data.priceIncluded.trim()) {
+      obj.priceIncluded = "This input is required!";
+    }
+    if (!data.pricePerPersonAndDay.trim()) {
+      obj.pricePerPersonAndDay = "This input is required!";
+    }
+    if (!data.breakfastsTypes.length) {
+      obj.breakfastsTypes = "Select at least one!!";
+    }
+    return obj;
+  };
+  // useEffect > dispatch > setCookie > router
+  useEffect(() => {
+    if (Object.keys(errors).length === 0 && edited) {
+      // formData
+
+      dispatch(
+        breakfastDetails({
+          breakfastDetails: formData,
+        })
+      );
+
+      setCookie(
+        "hotelData",
+        { ...hotelData, breakfastDetails: formData },
+        "1h"
+      );
+      
+      router.push("/register/parking-details");
+    }
+  }, [errors]);
+
+  useEffect(() => {
+    setFormData({ ...formData, breakfastsTypes: selected });
+  }, [selected]);
+
+  // set default values
+  useEffect(() => {
+    if (hotelData.breakfastDetails) {
+      setSelected(hotelData.breakfastDetails.breakfastsTypes);
+    }
+  }, [hotelData]);
+  useEffect(() => {
+    setEdited(true);
+  }, []);
   return (
     <div className="grid grid-cols-1 gap-2 section-d max-w-[500px]">
       <h2 className="font-bold">Breakfast details</h2>
       <div className="grid grid-cols-1 gap-5">
         <CustomRadio
           label="Do you serve guests breakfast"
-          name="breakfast"
+          name="serveToGuest"
           handleOnChange={handleOnChange}
           options={["Yes", "No"]}
+          defaultValue={formData?.serveToGuest}
         />
+        <InputError error={errors.serveToGuest} />
         <CustomRadio
           label="Is breakfast included in the price guests pay?"
-          name="breakfast"
+          name="priceIncluded"
           handleOnChange={handleOnChange}
           options={["Yes, it's included", "No, it costs extra"]}
+          defaultValue={formData?.priceIncluded}
         />
+        <InputError error={errors.priceIncluded} />
         <div className="grid grid-cols-1 gap-2">
           <label>Breakfast price per person, per day</label>
-          <input />
+          <input
+            name="pricePerPersonAndDay"
+            placeholder="e.g. 500"
+            onChange={handleOnChange}
+            defaultValue={formData.pricePerPersonAndDay}
+          />
+          <InputError error={errors.pricePerPersonAndDay} />
           <p className="text-gray-400 dark:text-gray-800">
             Including all taxes and fees
           </p>
@@ -129,6 +230,7 @@ const BreakfastDetails = () => {
           </ul>
         </div>
       </div>
+      <Button onClick={handleOnSubmit}>Next</Button>
     </div>
   );
 };
