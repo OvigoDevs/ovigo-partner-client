@@ -25,6 +25,7 @@ const RoomDetails = () => {
   const { registerData } = useSelector((state) => state.registerData);
   const dispatch = useDispatch();
   const router = useRouter();
+  const roomData = registerData.roomData;
 
   const roomTypes = [
     {
@@ -69,23 +70,38 @@ const RoomDetails = () => {
     },
   ];
 
-  const [roomType, setRoomType] = useState("");
-  const [roomQuantityOfSelectedType, setRoomQuantityOfSelectedType] =
-    useState(0);
-  const [twinBed, setTwinBed] = useState(0);
-  const [fullBed, setFullBed] = useState(0);
-  const [queenBed, setQueenBed] = useState(0);
-  const [kingBed, setKingBed] = useState(0);
-  const [bunkBed, setBunkBed] = useState(0);
-  const [sofaBed, setSofaBed] = useState(0);
+  const [roomType, setRoomType] = useState(roomData ? roomData.roomType : "");
+  const [roomQuantityOfSelectedType, setRoomQuantityOfSelectedType] = useState(
+    roomData ? roomData?.roomQuantityOfSelectedType : 0
+  );
+  const [twinBed, setTwinBed] = useState(
+    roomData?.twinBed ? roomData.twinBed : 0
+  );
+  const [fullBed, setFullBed] = useState(
+    roomData?.fullBed ? roomData.fullBed : 0
+  );
+  const [queenBed, setQueenBed] = useState(
+    roomData?.queenBed ? roomData.queenBed : 0
+  );
+  const [kingBed, setKingBed] = useState(
+    roomData?.kingBed ? roomData.kingBed : 0
+  );
+  const [bunkBed, setBunkBed] = useState(
+    roomData?.bunkBed ? roomData.bunkBed : 0
+  );
+  const [sofaBed, setSofaBed] = useState(
+    roomData?.sofaBed ? roomData.sofaBed : 0
+  );
   const [roomSize, setRoomSize] = useState({
-    size: 0,
+    size: roomData?.roomSize?.size ? roomData.roomSize?.size : 0,
     measurementUnit: "",
   });
 
-  const [guests, setGuests] = useState(0);
+  const [guests, setGuests] = useState(roomData?.guests ? roomData?.guests : 0);
 
-  const [smokingAllowed, setSmokingAllowed] = useState("");
+  const [smokingAllowed, setSmokingAllowed] = useState(
+    roomData?.SmokingAllowance ? roomData?.SmokingAllowance : ""
+  );
 
   const [error, setError] = useState("");
 
@@ -146,7 +162,7 @@ const RoomDetails = () => {
       <div className="py-5 grid grid-cols-2 gap-4">
         <div className="border p-5 rounded-md space-y-3">
           <h4 className="font-bold">What type of unit this is?</h4>
-          <Select onValueChange={handleSelectOnChange}>
+          <Select defaultValue={roomType} onValueChange={handleSelectOnChange}>
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Select Room Type" />
             </SelectTrigger>
@@ -166,6 +182,7 @@ const RoomDetails = () => {
           </h4>
           <input
             min={0}
+            defaultValue={roomQuantityOfSelectedType}
             onChange={(e) => setRoomQuantityOfSelectedType(e.target.value)}
             type="number"
             className="w-full"
@@ -487,6 +504,7 @@ const RoomDetails = () => {
             <p>Room size - optional</p>
             <div className="flex">
               <input
+                defaultValue={roomData?.roomSize?.size}
                 onChange={(e) =>
                   setRoomSize({
                     ...roomSize,
@@ -497,12 +515,14 @@ const RoomDetails = () => {
                 placeholder="Measurement"
               />
               <Select
-                onChange={(e) =>
+                defaultValue={roomData?.roomSize?.measurementUnit}
+                onValueChange={(e) => {
+                  console.log(e);
                   setRoomSize({
                     ...roomSize,
                     measurementUnit: e,
-                  })
-                }
+                  });
+                }}
               >
                 <SelectTrigger className="w-[180px]">
                   <SelectValue placeholder="Select Unit" />
@@ -518,6 +538,7 @@ const RoomDetails = () => {
           </div>
 
           <CustomRadio
+            defaultValue={roomData?.SmokingAllowance}
             options={["Yes", "No"]}
             name="smoking-allowed"
             label="Is smoking allowed in this room?"
