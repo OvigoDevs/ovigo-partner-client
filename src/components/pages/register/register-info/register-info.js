@@ -1,23 +1,34 @@
+"use client"
+
 import InputError from "@/components/core/input-error/input-error";
 import { Button } from "@/components/ui/button";
+import { setCookie } from "@/lib/cookie";
 import { NAME_REGEX } from "@/lib/regexes";
 import { registerInfo } from "@/redux/features/register_slice";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const RegisterInfo = () => {
-  const dispatch = useDispatch();
   const router = useRouter();
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-  });
-  const [errors, setErrors] = useState(formData);
+  const { registerData } = useSelector((state) => state.registerData);
+  const dispatch = useDispatch();
+
+  const [formData, setFormData] = useState(
+    registerData.registerInfo
+      ? registerData.registerInfo
+      : {
+          firstName: "",
+          lastName: "",
+        }
+  );
+  const [edited, setEdited] = useState(false);
+  const [errors, setErrors] = useState(edited ? formData : {});
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    setEdited(true);
   };
 
   const handleOnSubmit = () => {
@@ -33,23 +44,28 @@ const RegisterInfo = () => {
     }
     if (!data.lastName.trim()) {
       obj.lastName = "Last name is required!";
-    } else if (!NAME_REGEX.test(data.lastName)) {
-      obj.firstName = "Invalid last name!";
     }
     return obj;
   };
 
   useEffect(() => {
-    if (Object.keys(errors).length === 0) {
+    console.log({formData, errors})
+    if (Object.keys(errors).length === 0 && edited) {
       // update redux store
       dispatch(
         registerInfo({
           registerInfo: formData,
         })
       );
+      setCookie("registerData", { ...registerData, registerInfo: formData });
       router.push("/register/contact-details");
     }
   }, [errors]);
+
+  useEffect(() => {
+    setEdited(true);
+  }, []);
+
   return (
     <div className="section-d">
       <div className="max-w-[500px]">
@@ -61,6 +77,7 @@ const RegisterInfo = () => {
               name="firstName"
               placeholder="e.g. John"
               onChange={handleOnChange}
+              defaultValue={formData.firstName}
             />
             <InputError error={errors.firstName} />
           </div>
@@ -70,6 +87,7 @@ const RegisterInfo = () => {
               name="lastName"
               placeholder="e.g. Doe"
               onChange={handleOnChange}
+              defaultValue={formData.lastName}
             />
             <InputError error={errors.lastName} />
           </div>

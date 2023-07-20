@@ -2,11 +2,15 @@ import { Button } from "@/components/ui/button";
 import { getCookie, setCookie } from "@/lib/cookie";
 import { verification } from "@/redux/features/register_slice";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const Verification = () => {
   const { registerData } = useSelector((state) => state.registerData);
+  const [verify, setVerify] = useState(false);
+  useEffect(() => {
+    setVerify(registerData.verification);
+  }, []);
   const dispatch = useDispatch();
   const router = useRouter();
   const handleOnSubmit = () => {
@@ -28,11 +32,11 @@ const Verification = () => {
       </h3>
       <Button
         className="max-w-[150px]"
-        variant={registerData.verification ? "outline" : ""}
+        variant={verify ? "outline" : ""}
         onClick={handleOnSubmit}
-        disabled={registerData.verification}
+        disabled={verify}
       >
-        {registerData.verification ? "Verified" : "Verify"}
+        {verify ? "Verified" : "Verify"}
       </Button>
     </div>
   );
