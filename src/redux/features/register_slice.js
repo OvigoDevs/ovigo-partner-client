@@ -6,14 +6,17 @@ const doc = typeof document !== "undefined";
 // default values
 let registerData = {};
 let hotelData = {};
+let roomData = {};
 
 if (doc) {
   registerData = getCookie("registerData") ? getCookie("registerData") : {};
   hotelData = getCookie("hotelData") ? getCookie("hotelData") : {};
+  roomData = getCookie("roomData") ? getCookie("roomData") : {};
 }
 const initialState = {
   registerData,
   hotelData,
+  roomData,
 };
 
 export const registerSlice = createSlice({
@@ -56,6 +59,9 @@ export const registerSlice = createSlice({
     registerLanguages: (state, action) => {
       state.registerData.languages = action.payload.languages;
     },
+    roomDetails: (state, action) => {
+      state.roomData.roomDetails = action.payload.roomDetails;
+    },
   },
 });
 
@@ -72,5 +78,6 @@ export const {
   registerLanguages,
   popularFacilities,
   breakfastDetails,
+  roomDetails,
 } = registerSlice.actions;
 export default registerSlice.reducer;
