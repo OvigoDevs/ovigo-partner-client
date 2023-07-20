@@ -1,3 +1,4 @@
+"use client";
 import CustomCheckbox from "@/components/core/custom-checkbox/custom-checkbox";
 import CustomRadio from "@/components/core/custom-radio/custom-radio";
 import { Button } from "@/components/ui/button";
@@ -14,18 +15,17 @@ import {
 } from "@/components/ui/select";
 import { Lightbulb } from "lucide-react";
 import { BedDouble } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { roomDetails } from "@/redux/features/register_slice";
 import { setCookie } from "@/lib/cookie";
 import InputError from "@/components/core/input-error/input-error";
 
 const RoomDetails = () => {
-  const { registerData } = useSelector((state) => state.registerData);
+  const { roomData } = useSelector((state) => state.registerData);
   const dispatch = useDispatch();
   const router = useRouter();
-  const roomData = registerData.roomData;
 
   const roomTypes = [
     {
@@ -71,6 +71,7 @@ const RoomDetails = () => {
   ];
 
   const [roomType, setRoomType] = useState(roomData ? roomData.roomType : "");
+
   const [roomQuantityOfSelectedType, setRoomQuantityOfSelectedType] = useState(
     roomData ? roomData?.roomQuantityOfSelectedType : 0
   );
@@ -145,14 +146,18 @@ const RoomDetails = () => {
     } else if (smokingAllowed === "") {
       setError("Please set Smoking Policy");
     } else {
+      setError("");
       dispatch(roomDetails({ roomDetails: roomData }));
       setCookie(
-        "registerData",
-        registerData ? { ...registerData, roomData } : { roomData }
+        "roomData",
+        roomData ? { ...roomData, roomData } : { roomData }
       );
+
       router.push("/register/bath-details");
     }
   };
+
+  useEffect(() => {}, [roomData]);
 
   return (
     <div className="py-5">
