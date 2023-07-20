@@ -22,6 +22,7 @@ const RoomFeatures = () => {
           generalAmenities: [],
           outdoorsAndViews: [],
           foodAndDrink: [],
+          mainView: "",
         }
   );
   // edited
@@ -56,6 +57,14 @@ const RoomFeatures = () => {
     }
     if (!data.foodAndDrink.length) {
       obj.foodAndDrink = "At least select one please!";
+    }
+
+    if (data.outdoorsAndViews.length) {
+      if (formData.outdoorsAndViews.find((item) => item === "View")) {
+        if (!data.mainView.trim()) {
+          obj.mainView = "Main view is required!";
+        }
+      }
     }
     // errors
     return obj;
@@ -115,10 +124,20 @@ const RoomFeatures = () => {
             handleOnChange={handleOnChange}
           />
           <InputError error={errors.outdoorsAndViews} />
-          <div className="grid grid-cols-1 gap-2">
-            <label>{`What's the main view from this room`}</label>
-            <input />
-          </div>
+          {formData.outdoorsAndViews.length ? (
+            <>
+              {formData.outdoorsAndViews.find((item) => item === "View") ? (
+                <div className="grid grid-cols-1 gap-2">
+                  <label>{`What's the main view from this room`}</label>
+                  <input
+                    name="mainView"
+                    onChange={handleOnChange}
+                    defaultValue={formData.mainView}
+                  />
+                </div>
+              ) : null}
+            </>
+          ) : null}
         </div>
         <hr />
         <CustomCheckbox

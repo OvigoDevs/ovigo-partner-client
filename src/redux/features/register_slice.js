@@ -63,7 +63,7 @@ export const registerSlice = createSlice({
       state.hotelData.parkingDetails = action.payload.parkingDetails;
     },
     roomFeatures: (state, action) => {
-      state.registerData.roomFeatures = action.payload.roomFeatures;
+      state.roomData.roomFeatures = action.payload.roomFeatures;
     },
     roomDetails: (state, action) => {
       state.roomData.roomDetails = action.payload.roomDetails;
