@@ -1,34 +1,84 @@
 import CustomRadio from "@/components/core/custom-radio/custom-radio";
+import InputError from "@/components/core/input-error/input-error";
 import { Button } from "@/components/ui/button";
+import { setCookie } from "@/lib/cookie";
+import { parkingDetails } from "@/redux/features/register_slice";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const ParkingDetails = () => {
   // router
-  const router = useRouter()
+  const router = useRouter();
   // hoteldata
-  const {hotelData} = useSelector(state => state.registerData)
+  const { hotelData } = useSelector((state) => state.registerData);
   // dispatch
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   // formstate
-  const [formData, setFormData] = useState({
-    available: "",
-    reserve: "",
-    located: "",
-    type: ""
-  })
+  const [formData, setFormData] = useState(
+    hotelData.parkingDetails
+      ? hotelData.parkingDetails
+      : {
+          available: "",
+          reserve: "",
+          located: "",
+          type: "",
+        }
+  );
   // edited
-  const [edited, setEdited] = useState
+  const [edited, setEdited] = useState(false);
   // errors
+  const [errors, setErrors] = useState(edited ? formData : {});
   // input handler
   const handleOnChange = (e) => {
-    console.log(e);
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    if (!edited) {
+      setEdited(true);
+    }
   };
   // submit handler
+  const handleOnSubmit = () => {
+    setErrors(validator(formData));
+  };
   // validator
+  const validator = (data) => {
+    let obj = {};
+    if (!data.available.trim()) {
+      obj.available = "Availability is required!";
+    }
+    if (!data.reserve.trim()) {
+      obj.reserve = "Reservation is required!";
+    }
+    if (!data.located.trim()) {
+      obj.located = "Location is required!";
+    }
+    if (!data.type.trim()) {
+      obj.type = "Parking type is required!";
+    }
+
+    return obj;
+  };
   // useEffect > dispatch > setcookie > router
-  // update default value
+  useEffect(() => {
+    if (Object.keys(errors).length === 0 && edited) {
+      // dispatch
+      dispatch(
+        parkingDetails({
+          parkingDetails: formData,
+        })
+      );
+      // setcookie
+      setCookie("hotelData", { ...hotelData, parkingDetails: formData }, "1h");
+      // routing
+      router.push("/register/languages");
+    }
+  }, [errors]);
+
+  // set edit status
+  useEffect(() => {
+    setEdited(true);
+  }, []);
   return (
     <div className="py-5">
       <p className="font-bold">
@@ -40,34 +90,44 @@ const ParkingDetails = () => {
           <div className="">
             <CustomRadio
               label="Is parking available To Guests?"
-              name="parking"
+              name="available"
               handleOnChange={handleOnChange}
               options={["Yes, Free", "Yes, Paid", "No"]}
+              defaultValue={formData.available}
             />
+            <InputError error={errors.available} />
             <hr className="my-5" />
             <CustomRadio
               label="Do guests need to reserve a parking spot?"
-              name="parking-reserve"
+              name="reserve"
               handleOnChange={handleOnChange}
               options={["Reservation Needed", "No Reservation Needed"]}
+              defaultValue={formData.reserve}
             />
+            <InputError error={errors.reserve} />
             <hr className="my-5" />
 
             <CustomRadio
               label="Where is the parking located?"
-              name="parking-location"
+              name="located"
               handleOnChange={handleOnChange}
               options={["On site", "Off site"]}
+              defaultValue={formData.located}
             />
+            <InputError error={errors.located} />
             <hr className="my-5" />
             <CustomRadio
               label="What type of parking is it?"
-              name="parking-type"
+              name="type"
               handleOnChange={handleOnChange}
               options={["Private", "Public"]}
+              defaultValue={formData.type}
             />
+            <InputError error={errors.type} />
           </div>
-          <Button className="w-full mt-5">Submit</Button>
+          <Button className="w-full mt-5" onClick={handleOnSubmit}>
+            Submit
+          </Button>
         </div>
       </div>
     </div>

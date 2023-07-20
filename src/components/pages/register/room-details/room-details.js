@@ -75,19 +75,19 @@ const RoomDetails = () => {
       value: "Deluxe Double Bed With Shower",
     },
     {
-      id: 14,
+      id: 15,
       value: "Deluxe Double Bed With Side Sea View",
     },
     {
-      id: 15,
+      id: 16,
       value: "Deluxe Double Or Twin Room",
     },
     {
-      id: 16,
+      id: 17,
       value: "Deluxe King Room",
     },
     {
-      id: 17,
+      id: 18,
       value: "Deluxe Queen Room",
     },
     {
@@ -95,87 +95,87 @@ const RoomDetails = () => {
       value: "Deluxe Room",
     },
     {
-      id: 19,
+      id: 20,
       value: "Deluxe Room",
     },
     {
-      id: 20,
+      id: 21,
       value: "Double Room  - Disablity Access",
     },
     {
-      id: 21,
+      id: 22,
       value: "Double Room With Balcony",
     },
     {
-      id: 22,
+      id: 23,
       value: "Double Room With Balcony And Sea View",
     },
     {
-      id: 23,
+      id: 24,
       value: "Double Room With Extra Bed",
     },
     {
-      id: 24,
+      id: 25,
       value: "Double Room With Lake View",
     },
     {
-      id: 25,
+      id: 26,
       value: "Double Room With Mountain View",
     },
     {
-      id: 26,
+      id: 27,
       value: "Double Room With Patio",
     },
     {
-      id: 27,
+      id: 28,
       value: "Double Room With Sea View",
     },
     {
-      id: 28,
+      id: 29,
       value: "Double Room With Shared Bathroom",
     },
     {
-      id: 29,
+      id: 30,
       value: "Double Room With Spa Bath",
     },
     {
-      id: 30,
+      id: 31,
       value: "Double Room With Terrace",
     },
     {
-      id: 31,
+      id: 32,
       value: "Economy Double Room",
     },
     {
-      id: 32,
+      id: 33,
       value: "King Room",
     },
     {
-      id: 33,
+      id: 34,
       value: "King Room With Balcony",
     },
     {
-      id: 34,
+      id: 35,
       value: "King Room With Garden View",
     },
     {
-      id: 35,
+      id: 36,
       value: "King Room With Lake View",
     },
     {
-      id: 36,
+      id: 37,
       value: "King Room With Pool View",
     },
     {
-      id: 37,
+      id: 38,
       value: "Standard Double Room",
     },
     {
-      id: 38,
+      id: 39,
       value: "Standard Double Room With Balcony",
     },
     {
-      id: 39,
+      id: 40,
       value: "Superior Double Room",
     },
   ];
