@@ -6,14 +6,17 @@ const doc = typeof document !== "undefined";
 // default values
 let registerData = {};
 let hotelData = {};
+let roomData = {};
 
 if (doc) {
   registerData = getCookie("registerData") ? getCookie("registerData") : {};
   hotelData = getCookie("hotelData") ? getCookie("hotelData") : {};
+  roomData = getCookie("roomData") ? getCookie("roomData") : {};
 }
 const initialState = {
   registerData,
   hotelData,
+  roomData,
 };
 
 export const registerSlice = createSlice({
@@ -62,6 +65,12 @@ export const registerSlice = createSlice({
     roomFeatures: (state, action) => {
       state.registerData.roomFeatures = action.payload.roomFeatures;
     },
+    roomDetails: (state, action) => {
+      state.roomData.roomDetails = action.payload.roomDetails;
+    },
+    bathroomDetails: (state, action) => {
+      state.roomData.bathroomDetails = action.payload.bathroomDetails;
+    },
   },
 });
 
@@ -79,6 +88,8 @@ export const {
   popularFacilities,
   breakfastDetails,
   roomFeatures,
-  parkingDetails
+  parkingDetails,
+  roomDetails,
+  bathroomDetails,
 } = registerSlice.actions;
 export default registerSlice.reducer;
