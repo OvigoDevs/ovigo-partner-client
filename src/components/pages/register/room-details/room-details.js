@@ -148,10 +148,7 @@ const RoomDetails = () => {
     } else {
       setError("");
       dispatch(roomDetails({ roomDetails: roomData }));
-      setCookie(
-        "roomData",
-        roomData ? { ...roomData, roomData } : { roomData }
-      );
+      setCookie("roomData", roomData);
 
       router.push("/register/bath-details");
     }
