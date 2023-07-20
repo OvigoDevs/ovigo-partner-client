@@ -1,3 +1,5 @@
+"use client";
+
 import "./globals.scss";
 import { Inter } from "next/font/google";
 
@@ -8,6 +10,8 @@ import { Toaster } from "@/components/ui/toaster";
 import Navbar from "@/components/core/navbar/navbar";
 import Footer from "@/components/core/footer/footer";
 import StoreProvider from "@/redux/store-provider";
+import { usePathname } from "next/navigation";
+import DashboardNavbar from "@/components/core/dashboard-navbar/dashboard-navbar";
 
 const APP_NAME = "Ovigo";
 const APP_DEFAULT_TITLE = "Ovigo";
@@ -32,16 +36,28 @@ export const metadata = {
 };
 
 const RootLayout = ({ children }) => {
+  const pathname = usePathname();
   return (
     <html lang="en">
       <body className={inter.className}>
         <StoreProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <>
-              <Navbar />
-              {children}
-              <Toaster />
-              <Footer />
+              {pathname.includes("dashboard") ? (
+                <>
+                  <DashboardNavbar />
+                  {children}
+                  <Toaster />
+                  <Footer />
+                </>
+              ) : (
+                <>
+                  <Navbar />
+                  {children}
+                  <Toaster />
+                  <Footer />
+                </>
+              )}
             </>
           </ThemeProvider>
         </StoreProvider>
