@@ -13,28 +13,6 @@ import StoreProvider from "@/redux/store-provider";
 import { usePathname } from "next/navigation";
 import DashboardNavbar from "@/components/core/dashboard-navbar/dashboard-navbar";
 
-const APP_NAME = "Ovigo";
-const APP_DEFAULT_TITLE = "Ovigo";
-const APP_TITLE_TEMPLATE = "Ovigo";
-const APP_DESCRIPTION = "Ovigo - Smart Bangladesh smart tourism";
-
-export const metadata = {
-  applicationName: APP_NAME,
-  title: {
-    default: APP_DEFAULT_TITLE,
-    template: APP_TITLE_TEMPLATE,
-  },
-  description: APP_DESCRIPTION,
-  manifest: "/manifest.json",
-  themeColor: "#FFFFFF",
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "default",
-    title: APP_DEFAULT_TITLE,
-    // startUpImage: [],
-  },
-};
-
 const RootLayout = ({ children }) => {
   const pathname = usePathname();
   return (

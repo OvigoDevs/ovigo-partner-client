@@ -21,6 +21,10 @@ const CustomCheckbox = ({
       },
     });
   }, [selectedOptions]);
+
+  useEffect(() => {
+    defaultValue.length && setSelectedOptions(defaultValue);
+  }, [defaultValue]);
   return (
     <div className="grid grid-cols-1 gap-3">
       <p>{label}</p>

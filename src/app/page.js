@@ -1,6 +1,5 @@
 
 
-
 const Home = () => {
   return (
     <div className="container-d section-p min-h-screen">

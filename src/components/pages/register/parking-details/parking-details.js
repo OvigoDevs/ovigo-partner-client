@@ -1,12 +1,34 @@
 import CustomRadio from "@/components/core/custom-radio/custom-radio";
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const ParkingDetails = () => {
+  // router
+  const router = useRouter()
+  // hoteldata
+  const {hotelData} = useSelector(state => state.registerData)
+  // dispatch
+  const dispatch = useDispatch()
+  // formstate
+  const [formData, setFormData] = useState({
+    available: "",
+    reserve: "",
+    located: "",
+    type: ""
+  })
+  // edited
+  const [edited, setEdited] = useState
+  // errors
+  // input handler
   const handleOnChange = (e) => {
     console.log(e);
   };
+  // submit handler
+  // validator
+  // useEffect > dispatch > setcookie > router
+  // update default value
   return (
     <div className="py-5">
       <p className="font-bold">
