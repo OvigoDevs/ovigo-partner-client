@@ -1,5 +1,4 @@
 import Image from "next/image";
-import benefitIcon from "../../../../images/benefit-icon.svg";
 
 const BenefitSection = () => {
   const benefits = [
@@ -52,7 +51,7 @@ const BenefitSection = () => {
               <Image
                 width={100}
                 height={100}
-                src={benefitIcon}
+                src="/images/benefit-icon.svg"
                 alt="Benefit"
               ></Image>
               <div className="pt-5 grid grid-cols-1 gap-2">

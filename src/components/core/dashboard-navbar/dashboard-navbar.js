@@ -17,7 +17,6 @@ import { User2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-import propertiesIcon from "../../../images/dashboard/properties.svg";
 import { usePathname } from "next/navigation";
 
 const DashboardNavbar = () => {
@@ -79,7 +78,7 @@ const DashboardNavbar = () => {
                   <Image
                     width={40}
                     height={40}
-                    src={propertiesIcon}
+                    src="/images/dashboard/properties.svg"
                     alt="Properties Image"
                     className="w-full h-full"
                   />
