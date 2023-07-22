@@ -6,14 +6,17 @@ const doc = typeof document !== "undefined";
 // default values
 let registerData = {};
 let hotelData = {};
+let roomData = {};
 
 if (doc) {
   registerData = getCookie("registerData") ? getCookie("registerData") : {};
   hotelData = getCookie("hotelData") ? getCookie("hotelData") : {};
+  roomData = getCookie("roomData") ? getCookie("roomData") : {};
 }
 const initialState = {
   registerData,
   hotelData,
+  roomData,
 };
 
 export const registerSlice = createSlice({
@@ -54,7 +57,28 @@ export const registerSlice = createSlice({
       state.hotelData.breakfastDetails = action.payload.breakfastDetails;
     },
     registerLanguages: (state, action) => {
-      state.registerData.languages = action.payload.languages;
+      state.hotelData.registerLanguages = action.payload.registerLanguages;
+    },
+    parkingDetails: (state, action) => {
+      state.hotelData.parkingDetails = action.payload.parkingDetails;
+    },
+    roomFeatures: (state, action) => {
+      state.roomData.roomFeatures = action.payload.roomFeatures;
+    },
+    roomDetails: (state, action) => {
+      state.roomData.roomDetails = action.payload.roomDetails;
+    },
+    roomName: (state, action) => {
+      state.roomData.roomName = action.payload.roomName;
+    },
+    roomPrice: (state, action) => {
+      state.roomData.roomPrice = action.payload.roomPrice;
+    },
+    guestPayment: (state, action) => {
+      state.roomData.guestPayment = action.payload.guestPayment;
+    },
+    bathroomDetails: (state, action) => {
+      state.roomData.bathroomDetails = action.payload.bathroomDetails;
     },
   },
 });
@@ -72,5 +96,12 @@ export const {
   registerLanguages,
   popularFacilities,
   breakfastDetails,
+  roomFeatures,
+  parkingDetails,
+  roomDetails,
+  bathroomDetails,
+  roomName,
+  roomPrice,
+  guestPayment
 } = registerSlice.actions;
 export default registerSlice.reducer;

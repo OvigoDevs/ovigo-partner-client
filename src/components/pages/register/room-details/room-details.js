@@ -1,3 +1,4 @@
+"use client";
 import CustomCheckbox from "@/components/core/custom-checkbox/custom-checkbox";
 import CustomRadio from "@/components/core/custom-radio/custom-radio";
 import { Button } from "@/components/ui/button";
@@ -14,183 +15,147 @@ import {
 } from "@/components/ui/select";
 import { Lightbulb } from "lucide-react";
 import { BedDouble } from "lucide-react";
-import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { roomDetails } from "@/redux/features/register_slice";
+import { setCookie } from "@/lib/cookie";
+import InputError from "@/components/core/input-error/input-error";
 
 const RoomDetails = () => {
-  const doubleBedTypes = [
+  const { roomData } = useSelector((state) => state.registerData);
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const roomTypes = [
     {
       id: 1,
-      value: "Double Room",
+      value: "Single",
     },
     {
       id: 2,
-      value: "Double Room With Balcony",
+      value: "Double",
     },
     {
       id: 3,
-      value: "Double Room With Garden View",
+      value: "Twin",
     },
     {
       id: 4,
-      value: "Double Room With Private Bathroom",
+      value: "Triple",
     },
     {
       id: 5,
-      value: "Budget Double Room",
+      value: "Quad",
     },
     {
       id: 6,
-      value: "Business Double Room With Gym Access",
+      value: "Suite",
     },
     {
       id: 7,
-      value: "Deluxe Double Room",
+      value: "Family",
     },
     {
       id: 8,
-      value: "Deluxe Double Room With Balcony",
+      value: "Studio",
     },
     {
       id: 9,
-      value: "Deluxe Double Room With Balcony And Sea View",
+      value: "Apartment",
     },
     {
       id: 10,
-      value: "Deluxe Double Room With Bath",
-    },
-    {
-      id: 11,
-      value: "Deluxe Double Room With Castle View",
-    },
-    {
-      id: 12,
-      value: "Deluxe Double Room With Extra Bed",
-    },
-    {
-      id: 13,
-      value: "Deluxe Double Bed With Sea View",
-    },
-    {
-      id: 14,
-      value: "Deluxe Double Bed With Shower",
-    },
-    {
-      id: 14,
-      value: "Deluxe Double Bed With Side Sea View",
-    },
-    {
-      id: 15,
-      value: "Deluxe Double Or Twin Room",
-    },
-    {
-      id: 16,
-      value: "Deluxe King Room",
-    },
-    {
-      id: 17,
-      value: "Deluxe Queen Room",
-    },
-    {
-      id: 18,
-      value: "Deluxe Room",
-    },
-    {
-      id: 19,
-      value: "Deluxe Room",
-    },
-    {
-      id: 20,
-      value: "Double Room  - Disablity Access",
-    },
-    {
-      id: 21,
-      value: "Double Room With Balcony",
-    },
-    {
-      id: 22,
-      value: "Double Room With Balcony And Sea View",
-    },
-    {
-      id: 23,
-      value: "Double Room With Extra Bed",
-    },
-    {
-      id: 24,
-      value: "Double Room With Lake View",
-    },
-    {
-      id: 25,
-      value: "Double Room With Mountain View",
-    },
-    {
-      id: 26,
-      value: "Double Room With Patio",
-    },
-    {
-      id: 27,
-      value: "Double Room With Sea View",
-    },
-    {
-      id: 28,
-      value: "Double Room With Shared Bathroom",
-    },
-    {
-      id: 29,
-      value: "Double Room With Spa Bath",
-    },
-    {
-      id: 30,
-      value: "Double Room With Terrace",
-    },
-    {
-      id: 31,
-      value: "Economy Double Room",
-    },
-    {
-      id: 32,
-      value: "King Room",
-    },
-    {
-      id: 33,
-      value: "King Room With Balcony",
-    },
-    {
-      id: 34,
-      value: "King Room With Garden View",
-    },
-    {
-      id: 35,
-      value: "King Room With Lake View",
-    },
-    {
-      id: 36,
-      value: "King Room With Pool View",
-    },
-    {
-      id: 37,
-      value: "Standard Double Room",
-    },
-    {
-      id: 38,
-      value: "Standard Double Room With Balcony",
-    },
-    {
-      id: 39,
-      value: "Superior Double Room",
+      value: "Houseboat",
     },
   ];
 
-  const [twinBed, setTwinBed] = useState(0);
-  const [fullBed, setFullBed] = useState(0);
-  const [queenBed, setQueenBed] = useState(0);
-  const [kingBed, setKingBed] = useState(0);
-  const [bunkBed, setBunkBed] = useState(0);
-  const [sofaBed, setSofaBed] = useState(0);
+  const [roomType, setRoomType] = useState(roomData ? roomData.roomType : "");
 
-  const [guests, setGuests] = useState(0);
-  const handleOnChange = (e) => {
-    console.log(e);
+  const [roomQuantityOfSelectedType, setRoomQuantityOfSelectedType] = useState(
+    roomData ? roomData?.roomQuantityOfSelectedType : 0
+  );
+  const [twinBed, setTwinBed] = useState(
+    roomData?.twinBed ? roomData.twinBed : 0
+  );
+  const [fullBed, setFullBed] = useState(
+    roomData?.fullBed ? roomData.fullBed : 0
+  );
+  const [queenBed, setQueenBed] = useState(
+    roomData?.queenBed ? roomData.queenBed : 0
+  );
+  const [kingBed, setKingBed] = useState(
+    roomData?.kingBed ? roomData.kingBed : 0
+  );
+  const [bunkBed, setBunkBed] = useState(
+    roomData?.bunkBed ? roomData.bunkBed : 0
+  );
+  const [sofaBed, setSofaBed] = useState(
+    roomData?.sofaBed ? roomData.sofaBed : 0
+  );
+  const [roomSize, setRoomSize] = useState({
+    size: roomData?.roomSize?.size ? roomData.roomSize?.size : 0,
+    measurementUnit: "",
+  });
+
+  const [guests, setGuests] = useState(roomData?.guests ? roomData?.guests : 0);
+
+  const [smokingAllowed, setSmokingAllowed] = useState(
+    roomData?.SmokingAllowance ? roomData?.SmokingAllowance : ""
+  );
+
+  const [error, setError] = useState("");
+
+  const handleSelectOnChange = (e) => {
+    setRoomType(e);
   };
+
+  const handleSubmit = () => {
+    const roomData = {
+      roomType: roomType,
+      roomQuantityOfSelectedType: roomQuantityOfSelectedType,
+      twinBed: twinBed,
+      fullBed: fullBed,
+      queenBed: queenBed,
+      kingBed: kingBed,
+      bunkBed: bunkBed,
+      sofaBed: sofaBed,
+      guests: guests,
+      SmokingAllowance: smokingAllowed,
+      roomSize: roomSize,
+    };
+    if (roomType === "") {
+      setError("Please Select one unit type");
+      return;
+    } else if (roomQuantityOfSelectedType <= 0) {
+      setError("Please Select valid Quantity");
+      return;
+    } else if (
+      twinBed === 0 &&
+      fullBed === 0 &&
+      queenBed === 0 &&
+      kingBed === 0 &&
+      bunkBed === 0 &&
+      sofaBed === 0
+    ) {
+      setError("Please Set availability");
+      return;
+    } else if (guests <= 0) {
+      setError("Please Set minimum guest number");
+      return;
+    } else if (smokingAllowed === "") {
+      setError("Please set Smoking Policy");
+    } else {
+      setError("");
+      dispatch(roomDetails({ roomDetails: roomData }));
+      setCookie("roomData", roomData);
+
+      router.push("/register/bath-details");
+    }
+  };
+
+  useEffect(() => {}, [roomData]);
+
   return (
     <div className="py-5">
       <h4 className="font-bold">Room Details</h4>
@@ -199,13 +164,13 @@ const RoomDetails = () => {
       <div className="py-5 grid grid-cols-2 gap-4">
         <div className="border p-5 rounded-md space-y-3">
           <h4 className="font-bold">What type of unit this is?</h4>
-          <Select>
+          <Select defaultValue={roomType} onValueChange={handleSelectOnChange}>
             <SelectTrigger className="w-full">
-              <SelectValue placeholder="Select Bed Type" />
+              <SelectValue placeholder="Select Room Type" />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup className="grid grid-cols-4 gap-2">
-                {doubleBedTypes.map((bed) => (
+                {roomTypes.map((bed) => (
                   <SelectItem key={bed.id} value={bed.value}>
                     {bed.value}
                   </SelectItem>
@@ -213,14 +178,19 @@ const RoomDetails = () => {
               </SelectGroup>
             </SelectContent>
           </Select>
+          <InputError error={error}></InputError>
           <h4 className="font-bold">
             How many rooms of this type do you have?
           </h4>
           <input
+            min={0}
+            defaultValue={roomQuantityOfSelectedType}
+            onChange={(e) => setRoomQuantityOfSelectedType(e.target.value)}
             type="number"
             className="w-full"
             placeholder="Enter the quantity of this type of room"
           />
+          <InputError error={error}></InputError>
         </div>
       </div>
 
@@ -461,8 +431,8 @@ const RoomDetails = () => {
               </div>
             </div>
           </div>
+          <InputError error={error}></InputError>
         </div>
-
         {/* Suggestion Box */}
         <div>
           <div className="flex gap-3 border rounded-md p-3">
@@ -535,8 +505,27 @@ const RoomDetails = () => {
           <div className="space-y-1">
             <p>Room size - optional</p>
             <div className="flex">
-              <Input type="number" placeholder="Measurement" />
-              <Select>
+              <input
+                defaultValue={roomData?.roomSize?.size}
+                onChange={(e) =>
+                  setRoomSize({
+                    ...roomSize,
+                    size: e.target.value,
+                  })
+                }
+                type="number"
+                placeholder="Measurement"
+              />
+              <Select
+                defaultValue={roomData?.roomSize?.measurementUnit}
+                onValueChange={(e) => {
+                  console.log(e);
+                  setRoomSize({
+                    ...roomSize,
+                    measurementUnit: e,
+                  });
+                }}
+              >
                 <SelectTrigger className="w-[180px]">
                   <SelectValue placeholder="Select Unit" />
                 </SelectTrigger>
@@ -551,15 +540,20 @@ const RoomDetails = () => {
           </div>
 
           <CustomRadio
+            defaultValue={roomData?.SmokingAllowance}
             options={["Yes", "No"]}
+            name="smoking-allowed"
             label="Is smoking allowed in this room?"
-            handleOnChange={handleOnChange}
+            handleOnChange={(e) => setSmokingAllowed(e.target.value)}
           />
+          <InputError error={error}></InputError>
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-4 mt-5">
-        <Button className="w-full">Submit</Button>
+        <Button onClick={handleSubmit} className="w-full">
+          Submit
+        </Button>
       </div>
     </div>
   );
