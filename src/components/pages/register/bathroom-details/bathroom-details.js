@@ -45,10 +45,10 @@ const BathroomDetails = () => {
   const validator = (data) => {
     let obj = {};
     if (!data.privateBathroom.trim()) {
-      obj.privateBathroom = "Bathroom name is required!";
+      obj.privateBathroom = "Bathroom type is required!";
     }
-    if (!data.bathroomItems.length === 0) {
-      obj.bathroomItems = "Bathroom Items are required!";
+    if (data.bathroomItems.length === 0) {
+      obj.bathroomItems = "At least select one!";
     }
 
     return obj;
@@ -85,7 +85,7 @@ const BathroomDetails = () => {
             label="Is bathroom private?"
             handleOnChange={handleOnChange}
           />
-          <InputError error={errors.privateBathroom}></InputError>
+          <InputError error={errors.privateBathroom}/>
           <CustomCheckbox
             label="Bathroom items are available in this room?"
             options={[
@@ -104,7 +104,7 @@ const BathroomDetails = () => {
             name="bathroomItems"
             defaultValue={formData.bathroomItems}
           />
-          <InputError error={errors.bathroomItems}></InputError>
+          <InputError error={errors.bathroomItems}/>
         </div>
         <Button className="mt-10 w-[100px]" onClick={handleOnSubmit}>
           Next
