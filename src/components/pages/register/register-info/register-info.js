@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import InputError from "@/components/core/input-error/input-error";
 import { Button } from "@/components/ui/button";
@@ -49,7 +49,7 @@ const RegisterInfo = () => {
   };
 
   useEffect(() => {
-    console.log({formData, errors})
+    console.log({ formData, errors });
     if (Object.keys(errors).length === 0 && edited) {
       // update redux store
       dispatch(
