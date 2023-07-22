@@ -1,5 +1,4 @@
 import Image from "next/image";
-import guestSectionImage from "../../../../images/guest-section.svg";
 import { CheckCircle } from "lucide-react";
 import IconWrapper from "@/components/core/icon-wrapper/icon-wrapper";
 
@@ -43,7 +42,7 @@ const KnowGuestsSection = () => {
           <Image
             width={100}
             height={100}
-            src={guestSectionImage}
+            src="/images/guest-section.svg"
             alt="Guest Image"
             className="w-full h-full"
           />

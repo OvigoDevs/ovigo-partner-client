@@ -1,14 +1,86 @@
 import CustomRadio from "@/components/core/custom-radio/custom-radio";
+import InputError from "@/components/core/input-error/input-error";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { setCookie } from "@/lib/cookie";
+import { invoiceInfo } from "@/redux/features/register_slice";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const InvoiceInfo = () => {
-  const userName = "OVIGO OWNER";
-  const hotelName = "OVIGO HOTEL";
-
+  // router
+  const router = useRouter();
+  // roomdata
+  const { roomData } = useSelector((state) => state.registerData);
+  // dispatch
+  const dispatch = useDispatch();
+  // formdata
+  const [formData, setFormData] = useState(
+    roomData.invoiceInfo
+      ? roomData.invoiceInfo
+      : {
+          invoiceName: "",
+          legalCompanyName: "",
+          sameAddress: "",
+        }
+  );
+  // edited
+  const [edited, setEdited] = useState(false);
+  // errors
+  const [errors, setErrors] = useState(edited ? formData : {});
+  // handleOnChange
   const handleOnChange = (e) => {
-    console.log(e);
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    if (!edited) {
+      setEdited(true);
+    }
   };
+  // handleSubmit
+  const handleOnSubmit = () => {
+    console.log(formData);
+    setErrors(validator(formData));
+  };
+  // validation
+  const validator = (data) => {
+    let obj = {};
+
+    if (!data.invoiceName.trim()) {
+      obj.invoiceName = "Name on invoice is required!";
+    }
+    if (formData.invoiceName.trim()) {
+      if (formData.invoiceName === "Legal Company Name (Please specify)") {
+        if (!data.legalCompanyName.trim()) {
+          obj.legalCompanyName = "Legal company name is required!";
+        }
+      }
+    }
+
+    if (!data.sameAddress.trim()) {
+      obj.sameAddress = "Same address is required!";
+    }
+    return obj;
+  };
+  // useEffect > dispatch > setCookies > router
+  useEffect(() => {
+    if (Object.keys(errors).length === 0 && edited) {
+      // dispatch
+      dispatch(
+        invoiceInfo({
+          invoiceInfo: formData,
+        })
+      );
+      // setCookies
+      setCookie("roomData", { ...roomData, invoiceInfo: formData });
+      // router
+      router.push("/register/important-info");
+    }
+  }, [errors]);
+  // useEffect > setEdited
+  useEffect(() => {
+    setEdited(true);
+  }, []);
 
   return (
     <div className="py-5">
@@ -26,31 +98,51 @@ const InvoiceInfo = () => {
           <div className="pt-5">
             <CustomRadio
               options={[
-                userName,
-                hotelName,
-                "Leagal Company Name (Please specify)",
+                "OVIGO OWNER",
+                "OVIGO HOTEL",
+                "Legal Company Name (Please specify)",
               ]}
               label="What name should be on the invoice?"
               handleOnChange={handleOnChange}
+              name="invoiceName"
+              defaultValue={formData.invoiceName}
             />
+            <InputError error={errors.invoiceName} />
 
-            <h4 className="font-bold mt-5">Leagal Company Name (Please specify)</h4>
-            <Input className='w-full mt-2' type='text' placeholder='Legal Company Name'/>
+            {formData.invoiceName === "Legal Company Name (Please specify)" ? (
+              <>
+                <h4 className="font-bold mt-5">
+                  Legal Company Name (Please specify)
+                </h4>
+                <input
+                  className="w-full mt-2"
+                  name="legalCompanyName"
+                  type="text"
+                  placeholder="Legal Company Name"
+                  defaultValue={formData.legalCompanyName}
+                  onChange={handleOnChange}
+                />
+                <InputError error={errors.legalCompanyName} />
+              </>
+            ) : null}
 
-            <hr className="my-5"/>
+            <hr className="my-5" />
             <CustomRadio
-              options={[
-                "Yes", "No"
-              ]}
+              options={["Yes", "No"]}
               label="Does this recipient have the same address as your property?"
               handleOnChange={handleOnChange}
+              name="sameAddress"
+              defaultValue={formData.sameAddress}
             />
+            <InputError error={errors.sameAddress} />
           </div>
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-4 mt-5">
-        <Button className='w-full'>Submit</Button>
+        <Button className="w-full" onClick={handleOnSubmit}>
+          Submit
+        </Button>
       </div>
     </div>
   );
