@@ -1,28 +1,24 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-
-import hotelIcon from "@/images/service-category-icons/hotel.svg";
-import busIcon from "@/images/service-category-icons/bus.png";
-import packageIcon from "@/images/service-category-icons/tour-package.svg";
 import Link from "next/link";
 
 const ServiceCategory = () => {
   const serviceCategories = [
     {
       id: 0,
-      icon: hotelIcon,
+      icon: "hotel.svg",
       title: "Hotel",
       link: "/register/hotel-categories",
     },
     {
       id: 1,
-      icon: busIcon,
+      icon: "bus.png",
       title: "Bus",
       link: "/register/hotel-categories",
     },
     {
       id: 2,
-      icon: packageIcon,
+      icon: "tour-package.svg",
       title: "Tour Package",
       link: "/register/hotel-categories",
     },
@@ -43,7 +39,7 @@ const ServiceCategory = () => {
               <Image
                 width={50}
                 height={50}
-                src={icon}
+                src={`/images/service-category-icons/${icon}`}
                 alt="Service Icon"
                 className="mx-auto w-14 h-14 bg-white rounded-full"
               />

@@ -62,6 +62,9 @@ export const registerSlice = createSlice({
     parkingDetails: (state, action) => {
       state.hotelData.parkingDetails = action.payload.parkingDetails;
     },
+    confirmHotel: (state, action) => {
+      state.hotelData.confirmHotel = action.payload.confirmHotel;
+    },
     roomFeatures: (state, action) => {
       state.roomData.roomFeatures = action.payload.roomFeatures;
     },
@@ -77,6 +80,10 @@ export const registerSlice = createSlice({
     guestPayment: (state, action) => {
       state.roomData.guestPayment = action.payload.guestPayment;
     },
+    invoiceInfo: (state, action) => {
+      state.roomData.invoiceInfo = action.payload.invoiceInfo;
+    },
+    
     bathroomDetails: (state, action) => {
       state.roomData.bathroomDetails = action.payload.bathroomDetails;
     },
@@ -102,6 +109,8 @@ export const {
   bathroomDetails,
   roomName,
   roomPrice,
-  guestPayment
+  guestPayment,
+  invoiceInfo,
+  confirmHotel
 } = registerSlice.actions;
 export default registerSlice.reducer;

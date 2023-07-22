@@ -1,17 +1,47 @@
 import Image from "next/image";
-import phoneIcon from "../../../../images/phone.svg";
-import eyeIcon from "../../../../images/eye-and-money.svg";
-import calanderIcon from "../../../../images/calander-icon.svg";
 import CustomCheckbox from "@/components/core/custom-checkbox/custom-checkbox";
 import { Button } from "@/components/ui/button";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { setCookie } from "@/lib/cookie";
+import InputError from "@/components/core/input-error/input-error";
+import { confirmHotel } from "@/redux/features/register_slice";
+import { useRouter } from "next/navigation";
 
 const ConfirmHotel = () => {
-  const handleOnChange = (e) => {
-    console.log(e);
+  // router
+  const router = useRouter();
+  // hotelData
+  const { hotelData } = useSelector((state) => state.registerData);
+  // dispatch
+  const dispatch = useDispatch();
+  // confirmhotelState
+  const [confirmhotel, setConfirmhotel] = useState(
+    hotelData.confirmHotel ? hotelData.confirmHotel : []
+  );
+  const [errorMessage, setErrorMessage] = useState(null);
+  // submit & validation
+  const handleOnSubmit = () => {
+    if (confirmhotel.length !== 2) {
+      setErrorMessage("Room name is required!");
+    } else {
+      // dispatch
+      dispatch(
+        confirmHotel({
+          confirmHotel: confirmhotel,
+        })
+      );
+
+      // setCookie
+      setCookie("hotelData", { ...hotelData, confirmHotel: confirmhotel }, "1h");
+
+      // router
+      router.push("/register/hotel-details-completion");
+    }
   };
   return (
-    <div className="py-5">
-      <div className="grid grid-cols-2 gap-4">
+    <div className="py-5 max-w-[500px]">
+      <div className="grid grid-cols-1 gap-4">
         <div className="border rounded-md p-5 space-y-4">
           <h4 className="text-lg">
             That&apos;s it! You&apos;ve done everything you need to before your
@@ -21,18 +51,18 @@ const ConfirmHotel = () => {
 
           <div className="space-y-3">
             <div className="flex gap-4 items-center">
-              <Image width={40} height={40} src={phoneIcon} alt="Phone Icon" />
+              <Image width={40} height={40} src="/images/phone.svg" alt="Phone Icon" />
               <p>Manage your property from your dashboard.</p>
             </div>
             <div className="flex gap-4 items-center">
-              <Image width={40} height={40} src={eyeIcon} alt="Phone Icon" />
+              <Image width={40} height={40} src="/images/eye-and-money.svg" alt="Phone Icon" />
               <p>Get bookings and make money from guests browsing our site.</p>
             </div>
             <div className="flex gap-4 items-center">
               <Image
                 width={40}
                 height={40}
-                src={calanderIcon}
+                src="/images/calander-icon.svg"
                 alt="Phone Icon"
               />
               <p>
@@ -48,15 +78,18 @@ const ConfirmHotel = () => {
               "I certify that this is a legitimate accomodation business with all necessary licenses and permits, which can be shown upon request. Ovigo reserves the right to verify and investigate any details provided in this registration.",
               "I have read, accepted, and agreed to the General Delivery Terms.",
             ]}
-            name="agreement"
-            label=""
-            defaultValue={[]}
-            handleOnChange={handleOnChange}
+            name="confirmhotel"
+            label="Please check all the agreement"
+            defaultValue={confirmhotel}
+            handleOnChange={(e) => setConfirmhotel(e.target.value)}
           />
+          <InputError error={errorMessage} />
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-4 pt-5">
-        <Button className='w-full'>Submit</Button>
+      <div className="pt-5">
+        <Button className="w-full" onClick={handleOnSubmit}>
+          Submit
+        </Button>
       </div>
     </div>
   );
