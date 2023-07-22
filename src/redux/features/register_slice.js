@@ -74,6 +74,9 @@ export const registerSlice = createSlice({
     roomPrice: (state, action) => {
       state.roomData.roomPrice = action.payload.roomPrice;
     },
+    guestPayment: (state, action) => {
+      state.roomData.guestPayment = action.payload.guestPayment;
+    },
     bathroomDetails: (state, action) => {
       state.roomData.bathroomDetails = action.payload.bathroomDetails;
     },
@@ -99,5 +102,6 @@ export const {
   bathroomDetails,
   roomName,
   roomPrice,
+  guestPayment
 } = registerSlice.actions;
 export default registerSlice.reducer;
