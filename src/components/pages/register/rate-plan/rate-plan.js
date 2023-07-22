@@ -1,7 +1,9 @@
 import IconWrapper from "@/components/core/icon-wrapper/icon-wrapper";
+import { Button } from "@/components/ui/button";
 import { User2Icon } from "lucide-react";
 import { CheckCircle } from "lucide-react";
 import { FileWarning } from "lucide-react";
+import Link from "next/link";
 
 const RatePlan = () => {
   const groupSizePrice = {
@@ -131,6 +133,9 @@ const RatePlan = () => {
           );
         })}
       </div>
+      <Link href="/register/add-photos">
+        <Button>Next</Button>
+      </Link>
     </div>
   );
 };

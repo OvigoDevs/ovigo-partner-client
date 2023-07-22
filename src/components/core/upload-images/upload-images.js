@@ -2,12 +2,14 @@ import { X } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import IconWrapper from "../icon-wrapper/icon-wrapper";
+import InputError from "../input-error/input-error";
 
 const UploadImages = ({ func, name, defaultValue }) => {
   const [postImage, setPostImage] = useState({
     myFile: defaultValue ? defaultValue : [],
   });
   const [imageName, setImageName] = useState("Upload picture");
+  const [errors, setErrors] = useState(null);
 
   const handleFileUpload = async (e) => {
     let files = [];
@@ -17,9 +19,10 @@ const UploadImages = ({ func, name, defaultValue }) => {
       if (file.size < 5 * 1024 * 1024) {
         const base64 = await convertToBase64(file);
         files.push(base64);
+        setErrors(null);
       } else {
-        console.log(
-          `File size can't be more than 5 MB! Removed ${i + 1}th picture`
+        setErrors(
+          `File size can't be more than 5 MB!`
         );
       }
     }
@@ -53,7 +56,7 @@ const UploadImages = ({ func, name, defaultValue }) => {
                   }}
                 >
                   <IconWrapper>
-                    <X className="bg-white border rounded-full dark:text-gray-600"/>
+                    <X className="bg-white border rounded-full dark:text-gray-600" />
                   </IconWrapper>
                 </div>
 
@@ -85,6 +88,7 @@ const UploadImages = ({ func, name, defaultValue }) => {
           className="absolute left-0 top-0 h-full w-full cursor-pointer border opacity-0"
         />
       </div>
+      <InputError error={errors} />
     </div>
   );
 };
