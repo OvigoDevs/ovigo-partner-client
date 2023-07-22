@@ -1,5 +1,7 @@
 import IconWrapper from "@/components/core/icon-wrapper/icon-wrapper";
+import { Button } from "@/components/ui/button";
 import { BadgeCheck } from "lucide-react";
+import Link from "next/link";
 
 const ImportantInfo = () => {
   const info = [
@@ -32,7 +34,7 @@ const ImportantInfo = () => {
         "Yes, the best way to do so it by keeping your calendar up to date. Close any dates you don't want bookings. If you have bookings on other site, close those dates too.",
       icon: (
         <IconWrapper>
-          <BadgeCheck className="mt-[3px]"/>
+          <BadgeCheck className="mt-[3px]" />
         </IconWrapper>
       ),
     },
@@ -56,6 +58,9 @@ const ImportantInfo = () => {
           );
         })}
       </div>
+      <Link href="/register/confirm-hotel">
+        <Button>Next</Button>
+      </Link>
     </div>
   );
 };
