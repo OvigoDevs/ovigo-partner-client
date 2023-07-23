@@ -9,10 +9,19 @@ let hotelData = {};
 let roomData = {};
 
 if (doc) {
-  registerData = getCookie("registerData") ? getCookie("registerData") : {};
-  hotelData = getCookie("hotelData") ? getCookie("hotelData") : {};
-  roomData = getCookie("roomData") ? getCookie("roomData") : {};
+  registerData = localStorage.getItem("registerData")
+    ? JSON.parse(localStorage.getItem("registerData"))
+    : {};
+  hotelData = localStorage.getItem("hotelData")
+    ? JSON.parse(localStorage.getItem("hotelData"))
+    : {};
+  roomData = localStorage.getItem("roomData")
+    ? JSON.parse(localStorage.getItem("roomData"))
+    : {};
 }
+
+console.log({ registerData, hotelData, roomData });
+
 const initialState = {
   registerData,
   hotelData,
@@ -83,9 +92,12 @@ export const registerSlice = createSlice({
     invoiceInfo: (state, action) => {
       state.roomData.invoiceInfo = action.payload.invoiceInfo;
     },
-    
+
     bathroomDetails: (state, action) => {
       state.roomData.bathroomDetails = action.payload.bathroomDetails;
+    },
+    addPhotos: (state, action) => {
+      state.roomData.addPhotos = action.payload.addPhotos;
     },
   },
 });
@@ -111,6 +123,7 @@ export const {
   roomPrice,
   guestPayment,
   invoiceInfo,
-  confirmHotel
+  confirmHotel,
+  addPhotos,
 } = registerSlice.actions;
 export default registerSlice.reducer;
