@@ -50,7 +50,7 @@ const RegisterWithEmail = () => {
           <p>Create an account to list and manage your service.</p>
           <div className="grid grid-cols-1 gap-2">
             <label>Email Address</label>
-            <Input
+            <input
               placeholder="e.g. john@example.com"
               onChange={(e) => setEmail(e.target.value)}
               defaultValue={email}
