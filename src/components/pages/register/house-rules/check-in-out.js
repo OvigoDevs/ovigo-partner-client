@@ -134,8 +134,8 @@ const times = [
 const CheckInOut = ({ handleOnChange, type, defaultValue, errors }) => {
   return (
     <div className="space-y-1 py-3">
-      <p className="">{type === "in" ? "Check-in" : "Check-out"}</p>
-      <div className="grid md:grid-cols-2 gap-4">
+      <p className="font-bold">{type === "in" ? "Check-in" : "Check-out"}</p>
+      <div className="grid grid-cols-1 gap-4">
         {["from", "until"].map((item) => {
           return (
             <div className="space-y-2" key={item}>

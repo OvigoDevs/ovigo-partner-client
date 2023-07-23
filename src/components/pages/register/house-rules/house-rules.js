@@ -2,6 +2,7 @@ import CustomRadio from "@/components/core/custom-radio/custom-radio";
 import { Button } from "@/components/ui/button";
 import CheckInOut from "./check-in-out";
 import { useEffect, useState } from "react";
+import InputError from "@/components/core/input-error/input-error";
 
 const HouseRules = () => {
   const [formData, setFormData] = useState({
@@ -9,11 +10,13 @@ const HouseRules = () => {
     checkinuntil: "",
     checkoutfrom: "",
     checkoutuntil: "",
+    allowChildren: "",
+    allowPet: "",
+    petFee: ""
   });
   const [errors, setErrors] = useState(formData);
   const handleOnChange = (e) => {
     const { name, value } = e.target;
-    console.log({name, value})
     setFormData({ ...formData, [name]: value });
   };
 
@@ -34,6 +37,19 @@ const HouseRules = () => {
     if (!data.checkoutuntil.trim()) {
       obj.checkoutuntil = "Check out until time is required!";
     }
+    if (!data.allowChildren.trim()) {
+      obj.allowChildren = "Selection is required!";
+    }
+    if (!data.allowPet.trim()) {
+      obj.allowPet = "Selection is required!";
+    }
+
+    if (data.allowPet) {
+      if (!data.petFee.trim()) {
+        obj.petFee = "Pet fee is required!";
+      }
+    }
+
     return obj;
   };
   useEffect(() => {
@@ -65,28 +81,33 @@ const HouseRules = () => {
 
           <CustomRadio
             label="Do you allow children?"
-            name="parking-type"
+            name="allowChildren"
             handleOnChange={handleOnChange}
             options={["Yes", "No"]}
           />
+          <InputError error={errors.allowChildren} />
 
           <CustomRadio
             label="Do you allow pets?"
-            name="parking-type"
+            name="allowPet"
             handleOnChange={handleOnChange}
-            options={["Yes", "Upon request", "No"]}
+            options={[
+              "Yes, pets can stay for free",
+              "Yes, pets can stay for paid",
+              "No",
+            ]}
           />
-          <CustomRadio
-            label="Do you allow pets for free?"
-            name="parking-type"
-            handleOnChange={handleOnChange}
-            options={["Yes, pets can stay for free", "No"]}
-          />
-          <input
-            type="number"
-            placeholder="Price in BDT per night (If applicable)"
-            className="mx-2"
-          />
+          <InputError error={errors.allowPet} />
+
+          {formData.allowPet === "Yes, pets can stay for paid" ? (
+            <input
+              type="number"
+              name="petFee"
+              placeholder="Price in BDT per night (If applicable)"
+              className="mx-2"
+              onChange={handleOnChange}
+            />
+          ) : null}
 
           <hr className="py-2" />
 
