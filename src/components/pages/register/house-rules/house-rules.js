@@ -1,263 +1,162 @@
 import CustomRadio from "@/components/core/custom-radio/custom-radio";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import CheckInOut from "./check-in-out";
+import { useEffect, useState } from "react";
+import InputError from "@/components/core/input-error/input-error";
+import { useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { houseRules } from "@/redux/features/register_slice";
+import { setCookie } from "@/lib/cookie";
 
 const HouseRules = () => {
-  const times = [
-    {
-      id: 1,
-      value: "12:00 am",
-      label: "12:00 AM",
-    },
-    {
-      id: 2,
-      value: "01:00 am",
-      label: "01:00 AM",
-    },
-    {
-      id: 3,
-      value: "02:00 am",
-      label: "02:00 AM",
-    },
-    {
-      id: 4,
-      value: "03:00 am",
-      label: "03:00 AM",
-    },
-    {
-      id: 5,
-      value: "04:00 am",
-      label: "04:00 AM",
-    },
-    {
-      id: 6,
-      value: "05:00 am",
-      label: "05:00 AM",
-    },
-    {
-      id: 7,
-      value: "06:00 am",
-      label: "06:00 AM",
-    },
-    {
-      id: 8,
-      value: "07:00 am",
-      label: "07:00 AM",
-    },
-    {
-      id: 9,
-      value: "08:00 am",
-      label: "08:00 AM",
-    },
-    {
-      id: 10,
-      value: "09:00 am",
-      label: "09:00 AM",
-    },
-    {
-      id: 11,
-      value: "10:00 am",
-      label: "10:00 AM",
-    },
-    {
-      id: 12,
-      value: "11:00 am",
-      label: "11:00 AM",
-    },
-    {
-      id: 13,
-      value: "12:00 pm",
-      label: "12:00 PM",
-    },
-    {
-      id: 14,
-      value: "01:00 pm",
-      label: "01:00 PM",
-    },
-    {
-      id: 15,
-      value: "02:00 pm",
-      label: "02:00 PM",
-    },
-    {
-      id: 16,
-      value: "03:00 pm",
-      label: "03:00 PM",
-    },
-    {
-      id: 17,
-      value: "04:00 pm",
-      label: "04:00 PM",
-    },
-    {
-      id: 18,
-      value: "05:00 pm",
-      label: "05:00 PM",
-    },
-    {
-      id: 19,
-      value: "06:00 pm",
-      label: "06:00 PM",
-    },
-    {
-      id: 20,
-      value: "07:00 pm",
-      label: "07:00 PM",
-    },
-    {
-      id: 21,
-      value: "08:00 pm",
-      label: "08:00 PM",
-    },
-    {
-      id: 22,
-      value: "09:00 pm",
-      label: "09:00 PM",
-    },
-    {
-      id: 23,
-      value: "10:00 pm",
-      label: "10:00 PM",
-    },
-    {
-      id: 24,
-      value: "11:00 pm",
-      label: "11:00 PM",
-    },
-  ];
-
+  // router
+  const router = useRouter();
+  // redux
+  const { hotelData } = useSelector((state) => state.registerData);
+  // dispatch
+  const dispatch = useDispatch();
+  // formdata
+  const [formData, setFormData] = useState(
+    hotelData.houseRules
+      ? hotelData.houseRules
+      : {
+          checkinfrom: "",
+          checkinuntil: "",
+          checkoutfrom: "",
+          checkoutuntil: "",
+          allowChildren: "",
+          allowPet: "",
+          petFee: "",
+        }
+  );
+  //edited
+  const [edited, setEdited] = useState(false);
+  //errors
+  const [errors, setErrors] = useState(edited ? formData : {});
+  // input handler
   const handleOnChange = (e) => {
-    console.log(e);
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    if (!edited) {
+      setEdited(true);
+    }
   };
+  // submit handler
+  const handleOnSubmit = () => {
+    setErrors(validator(formData));
+  };
+  // validator
+  const validator = (data) => {
+    let obj = {};
+    if (!data.checkinfrom.trim()) {
+      obj.checkinfrom = "Check in from time is required!";
+    }
+    if (!data.checkinuntil.trim()) {
+      obj.checkinuntil = "Check in until time is required!";
+    }
+    if (!data.checkoutfrom.trim()) {
+      obj.checkoutfrom = "Check out from time is required!";
+    }
+    if (!data.checkoutuntil.trim()) {
+      obj.checkoutuntil = "Check out until time is required!";
+    }
+    if (!data.allowChildren.trim()) {
+      obj.allowChildren = "Selection is required!";
+    }
+    if (!data.allowPet.trim()) {
+      obj.allowPet = "Selection is required!";
+    }
+
+    if (data.allowPet) {
+      if (!data.petFee.trim()) {
+        obj.petFee = "Pet fee is required!";
+      }
+    }
+
+    return obj;
+  };
+  // useEffect > dispatch > setCookie > router
+  useEffect(() => {
+    if (Object.keys(errors).length === 0 && edited) {
+      // dispatch
+      dispatch(
+        houseRules({
+          houseRules: formData,
+        })
+      );
+      // setcookie
+      setCookie("hotelData", { ...hotelData, houseRules: formData }, "1h");
+      // router
+      router.push("/register/hotel-details-completion");
+    }
+  }, [errors]);
+  // useEffect > edited
+  useEffect(() => {
+    setEdited(true);
+  }, []);
   return (
     <div className="py-5">
       <h4 className="font-bold">House Rules</h4>
-      <div className="grid md:grid-cols-2 gap-4 my-5">
+      <div className="grid lg:grid-cols-2 gap-4 my-5">
         <div className="p-5 rounded-md border grid grid-cols-1 gap-5">
           <h4 className="font-bold">
             What are your check-in and check-out times?
           </h4>
-          <div className="space-y-1 py-3">
-            <p className="">Check-in</p>
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <p className="">From</p>
-                <Select>
-                  <SelectTrigger className="">
-                    <SelectValue placeholder="Select Time" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup className="grid grid-cols-3 gap-2">
-                      {times.map((time) => (
-                        <SelectItem key={time.id} value={time.value}>
-                          {time.label}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="space-y-2">
-                <p className="">Until</p>
-                <Select>
-                  <SelectTrigger className="">
-                    <SelectValue placeholder="Select Time" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup className="grid grid-cols-3 gap-2">
-                      {times.map((time) => (
-                        <SelectItem key={time.id} value={time.value}>
-                          {time.label}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-          </div>
-
-          <div className="space-y-1 py-3">
-            <p className="">Check-out</p>
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <p className="">From</p>
-                <Select>
-                  <SelectTrigger className="">
-                    <SelectValue placeholder="Select Time" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup className="grid grid-cols-3 gap-2">
-                      {times.map((time) => (
-                        <SelectItem key={time.id} value={time.value}>
-                          {time.label}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="space-y-2">
-                <p className="">Until</p>
-                <Select>
-                  <SelectTrigger className="">
-                    <SelectValue placeholder="Select Time" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup className="grid grid-cols-3 gap-2">
-                      {times.map((time) => (
-                        <SelectItem key={time.id} value={time.value}>
-                          {time.label}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-          </div>
-
+          <CheckInOut
+            handleOnChange={handleOnChange}
+            defaultValue={formData}
+            type="in"
+            errors={errors}
+          />
+          <CheckInOut
+            handleOnChange={handleOnChange}
+            defaultValue={formData}
+            type="out"
+            errors={errors}
+          />
           <hr className="py-2" />
 
           <CustomRadio
             label="Do you allow children?"
-            name="parking-type"
+            name="allowChildren"
             handleOnChange={handleOnChange}
             options={["Yes", "No"]}
+            defaultValue={formData.allowChildren}
           />
+          <InputError error={errors.allowChildren} />
 
           <CustomRadio
             label="Do you allow pets?"
-            name="parking-type"
+            name="allowPet"
             handleOnChange={handleOnChange}
-            options={["Yes", "Upon request", "No"]}
+            options={[
+              "Yes, pets can stay for free",
+              "Yes, pets can stay for paid",
+              "No",
+            ]}
+            defaultValue={formData.allowPet}
           />
-          <CustomRadio
-            label="Do you allow pets for free?"
-            name="parking-type"
-            handleOnChange={handleOnChange}
-            options={["Yes, pets can stay for free", "No"]}
-          />
-          <input
-            type="number"
-            placeholder="Price in BDT per night (If applicable)"
-            className="mx-2"
-          />
+          <InputError error={errors.allowPet} />
+
+          {formData.allowPet === "Yes, pets can stay for paid" ? (
+            <>
+              <input
+                type="number"
+                name="petFee"
+                placeholder="Price in BDT per night (If applicable)"
+                className="mx-2"
+                onChange={handleOnChange}
+                defaultValue={formData.petFee}
+              />
+              <InputError error={errors.petFee} />
+            </>
+          ) : null}
 
           <hr className="py-2" />
 
-          <Button className="w-full">Submit</Button>
+          <Button className="w-full" onClick={handleOnSubmit}>
+            Submit
+          </Button>
         </div>
       </div>
     </div>
