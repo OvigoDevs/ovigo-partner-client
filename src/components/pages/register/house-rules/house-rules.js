@@ -3,26 +3,49 @@ import { Button } from "@/components/ui/button";
 import CheckInOut from "./check-in-out";
 import { useEffect, useState } from "react";
 import InputError from "@/components/core/input-error/input-error";
+import { useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { houseRules } from "@/redux/features/register_slice";
+import { setCookie } from "@/lib/cookie";
 
 const HouseRules = () => {
-  const [formData, setFormData] = useState({
-    checkinfrom: "",
-    checkinuntil: "",
-    checkoutfrom: "",
-    checkoutuntil: "",
-    allowChildren: "",
-    allowPet: "",
-    petFee: ""
-  });
-  const [errors, setErrors] = useState(formData);
+  // router
+  const router = useRouter();
+  // redux
+  const { hotelData } = useSelector((state) => state.registerData);
+  // dispatch
+  const dispatch = useDispatch();
+  // formdata
+  const [formData, setFormData] = useState(
+    hotelData.houseRules
+      ? hotelData.houseRules
+      : {
+          checkinfrom: "",
+          checkinuntil: "",
+          checkoutfrom: "",
+          checkoutuntil: "",
+          allowChildren: "",
+          allowPet: "",
+          petFee: "",
+        }
+  );
+  //edited
+  const [edited, setEdited] = useState(false);
+  //errors
+  const [errors, setErrors] = useState(edited ? formData : {});
+  // input handler
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    if (!edited) {
+      setEdited(true);
+    }
   };
-
+  // submit handler
   const handleOnSubmit = () => {
     setErrors(validator(formData));
   };
+  // validator
   const validator = (data) => {
     let obj = {};
     if (!data.checkinfrom.trim()) {
@@ -52,15 +75,29 @@ const HouseRules = () => {
 
     return obj;
   };
+  // useEffect > dispatch > setCookie > router
   useEffect(() => {
-    if (Object.keys(errors).length === 0) {
-      console.log(formData);
+    if (Object.keys(errors).length === 0 && edited) {
+      // dispatch
+      dispatch(
+        houseRules({
+          houseRules: formData,
+        })
+      );
+      // setcookie
+      setCookie("hotelData", { ...hotelData, houseRules: formData }, "1h");
+      // router
+      router.push("/register/hotel-details-completion");
     }
   }, [errors]);
+  // useEffect > edited
+  useEffect(() => {
+    setEdited(true);
+  }, []);
   return (
     <div className="py-5">
       <h4 className="font-bold">House Rules</h4>
-      <div className="grid md:grid-cols-2 gap-4 my-5">
+      <div className="grid lg:grid-cols-2 gap-4 my-5">
         <div className="p-5 rounded-md border grid grid-cols-1 gap-5">
           <h4 className="font-bold">
             What are your check-in and check-out times?
@@ -84,6 +121,7 @@ const HouseRules = () => {
             name="allowChildren"
             handleOnChange={handleOnChange}
             options={["Yes", "No"]}
+            defaultValue={formData.allowChildren}
           />
           <InputError error={errors.allowChildren} />
 
@@ -96,17 +134,22 @@ const HouseRules = () => {
               "Yes, pets can stay for paid",
               "No",
             ]}
+            defaultValue={formData.allowPet}
           />
           <InputError error={errors.allowPet} />
 
           {formData.allowPet === "Yes, pets can stay for paid" ? (
-            <input
-              type="number"
-              name="petFee"
-              placeholder="Price in BDT per night (If applicable)"
-              className="mx-2"
-              onChange={handleOnChange}
-            />
+            <>
+              <input
+                type="number"
+                name="petFee"
+                placeholder="Price in BDT per night (If applicable)"
+                className="mx-2"
+                onChange={handleOnChange}
+                defaultValue={formData.petFee}
+              />
+              <InputError error={errors.petFee} />
+            </>
           ) : null}
 
           <hr className="py-2" />

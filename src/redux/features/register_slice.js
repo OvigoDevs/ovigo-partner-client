@@ -74,6 +74,9 @@ export const registerSlice = createSlice({
     confirmHotel: (state, action) => {
       state.hotelData.confirmHotel = action.payload.confirmHotel;
     },
+    houseRules: (state, action) => {
+      state.hotelData.houseRules = action.payload.houseRules;
+    },
     roomFeatures: (state, action) => {
       state.roomData.roomFeatures = action.payload.roomFeatures;
     },
@@ -125,5 +128,6 @@ export const {
   invoiceInfo,
   confirmHotel,
   addPhotos,
+  houseRules
 } = registerSlice.actions;
 export default registerSlice.reducer;
