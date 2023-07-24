@@ -137,7 +137,8 @@ label {
 }
 
 input,
-textarea {
+textarea,
+select {
   @apply border border-gray-200 dark:border-gray-600 px-2 py-[9px] rounded-md focus:outline-none focus:border-gray-400 dark:bg-[#00000000];
 }
 
