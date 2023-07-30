@@ -23,7 +23,7 @@ const ConfirmHotel = () => {
   // submit & validation
   const handleOnSubmit = () => {
     if (confirmhotel.length !== 2) {
-      setErrorMessage("Room name is required!");
+      setErrorMessage("Select all agreements!");
     } else {
       // dispatch
       dispatch(

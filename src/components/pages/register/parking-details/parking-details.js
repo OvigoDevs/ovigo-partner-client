@@ -47,14 +47,19 @@ const ParkingDetails = () => {
     if (!data.available.trim()) {
       obj.available = "Availability is required!";
     }
-    if (!data.reserve.trim()) {
-      obj.reserve = "Reservation is required!";
-    }
-    if (!data.located.trim()) {
-      obj.located = "Location is required!";
-    }
-    if (!data.type.trim()) {
-      obj.type = "Parking type is required!";
+
+    if(data.available){
+      if (data.available !== "No") {
+        if (!data.reserve.trim()) {
+          obj.reserve = "Reservation is required!";
+        }
+        if (!data.located.trim()) {
+          obj.located = "Location is required!";
+        }
+        if (!data.type.trim()) {
+          obj.type = "Parking type is required!";
+        }
+      }
     }
 
     return obj;
@@ -97,33 +102,41 @@ const ParkingDetails = () => {
             />
             <InputError error={errors.available} />
             <hr className="my-5" />
-            <CustomRadio
-              label="Do guests need to reserve a parking spot?"
-              name="reserve"
-              handleOnChange={handleOnChange}
-              options={["Reservation Needed", "No Reservation Needed"]}
-              defaultValue={formData.reserve}
-            />
-            <InputError error={errors.reserve} />
-            <hr className="my-5" />
+            {formData.available ? (
+              <>
+                {formData.available !== "No" ? (
+                  <>
+                    <CustomRadio
+                      label="Do guests need to reserve a parking spot?"
+                      name="reserve"
+                      handleOnChange={handleOnChange}
+                      options={["Reservation Needed", "No Reservation Needed"]}
+                      defaultValue={formData.reserve}
+                    />
+                    <InputError error={errors.reserve} />
+                    <hr className="my-5" />
 
-            <CustomRadio
-              label="Where is the parking located?"
-              name="located"
-              handleOnChange={handleOnChange}
-              options={["On site", "Off site"]}
-              defaultValue={formData.located}
-            />
-            <InputError error={errors.located} />
-            <hr className="my-5" />
-            <CustomRadio
-              label="What type of parking is it?"
-              name="type"
-              handleOnChange={handleOnChange}
-              options={["Private", "Public"]}
-              defaultValue={formData.type}
-            />
-            <InputError error={errors.type} />
+                    <CustomRadio
+                      label="Where is the parking located?"
+                      name="located"
+                      handleOnChange={handleOnChange}
+                      options={["On site", "Off site"]}
+                      defaultValue={formData.located}
+                    />
+                    <InputError error={errors.located} />
+                    <hr className="my-5" />
+                    <CustomRadio
+                      label="What type of parking is it?"
+                      name="type"
+                      handleOnChange={handleOnChange}
+                      options={["Private", "Public"]}
+                      defaultValue={formData.type}
+                    />
+                    <InputError error={errors.type} />
+                  </>
+                ) : null}
+              </>
+            ) : null}
           </div>
           <Button className="w-full mt-5" onClick={handleOnSubmit}>
             Submit

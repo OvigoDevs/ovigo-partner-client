@@ -25,8 +25,8 @@ const ContactDetails = () => {
   }, [registerData]);
 
   const handleOnSubmit = () => {
-    if (!PHONE_REGEX.test(phone)) {
-      setError("Phone number is invalid");
+    if (!phone) {
+      setError("Phone number is required");
     } else {
       setError("");
       dispatch(
