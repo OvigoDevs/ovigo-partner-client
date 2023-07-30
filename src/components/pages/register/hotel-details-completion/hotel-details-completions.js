@@ -3,8 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 import { PlusSquare } from "lucide-react";
 import Link from "next/link";
+import { useSelector } from "react-redux";
 
 const HotelDetailsCompletion = () => {
+  const { hotels } = useSelector((state) => state.registerData);
   const steps = [
     {
       id: 0,
@@ -12,11 +14,11 @@ const HotelDetailsCompletion = () => {
       description: "Tell us about your room",
       icon: (
         <IconWrapper>
-          <PlusSquare/>
+          <PlusSquare />
         </IconWrapper>
       ),
       link: "/register/room-details",
-      buttonText: "Add room"
+      buttonText: "Add room",
     },
     {
       id: 1,
@@ -24,11 +26,11 @@ const HotelDetailsCompletion = () => {
       description: "Add photos of your room",
       icon: (
         <IconWrapper>
-          <PlusSquare/>
+          <PlusSquare />
         </IconWrapper>
       ),
       link: "/register/room-photos",
-      buttonText: "Add photos"
+      buttonText: "Add photos",
     },
     {
       id: 2,
@@ -36,11 +38,11 @@ const HotelDetailsCompletion = () => {
       description: "Complete registration",
       icon: (
         <IconWrapper>
-          <Check/>
+          <Check />
         </IconWrapper>
       ),
       link: "/register/complete-registration",
-      buttonText: "Complete"
+      buttonText: "Complete",
     },
   ];
   return (
@@ -49,6 +51,29 @@ const HotelDetailsCompletion = () => {
         {`Step 1 is completed: All the details of your hotel are collected. Let's add some rooms`}
       </div>
       <div className="grid grid-cols-1 gap-[1rem]">
+        {hotels.length ? (
+          <div className="grid grid-cols-1 gap-[1rem]">
+            {hotels.map((hotel) => {
+              return (
+                <div
+                  key={hotel.id}
+                  className="flex items-center justify-between gap-5 p-[1rem] rounded-md border"
+                >
+                  <div className="grid grid-cols-1 gap-2">
+                    <p className="font-semibold">
+                      {hotel.hotelData.hotelInformation.propertyName}
+                    </p>
+                    <span className="text-xs lg:text-sm">
+                      {hotel.hotelData.hotelAddress.city}|
+                      {hotel.hotelData.hotelAddress.country}
+                    </span>
+                  </div>
+                  <Button>Edit</Button>
+                </div>
+              );
+            })}
+          </div>
+        ) : null}
         {steps.map((step) => {
           const { id, title, description, icon, link, buttonText } = step;
           return (
@@ -56,13 +81,15 @@ const HotelDetailsCompletion = () => {
               key={id}
               className="flex items-center justify-between gap-3 p-2 rounded-lg border dark:border-gray-800"
             >
-              
               <div className="grid grid-cols-1">
                 <h4 className="font-bold">{title}</h4>
                 <p>{description}</p>
               </div>
               <Link href={link}>
-                <Button className="flex items-center gap-1"> {icon} {buttonText}</Button>
+                <Button className="flex items-center gap-1">
+                  {" "}
+                  {icon} {buttonText}
+                </Button>
               </Link>
             </div>
           );

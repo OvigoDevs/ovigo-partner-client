@@ -5,14 +5,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { setCookie } from "@/lib/cookie";
 import InputError from "@/components/core/input-error/input-error";
-import { confirmHotel } from "@/redux/features/register_slice";
+import { addNewHotel, confirmHotel } from "@/redux/features/register_slice";
 import { useRouter } from "next/navigation";
 
 const ConfirmHotel = () => {
   // router
   const router = useRouter();
   // hotelData
-  const { hotelData } = useSelector((state) => state.registerData);
+  const { hotelData, roomData, hotels } = useSelector(
+    (state) => state.registerData
+  );
   // dispatch
   const dispatch = useDispatch();
   // confirmhotelState
@@ -25,15 +27,31 @@ const ConfirmHotel = () => {
     if (confirmhotel.length !== 2) {
       setErrorMessage("Select all agreements!");
     } else {
+
+      // setCookie
+      setCookie(
+        "hotelData",
+        { ...hotelData, confirmHotel: confirmhotel },
+        "1h"
+      );
+
       // dispatch
+
       dispatch(
         confirmHotel({
           confirmHotel: confirmhotel,
         })
       );
 
-      // setCookie
-      setCookie("hotelData", { ...hotelData, confirmHotel: confirmhotel }, "1h");
+      
+      setCookie("hotels", [...hotels, {
+        id: 0,
+        hotelData,
+        roomData
+      }], "1h")
+
+      setCookie("hotelData", {}, "1h")
+      setCookie("roomData", {}, "1h")
 
       // router
       router.push("/register/hotel-details-completion");
@@ -51,11 +69,21 @@ const ConfirmHotel = () => {
 
           <div className="space-y-3">
             <div className="flex gap-4 items-center">
-              <Image width={40} height={40} src="/images/phone.svg" alt="Phone Icon" />
+              <Image
+                width={40}
+                height={40}
+                src="/images/phone.svg"
+                alt="Phone Icon"
+              />
               <p>Manage your property from your dashboard.</p>
             </div>
             <div className="flex gap-4 items-center">
-              <Image width={40} height={40} src="/images/eye-and-money.svg" alt="Phone Icon" />
+              <Image
+                width={40}
+                height={40}
+                src="/images/eye-and-money.svg"
+                alt="Phone Icon"
+              />
               <p>Get bookings and make money from guests browsing our site.</p>
             </div>
             <div className="flex gap-4 items-center">

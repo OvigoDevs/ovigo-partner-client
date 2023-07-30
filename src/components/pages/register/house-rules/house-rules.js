@@ -68,8 +68,10 @@ const HouseRules = () => {
     }
 
     if (data.allowPet) {
-      if (!data.petFee.trim()) {
-        obj.petFee = "Pet fee is required!";
+      if (data.allowPet !== "No") {
+        if (!data.petFee.trim()) {
+          obj.petFee = "Pet fee is required!";
+        }
       }
     }
 
