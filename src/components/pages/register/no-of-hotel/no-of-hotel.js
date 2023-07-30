@@ -32,7 +32,6 @@ const NoOfHotel = () => {
   ];
   const router = useRouter();
   const { hotelData } = useSelector((state) => state.registerData);
-  console.log(hotelData);
   const [selectedOption, setSelectedOption] = useState(null);
 
   const dispatch = useDispatch();

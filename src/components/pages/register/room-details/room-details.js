@@ -15,6 +15,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import InputError from "@/components/core/input-error/input-error";
 import CustomRadio from "@/components/core/custom-radio/custom-radio";
+import { roomDetails } from "@/redux/features/register_slice";
+import { setCookie } from "@/lib/cookie";
 
 const BedTypes = [
   {
@@ -118,6 +120,9 @@ const RoomDetails = () => {
           sofaBeds: 0,
           guestsNumber: 0,
           cribsAllowed: "",
+          smookingAllow: "",
+          roomSize: 0,
+          roomSizeUnit: "",
         }
   );
   // edited
@@ -169,16 +174,32 @@ const RoomDetails = () => {
     if (data.cribsAllowed < 1) {
       obj.cribsAllowed = "Selection is required!";
     }
+    if (data.smookingAllow < 1) {
+      obj.smookingAllow = "Selection is required!";
+    }
 
+    if (data.roomSize < 1) {
+      obj.roomSize = "Room size is required!";
+    }
+    if (!data.roomSizeUnit) {
+      obj.roomSizeUnit = "Room size unit is required!";
+    } 
+     
     return obj;
   };
   // useEffect > dispatch > setcookie > router
   useEffect(() => {
-    if (Object.keys(errors).length === 0) {
-      console.log(formData);
+    if (Object.keys(errors).length === 0 && edited) {
       // dispatch
+      dispatch(
+        roomDetails({
+          roomDetails: formData,
+        })
+      );
       // setCookie
+      setCookie("roomData", { ...roomData, roomDetails: formData }, "1h");
       // router
+      router.push("/register/bath-details");
     }
   }, [errors]);
   // useEffect > setEdited
@@ -202,6 +223,7 @@ const RoomDetails = () => {
                 },
               })
             }
+            defaultValue={formData.unitType}
           >
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Select Room Type" />
@@ -234,6 +256,7 @@ const RoomDetails = () => {
                 },
               })
             }
+            defaultValue={formData.sameTypeRooms}
           />
           <InputError error={errors.sameTypeRooms} />
         </div>
@@ -296,6 +319,65 @@ const RoomDetails = () => {
         />
 
         <InputError error={errors.cribsAllowed} />
+      </div>
+
+      <div className="grid grid-cols-1 gap-2 py-[1rem] my-[1rem] border rounded-md p-[1rem]">
+        <h3>How big is this room?</h3>
+        <div className="grid grid-cols-3">
+          <input
+            type="number"
+            name="roomSize"
+            defaultValue={formData.roomSize}
+            onChange={handleOnChange}
+            className="col-span-2"
+          />
+          <Select
+            onValueChange={(value) =>
+              handleOnChange({
+                target: {
+                  name: "roomSizeUnit",
+                  value,
+                },
+              })
+            }
+            defaultValue={formData.roomSizeUnit}
+          >
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Size unit" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup className="grid grid-cols-1 gap-2">
+                {[
+                  {
+                    id: 0,
+                    value: "Inch",
+                  },
+                  {
+                    id: 1,
+                    value: "Feet",
+                  },
+                ].map((bed) => (
+                  <SelectItem key={bed.id} value={bed.value}>
+                    {bed.value}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
+        <InputError error={errors.roomSizeUnit} />
+      </div>
+
+      <div className="grid grid-cols-1 gap-2 py-[1rem] my-[1rem] border rounded-md p-[1rem]">
+        <h3>Do you allow smooking?</h3>
+        <CustomRadio
+          name="smookingAllow"
+          handleOnChange={handleOnChange}
+          defaultValue={formData.smookingAllow}
+          options={["Yes", "No"]}
+        />
+
+        <InputError error={errors.smookingAllow} />
       </div>
 
       <div className="grid grid-cols-2 gap-4 mt-5">
