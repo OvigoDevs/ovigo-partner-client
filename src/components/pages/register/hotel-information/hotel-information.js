@@ -6,6 +6,7 @@ import { hotelInformation } from "@/redux/features/register_slice";
 import { setCookie } from "@/lib/cookie";
 import InputError from "@/components/core/input-error/input-error";
 import { Button } from "@/components/ui/button";
+import Backlink from "@/components/core/backlink/backlink";
 
 const HotelInformation = () => {
   // router instance
@@ -87,6 +88,7 @@ const HotelInformation = () => {
   }, []);
   return (
     <div className="section-d max-w-[500px]">
+      <Backlink link="/register/hotel-address" text="Hotel address" />
       <h3 className="font-bold">Hotel information</h3>
       <div className="grid grid-cols-1 gap-5 my-5">
         <h4>Tell us about your hotel</h4>

@@ -1,3 +1,4 @@
+import Backlink from "@/components/core/backlink/backlink";
 import CustomRadio from "@/components/core/custom-radio/custom-radio";
 import InputError from "@/components/core/input-error/input-error";
 import { Button } from "@/components/ui/button";
@@ -48,7 +49,7 @@ const ParkingDetails = () => {
       obj.available = "Availability is required!";
     }
 
-    if(data.available){
+    if (data.available) {
       if (data.available !== "No") {
         if (!data.reserve.trim()) {
           obj.reserve = "Reservation is required!";
@@ -86,6 +87,7 @@ const ParkingDetails = () => {
   }, []);
   return (
     <div className="py-5">
+      <Backlink link="/register/breakfast-details" text="Breakfast details" />
       <p className="font-bold">
         Tell us about the parking situation at your hotel?
       </p>
@@ -138,7 +140,7 @@ const ParkingDetails = () => {
               </>
             ) : null}
           </div>
-          <Button className="w-full mt-5" onClick={handleOnSubmit}>
+          <Button className="max-w-[150px] mt-5" onClick={handleOnSubmit}>
             Submit
           </Button>
         </div>

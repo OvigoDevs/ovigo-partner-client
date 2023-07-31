@@ -39,7 +39,6 @@ const ConfirmHotel = () => {
       );
 
       // dispatch
-      console.log("--->", hotels);
       const MaxID = MaxID_generator(hotels);
       dispatch(
         confirmHotel({

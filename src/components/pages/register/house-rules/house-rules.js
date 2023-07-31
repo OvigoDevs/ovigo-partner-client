@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { houseRules } from "@/redux/features/register_slice";
 import { setCookie } from "@/lib/cookie";
+import Backlink from "@/components/core/backlink/backlink";
 
 const HouseRules = () => {
   // router
@@ -98,9 +99,10 @@ const HouseRules = () => {
   }, []);
   return (
     <div className="py-5">
+      <Backlink link="/register/languages" text="Languages"/>
       <h4 className="font-bold">House Rules</h4>
       <div className="grid lg:grid-cols-2 gap-4 my-5">
-        <div className="p-5 rounded-md border grid grid-cols-1 gap-5">
+        <div className="grid grid-cols-1 gap-5">
           <h4 className="font-bold">
             What are your check-in and check-out times?
           </h4>

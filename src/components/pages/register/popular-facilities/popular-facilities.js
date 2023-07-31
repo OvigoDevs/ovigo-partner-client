@@ -1,3 +1,4 @@
+import Backlink from "@/components/core/backlink/backlink";
 import CustomCheckbox from "@/components/core/custom-checkbox/custom-checkbox";
 import IconWrapper from "@/components/core/icon-wrapper/icon-wrapper";
 import InputError from "@/components/core/input-error/input-error";
@@ -72,6 +73,7 @@ const PopularFacilities = () => {
   }, [hotelData]);
   return (
     <div className="py-5">
+      <Backlink link="/register/hotel-information" text="Hotel information" />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 pt-5">
         <div className="space-y-5">
           <CustomCheckbox

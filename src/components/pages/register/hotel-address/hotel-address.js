@@ -1,5 +1,6 @@
 "use client";
 
+import Backlink from "@/components/core/backlink/backlink";
 import IconWrapper from "@/components/core/icon-wrapper/icon-wrapper";
 import InputError from "@/components/core/input-error/input-error";
 import { Button } from "@/components/ui/button";
@@ -70,11 +71,15 @@ const HotelAddress = () => {
   }, []);
   return (
     <div className="py-5">
+      <Backlink
+        link="/register/hotel-type-confirmation"
+        text="Hotel type confirmation"
+      />
       <p>Where is the property that you are listing?</p>
 
       <div className="grid grid-cols-1 lg:grid-cols-2">
         <div>
-          <div className="border p-5 rounded-md mt-5 space-y-3">
+          <div className="mt-5 space-y-3">
             <div className="grid grid-cols-1 gap-2">
               <label>Country/Region</label>
               <input name="country" readOnly defaultValue={address.country} />
@@ -114,7 +119,7 @@ const HotelAddress = () => {
             </div>
           </div>
           <hr className="my-5" />
-          <Button className="w-full" onClick={handleSubmit}>
+          <Button className="max-w-[150px]" onClick={handleSubmit}>
             Next
           </Button>
         </div>

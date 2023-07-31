@@ -1,3 +1,4 @@
+import Backlink from "@/components/core/backlink/backlink";
 import InputError from "@/components/core/input-error/input-error";
 import { Button } from "@/components/ui/button";
 import { setCookie } from "@/lib/cookie";
@@ -68,6 +69,7 @@ const CreatePassword = () => {
   return (
     <div className="section-d">
       <div className="max-w-[500px]">
+        <Backlink link="/register/contact-details" text="Contact details" />
         <h1 className="font-bold mb-5">Create password</h1>
         <div className="grid grid-cols-1 gap-2">
           <div className="grid grid-cols-1 gap-2">
