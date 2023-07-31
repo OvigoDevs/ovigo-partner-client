@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { roomName } from "@/redux/features/register_slice";
 import InputError from "@/components/core/input-error/input-error";
+import Backlink from "@/components/core/backlink/backlink";
 
 const RoomName = () => {
   // router
@@ -40,6 +41,7 @@ const RoomName = () => {
 
   return (
     <div className="section-d grid grid-cols-1 gap-5 max-w-[400px]">
+      <Backlink link="/register/room-features" text="Room features" />
       <h3 className="font-bold">{`What's the name of this room?`}</h3>
       <p>
         This is the name that guests will see on your property page. Choose a

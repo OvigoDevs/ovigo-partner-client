@@ -11,6 +11,7 @@ import {
   confirmHotel,
 } from "@/redux/features/register_slice";
 import { useRouter } from "next/navigation";
+import Backlink from "@/components/core/backlink/backlink";
 
 const ConfirmHotel = () => {
   // router
@@ -69,6 +70,7 @@ const ConfirmHotel = () => {
   };
   return (
     <div className="py-5 max-w-[500px]">
+      <Backlink link="/register/important-info" text="Important information" />
       <div className="grid grid-cols-1 gap-4">
         <div className="border rounded-md p-5 space-y-4">
           <h4 className="text-lg">

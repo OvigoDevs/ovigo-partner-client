@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { useDispatch, useSelector } from "react-redux";
 import InputError from "@/components/core/input-error/input-error";
 import { setCookie } from "@/lib/cookie";
+import Backlink from "@/components/core/backlink/backlink";
 
 const BathroomDetails = () => {
   const router = useRouter();
@@ -76,6 +77,7 @@ const BathroomDetails = () => {
   return (
     <div className="section-d flex items-start justify-start gap-[1rem]">
       <div className="max-w-[500px] w-[500px]">
+        <Backlink link="/register/room-details" text="Room details" />
         <h3 className="font-bold">Bathroom details</h3>
         <div className="grid grid-cols-1 gap-5 py-5">
           <CustomRadio
@@ -85,7 +87,7 @@ const BathroomDetails = () => {
             label="Is bathroom private?"
             handleOnChange={handleOnChange}
           />
-          <InputError error={errors.privateBathroom}/>
+          <InputError error={errors.privateBathroom} />
           <CustomCheckbox
             label="Bathroom items are available in this room?"
             options={[
@@ -104,7 +106,7 @@ const BathroomDetails = () => {
             name="bathroomItems"
             defaultValue={formData.bathroomItems}
           />
-          <InputError error={errors.bathroomItems}/>
+          <InputError error={errors.bathroomItems} />
         </div>
         <Button className="mt-10 w-[100px]" onClick={handleOnSubmit}>
           Next

@@ -1,3 +1,4 @@
+import Backlink from "@/components/core/backlink/backlink";
 import CustomCheckbox from "@/components/core/custom-checkbox/custom-checkbox";
 import InputError from "@/components/core/input-error/input-error";
 import { Button } from "@/components/ui/button";
@@ -90,6 +91,7 @@ const RoomFeatures = () => {
   }, []);
   return (
     <div className="section-d max-w-[500px]">
+      <Backlink link="/register/bath-details" text="Bathroom details" />
       <h3 className="font-bold">What can guests use in this room?</h3>
       <div className="grid grid-cols-1 gap-5 my-10">
         <CustomCheckbox

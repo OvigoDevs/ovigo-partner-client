@@ -1,3 +1,4 @@
+import Backlink from "@/components/core/backlink/backlink";
 import InputError from "@/components/core/input-error/input-error";
 import UploadImages from "@/components/core/upload-images/upload-images";
 import { Button } from "@/components/ui/button";
@@ -15,12 +16,11 @@ const AddPhotos = () => {
   // disptach
   const dispatch = useDispatch();
   // formdata
-  console.log(roomData)
+  console.log(roomData);
   const [formData, setFormData] = useState(
     roomData.addPhotos
       ? roomData.addPhotos
-      : 
-      {
+      : {
           mainImage: [],
           otherImages: [],
         }
@@ -69,7 +69,7 @@ const AddPhotos = () => {
       // setCookie
       setCookie("roomData", { ...roomData, addPhotos: formData });
       // router
-      router.push("/register/guest-payment");
+      router.push("/register/hotel-details-completion");
     }
   }, [errors]);
   // useEffect > setEdited
@@ -78,6 +78,7 @@ const AddPhotos = () => {
   }, []);
   return (
     <div className="section-d grid grid-cols-1 gap-5 max-w-[500px]">
+      <Backlink link="/register/hotel-details-completion" text="Back" />
       <h2 className="font-semibold">What does your hotel look like?</h2>
       <div>
         <p>Upload a main photo that makes a good girst impression</p>

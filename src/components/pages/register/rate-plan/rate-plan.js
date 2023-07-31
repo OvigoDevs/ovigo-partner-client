@@ -1,3 +1,4 @@
+import Backlink from "@/components/core/backlink/backlink";
 import IconWrapper from "@/components/core/icon-wrapper/icon-wrapper";
 import { Button } from "@/components/ui/button";
 import { User2Icon } from "lucide-react";
@@ -75,6 +76,7 @@ const RatePlan = () => {
   ];
   return (
     <div className="section-d max-w-[500px] grid grid-cols-1 gap-5">
+      <Backlink link="/register/room-price" text="Room price" />
       <h3 className="font-bold">Rate plan</h3>
       <p>
         To attract a winder range of guests, we suggest setting up multiple rate
