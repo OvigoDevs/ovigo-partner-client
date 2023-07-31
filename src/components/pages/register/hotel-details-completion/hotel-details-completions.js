@@ -47,7 +47,7 @@ const HotelDetailsCompletion = () => {
     },
   ];
   return (
-    <div className="section-d max-w-[500px]">
+    <div className="section-d max-w-[500px] min-h-[80vh]">
       <Backlink link="/register/house-rules" text="House rules" />
       <div className="rounded-md bg-green-400 text-white mb-10 p-2 text-center font-semibold">
         {`Step 1 is completed: All the details of your hotel are collected. Let's add some rooms`}
