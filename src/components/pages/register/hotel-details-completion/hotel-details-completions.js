@@ -42,7 +42,7 @@ const HotelDetailsCompletion = () => {
           <Check />
         </IconWrapper>
       ),
-      link: "/register/complete-registration",
+      link: "/register/guest-payment",
       buttonText: "Complete",
     },
   ];

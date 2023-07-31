@@ -17,6 +17,7 @@ import InputError from "@/components/core/input-error/input-error";
 import CustomRadio from "@/components/core/custom-radio/custom-radio";
 import { roomDetails } from "@/redux/features/register_slice";
 import { setCookie } from "@/lib/cookie";
+import Backlink from "@/components/core/backlink/backlink";
 
 const BedTypes = [
   {
@@ -208,6 +209,7 @@ const RoomDetails = () => {
   }, []);
   return (
     <div className="py-5 max-w-[500px]">
+      <Backlink link="/register/hotel-details-completion" text="Back"/>
       <h4 className="font-bold">Room Details</h4>
 
       {/* Bed Details Container */}

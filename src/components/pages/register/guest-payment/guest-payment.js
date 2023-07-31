@@ -1,3 +1,4 @@
+import Backlink from "@/components/core/backlink/backlink";
 import CustomRadio from "@/components/core/custom-radio/custom-radio";
 import InputError from "@/components/core/input-error/input-error";
 import { Button } from "@/components/ui/button";
@@ -26,7 +27,7 @@ const GuestPayment = () => {
   // submit & validation
   const handleOnSubmit = () => {
     if (!payment) {
-      console.log(payment)
+      console.log(payment);
       setErrorMessage("Payment is required!");
     } else {
       // dispatch
@@ -45,6 +46,7 @@ const GuestPayment = () => {
   };
   return (
     <div className="section-d max-w-[500px] grid grid-cols-1 gap-5">
+      <Backlink link="/register/add-photos" text="Add photos" />
       <h3 className="font-bold">Guest payment options</h3>
       <div>
         <CustomRadio

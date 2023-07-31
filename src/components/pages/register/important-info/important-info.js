@@ -1,3 +1,4 @@
+import Backlink from "@/components/core/backlink/backlink";
 import IconWrapper from "@/components/core/icon-wrapper/icon-wrapper";
 import { Button } from "@/components/ui/button";
 import { BadgeCheck } from "lucide-react";
@@ -41,6 +42,7 @@ const ImportantInfo = () => {
   ];
   return (
     <div className="section-d max-w-[500px] grid grid-cols-1 gap-5">
+      <Backlink link="/register/invoice-info" text="Invoice information" />
       <h3>Some important info before you list your hotel on Ovigo</h3>
       <div className="grid grid-cols-1 gap-3">
         {info.map((item) => {

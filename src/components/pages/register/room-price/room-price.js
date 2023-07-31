@@ -1,3 +1,4 @@
+import Backlink from "@/components/core/backlink/backlink";
 import IconWrapper from "@/components/core/icon-wrapper/icon-wrapper";
 import InputError from "@/components/core/input-error/input-error";
 import { Button } from "@/components/ui/button";
@@ -42,6 +43,7 @@ const RoomPrice = () => {
   };
   return (
     <div className="section-d max-w-[400px]">
+      <Backlink link="/register/room-name" text="Room name" />
       <h4 className="">Set the price per night for this room</h4>
 
       <div className="grid grid-cols-1 gap-4 pt-5">

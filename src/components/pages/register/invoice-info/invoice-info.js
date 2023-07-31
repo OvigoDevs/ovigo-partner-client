@@ -1,3 +1,4 @@
+import Backlink from "@/components/core/backlink/backlink";
 import CustomRadio from "@/components/core/custom-radio/custom-radio";
 import InputError from "@/components/core/input-error/input-error";
 import { Button } from "@/components/ui/button";
@@ -84,6 +85,7 @@ const InvoiceInfo = () => {
 
   return (
     <div className="py-5">
+      <Backlink link="/register/guest-payment" text="Guest payment" />
       <h4 className="font-bold">Invoicing</h4>
 
       {/* Container */}
