@@ -7,6 +7,7 @@ import { registerPhoneInfo } from "@/redux/features/register_slice";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCookie } from "@/lib/cookie";
+import Backlink from "@/components/core/backlink/backlink";
 
 const ContactDetails = () => {
   const router = useRouter();
@@ -34,19 +35,20 @@ const ContactDetails = () => {
           phone,
         })
       );
-      setCookie(
-        "registerData",
-        { ...registerData, phone }
-      );
+      setCookie("registerData", { ...registerData, phone });
 
-      router.push("/register/create-password")
+      router.push("/register/create-password");
     }
   };
 
   return (
     <div className="section-d">
       <div className="max-w-[500px]">
-        <h1 className="font-bold mb-5">Registration information</h1>
+        <Backlink
+          link="/register/register-info"
+          text="Registration information"
+        />
+        <h1 className="font-bold mb-5">Contact details</h1>
         <div className="col-span-2 grid grid-cols-1 gap-2">
           <label>Phone</label>
           <input

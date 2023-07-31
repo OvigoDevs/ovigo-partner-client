@@ -1,3 +1,4 @@
+import Backlink from "@/components/core/backlink/backlink";
 import IconWrapper from "@/components/core/icon-wrapper/icon-wrapper";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
@@ -47,6 +48,7 @@ const HotelDetailsCompletion = () => {
   ];
   return (
     <div className="section-d max-w-[500px]">
+      <Backlink link="/register/house-rules" text="House rules" />
       <div className="rounded-md bg-green-400 text-white mb-10 p-2 text-center font-semibold">
         {`Step 1 is completed: All the details of your hotel are collected. Let's add some rooms`}
       </div>
@@ -87,7 +89,7 @@ const HotelDetailsCompletion = () => {
                 <p>{description}</p>
               </div>
               <Link href={link}>
-                <Button className="flex items-center gap-1">
+                <Button variant="outline" className="flex items-center gap-1">
                   {" "}
                   {icon} {buttonText}
                 </Button>

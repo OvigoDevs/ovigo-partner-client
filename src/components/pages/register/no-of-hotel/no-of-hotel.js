@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { noOfHotels } from "@/redux/features/register_slice";
 import { setCookie } from "@/lib/cookie";
+import Backlink from "@/components/core/backlink/backlink";
 
 const NoOfHotel = () => {
   const options = [
@@ -55,6 +56,7 @@ const NoOfHotel = () => {
   }, []);
   return (
     <div className="section-d max-w-[500px]">
+      <Backlink link="/register/hotel-categories" text="Hotel categories" />
       <p>How many hotel are you listing?</p>
 
       <div className="rounded-md mt-5 grid grid-cols-1 gap-4">
@@ -86,7 +88,7 @@ const NoOfHotel = () => {
         })}
       </div>
       <hr className="my-5" />
-      <Button className="w-full" onClick={handleOnNext}>
+      <Button className="max-w-[150px]" onClick={handleOnNext}>
         Continue
       </Button>
     </div>

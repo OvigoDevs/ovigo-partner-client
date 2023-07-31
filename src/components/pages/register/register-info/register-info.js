@@ -1,5 +1,6 @@
 "use client";
 
+import Backlink from "@/components/core/backlink/backlink";
 import InputError from "@/components/core/input-error/input-error";
 import { Button } from "@/components/ui/button";
 import { setCookie } from "@/lib/cookie";
@@ -69,6 +70,7 @@ const RegisterInfo = () => {
   return (
     <div className="section-d">
       <div className="max-w-[500px]">
+      <Backlink link="/register/verification" text="Verification" />
         <h1 className="font-bold mb-5">Registration information</h1>
         <div className="grid grid-cols-1 gap-2">
           <div className="grid grid-cols-1 gap-1">

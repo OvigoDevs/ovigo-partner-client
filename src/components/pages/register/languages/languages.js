@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import InputError from "@/components/core/input-error/input-error";
 import { useRouter } from "next/navigation";
+import Backlink from "@/components/core/backlink/backlink";
 const Languages = () => {
   const { hotelData } = useSelector((state) => state.registerData);
 
@@ -32,6 +33,7 @@ const Languages = () => {
   };
   return (
     <div className="section-d max-w-[500px]">
+      <Backlink link="/register/parking-details" text="Parking details" />
       <h3 className="font-bold">Languages</h3>
       <div className="grid grid-cols-1 gap-3 py-5">
         <CustomCheckbox

@@ -1,3 +1,4 @@
+import Backlink from "@/components/core/backlink/backlink";
 import IconWrapper from "@/components/core/icon-wrapper/icon-wrapper";
 import { Button } from "@/components/ui/button";
 import { setCookie } from "@/lib/cookie";
@@ -119,6 +120,7 @@ const HotelCategories = () => {
   return (
     <div className="section-d">
       <div className="grid grid-cols-1 gap-2">
+        <Backlink link="/register/service-category" text="Service category" />
         <h3 className="font-bold">Hotel categories</h3>
         <p>
           From the list below, which property category is the best fit for your

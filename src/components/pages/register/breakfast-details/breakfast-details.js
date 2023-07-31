@@ -1,3 +1,4 @@
+import Backlink from "@/components/core/backlink/backlink";
 import CustomRadio from "@/components/core/custom-radio/custom-radio";
 import IconWrapper from "@/components/core/icon-wrapper/icon-wrapper";
 import InputError from "@/components/core/input-error/input-error";
@@ -159,6 +160,7 @@ const BreakfastDetails = () => {
   }, []);
   return (
     <div className="grid grid-cols-1 gap-2 section-d max-w-[500px]">
+      <Backlink link="/register/popular-facilities" text="Popular facilities" />
       <h2 className="font-bold">Breakfast details</h2>
       <div className="grid grid-cols-1 gap-5">
         <CustomRadio
@@ -239,7 +241,7 @@ const BreakfastDetails = () => {
           </>
         ) : null}
       </div>
-      <Button onClick={handleOnSubmit}>Next</Button>
+      <Button onClick={handleOnSubmit} className="max-w-[150px] mt-5">Next</Button>
     </div>
   );
 };

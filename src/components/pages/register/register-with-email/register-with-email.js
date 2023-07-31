@@ -7,6 +7,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { registerWithEmail } from "@/redux/features/register_slice";
 import InputError from "@/components/core/input-error/input-error";
 import { setCookie } from "@/lib/cookie";
+import Link from "next/link";
+import { ChevronLeft } from "lucide-react";
+import IconWrapper from "@/components/core/icon-wrapper/icon-wrapper";
+import Backlink from "@/components/core/backlink/backlink";
 
 const RegisterWithEmail = () => {
   const router = useRouter();
@@ -46,6 +50,7 @@ const RegisterWithEmail = () => {
     <div className="section-d max-w-[450px]">
       <div className="rounded-md">
         <div className="grid grid-cols-1 gap-2 mb-10">
+          <Backlink link="/register/landing" text="Overview" />
           <h2 className="text-xl font-bold">Create your partner account</h2>
           <p>Create an account to list and manage your service.</p>
           <div className="grid grid-cols-1 gap-2">
