@@ -53,6 +53,7 @@ const HotelDetailsCompletion = () => {
       <div className="grid grid-cols-1 gap-[1rem]">
         {hotels.length ? (
           <div className="grid grid-cols-1 gap-[1rem]">
+            <h3 className="font-semibold">Your hotels</h3>
             {hotels.map((hotel) => {
               return (
                 <div
@@ -61,11 +62,11 @@ const HotelDetailsCompletion = () => {
                 >
                   <div className="grid grid-cols-1 gap-2">
                     <p className="font-semibold">
-                      {hotel.hotelData.hotelInformation.propertyName}
+                      {hotel.hotelData?.hotelInformation?.propertyName}
                     </p>
                     <span className="text-xs lg:text-sm">
-                      {hotel.hotelData.hotelAddress.city}|
-                      {hotel.hotelData.hotelAddress.country}
+                      {hotel.hotelData?.hotelAddress?.city}|
+                      {hotel.hotelData?.hotelAddress?.country}
                     </span>
                   </div>
                   <Button>Edit</Button>

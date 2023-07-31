@@ -31,15 +31,19 @@ const initialState = {
   hotels,
 };
 
-const MaxID_generator = (items) => {
+export const MaxID_generator = (items) => {
   let maxId = 0;
-
+  if(!items.length){
+    return maxId + 1
+  } 
+  console.log(">>>>", items)
   for (let i = 0; i < items.length; i++) {
+    console.log(items[i].id > maxId)
     if (items[i].id > maxId) {
       maxId = items[i].id;
     }
   }
-
+console.log({d: maxId+1})
   return maxId + 1;
 };
 
@@ -91,7 +95,7 @@ export const registerSlice = createSlice({
       state.hotels = [
         ...state.hotels,
         {
-          id: MaxID_generator(state.hotels),
+          id: action.payload.id,
           hotelData: state.hotelData,
           roomData: state.roomData,
         },

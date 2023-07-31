@@ -5,7 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { setCookie } from "@/lib/cookie";
 import InputError from "@/components/core/input-error/input-error";
-import { addNewHotel, confirmHotel } from "@/redux/features/register_slice";
+import {
+  MaxID_generator,
+  addNewHotel,
+  confirmHotel,
+} from "@/redux/features/register_slice";
 import { useRouter } from "next/navigation";
 
 const ConfirmHotel = () => {
@@ -27,7 +31,6 @@ const ConfirmHotel = () => {
     if (confirmhotel.length !== 2) {
       setErrorMessage("Select all agreements!");
     } else {
-
       // setCookie
       setCookie(
         "hotelData",
@@ -36,22 +39,30 @@ const ConfirmHotel = () => {
       );
 
       // dispatch
-
+      console.log("--->", hotels);
+      const MaxID = MaxID_generator(hotels);
       dispatch(
         confirmHotel({
           confirmHotel: confirmhotel,
+          id: MaxID,
         })
       );
 
-      
-      setCookie("hotels", [...hotels, {
-        id: 0,
-        hotelData,
-        roomData
-      }], "1h")
+      setCookie(
+        "hotels",
+        [
+          ...hotels,
+          {
+            id: MaxID,
+            hotelData,
+            roomData,
+          },
+        ],
+        "1h"
+      );
 
-      setCookie("hotelData", {}, "1h")
-      setCookie("roomData", {}, "1h")
+      setCookie("hotelData", {}, "1h");
+      setCookie("roomData", {}, "1h");
 
       // router
       router.push("/register/hotel-details-completion");
