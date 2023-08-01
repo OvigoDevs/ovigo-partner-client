@@ -17,7 +17,7 @@ const ConfirmHotel = () => {
   // router
   const router = useRouter();
   // hotelData
-  const { hotelData, roomData, hotels } = useSelector(
+  const { hotelData, rooms, registerData } = useSelector(
     (state) => state.registerData
   );
   // dispatch
@@ -32,6 +32,12 @@ const ConfirmHotel = () => {
     if (confirmhotel.length !== 2) {
       setErrorMessage("Select all agreements!");
     } else {
+      // dispatch
+      dispatch(
+        confirmHotel({
+          confirmHotel: confirmhotel,
+        })
+      );
       // setCookie
       setCookie(
         "hotelData",
@@ -39,33 +45,10 @@ const ConfirmHotel = () => {
         "1h"
       );
 
-      // dispatch
-      const MaxID = MaxID_generator(hotels);
-      dispatch(
-        confirmHotel({
-          confirmHotel: confirmhotel,
-          id: MaxID,
-        })
-      );
-
-      setCookie(
-        "hotels",
-        [
-          ...hotels,
-          {
-            id: MaxID,
-            hotelData,
-            roomData,
-          },
-        ],
-        "1h"
-      );
-
-      setCookie("hotelData", {}, "1h");
-      setCookie("roomData", {}, "1h");
+      console.log({registerData, hotelData, rooms})
 
       // router
-      router.push("/register/hotel-details-completion");
+      // router.push("/dashboard");
     }
   };
   return (

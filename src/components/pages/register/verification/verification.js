@@ -42,9 +42,11 @@ const Verification = () => {
         >
           {verify ? "Verified" : "Verify"}
         </Button>
-        <Link href="/register/register-info">
-          <Button className="max-w-[150px]">Next</Button>
-        </Link>
+        {verify ? (
+          <Link href="/register/register-info">
+            <Button className="max-w-[150px]">Next</Button>
+          </Link>
+        ) : null}
       </div>
     </div>
   );
