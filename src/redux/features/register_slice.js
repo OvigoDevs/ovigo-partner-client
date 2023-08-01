@@ -7,8 +7,9 @@ const doc = typeof document !== "undefined";
 let registerData = {};
 let hotelData = {};
 let roomData = {};
-let hotels = [];
+let rooms = [];
 
+// retriving data from local storage to set default values in states
 if (doc) {
   registerData = localStorage.getItem("registerData")
     ? JSON.parse(localStorage.getItem("registerData"))
@@ -19,8 +20,8 @@ if (doc) {
   roomData = localStorage.getItem("roomData")
     ? JSON.parse(localStorage.getItem("roomData"))
     : {};
-  hotels = localStorage.getItem("hotels")
-    ? JSON.parse(localStorage.getItem("hotels"))
+  rooms = localStorage.getItem("rooms")
+    ? JSON.parse(localStorage.getItem("rooms"))
     : [];
 }
 
@@ -28,22 +29,20 @@ const initialState = {
   registerData,
   hotelData,
   roomData,
-  hotels,
+  rooms,
 };
 
+// maximum id generator
 export const MaxID_generator = (items) => {
   let maxId = 0;
   if(!items.length){
     return maxId + 1
-  } 
-  console.log(">>>>", items)
+  }
   for (let i = 0; i < items.length; i++) {
-    console.log(items[i].id > maxId)
     if (items[i].id > maxId) {
       maxId = items[i].id;
     }
   }
-console.log({d: maxId+1})
   return maxId + 1;
 };
 
@@ -92,16 +91,6 @@ export const registerSlice = createSlice({
     },
     confirmHotel: (state, action) => {
       state.hotelData.confirmHotel = action.payload.confirmHotel;
-      state.hotels = [
-        ...state.hotels,
-        {
-          id: action.payload.id,
-          hotelData: state.hotelData,
-          roomData: state.roomData,
-        },
-      ];
-      state.hotelData = {};
-      state.roomData = {};
     },
     houseRules: (state, action) => {
       state.hotelData.houseRules = action.payload.houseRules;
@@ -129,6 +118,11 @@ export const registerSlice = createSlice({
     },
     addPhotos: (state, action) => {
       state.roomData.addPhotos = action.payload.addPhotos;
+      state.rooms = [
+        ...state.rooms,
+        action.payload
+      ]
+      state.roomData = {}
     },
   },
 });

@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 const HotelCategories = () => {
   const hotels = [
     {
-      id: 0,
+      id: -1,
       title: "Hotel",
       description:
         "Accomodation for travellers often with restaurants, meeting rooms, and other guest services",
@@ -104,6 +104,8 @@ const HotelCategories = () => {
 
   const dispatch = useDispatch();
   const handleOnNext = () => {
+    console.log(selectedHotel)
+    setErrors(null);
     const data = hotels.filter((item) => item.id === selectedHotel)[0];
     dispatch(
       hotelCategories({
@@ -161,9 +163,7 @@ const HotelCategories = () => {
       <InputError error={errors} />
       <Button
         onClick={() => {
-          selectedHotel
-            ? handleOnNext()
-            : setErrors("Select at least one!");
+          selectedHotel ? handleOnNext() : setErrors("Select at least one!");
         }}
         className="mt-5"
       >

@@ -384,7 +384,7 @@ const RoomDetails = () => {
 
       <div className="grid grid-cols-2 gap-4 mt-5">
         <Button className="w-full" onClick={handleOnSubmit}>
-          Submit
+          Next
         </Button>
       </div>
     </div>

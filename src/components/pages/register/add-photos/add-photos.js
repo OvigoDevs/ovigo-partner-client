@@ -3,7 +3,7 @@ import InputError from "@/components/core/input-error/input-error";
 import UploadImages from "@/components/core/upload-images/upload-images";
 import { Button } from "@/components/ui/button";
 import { setCookie } from "@/lib/cookie";
-import { addPhotos } from "@/redux/features/register_slice";
+import { MaxID_generator, addPhotos } from "@/redux/features/register_slice";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,11 +12,12 @@ const AddPhotos = () => {
   // router
   const router = useRouter();
   // roomdata
-  const { roomData } = useSelector((state) => state.registerData);
+  const { roomData, rooms } = useSelector(
+    (state) => state.registerData
+  );
   // disptach
   const dispatch = useDispatch();
   // formdata
-  console.log(roomData);
   const [formData, setFormData] = useState(
     roomData.addPhotos
       ? roomData.addPhotos
@@ -61,13 +62,16 @@ const AddPhotos = () => {
   useEffect(() => {
     if (Object.keys(errors).length === 0 && edited) {
       // dispatch
-      dispatch(
-        addPhotos({
-          addPhotos: formData,
-        })
-      );
+      const roomID = MaxID_generator(rooms);
+      const updatedRoomData = { ...roomData, addPhotos: formData };
+      const roomDetailsToSet = {
+        id: roomID,
+        roomData: updatedRoomData,
+      };
+      dispatch(addPhotos(roomDetailsToSet));
       // setCookie
-      setCookie("roomData", { ...roomData, addPhotos: formData });
+      setCookie("roomData", {}, "1h");
+      setCookie("rooms", [...rooms, roomDetailsToSet], "1h");
       // router
       router.push("/register/hotel-details-completion");
     }

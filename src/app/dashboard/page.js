@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Delete } from "lucide-react";
 import { Edit } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 
 const Dashboard = () => {
   const properties = [
