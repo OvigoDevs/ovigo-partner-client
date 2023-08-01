@@ -352,11 +352,11 @@ const RoomDetails = () => {
                 {[
                   {
                     id: 0,
-                    value: "Inch",
+                    value: "Square Inch",
                   },
                   {
                     id: 1,
-                    value: "Feet",
+                    value: "Square Feet",
                   },
                 ].map((bed) => (
                   <SelectItem key={bed.id} value={bed.value}>

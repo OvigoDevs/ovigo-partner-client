@@ -44,7 +44,7 @@ const ConfirmHotel = () => {
         { ...hotelData, confirmHotel: confirmhotel },
         "1h"
       );
-
+        // need to hit API to save these data in DB
       console.log({registerData, hotelData, rooms})
 
       // router
