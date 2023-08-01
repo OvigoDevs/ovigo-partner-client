@@ -1,6 +1,7 @@
 import Backlink from "@/components/core/backlink/backlink";
 import IconWrapper from "@/components/core/icon-wrapper/icon-wrapper";
 import { Button } from "@/components/ui/button";
+import { Edit2Icon } from "lucide-react";
 import { Check } from "lucide-react";
 import { PlusSquare } from "lucide-react";
 import Link from "next/link";
@@ -71,7 +72,12 @@ const HotelDetailsCompletion = () => {
                       {hotel.hotelData?.hotelAddress?.country}
                     </span>
                   </div>
-                  <Button>Edit</Button>
+                  <Button variant="outline">
+                    <IconWrapper>
+                      <Edit2Icon className="w-4 h-4 mr-1"/>
+                    </IconWrapper>
+                    Edit
+                  </Button>
                 </div>
               );
             })}

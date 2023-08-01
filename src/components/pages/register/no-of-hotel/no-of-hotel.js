@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { noOfHotels } from "@/redux/features/register_slice";
 import { setCookie } from "@/lib/cookie";
 import Backlink from "@/components/core/backlink/backlink";
+import InputError from "@/components/core/input-error/input-error";
 
 const NoOfHotel = () => {
   const options = [
@@ -34,6 +35,7 @@ const NoOfHotel = () => {
   const router = useRouter();
   const { hotelData } = useSelector((state) => state.registerData);
   const [selectedOption, setSelectedOption] = useState(null);
+  const [errors, setErrors] = useState(null);
 
   const dispatch = useDispatch();
   const handleOnNext = () => {
@@ -87,8 +89,15 @@ const NoOfHotel = () => {
           );
         })}
       </div>
+      {errors ? <hr className="my-5" /> : null}
+      <InputError error={errors} />
       <hr className="my-5" />
-      <Button className="max-w-[150px]" onClick={handleOnNext}>
+      <Button
+        className="max-w-[150px]"
+        onClick={() => {
+          selectedOption ? handleOnNext() : setErrors("Select at least one!");
+        }}
+      >
         Continue
       </Button>
     </div>

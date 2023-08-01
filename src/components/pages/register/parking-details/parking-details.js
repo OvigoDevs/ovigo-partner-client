@@ -141,7 +141,7 @@ const ParkingDetails = () => {
             ) : null}
           </div>
           <Button className="max-w-[150px] mt-5" onClick={handleOnSubmit}>
-            Submit
+            Next
           </Button>
         </div>
       </div>
