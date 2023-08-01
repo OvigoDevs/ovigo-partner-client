@@ -1,5 +1,6 @@
 import Backlink from "@/components/core/backlink/backlink";
 import IconWrapper from "@/components/core/icon-wrapper/icon-wrapper";
+import InputError from "@/components/core/input-error/input-error";
 import { Button } from "@/components/ui/button";
 import { setCookie } from "@/lib/cookie";
 import { hotelCategories } from "@/redux/features/register_slice";
@@ -99,6 +100,7 @@ const HotelCategories = () => {
   const router = useRouter();
   const { hotelData } = useSelector((state) => state.registerData);
   const [selectedHotel, setSelectedHotel] = useState(null);
+  const [errors, setErrors] = useState(null);
 
   const dispatch = useDispatch();
   const handleOnNext = () => {
@@ -156,7 +158,17 @@ const HotelCategories = () => {
         })}
       </div>
 
-      <Button onClick={handleOnNext}>Next</Button>
+      <InputError error={errors} />
+      <Button
+        onClick={() => {
+          selectedHotel
+            ? handleOnNext()
+            : setErrors("Select at least one!");
+        }}
+        className="mt-5"
+      >
+        Next
+      </Button>
     </div>
   );
 };

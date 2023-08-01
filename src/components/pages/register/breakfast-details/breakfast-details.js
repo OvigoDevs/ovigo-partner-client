@@ -114,9 +114,15 @@ const BreakfastDetails = () => {
         if (!data.priceIncluded.trim()) {
           obj.priceIncluded = "This input is required!";
         }
-        if (!data.pricePerPersonAndDay.trim()) {
-          obj.pricePerPersonAndDay = "This input is required!";
+
+        if (data.priceIncluded.trim()) {
+          if (formData.priceIncluded === "No, it costs extra") {
+            if (!data.pricePerPersonAndDay.trim()) {
+              obj.pricePerPersonAndDay = "This input is required!";
+            }
+          }
         }
+
         if (!data.breakfastsTypes.length) {
           obj.breakfastsTypes = "Select at least one!!";
         }
@@ -183,19 +189,21 @@ const BreakfastDetails = () => {
                   defaultValue={formData?.priceIncluded}
                 />
                 <InputError error={errors.priceIncluded} />
-                <div className="grid grid-cols-1 gap-2">
-                  <label>Breakfast price per person, per day</label>
-                  <input
-                    name="pricePerPersonAndDay"
-                    placeholder="e.g. 500"
-                    onChange={handleOnChange}
-                    defaultValue={formData.pricePerPersonAndDay}
-                  />
-                  <InputError error={errors.pricePerPersonAndDay} />
-                  <p className="text-gray-400 dark:text-gray-800">
-                    Including all taxes and fees
-                  </p>
-                </div>
+                {formData.priceIncluded === "No, it costs extra" ? (
+                  <div className="grid grid-cols-1 gap-2">
+                    <label>Breakfast price per person, per day</label>
+                    <input
+                      name="pricePerPersonAndDay"
+                      placeholder="e.g. 500"
+                      onChange={handleOnChange}
+                      defaultValue={formData.pricePerPersonAndDay}
+                    />
+                    <InputError error={errors.pricePerPersonAndDay} />
+                    <p className="text-gray-400 dark:text-gray-800">
+                      Including all taxes and fees
+                    </p>
+                  </div>
+                ) : null}
                 <div className="grid grid-cols-1 gap-2">
                   <div>
                     <label>What type of breakfast do you offer?</label>
@@ -235,13 +243,16 @@ const BreakfastDetails = () => {
                       );
                     })}
                   </ul>
+                  <InputError error={errors.breakfastsTypes} />
                 </div>
               </>
             ) : null}
           </>
         ) : null}
       </div>
-      <Button onClick={handleOnSubmit} className="max-w-[150px] mt-5">Next</Button>
+      <Button onClick={handleOnSubmit} className="max-w-[150px] mt-5">
+        Next
+      </Button>
     </div>
   );
 };
