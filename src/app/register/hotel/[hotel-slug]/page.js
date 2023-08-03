@@ -1,10 +1,5 @@
 "use client";
 
-import ContactDetails from "@/components/pages/register/common/contact-details/contact-details";
-import CreatePassword from "@/components/pages/register/common/create-password/create-password";
-import RegisterLanding from "@/components/pages/register/common/landing-page/register-landing";
-import RegisterInfo from "@/components/pages/register/common/register-info/register-info";
-import RegisterWithEmail from "@/components/pages/register/common/register-with-email/register-with-email";
 import AddPhotos from "@/components/pages/register/hotel/add-photos/add-photos";
 import BathroomDetails from "@/components/pages/register/hotel/bathroom-details/bathroom-details";
 import BreakfastDetails from "@/components/pages/register/hotel/breakfast-details/breakfast-details";
@@ -28,25 +23,61 @@ import RoomFeatures from "@/components/pages/register/hotel/room-features/room-f
 import RoomName from "@/components/pages/register/hotel/room-name/room-name";
 import RoomPrice from "@/components/pages/register/hotel/room-price/room-price";
 import ServiceCategory from "@/components/pages/register/hotel/service-category/service-category";
-import Verification from "@/components/pages/register/common/verification/verification";
 import { usePathname } from "next/navigation";
 
-const RegisterDynamicComps = () => {
+const HotelDynamicComps = () => {
   const pathname = usePathname();
+  console.log(pathname)
   return (
     <div>
-      {pathname.includes("landing") ? (
-        <RegisterLanding />
-      ) : pathname.includes("with-email") ? (
-        <RegisterWithEmail />
-      ) : pathname.includes("register-info") ? (
-        <RegisterInfo />
-      ) : pathname.includes("verification") ? (
-        <Verification />
-      ) : pathname.includes("create-password") ? (
-        <CreatePassword />
-      ) : pathname.includes("contact-details") ? (
-        <ContactDetails />
+      {pathname.includes("hotel-categories") ? (
+        <HotelCategories />
+      ) : pathname.includes("hotel-type-confirmation") ? (
+        <HotelTypeConfirmation />
+      ) : pathname.includes("service-category") ? (
+        <ServiceCategory />
+      ) : pathname.includes("no-of-hotel") ? (
+        <NoOfHotel />
+      ) : pathname.includes("hotel-address") ? (
+        <HotelAddress />
+      ) : pathname.includes("popular-facilities") ? (
+        <PopularFacilities />
+      ) : pathname.includes("hotel-information") ? (
+        <HotelInformation />
+      ) : pathname.includes("breakfast-details") ? (
+        <BreakfastDetails />
+      ) : pathname.includes("room-details") ? (
+        <RoomDetails />
+      ) : pathname.includes("languages") ? (
+        <Languages />
+      ) : pathname.includes("parking-details") ? (
+        <ParkingDetails />
+      ) : pathname.includes("house-rules") ? (
+        <HouseRules />
+      ) : pathname.includes("room-details") ? (
+        <RoomDetails />
+      ) : pathname.includes("bath-details") ? (
+        <BathroomDetails />
+      ) : pathname.includes("room-price") ? (
+        <RoomPrice />
+      ) : pathname.includes("hotel-details-completion") ? (
+        <HotelDetailsCompletion />
+      ) : pathname.includes("room-features") ? (
+        <RoomFeatures />
+      ) : pathname.includes("room-name") ? (
+        <RoomName />
+      ) : pathname.includes("rate-plan") ? (
+        <RatePlan />
+      ) : pathname.includes("add-photos") ? (
+        <AddPhotos />
+      ) : pathname.includes("guest-payment") ? (
+        <GuestPayment />
+      ) : pathname.includes("important-info") ? (
+        <ImportantInfo />
+      ) : pathname.includes("invoice-info") ? (
+        <InvoiceInfo />
+      ) : pathname.includes("confirm-hotel") ? (
+        <ConfirmHotel />
       ) : (
         "404 | No component found"
       )}
@@ -54,4 +85,4 @@ const RegisterDynamicComps = () => {
   );
 };
 
-export default RegisterDynamicComps;
+export default HotelDynamicComps;
