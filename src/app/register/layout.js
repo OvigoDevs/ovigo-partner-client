@@ -1,8 +1,4 @@
 "use client";
-import IconWrapper from "@/components/core/icon-wrapper/icon-wrapper";
-import SideNav from "@/components/pages/register/sidenav/sidenav";
-import { MenuIcon } from "lucide-react";
-import { MenuSquareIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
