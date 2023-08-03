@@ -7,7 +7,9 @@ const doc = typeof document !== "undefined";
 let registerData = {};
 let hotelData = {};
 let roomData = {};
+let rooms = [];
 
+// retriving data from local storage to set default values in states
 if (doc) {
   registerData = localStorage.getItem("registerData")
     ? JSON.parse(localStorage.getItem("registerData"))
@@ -18,14 +20,30 @@ if (doc) {
   roomData = localStorage.getItem("roomData")
     ? JSON.parse(localStorage.getItem("roomData"))
     : {};
+  rooms = localStorage.getItem("rooms")
+    ? JSON.parse(localStorage.getItem("rooms"))
+    : [];
 }
-
-console.log({ registerData, hotelData, roomData });
 
 const initialState = {
   registerData,
   hotelData,
   roomData,
+  rooms,
+};
+
+// maximum id generator
+export const MaxID_generator = (items) => {
+  let maxId = 0;
+  if(!items.length){
+    return maxId + 1
+  }
+  for (let i = 0; i < items.length; i++) {
+    if (items[i].id > maxId) {
+      maxId = items[i].id;
+    }
+  }
+  return maxId + 1;
 };
 
 export const registerSlice = createSlice({
@@ -95,12 +113,16 @@ export const registerSlice = createSlice({
     invoiceInfo: (state, action) => {
       state.roomData.invoiceInfo = action.payload.invoiceInfo;
     },
-
     bathroomDetails: (state, action) => {
       state.roomData.bathroomDetails = action.payload.bathroomDetails;
     },
     addPhotos: (state, action) => {
       state.roomData.addPhotos = action.payload.addPhotos;
+      state.rooms = [
+        ...state.rooms,
+        action.payload
+      ]
+      state.roomData = {}
     },
   },
 });
@@ -128,6 +150,7 @@ export const {
   invoiceInfo,
   confirmHotel,
   addPhotos,
-  houseRules
+  houseRules,
+  addNewHotel,
 } = registerSlice.actions;
 export default registerSlice.reducer;

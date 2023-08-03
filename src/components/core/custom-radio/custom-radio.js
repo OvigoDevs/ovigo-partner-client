@@ -26,7 +26,7 @@ const CustomRadio = ({
       {nativeOptions.map((option) => {
         return (
           <div
-            className="flex items-center space-x-2 md:cursor-pointer"
+            className={`flex items-center space-x-2 ${!option.value ? "md:cursor-pointer": "cursor-not-allowed"}`}
             key={option.text}
             onClick={() => {
               setNativeOptions([

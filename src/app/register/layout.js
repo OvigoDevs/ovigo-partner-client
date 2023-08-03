@@ -1,8 +1,4 @@
 "use client";
-import IconWrapper from "@/components/core/icon-wrapper/icon-wrapper";
-import SideNav from "@/components/pages/register/sidenav/sidenav";
-import { MenuIcon } from "lucide-react";
-import { MenuSquareIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -14,8 +10,8 @@ const RegisterLayout = ({ children }) => {
   }, [pathname]);
 
   return (
-    <div className="container-d flex items-start justify-start gap-[1rem]">
-      <div
+    <div className="container">
+      {/* <div
         className={`fixed  md:sticky left-0 z-10 transition ease-in-out duration-500 top-[56px] md:top-[76px] ${
           openSideNav ? "translate-x-0" : "-translate-x-[100%] md:translate-x-0"
         }`}
@@ -36,7 +32,8 @@ const RegisterLayout = ({ children }) => {
       </div>
       <div className="w-full md:border-l pl-[1rem] min-h-screen">
         {children}
-      </div>
+      </div> */}
+      {children}
     </div>
   );
 };
