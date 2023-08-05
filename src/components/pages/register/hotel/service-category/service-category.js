@@ -17,12 +17,12 @@ const ServiceCategory = () => {
     //   title: "Bus",
     //   link: "/register/hotel/hotel-categories",
     // },
-    // {
-    //   id: 2,
-    //   icon: "tour-package.svg",
-    //   title: "Tour Package",
-    //   link: "/register/hotel/hotel-categories",
-    // },
+    {
+      id: 2,
+      icon: "tour-package.svg",
+      title: "Tour Package",
+      link: "/register/tour-package/organizer",
+    },
   ];
   return (
     <div className="pt-5">
