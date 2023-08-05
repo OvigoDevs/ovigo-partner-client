@@ -8,6 +8,7 @@ let registerData = {};
 let hotelData = {};
 let roomData = {};
 let rooms = [];
+let tourPackageData = {};
 
 // retriving data from local storage to set default values in states
 if (doc) {
@@ -23,6 +24,10 @@ if (doc) {
   rooms = localStorage.getItem("rooms")
     ? JSON.parse(localStorage.getItem("rooms"))
     : [];
+
+  tourPackageData = localStorage.getItem("tourPackageData")
+    ? JSON.parse(localStorage.getItem("tourPackageData"))
+    : {};
 }
 
 const initialState = {
@@ -30,13 +35,14 @@ const initialState = {
   hotelData,
   roomData,
   rooms,
+  tourPackageData
 };
 
 // maximum id generator
 export const MaxID_generator = (items) => {
   let maxId = 0;
-  if(!items.length){
-    return maxId + 1
+  if (!items.length) {
+    return maxId + 1;
   }
   for (let i = 0; i < items.length; i++) {
     if (items[i].id > maxId) {
@@ -118,12 +124,13 @@ export const registerSlice = createSlice({
     },
     addPhotos: (state, action) => {
       state.roomData.addPhotos = action.payload.addPhotos;
-      state.rooms = [
-        ...state.rooms,
-        action.payload
-      ]
-      state.roomData = {}
+      state.rooms = [...state.rooms, action.payload];
+      state.roomData = {};
     },
+    organizerName: (state, action) => {
+      console.log(action.payload.organizerName)
+      state.tourPackageData.organizerName = action.payload.organizerName
+    }
   },
 });
 
@@ -152,5 +159,6 @@ export const {
   addPhotos,
   houseRules,
   addNewHotel,
+  organizerName
 } = registerSlice.actions;
 export default registerSlice.reducer;

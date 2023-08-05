@@ -8,7 +8,8 @@
   --color-dark-blue: 217.2 32.6% 17.5%;
   --color-white: 210 40% 98%;
   --color-white-muted: 210 40% 96.1%;
-  --color-sweet-red: 351 97% 57%;
+  // --color-sweet-red: 351 97% 57%;
+  --color-bright-green: 150 71% 47%;
   --color-purple: 230 92% 65%;
 }
 
@@ -30,7 +31,7 @@
     --border: var(--color-light-blue);
     --input: var(--color-light-blue);
 
-    --primary: var(--color-sweet-red);
+    --primary: var(--color-bright-green);
     --primary-foreground: var(--color-white);
 
     --secondary: var(--color-purple);
