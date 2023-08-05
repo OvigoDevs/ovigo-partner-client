@@ -22,7 +22,7 @@ import RoomDetails from "@/components/pages/register/hotel/room-details/room-det
 import RoomFeatures from "@/components/pages/register/hotel/room-features/room-features";
 import RoomName from "@/components/pages/register/hotel/room-name/room-name";
 import RoomPrice from "@/components/pages/register/hotel/room-price/room-price";
-import ServiceCategory from "@/components/pages/register/hotel/service-category/service-category";
+
 import { usePathname } from "next/navigation";
 
 const HotelDynamicComps = () => {
@@ -34,8 +34,6 @@ const HotelDynamicComps = () => {
         <HotelCategories />
       ) : pathname.includes("hotel-type-confirmation") ? (
         <HotelTypeConfirmation />
-      ) : pathname.includes("service-category") ? (
-        <ServiceCategory />
       ) : pathname.includes("no-of-hotel") ? (
         <NoOfHotel />
       ) : pathname.includes("hotel-address") ? (

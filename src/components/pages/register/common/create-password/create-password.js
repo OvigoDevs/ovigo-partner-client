@@ -55,7 +55,7 @@ const CreatePassword = () => {
         })
       );
       setCookie("registerData", { ...registerData, createPassword: formData });
-      router.push("/register/hotel/service-category");
+      router.push("/register/service-category");
     }
   }, [errors]);
 
