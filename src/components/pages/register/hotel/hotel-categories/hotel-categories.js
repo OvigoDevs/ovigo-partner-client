@@ -123,7 +123,7 @@ const HotelCategories = () => {
   return (
     <div className="section-d">
       <div className="grid grid-cols-1 gap-2">
-        <Backlink link="/register/hotel/service-category" text="Service category" />
+        <Backlink link="/register/service-category" text="Service category" />
         <h3 className="font-bold">Hotel categories</h3>
         <p>
           From the list below, which property category is the best fit for your
