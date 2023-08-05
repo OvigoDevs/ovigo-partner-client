@@ -1,13 +1,13 @@
-"use client";
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+// "use client";
+// import { usePathname } from "next/navigation";
+// import { useEffect, useState } from "react";
 
 const RegisterLayout = ({ children }) => {
-  const pathname = usePathname();
-  const [openSideNav, setOpenSideNav] = useState(true);
-  useEffect(() => {
-    setOpenSideNav(false);
-  }, [pathname]);
+  // const pathname = usePathname();
+  // const [openSideNav, setOpenSideNav] = useState(true);
+  // useEffect(() => {
+  //   setOpenSideNav(false);
+  // }, [pathname]);
 
   return (
     <div className="container">
