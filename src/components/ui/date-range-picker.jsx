@@ -34,7 +34,7 @@ export function DatePickerWithRange({ className, name, defaultValues, handleOnCh
         value: {
           from: date?.from.toLocaleDateString(),
           to: date?.to.toLocaleDateString(),
-          totalDays: Difference_In_Days
+          totalDays: Difference_In_Days + 1
         },
       },
     });

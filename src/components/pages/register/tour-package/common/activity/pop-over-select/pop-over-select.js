@@ -18,12 +18,10 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-
-
-export function PopOverSelect({optionsToSelect, placeholder}) {
+export function PopOverSelect({ optionsToSelect, placeholder, defaultValue }) {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
-
+  const [value, setValue] = React.useState(defaultValue ? defaultValue : "");
+  console.log(value);
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
@@ -41,9 +39,12 @@ export function PopOverSelect({optionsToSelect, placeholder}) {
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
         <Command>
-          <CommandInput placeholder={`Search ${placeholder}...`} className="h-9" />
+          <CommandInput
+            placeholder={`Search ${placeholder}...`}
+            className="h-9 my-1"
+          />
           <CommandEmpty>No {placeholder} found.</CommandEmpty>
-          <CommandGroup>
+          <CommandGroup className="max-h-[300px] overflow-y-auto">
             {optionsToSelect.map((option) => (
               <CommandItem
                 key={option.id}
