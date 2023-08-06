@@ -1,10 +1,8 @@
 import Backlink from "@/components/core/backlink/backlink";
-import IconWrapper from "@/components/core/icon-wrapper/icon-wrapper";
 import InputError from "@/components/core/input-error/input-error";
 import { Button } from "@/components/ui/button";
 import { setCookie } from "@/lib/cookie";
-import { organizerName } from "@/redux/features/register_slice";
-import { ThumbsUpIcon } from "lucide-react";
+import { tourOrganizer } from "@/redux/features/register_slice";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,7 +16,9 @@ const Organizer = () => {
   // dispatch
   const dispatch = useDispatch();
   // formState
-  const [organizer, setOrganizer] = useState("");
+  const [organizer, setOrganizer] = useState(
+    tourPackageData.tourOrganizer ? tourPackageData.tourOrganizer : ""
+  );
   const [errors, setErrors] = useState(null);
   // input handler
   const handleOnChange = (e) => {
@@ -31,11 +31,11 @@ const Organizer = () => {
     } else {
       setErrors(null);
       // dispatch
-      dispatch(organizerName({ organizerName: organizer }));
+      dispatch(tourOrganizer({ tourOrganizer: organizer }));
       // setCookie
       setCookie(
         "tourPackageData",
-        { ...tourPackageData, organizerName: organizer },
+        { ...tourPackageData, tourOrganizer: organizer },
         "1h"
       );
       // router

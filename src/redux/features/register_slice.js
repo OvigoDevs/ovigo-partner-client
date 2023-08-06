@@ -127,10 +127,12 @@ export const registerSlice = createSlice({
       state.rooms = [...state.rooms, action.payload];
       state.roomData = {};
     },
-    organizerName: (state, action) => {
-      console.log(action.payload.organizerName)
-      state.tourPackageData.organizerName = action.payload.organizerName
-    }
+    tourOrganizer: (state, action) => {
+      state.tourPackageData.tourOrganizer = action.payload.tourOrganizer
+    },
+    tourDateAndTime: (state, action) => {
+      state.tourPackageData.tourDateAndTime = action.payload.tourDateAndTime
+    },
   },
 });
 
@@ -159,6 +161,7 @@ export const {
   addPhotos,
   houseRules,
   addNewHotel,
-  organizerName
+  tourOrganizer,
+  tourDateAndTime
 } = registerSlice.actions;
 export default registerSlice.reducer;

@@ -19,15 +19,22 @@ export function DatePickerWithRange({ className, name, defaultValues, handleOnCh
     from: new Date(2022, 0, 20),
     to: addDays(new Date(2022, 0, 20), 20),
   });
-
-  console.log(defaultValues);
+  
   React.useEffect(() => {
+      
+    // To calculate the time difference of two dates
+    var Difference_In_Time = date.to.getTime() - date.from.getTime();
+      
+    // To calculate the no. of days between two dates
+    var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+
     handleOnChange({
       target: {
         name: name,
         value: {
           from: date?.from.toLocaleDateString(),
           to: date?.to.toLocaleDateString(),
+          totalDays: Difference_In_Days
         },
       },
     });
