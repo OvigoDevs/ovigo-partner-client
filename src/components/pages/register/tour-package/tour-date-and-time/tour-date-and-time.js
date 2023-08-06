@@ -1,7 +1,7 @@
 import Backlink from "@/components/core/backlink/backlink";
 import { DatePickerWithRange } from "@/components/ui/date-range-picker";
 import CheckInOut from "../../hotel/house-rules/check-in-out";
-import Hints from "../hints/hints";
+import Hints from "../common/hints/hints";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";

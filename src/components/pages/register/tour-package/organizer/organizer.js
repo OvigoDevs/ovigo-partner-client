@@ -6,7 +6,7 @@ import { tourOrganizer } from "@/redux/features/register_slice";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Hints from "../hints/hints";
+import Hints from "../common/hints/hints";
 
 const Organizer = () => {
   // router

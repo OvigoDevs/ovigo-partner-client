@@ -7,6 +7,7 @@ import ContactInformation from "@/components/pages/register/tour-package/contact
 import InvoiceInfo from "@/components/pages/register/tour-package/invoice-info/invoice-info";
 import Organizer from "@/components/pages/register/tour-package/organizer/organizer";
 import TourDateAndTime from "@/components/pages/register/tour-package/tour-date-and-time/tour-date-and-time";
+import TourPlanDayToDay from "@/components/pages/register/tour-package/tour-plan-day-to-day/tour-plan-day-to-day";
 import { usePathname } from "next/navigation";
 
 const TourPackageDynamicPage = () => {
@@ -27,6 +28,8 @@ const TourPackageDynamicPage = () => {
         <BusinessLicense />
       ) : pathname.includes("invoice-info") ? (
         <InvoiceInfo />
+      ) : pathname.includes("tour-plan-day-to-day") ? (
+        <TourPlanDayToDay />
       ) : (
         "404 | No component found"
       )}
