@@ -12,16 +12,10 @@ const initialPlans = [
     activity: "abc",
     place: "xyz",
   },
-  {
-    id: 1,
-    time: "12:00 am",
-    activity: "abc",
-    place: "xyz",
-  },
 ];
 const OneDayPlans = ({ day }) => {
   const [plans, setPlans] = useState(initialPlans);
-  const handleAddNewPlan = (data) => {
+  const handleAddNewPlan = () => {
     setPlans([
       ...plans,
       {

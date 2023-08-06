@@ -48,6 +48,7 @@ const TourPlanDayToDay = () => {
           <Hints />
         </div>
       </div>
+      <Button>Next</Button>
     </div>
   );
 };
