@@ -6,6 +6,10 @@ import CompanyStructure from "@/components/pages/register/tour-package/company-s
 import ContactInformation from "@/components/pages/register/tour-package/contact-information/contact-information";
 import InvoiceInfo from "@/components/pages/register/tour-package/invoice-info/invoice-info";
 import Organizer from "@/components/pages/register/tour-package/organizer/organizer";
+import PackagePrice from "@/components/pages/register/tour-package/package-price/package-price";
+import SeatAndGroupSize from "@/components/pages/register/tour-package/seat-and-group-size/seat-and-group-size";
+import TourDestination from "@/components/pages/register/tour-package/tour-destination/tour-destination";
+import TourPackageName from "@/components/pages/register/tour-package/tour-package-name/tour-package-name";
 import { usePathname } from "next/navigation";
 
 const TourPackageDynamicPage = () => {
@@ -24,6 +28,14 @@ const TourPackageDynamicPage = () => {
         <BusinessLicense />
       ) : pathname.includes("invoice-info") ? (
         <InvoiceInfo />
+      ) : pathname.includes("tour-package-name") ? (
+        <TourPackageName />
+      ) : pathname.includes("tour-destination") ? (
+        <TourDestination />
+      ) : pathname.includes("total-seat-n-group-size") ? (
+        <SeatAndGroupSize />
+      ) : pathname.includes("package-price") ? (
+        <PackagePrice />
       ) : (
         "404 | No component found"
       )}

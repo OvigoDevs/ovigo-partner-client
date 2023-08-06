@@ -29,16 +29,15 @@ const InvoiceInfo = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    console.log(formData);
   };
 
   const handleSubmit = () => {
-    setErrors(validator(formData));
+    const newErrors = validator(formData);
 
-    console.log(formData);
-
-    if (Object.keys(errors).length === 0) {
-      router.push("/register/tour-package/");
+    if (Object.keys(newErrors).length === 0) {
+      router.push("/register/tour-package/tour-package-name");
+    } else {
+      setErrors(newErrors);
     }
   };
   const validator = (data) => {
@@ -46,13 +45,13 @@ const InvoiceInfo = () => {
     if (!data.name.trim()) {
       obj.name = "Name is required!";
     }
+    if (!sameAddress.trim()) {
+      obj.sameAddress = "Select an option.";
+    }
     if (sameAddress === "No") {
       if (!data.address.trim()) {
         obj.address = "Address is required!";
       }
-    }
-    if (!sameAddress.trim()) {
-      obj.sameAddress = "Select an option.";
     }
 
     return obj;
