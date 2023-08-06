@@ -23,10 +23,12 @@ const BusinessAddress = () => {
   };
 
   const handleSubmit = () => {
-    setErrors(validator(address));
+    const newErrors = validator(address);
 
-    if (Object.keys(errors).length === 0) {
+    if (Object.keys(newErrors).length === 0) {
       router.push("/register/tour-package/contact-information");
+    } else {
+      setErrors(newErrors);
     }
   };
   const validator = (data) => {
