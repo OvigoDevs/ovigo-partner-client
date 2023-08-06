@@ -1,12 +1,18 @@
 import Backlink from "@/components/core/backlink/backlink";
 import CustomRadio from "@/components/core/custom-radio/custom-radio";
 import IconWrapper from "@/components/core/icon-wrapper/icon-wrapper";
+import InputError from "@/components/core/input-error/input-error";
 import { Button } from "@/components/ui/button";
 import { ThumbsUp } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const CompanyStructure = () => {
-  const [companyStructure, setCompanyStructure] = useState(null);
+  // router
+  const router = useRouter();
+
+  const [companyStructure, setCompanyStructure] = useState("");
+  const [errors, setErrors] = useState(null);
 
   // onChange for Custom Radio Buttons
   const handleOnChange = (e) => {
@@ -16,34 +22,36 @@ const CompanyStructure = () => {
 
   // onSubmitHandler for Next Button
   const handleOnSubmit = () => {
-    console.log(companyStructure);
+    if (!companyStructure.trim()) {
+      setErrors("Selecting an option is required!");
+    } else {
+      setErrors(null);
+      router.push("/register/tour-package/business-address");
+    }
   };
 
   return (
     <div className="section-d ">
-      <Backlink
-        link="/register/tour-package/organizer"
-        text="Organizer company name"
-      />
+      <Backlink link="/register/tour-package/organizer" text="Company Name" />
       <div className="grid md:grid-cols-2 gap-4">
-        <div>
-          <div className="w-full">
-            <h3 className="text-xl font-bold">Company Structure</h3>
-            <CustomRadio
-              options={[
-                "Sole Proprietorship",
-                "Partnership",
-                "Limited Liability Company (LLC)",
-                "Corporation",
-              ]}
-              handleOnChange={handleOnChange}
-              name="companyStructure"
-            />
-            <Button onClick={handleOnSubmit} className="mt-5">
-              Next
-            </Button>
+        <div className="p-5 border rounded-md w-full space-y-3">
+          <h3 className="text-xl font-bold">Company Structure</h3>
+          <CustomRadio
+            options={[
+              "Sole Proprietorship",
+              "Partnership",
+              "Limited Liability Company (LLC)",
+              "Corporation",
+            ]}
+            handleOnChange={handleOnChange}
+            name="companyStructure"
+          />
+          <InputError error={errors} />
+          <div className="pt-3">
+            <Button onClick={handleOnSubmit}>Next</Button>
           </div>
         </div>
+        {/* Suggestion Box */}
         <div>
           <div className="flex gap-3 p-2 border rounded-md">
             <IconWrapper>
