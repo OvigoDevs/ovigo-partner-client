@@ -13,6 +13,10 @@ import SeatAndGroupSize from "@/components/pages/register/tour-package/seat-and-
 import TourDestination from "@/components/pages/register/tour-package/tour-destination/tour-destination";
 import TourPackageName from "@/components/pages/register/tour-package/tour-package-name/tour-package-name";
 import { usePathname } from "next/navigation";
+import TourAccomodation from "@/components/pages/register/tour-package/tour-accomodation/tour-accomodation";
+import TourExclusions from "@/components/pages/register/tour-package/tour-exclusions/tour-exclusions";
+import TourAddons from "@/components/pages/register/tour-package/tour-addons/tour-addons";
+import TourMeals from "@/components/pages/register/tour-package/tour-meals/tour-meals";
 
 const TourPackageDynamicPage = () => {
   const pathname = usePathname();
@@ -42,6 +46,14 @@ const TourPackageDynamicPage = () => {
         <SeatAndGroupSize />
       ) : pathname.includes("package-price") ? (
         <PackagePrice />
+      ) : pathname.includes("tour-accomodation") ? (
+        <TourAccomodation />
+      ) : pathname.includes("tour-exclusions") ? (
+        <TourExclusions />
+      ) : pathname.includes("tour-addons") ? (
+        <TourAddons />
+      ) : pathname.includes("tour-meals") ? (
+        <TourMeals />
       ) : (
         "404 | No component found"
       )}
