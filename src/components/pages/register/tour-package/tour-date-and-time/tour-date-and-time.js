@@ -1,30 +1,68 @@
 import Backlink from "@/components/core/backlink/backlink";
 import { DatePickerWithRange } from "@/components/ui/date-range-picker";
 import CheckInOut from "../../hotel/house-rules/check-in-out";
-import Hints from "../hints/hints";
+import Hints from "../common/hints/hints";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { tourDateAndTime } from "@/redux/features/register_slice";
+import { setCookie } from "@/lib/cookie";
 
 const TourDateAndTime = () => {
-  const [formData, setFormData] = useState({
-    startAndEndDate: "",
-    checkoutfrom: "",
-    checkoutuntil: "",
-    totalDays: 0,
-  });
-  const [errors, setErrors] = useState(formData);
+  // router
+  const router = useRouter();
+  // redux
+  const { tourPackageData } = useSelector((state) => state.registerData);
+  // dispatch
+  const dispatch = useDispatch();
+  // form state
+  const [formData, setFormData] = useState(
+    tourPackageData.tourDateAndTime
+      ? tourPackageData.tourDateAndTime
+      : {
+          startAndEndDate: "",
+          checkoutfrom: "",
+          checkoutuntil: "",
+        }
+  );
+  const [edited, setEdited] = useState(false);
+  const [errors, setErrors] = useState(edited ? formData : {});
+  // handle input
   const handleOnChange = (e) => {
     let { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    if (!edited) {
+      setEdited(true);
+    }
   };
+  // handle submission
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    setErrors(validator(formData));
+    console.log(formData);
+    const invalidations = validator(formData);
+    if (Object.keys(invalidations).length === 0) {
+      // dispatch
+      dispatch(
+        tourDateAndTime({
+          tourDateAndTime: formData,
+        })
+      );
+      // cookie
+      setCookie("tourPackageData", {
+        ...tourPackageData,
+        tourDateAndTime: formData,
+      });
+      // router
+      // router.push("/register/tour-package/")
+    } else {
+      setErrors(invalidations);
+    }
   };
 
   const validator = (data) => {
     let obj = {};
-    
+
     if (!data.checkoutfrom.trim()) {
       obj.checkoutfrom = "Start time is required!";
     }
@@ -34,11 +72,6 @@ const TourDateAndTime = () => {
     return obj;
   };
 
-  useEffect(() => {
-    if (Object.keys(errors).length === 0) {
-      console.log(formData);
-    }
-  }, [errors]);
   return (
     <div className="section-d">
       <Backlink link="/register/tour-package/tour-date-and-time" text="Back" />
@@ -65,14 +98,23 @@ const TourDateAndTime = () => {
           </div>
           <div className="grid grid-cols-1 gap-2">
             <label>Total Days</label>
-            <input value={formData.totalDays} readOnly />
+            <input
+              value={
+                formData.startAndEndDate
+                  ? formData.startAndEndDate?.totalDays
+                  : 0
+              }
+              readOnly
+            />
           </div>
         </div>
         <div>
           <Hints />
         </div>
       </div>
-      <Button onClick={handleOnSubmit} className="mt-5">Submit</Button>
+      <Button onClick={handleOnSubmit} className="mt-5">
+        Next
+      </Button>
     </div>
   );
 };

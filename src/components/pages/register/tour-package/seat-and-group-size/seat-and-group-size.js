@@ -3,42 +3,42 @@ import IconWrapper from "@/components/core/icon-wrapper/icon-wrapper";
 import InputError from "@/components/core/input-error/input-error";
 import { Button } from "@/components/ui/button";
 import { ThumbsUp } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 
-const ContactInformation = () => {
+const { useRouter } = require("next/navigation");
+const { useState } = require("react");
+
+const SeatAndGroupSize = () => {
   const router = useRouter();
 
-  const [contactInformation, setContactInformation] = useState({
-    phoneNumber: "",
-    emailAddress: "",
+  const [formData, setFormData] = useState({
+    totalSeat: "",
+    groupSize: "",
   });
 
-  const [errors, setErrors] = useState(
-    contactInformation ? contactInformation : {}
-  );
+  const [errors, setErrors] = useState(formData ? formData : {});
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setContactInformation({ ...contactInformation, [name]: value });
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = () => {
-    const newErrors = validator(contactInformation);
+    const newErrors = validator(formData);
 
     if (Object.keys(newErrors).length === 0) {
-      router.push("/register/tour-package/business-license");
+      router.push("/register/tour-package/package-price");
     } else {
       setErrors(newErrors);
     }
   };
+
   const validator = (data) => {
     let obj = {};
-    if (!data.phoneNumber.trim()) {
-      obj.phoneNumber = "Phone Number is required!";
+    if (!data.totalSeat.trim()) {
+      obj.totalSeat = "Total Seat is required!";
     }
-    if (!data.emailAddress.trim()) {
-      obj.emailAddress = "Email Address is required!";
+    if (!data.groupSize.trim()) {
+      obj.groupSize = "Group Size is required!";
     }
 
     return obj;
@@ -47,33 +47,35 @@ const ContactInformation = () => {
   return (
     <div className="py-5">
       <Backlink
-        link="/register/tour-package/business-address"
-        text="Business Address"
+        link="/register/tour-package/tour-destination"
+        text="Tour Destination"
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div className="border p-5 rounded-md">
           <div className=" space-y-3">
-            <p className="text-xl font-bold">Contact Information</p>
+            <p className="text-xl font-bold">Total Seat and Group Size</p>
             <div className="grid grid-cols-1 gap-2">
-              <label>Phone Number</label>
+              <label>Total Seat</label>
               <input
-                name="phoneNumber"
-                type="text"
-                placeholder="e.g. +8801222-22 22 22"
+                name="totalSeat"
+                type="number"
+                placeholder="e.g. 36"
                 onChange={handleInputChange}
               />
-              <InputError error={errors.phoneNumber} />
+              <InputError error={errors.totalSeat} />
             </div>
             <div className="grid grid-cols-1 gap-2">
-              <label>Email Address</label>
+              <label>
+                Group Size (How many people will travel together in each group?)
+              </label>
               <input
-                name="emailAddress"
-                type="email"
-                placeholder="e.g. contact@ovigotourism.com"
+                name="groupSize"
+                type="number"
+                placeholder="e.g. 12"
                 onChange={handleInputChange}
               />
-              <InputError error={errors.emailAddress} />
+              <InputError error={errors.groupSize} />
             </div>
           </div>
           <hr className="my-5" />
@@ -109,4 +111,4 @@ const ContactInformation = () => {
   );
 };
 
-export default ContactInformation;
+export default SeatAndGroupSize;

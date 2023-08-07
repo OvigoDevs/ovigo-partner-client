@@ -8,7 +8,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const times = [
+export const times = [
   {
     id: 1,
     value: "12:00 am",
