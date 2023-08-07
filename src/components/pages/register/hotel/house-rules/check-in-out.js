@@ -8,7 +8,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const times = [
+export const times = [
   {
     id: 1,
     value: "12:00 am",
@@ -131,10 +131,12 @@ const times = [
   },
 ];
 
-const CheckInOut = ({ handleOnChange, type, defaultValue, errors }) => {
+const CheckInOut = ({ handleOnChange, type, defaultValue, errors, from }) => {
   return (
-    <div className="space-y-1 py-3">
-      <p className="font-bold">{type === "in" ? "Check-in" : "Check-out"}</p>
+    <div className={`space-y-1 ${from !== "tour-package" ? "py-3":""}`}>
+      {from !== "tour-package" ? (
+        <p className="font-bold">{type === "in" ? "Check-in" : "Check-out"}</p>
+      ) : null}
       <div className="grid grid-cols-1 gap-4">
         {["from", "until"].map((item) => {
           return (
