@@ -131,7 +131,7 @@ const TourDestination = () => {
                   <SelectValue placeholder="Select The City You Want Your Journey To Start" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectGroup className="grid grid-cols-4 gap-2">
+                  <SelectGroup className="grid grid-cols-1 max-h-[200px] overflow-y-auto gap-2">
                     {journeyStart.map((place) => (
                       <SelectItem key={place.id} value={place.value}>
                         {place.value}
@@ -158,7 +158,7 @@ const TourDestination = () => {
                   <SelectValue placeholder="Select The Final Destination, If multiple then select all" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectGroup className="grid grid-cols-4 gap-2">
+                  <SelectGroup className="grid grid-cols-1 max-h-[200px] overflow-y-auto gap-2">
                     {journeyEnd.map((place) => (
                       <SelectItem key={place.id} value={place.value}>
                         {place.value}

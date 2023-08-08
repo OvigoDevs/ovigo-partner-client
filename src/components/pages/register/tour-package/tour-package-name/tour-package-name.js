@@ -156,7 +156,7 @@ const TourPackageName = () => {
                   <SelectValue placeholder="Select the category of this tour package" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectGroup className="grid grid-cols-4 gap-2">
+                  <SelectGroup className="grid grid-cols-1 max-h-[200px] overflow-y-auto gap-2">
                     {tourCategories.map((category) => (
                       <SelectItem key={category.id} value={category.category}>
                         {category.category}

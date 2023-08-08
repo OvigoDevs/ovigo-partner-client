@@ -1,9 +1,11 @@
 "use client";
 
+import AddDescription from "@/components/pages/register/tour-package/add-description/add-description";
 import BusinessAddress from "@/components/pages/register/tour-package/business-address/business-address";
 import BusinessLicense from "@/components/pages/register/tour-package/business-license/business-license";
 import CompanyStructure from "@/components/pages/register/tour-package/company-structure/company-structure";
 import ContactInformation from "@/components/pages/register/tour-package/contact-information/contact-information";
+import HostNameAndProfile from "@/components/pages/register/tour-package/host-name-and-profile/host-name-and-profile";
 import InvoiceInfo from "@/components/pages/register/tour-package/invoice-info/invoice-info";
 import Organizer from "@/components/pages/register/tour-package/organizer/organizer";
 import TourDateAndTime from "@/components/pages/register/tour-package/tour-date-and-time/tour-date-and-time";
@@ -63,6 +65,10 @@ const TourPackageDynamicPage = () => {
         <TourHealthAndSafety />
       ) :  pathname.includes("tour-booking-and-cancellation-policy") ? (
         <BookingAndCancellationPolicy />
+      ) : pathname.includes("host-name-and-profile") ? (
+        <HostNameAndProfile />
+      ) : pathname.includes("add-description") ? (
+        <AddDescription />
       ) : (
         "404 | No component found"
       )}
