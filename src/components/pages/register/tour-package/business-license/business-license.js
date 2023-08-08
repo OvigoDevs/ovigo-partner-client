@@ -1,14 +1,46 @@
 import Backlink from "@/components/core/backlink/backlink";
 import InputError from "@/components/core/input-error/input-error";
+import UploadImages from "@/components/core/upload-images/upload-images";
 import { Button } from "@/components/ui/button";
 import ImageIcon from "@/components/ui/image-icon";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const BusinessLicense = () => {
   const router = useRouter();
-  const handleSubmit = () => {
-    router.push("/register/tour-package/invoice-info");
+
+  const [formData, setFormData] = useState({
+    businessLicense: [],
+  });
+  const [errors, setErrors] = useState(formData.businessLicense.length != 0 ? formData : {});
+
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
+
+  // handlesubmit
+  const handleOnSubmit = () => {
+    const newErrors = validator(formData);
+
+    if (Object.keys(newErrors).length === 0) {
+      router.push("/register/tour-package/");
+    } else {
+      setErrors(newErrors);
+    }
+  };
+  // validation
+  const validator = (data) => {
+    let obj = {};
+    if (!data.businessLicense.length) {
+      obj.businessLicense = "Business License is required!";
+    } else if (data.businessLicense.length > 5) {
+      obj.businessLicense =
+        "Maximum 5 images can be added! Remove rest of the images please!";
+    }
+    return obj;
+  };
+
   return (
     <div className="py-5">
       <Backlink
@@ -24,12 +56,12 @@ const BusinessLicense = () => {
               <label>
                 Add your business license copy to validate as a proper company
               </label>
-              <ImageIcon />
-              {/* <InputError error={errors.phoneNumber} /> */}
+              <UploadImages func={handleOnChange} name="businessLicense" />
+              <InputError error={errors.businessLicense} />
             </div>
           </div>
           <hr className="my-5" />
-          <Button className="max-w-[150px]" onClick={handleSubmit}>
+          <Button className="max-w-[150px]" onClick={handleOnSubmit}>
             Next
           </Button>
         </div>
