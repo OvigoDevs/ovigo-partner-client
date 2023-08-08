@@ -17,6 +17,9 @@ import TourAccomodation from "@/components/pages/register/tour-package/tour-acco
 import TourExclusions from "@/components/pages/register/tour-package/tour-exclusions/tour-exclusions";
 import TourAddons from "@/components/pages/register/tour-package/tour-addons/tour-addons";
 import TourMeals from "@/components/pages/register/tour-package/tour-meals/tour-meals";
+import TourJourneyDetails from "@/components/pages/register/tour-package/tour-journey-details/tour-journey-details";
+import TourHealthAndSafety from "@/components/pages/register/tour-package/tour-health-and-safety/tour-health-and-safety";
+import BookingAndCancellationPolicy from "@/components/pages/register/tour-package/tour-booking-and-cancellation-policy/tour-booking-and-cancellation-policy";
 
 const TourPackageDynamicPage = () => {
   const pathname = usePathname();
@@ -54,6 +57,12 @@ const TourPackageDynamicPage = () => {
         <TourAddons />
       ) : pathname.includes("tour-meals") ? (
         <TourMeals />
+      ) : pathname.includes("tour-journey-details") ? (
+        <TourJourneyDetails />
+      ) : pathname.includes("tour-health-and-safety") ? (
+        <TourHealthAndSafety />
+      ) :  pathname.includes("tour-booking-and-cancellation-policy") ? (
+        <BookingAndCancellationPolicy />
       ) : (
         "404 | No component found"
       )}
