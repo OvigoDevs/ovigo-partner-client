@@ -21,7 +21,7 @@ import {
 export function PopOverSelect({ optionsToSelect, placeholder, defaultValue }) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(defaultValue ? defaultValue : "");
-  console.log(value);
+  
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
