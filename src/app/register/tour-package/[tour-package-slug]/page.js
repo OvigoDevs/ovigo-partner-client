@@ -1,5 +1,6 @@
 "use client";
 
+import AddDescription from "@/components/pages/register/tour-package/add-description/add-description";
 import BusinessAddress from "@/components/pages/register/tour-package/business-address/business-address";
 import BusinessLicense from "@/components/pages/register/tour-package/business-license/business-license";
 import CompanyStructure from "@/components/pages/register/tour-package/company-structure/company-structure";
@@ -37,9 +38,10 @@ const TourPackageDynamicPage = () => {
         <SeatAndGroupSize />
       ) : pathname.includes("package-price") ? (
         <PackagePrice />
-      ) : 
-      pathname.includes("host-name-and-profile") ? (
+      ) : pathname.includes("host-name-and-profile") ? (
         <HostNameAndProfile />
+      ) : pathname.includes("add-description") ? (
+        <AddDescription />
       ) : (
         "404 | No component found"
       )}
