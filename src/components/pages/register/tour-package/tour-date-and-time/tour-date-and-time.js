@@ -54,7 +54,7 @@ const TourDateAndTime = () => {
         tourDateAndTime: formData,
       });
       // router
-      // router.push("/register/tour-package/")
+      router.push("/register/tour-package/total-seat-n-group-size")
     } else {
       setErrors(invalidations);
     }
@@ -74,7 +74,7 @@ const TourDateAndTime = () => {
 
   return (
     <div className="section-d">
-      <Backlink link="/register/tour-package/tour-date-and-time" text="Back" />
+      <Backlink link="/register/tour-package/tour-destination" text="Destination" />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="grid grid-cols-1 gap-4">
           <h3 className="font-semibold">Tour Date And Time</h3>

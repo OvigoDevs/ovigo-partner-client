@@ -5,6 +5,7 @@ import Hints from "../common/hints/hints";
 import { createArrayOfObjects } from "../tour-plan-day-to-day/tour-plan-day-to-day";
 import MultiSelector from "../tour-plan-day-to-day/multi-selector/multi-selector";
 import PopOverSelect from "../common/actions/pop-over-select/pop-over-select";
+import { useRouter } from "next/navigation";
 
 // default Values for multi-select
 const initialPlans = [
@@ -55,9 +56,10 @@ const fitnessRequirements = [
 const BookingAndCancellationPolicy = () => {
   const { tourPackageData } = useSelector((state) => state.registerData);
   console.log(tourPackageData);
+  const router = useRouter();
   return (
     <div className="section-d">
-      <Backlink link="/" text="Back" />
+      <Backlink link="/register/tour-package/tour-health-and-safety" text="Health and safety" />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <div>
           <div className="grid grid-cols-1 gap-2 mb-5">
@@ -89,7 +91,7 @@ const BookingAndCancellationPolicy = () => {
           <Hints />
         </div>
       </div>
-      <Button className="mt-5">Next</Button>
+      <Button className="mt-5" onClick={() => router.push("/register/tour-package/tour-add-photos")}>Next</Button>
     </div>
   );
 };
