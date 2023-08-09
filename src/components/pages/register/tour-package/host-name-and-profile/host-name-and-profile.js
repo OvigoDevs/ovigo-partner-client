@@ -78,7 +78,7 @@ const HostNameAndProfile = () => {
     const newErrors = validator(formData);
 
     if (Object.keys(newErrors).length === 0) {
-      router.push("/register/tour-package/tour-package-name");
+      router.push("/register/tour-package/tour-journey-details");
     } else {
       setErrors(newErrors);
     }
@@ -107,8 +107,8 @@ const HostNameAndProfile = () => {
   return (
     <div className="py-5">
       <Backlink
-        link="/register/tour-package/business-license"
-        text="Business License"
+        link="/register/tour-package/tour-addons"
+        text="Add Ons"
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">

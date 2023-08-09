@@ -22,6 +22,8 @@ import TourMeals from "@/components/pages/register/tour-package/tour-meals/tour-
 import TourJourneyDetails from "@/components/pages/register/tour-package/tour-journey-details/tour-journey-details";
 import TourHealthAndSafety from "@/components/pages/register/tour-package/tour-health-and-safety/tour-health-and-safety";
 import BookingAndCancellationPolicy from "@/components/pages/register/tour-package/tour-booking-and-cancellation-policy/tour-booking-and-cancellation-policy";
+import TourAddPhotos from "@/components/pages/register/tour-package/tour-add-photos/tour-add-photos";
+import RegistrationProgress from "@/components/pages/register/tour-package/registration-progress/registration-progress";
 
 const TourPackageDynamicPage = () => {
   const pathname = usePathname();
@@ -63,12 +65,16 @@ const TourPackageDynamicPage = () => {
         <TourJourneyDetails />
       ) : pathname.includes("tour-health-and-safety") ? (
         <TourHealthAndSafety />
-      ) :  pathname.includes("tour-booking-and-cancellation-policy") ? (
+      ) : pathname.includes("tour-booking-and-cancellation-policy") ? (
         <BookingAndCancellationPolicy />
       ) : pathname.includes("host-name-and-profile") ? (
         <HostNameAndProfile />
       ) : pathname.includes("add-description") ? (
         <AddDescription />
+      ) : pathname.includes("tour-add-photos") ? (
+        <TourAddPhotos />
+      ) : pathname.includes("registration-progress") ? (
+        <RegistrationProgress />
       ) : (
         "404 | No component found"
       )}

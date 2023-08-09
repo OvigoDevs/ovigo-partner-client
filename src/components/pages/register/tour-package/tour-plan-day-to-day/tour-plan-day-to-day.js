@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import Hints from "../common/hints/hints";
 import MultiSelector from "./multi-selector/multi-selector";
 import { times } from "../../hotel/house-rules/check-in-out";
+import { useRouter } from "next/navigation";
 
 // default Values for multi-select
 const initialPlans = [
@@ -70,10 +71,11 @@ export const createArrayOfObjects = (number) => {
 };
 
 const TourPlanDayToDay = () => {
+  const router = useRouter()
   const { tourPackageData } = useSelector((state) => state.registerData);
   return (
     <div className="section-d">
-      <Backlink link="/" text="Back" />
+      <Backlink link="/register/tour-package/package-price" text="Package price" />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <div>
           <div className="grid grid-cols-1 gap-2 mb-5">
@@ -104,7 +106,7 @@ const TourPlanDayToDay = () => {
           <Hints />
         </div>
       </div>
-      <Button className="mt-5">Next</Button>
+      <Button className="mt-5" onClick={() => router.push("/register/tour-package/tour-accomodation")}>Next</Button>
     </div>
   );
 };

@@ -86,7 +86,7 @@ const TourDestination = () => {
     const newErrors = validator(tourDestination);
 
     if (Object.keys(newErrors).length === 0) {
-      router.push("/register/tour-package/total-seat-n-group-size");
+      router.push("/register/tour-package/tour-date-and-time");
     } else {
       setErrors(newErrors);
     }

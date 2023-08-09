@@ -24,7 +24,7 @@ const BusinessLicense = () => {
     const newErrors = validator(formData);
 
     if (Object.keys(newErrors).length === 0) {
-      router.push("/register/tour-package/");
+      router.push("/register/tour-package/invoice-info");
     } else {
       setErrors(newErrors);
     }
