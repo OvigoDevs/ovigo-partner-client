@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button";
 import MultiSelector from "../tour-plan-day-to-day/multi-selector/multi-selector";
 import { createArrayOfObjects } from "../tour-plan-day-to-day/tour-plan-day-to-day";
 import Hints from "../common/hints/hints";
+import { useRouter } from "next/navigation";
+import Backlink from "@/components/core/backlink/backlink";
 
 const initialPlans = [
   {
@@ -25,8 +27,11 @@ const columns = [
 ];
 
 const TourExclusions = () => {
+  const router = useRouter()
   return (
-    <div className="section-d grid grid-cols-1 md:grid-cols-2 gap-5">
+    <div className="section-d">
+      <Backlink link="/register/tour-package/tour-meals" text="Meals" />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
       <div>
         <div className="grid grid-cols-1 gap-3 mb-5">
           <h3 className="font-bold">Exclusions</h3>
@@ -46,11 +51,12 @@ const TourExclusions = () => {
           />
         </div>
 
-        <Button className="mt-5">Next</Button>
+        <Button className="mt-5" onClick={() => router.push("/register/tour-package/host-name-and-profile")}>Next</Button>
       </div>
       <div>
         <Hints />
       </div>
+    </div>
     </div>
   );
 };

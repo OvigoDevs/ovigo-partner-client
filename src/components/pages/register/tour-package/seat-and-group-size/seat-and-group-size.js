@@ -47,7 +47,7 @@ const SeatAndGroupSize = () => {
   return (
     <div className="py-5">
       <Backlink
-        link="/register/tour-package/tour-destination"
+        link="/register/tour-package/tour-date-and-time"
         text="Tour Destination"
       />
 
