@@ -11,7 +11,10 @@ const TourAddPhotos = () => {
   };
   return (
     <div className="section-d">
-      <Backlink link="/register/service-category" text="Back" />
+      <Backlink
+        link="/register/tour-package/tour-booking-and-cancellation-policy"
+        text="Booking and cancellation policy"
+      />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
         <div className="grid grid-cols-1 gap-2">
           <div className="grid grid-cols-1 gap-2">

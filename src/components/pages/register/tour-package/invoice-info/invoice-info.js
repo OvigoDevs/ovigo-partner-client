@@ -35,7 +35,7 @@ const InvoiceInfo = () => {
     const newErrors = validator(formData);
 
     if (Object.keys(newErrors).length === 0) {
-      router.push("/register/tour-package/tour-package-name");
+      router.push("/register/tour-package/registration-progress");
     } else {
       setErrors(newErrors);
     }
