@@ -5,7 +5,7 @@ import InputError from "@/components/core/input-error/input-error";
 import { Button } from "@/components/ui/button";
 import { ThumbsUp } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const CompanyStructure = () => {
   // router
@@ -13,12 +13,24 @@ const CompanyStructure = () => {
 
   const [companyStructure, setCompanyStructure] = useState("");
   const [errors, setErrors] = useState(null);
+  const [tourPackageData, setTourPackageData] = useState("");
 
   // onChange for Custom Radio Buttons
   const handleOnChange = (e) => {
-    console.log(e.target);
     setCompanyStructure(e.target.value);
   };
+
+  useEffect(() => {
+    const oldTourPackageData = JSON.parse(
+      localStorage.getItem("tourPackageData")
+    );
+    if(oldTourPackageData?.companyStructure){
+      console.log(oldTourPackageData)
+      setCompanyStructure(oldTourPackageData.companyStructure)
+    }
+    setTourPackageData(oldTourPackageData);
+  }, []);
+  console.log(companyStructure)
 
   // onSubmitHandler for Next Button
   const handleOnSubmit = () => {
@@ -26,6 +38,15 @@ const CompanyStructure = () => {
       setErrors("Selecting an option is required!");
     } else {
       setErrors(null);
+      const newTourPackageData = {
+        ...tourPackageData,
+        companyStructure,
+      };
+
+      localStorage.setItem(
+        "tourPackageData",
+        JSON.stringify(newTourPackageData)
+      );
       router.push("/register/tour-package/business-address");
     }
   };
@@ -37,14 +58,15 @@ const CompanyStructure = () => {
         <div className="p-5 border rounded-md w-full space-y-3">
           <h3 className="text-xl font-bold">Company Structure</h3>
           <CustomRadio
+            name="companyStructure"
+            handleOnChange={handleOnChange}
+            defaultValue={companyStructure}
             options={[
               "Sole Proprietorship",
               "Partnership",
               "Limited Liability Company (LLC)",
               "Corporation",
             ]}
-            handleOnChange={handleOnChange}
-            name="companyStructure"
           />
           <InputError error={errors} />
           <div className="pt-3">

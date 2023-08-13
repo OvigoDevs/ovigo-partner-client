@@ -4,7 +4,7 @@ import UploadImages from "@/components/core/upload-images/upload-images";
 import { Button } from "@/components/ui/button";
 import ImageIcon from "@/components/ui/image-icon";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const BusinessLicense = () => {
   const router = useRouter();
@@ -12,8 +12,19 @@ const BusinessLicense = () => {
   const [formData, setFormData] = useState({
     businessLicense: [],
   });
-  const [errors, setErrors] = useState(formData.businessLicense.length != 0 ? formData : {});
+  const [errors, setErrors] = useState(formData?.businessLicense?.length != 0 ? formData : {});
 
+  // tourPackage state
+  const [tourPackageData, setTourPackageData] = useState(null);
+
+  useEffect(()=>{
+    const oldTourPackageData = JSON.parse(localStorage.getItem("tourPackageData"));
+    setTourPackageData(oldTourPackageData)
+    if(oldTourPackageData?.businessLicense){
+      setFormData({businessLicense: oldTourPackageData.businessLicense})
+    }
+  },[])
+  
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -24,17 +35,24 @@ const BusinessLicense = () => {
     const newErrors = validator(formData);
 
     if (Object.keys(newErrors).length === 0) {
+      const newTourPackageData = {
+        ...tourPackageData,
+        businessLicense: formData.businessLicense
+      }
+
+      localStorage.setItem("tourPackageData", JSON.stringify(newTourPackageData))  
       router.push("/register/tour-package/invoice-info");
     } else {
       setErrors(newErrors);
     }
   };
+  console.log(formData) 
   // validation
   const validator = (data) => {
     let obj = {};
-    if (!data.businessLicense.length) {
+    if (!data?.businessLicense?.length) {
       obj.businessLicense = "Business License is required!";
-    } else if (data.businessLicense.length > 5) {
+    } else if (data?.businessLicense?.length > 5) {
       obj.businessLicense =
         "Maximum 5 images can be added! Remove rest of the images please!";
     }

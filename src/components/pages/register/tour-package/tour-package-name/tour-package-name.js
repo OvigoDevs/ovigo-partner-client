@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/select";
 import { ThumbsUp } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const TourPackageName = () => {
   const router = useRouter();
@@ -84,9 +84,29 @@ const TourPackageName = () => {
       category: "Luxury and VIP Tours",
     },
   ];
-  
 
   const [errors, setErrors] = useState(tourPackage ? tourPackage : {});
+
+  // get previous data from local storage
+  const [tourPackageData, setTourPackageData] = useState(null);
+
+  useEffect(() => {
+    const oldTourPackageData = JSON.parse(
+      localStorage.getItem("tourPackageData")
+    );
+
+    setTourPackageData(oldTourPackageData);
+
+    if (
+      oldTourPackageData?.tourPackageName &&
+      oldTourPackageData?.tourCategory
+    ) {
+      setTourPackage({
+        tourPackageName: oldTourPackageData?.tourPackageName,
+        tourCategory: oldTourPackageData?.tourCategory,
+      });
+    }
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -103,6 +123,15 @@ const TourPackageName = () => {
     const newErrors = validator(tourPackage);
 
     if (Object.keys(newErrors).length === 0) {
+      let newTourPackageData = {
+        ...tourPackageData,
+        ...tourPackage,
+      };
+      console.log(tourPackage);
+      localStorage.setItem(
+        "tourPackageData",
+        JSON.stringify(newTourPackageData)
+      );
       router.push("/register/tour-package/tour-destination");
     } else {
       setErrors(newErrors);
@@ -114,7 +143,7 @@ const TourPackageName = () => {
     if (!data.tourPackageName.trim()) {
       obj.tourPackageName = "Tour Package Name is required!";
     }
-    if (!data.tourCategory.trim()) {
+    if (!data.tourCategory?.trim()) {
       obj.tourCategory = "Tour Category is required!";
     }
 
@@ -137,6 +166,7 @@ const TourPackageName = () => {
                 type="text"
                 placeholder="e.g. Green Escapes"
                 onChange={handleInputChange}
+                defaultValue={tourPackage.tourPackageName}
               />
               <InputError error={errors.tourPackageName} />
             </div>
@@ -169,7 +199,9 @@ const TourPackageName = () => {
             </div>
           </div>
           <hr className="my-5" />
-          <Button className="max-w-[150px]" onClick={handleSubmit}>Next</Button>
+          <Button className="max-w-[150px]" onClick={handleSubmit}>
+            Next
+          </Button>
         </div>
         {/* Suggestion Box */}
         <div>

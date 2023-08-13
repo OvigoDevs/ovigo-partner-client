@@ -3,7 +3,7 @@ import CustomRadio from "@/components/core/custom-radio/custom-radio";
 import InputError from "@/components/core/input-error/input-error";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const InvoiceInfo = () => {
   // router
@@ -20,6 +20,23 @@ const InvoiceInfo = () => {
   // errors
   const [errors, setErrors] = useState(formData ? formData : {});
 
+  // get tourPackageData from local storage
+  const [tourPackageData, setTourPackageData] = useState(null);
+
+  useEffect(() => {
+    const oldTourPackageData = JSON.parse(
+      localStorage.getItem("tourPackageData")
+    );
+    setTourPackageData(oldTourPackageData);
+    if (oldTourPackageData?.invoiceInfo) {
+      setFormData({
+        name: oldTourPackageData?.invoiceInfo?.name,
+        address: oldTourPackageData?.invoiceInfo?.address,
+      });
+      setSameAddress(oldTourPackageData?.invoiceInfo?.sameAddress)
+    }
+  }, []);
+
   // onChange for Custom Radio Buttons
   const handleOnChange = (e) => {
     console.log(e.target);
@@ -35,6 +52,27 @@ const InvoiceInfo = () => {
     const newErrors = validator(formData);
 
     if (Object.keys(newErrors).length === 0) {
+      let newTourPackageData = {};
+      if (sameAddress === "Yes") {
+        newTourPackageData = {
+          ...tourPackageData,
+          invoiceInfo: {
+            name: formData.name,
+            sameAddress,
+            address: tourPackageData.businessAddress.streetAddress,
+          },
+        };
+      } if(sameAddress === "No") {
+        newTourPackageData = {
+          ...tourPackageData,
+          invoiceInfo: {
+            name: formData.name,
+            sameAddress,
+            address: formData.address,
+          },
+        };
+      }
+      localStorage.setItem("tourPackageData", JSON.stringify(newTourPackageData))
       router.push("/register/tour-package/tour-package-name");
     } else {
       setErrors(newErrors);
@@ -78,6 +116,7 @@ const InvoiceInfo = () => {
               <input
                 name="name"
                 type="text"
+                defaultValue={formData.name}
                 placeholder="e.g. John Doe"
                 onChange={handleInputChange}
               />
@@ -88,6 +127,7 @@ const InvoiceInfo = () => {
               options={["Yes", "No"]}
               handleOnChange={handleOnChange}
               name="sameAddress"
+              defaultValue={sameAddress}
             />
             <InputError error={errors?.sameAddress} />
             {sameAddress === "No" ? (
@@ -96,6 +136,7 @@ const InvoiceInfo = () => {
                 <input
                   name="address"
                   type="text"
+                  defaultValue={formData.address}
                   placeholder="e.g. location, city"
                   onChange={handleInputChange}
                 />

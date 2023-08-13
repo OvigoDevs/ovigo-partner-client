@@ -4,7 +4,7 @@ import InputError from "@/components/core/input-error/input-error";
 import { Button } from "@/components/ui/button";
 import { ThumbsUp } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const ContactInformation = () => {
   const router = useRouter();
@@ -18,6 +18,17 @@ const ContactInformation = () => {
     contactInformation ? contactInformation : {}
   );
 
+  const [tourPackageData, setTourPackageData] = useState(null)
+
+  // get tourPackageData from local storage
+  useEffect(() => {
+    const oldTourPackageData = JSON.parse(localStorage.getItem("tourPackageData"));
+    if(oldTourPackageData?.contactInformation){
+      setContactInformation(oldTourPackageData.contactInformation)
+    }
+    setTourPackageData(oldTourPackageData)
+  },[])
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setContactInformation({ ...contactInformation, [name]: value });
@@ -27,6 +38,14 @@ const ContactInformation = () => {
     const newErrors = validator(contactInformation);
 
     if (Object.keys(newErrors).length === 0) {
+      const newTourPackageData = {
+        ...tourPackageData,
+        contactInformation
+      }
+
+      // Set data to local storage
+      localStorage.setItem("tourPackageData", JSON.stringify(newTourPackageData))
+
       router.push("/register/tour-package/business-license");
     } else {
       setErrors(newErrors);
@@ -60,6 +79,7 @@ const ContactInformation = () => {
               <input
                 name="phoneNumber"
                 type="text"
+                defaultValue={contactInformation.phoneNumber}
                 placeholder="e.g. +8801222-22 22 22"
                 onChange={handleInputChange}
               />
@@ -70,6 +90,7 @@ const ContactInformation = () => {
               <input
                 name="emailAddress"
                 type="email"
+                defaultValue={contactInformation.emailAddress}
                 placeholder="e.g. contact@ovigotourism.com"
                 onChange={handleInputChange}
               />
