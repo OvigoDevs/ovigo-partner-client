@@ -81,3 +81,6 @@ const RegistrationProgress = () => {
 };
 
 export default RegistrationProgress;
+
+
+

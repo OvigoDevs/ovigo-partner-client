@@ -17,6 +17,18 @@ const BusinessAddress = () => {
   });
   const [errors, setErrors] = useState(address ? address : {});
 
+  const [tourPackageData, setTourPackageData] = useState(null)
+
+  // getting tourPackageData from local storage
+  useEffect(() => {
+    const oldTourPackageData = JSON.parse(localStorage.getItem("tourPackageData"))
+    setTourPackageData(oldTourPackageData)
+    if(oldTourPackageData?.businessAddress){
+      console.log("YES")
+      setAddress(oldTourPackageData.businessAddress)
+    }
+  }, []);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setAddress({ ...address, [name]: value });
@@ -26,6 +38,12 @@ const BusinessAddress = () => {
     const newErrors = validator(address);
 
     if (Object.keys(newErrors).length === 0) {
+      const newTourPackageData = {
+        ...tourPackageData,
+        businessAddress: address
+      }
+      console.log(newTourPackageData)
+      localStorage.setItem("tourPackageData", JSON.stringify(newTourPackageData));
       router.push("/register/tour-package/contact-information");
     } else {
       setErrors(newErrors);
@@ -56,9 +74,7 @@ const BusinessAddress = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div className="border p-5 rounded-md">
           <div className=" space-y-3">
-            <p className="text-xl font-bold">
-              Where is the property that you are listing?
-            </p>
+            <p className="text-xl font-bold">Business Address</p>
             <div className="grid grid-cols-1 gap-2">
               <label>Country/Region</label>
               <input name="country" readOnly defaultValue={address.country} />

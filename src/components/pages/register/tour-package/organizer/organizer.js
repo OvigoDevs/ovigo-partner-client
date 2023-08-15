@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { setCookie } from "@/lib/cookie";
 import { tourOrganizer } from "@/redux/features/register_slice";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Hints from "../common/hints/hints";
 
@@ -12,13 +12,27 @@ const Organizer = () => {
   // router
   const router = useRouter();
   // redux
-  const { tourPackageData } = useSelector((state) => state.registerData);
+  // const { tourPackageData } = useSelector((state) => state.registerData);
   // dispatch
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+
   // formState
   const [organizer, setOrganizer] = useState(
-    tourPackageData.tourOrganizer ? tourPackageData.tourOrganizer : ""
+    ""
+    // tourPackageData.tourOrganizer ? tourPackageData.tourOrganizer : ""
   );
+
+  const [oldTourPackageData, setOldTourPackageData] = useState(null);
+
+  // get data from local storage
+  useEffect(() => {
+    const tourPackageData = JSON.parse(localStorage.getItem("tourPackageData"));
+    setOldTourPackageData(tourPackageData);
+    if (tourPackageData?.tourOrganizerName) {
+      setOrganizer(tourPackageData.tourOrganizerName);
+    }
+  }, []);
+
   const [errors, setErrors] = useState(null);
   // input handler
   const handleOnChange = (e) => {
@@ -30,14 +44,23 @@ const Organizer = () => {
       setErrors("Organizer name is required!");
     } else {
       setErrors(null);
+
+      const tourPackageData = {
+        ...oldTourPackageData,
+        tourOrganizerName: organizer,
+      };
+
+      localStorage.setItem("tourPackageData", JSON.stringify(tourPackageData));
+      console.log(oldTourPackageData);
+
       // dispatch
-      dispatch(tourOrganizer({ tourOrganizer: organizer }));
+      /* dispatch(tourOrganizer({ tourOrganizer: organizer }));
       // setCookie
       setCookie(
         "tourPackageData",
         { ...tourPackageData, tourOrganizer: organizer },
         "1h"
-      );
+      ); */
       // router
       router.push("/register/tour-package/company-structure");
     }

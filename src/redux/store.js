@@ -3,17 +3,17 @@ import userReducer from "./features/user_slice";
 import registerReducer from "./features/register_slice";
 
 import { setupListeners } from "@reduxjs/toolkit/query";
-// import { usersApi } from "./services/users";
+import { RegisterAPI } from "./services/register";
 
 const store = configureStore({
   reducer: {
     userdata: userReducer,
     registerData: registerReducer,
-    // [usersApi.reducerPath]: usersApi.reducer,
+    [RegisterAPI.reducerPath]: RegisterAPI.reducer,
   },
 
-  //   middleware: (getDefaultMiddleware) =>
-  //     getDefaultMiddleware().concat(usersApi.middleware),
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(RegisterAPI.middleware),
 });
 
 setupListeners(store.dispatch);

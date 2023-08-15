@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/select";
 import { ThumbsUp } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const TourDestination = () => {
   const router = useRouter();
@@ -80,12 +80,37 @@ const TourDestination = () => {
     setTourDestination({ ...tourDestination, [name]: value });
   };
 
-  console.log(tourDestination);
+  // get tourPackageData from local storage
+  const [tourPackageData, setTourPackageData] = useState(null);
+
+  useEffect(() => {
+    const oldTourPackageData = JSON.parse(
+      localStorage.getItem("tourPackageData")
+    );
+    setTourPackageData(oldTourPackageData);
+
+    if (oldTourPackageData?.tourDestination) {
+      setTourDestination({
+        tourStart: oldTourPackageData?.tourDestination?.tourStart,
+        tourEnd: oldTourPackageData?.tourDestination?.tourEnd,
+      });
+    }
+  }, []);
 
   const handleSubmit = () => {
     const newErrors = validator(tourDestination);
 
     if (Object.keys(newErrors).length === 0) {
+      const newTourPackageData = {
+        ...tourPackageData,
+        tourDestination,
+      };
+
+      localStorage.setItem(
+        "tourPackageData",
+        JSON.stringify(newTourPackageData)
+      );
+
       router.push("/register/tour-package/tour-date-and-time");
     } else {
       setErrors(newErrors);
