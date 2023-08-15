@@ -3,12 +3,14 @@ import InputError from "@/components/core/input-error/input-error";
 import { Button } from "@/components/ui/button";
 import { setCookie } from "@/lib/cookie";
 import { createPassword } from "@/redux/features/register_slice";
+import { useRegisterPostMutation } from "@/redux/services/register";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const CreatePassword = () => {
   const router = useRouter();
+  const [registerPost, response] = useRegisterPostMutation()
   const { registerData } = useSelector((state) => state.registerData);
   const dispatch = useDispatch();
 
@@ -55,7 +57,22 @@ const CreatePassword = () => {
         })
       );
       setCookie("registerData", { ...registerData, createPassword: formData });
-      router.push("/register/service-category");
+      const dataForRegistering = {
+        email: registerData.email,
+        phone: registerData.phone,
+        registerInfo: registerData.registerInfo,
+        password: formData.password,
+        verification: registerData.verification,
+        servicesList: [],
+      }
+      console.log(dataForRegistering)
+      registerPost(dataForRegistering)
+      .unwrap()
+      .then(() => {})
+      .then((error) => {
+        console.log(error)
+      })
+      // router.push("/register/service-category");
     }
   }, [errors]);
 
