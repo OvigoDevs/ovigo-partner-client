@@ -6,8 +6,6 @@ import { useState } from "react";
 import { setCookie } from "@/lib/cookie";
 import InputError from "@/components/core/input-error/input-error";
 import {
-  MaxID_generator,
-  addNewHotel,
   confirmHotel,
 } from "@/redux/features/register_slice";
 import { useRouter } from "next/navigation";
@@ -54,7 +52,7 @@ const ConfirmHotel = () => {
       hotelListingPost(dataForRegistering)
         .unwrap()
         .then(() => {
-          router.push("/dashboard");
+          // router.push("/dashboard");
         })
         .then((error) => {
           console.log(error);
