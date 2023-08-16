@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { setupListeners } from "@reduxjs/toolkit/query";
+
+//features
 import userReducer from "./features/user_slice";
 import registerReducer from "./features/register_slice";
-
-import { setupListeners } from "@reduxjs/toolkit/query";
+// services
 import { RegisterAPI } from "./services/register";
 
 const store = configureStore({

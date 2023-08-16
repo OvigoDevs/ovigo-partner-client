@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const CreatePassword = () => {
   const router = useRouter();
-  const [registerPost, response] = useRegisterPostMutation()
+  const [registerPost, response] = useRegisterPostMutation();
   const { registerData } = useSelector((state) => state.registerData);
   const dispatch = useDispatch();
 
@@ -64,15 +64,15 @@ const CreatePassword = () => {
         password: formData.password,
         verification: registerData.verification,
         servicesList: [],
-      }
-      console.log(dataForRegistering)
+      };
       registerPost(dataForRegistering)
-      .unwrap()
-      .then(() => {})
-      .then((error) => {
-        console.log(error)
-      })
-      // router.push("/register/service-category");
+        .unwrap()
+        .then(() => {
+          router.push("/register/service-category");
+        })
+        .then((error) => {
+          console.log(error);
+        });
     }
   }, [errors]);
 
