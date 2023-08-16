@@ -4,6 +4,7 @@ import Hotel from "@/components/icons/hotel";
 import Register from "@/components/icons/register";
 import { Button } from "@/components/ui/button";
 import { PlusSquare } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const STEPS = [
   {
@@ -34,6 +35,7 @@ const STEPS = [
 ];
 
 const RegistrationProgress = () => {
+  const router = useRouter();
   return (
     <div>
       <div className="grid grid-cols-1 gap-5 py-20 max-w-[550px] mx-auto">
@@ -54,12 +56,18 @@ const RegistrationProgress = () => {
               </div>
               <Button
                 className={`flex items-center justify-center`}
+                onClick={() => {
+                  if (step.id === 1) {
+                    router.push("/register/tour-package/tour-package-name");
+                  }
+                  if (step.id === 2) {
+                    router.push("/register/tour-package/add-description");
+                  }
+                }}
               >
                 {step.id !== 2 ? (
                   <IconWrapper>
-                    <PlusSquare
-                      className={`mr-2 text-white`}
-                    />
+                    <PlusSquare className={`mr-2 text-white`} />
                   </IconWrapper>
                 ) : null}
                 <span>{step.btnText}</span>

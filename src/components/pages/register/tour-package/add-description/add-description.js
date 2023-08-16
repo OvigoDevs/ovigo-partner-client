@@ -45,8 +45,8 @@ const AddDescription = () => {
   return (
     <div className="py-5">
       <Backlink
-        link="/register/tour-package/"
-        text="Confirmation Step"
+        link="/register/tour-package/registration-progress"
+        text="Registration progress"
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
