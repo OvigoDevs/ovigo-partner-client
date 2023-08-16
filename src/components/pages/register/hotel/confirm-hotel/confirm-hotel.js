@@ -12,8 +12,10 @@ import {
 } from "@/redux/features/register_slice";
 import { useRouter } from "next/navigation";
 import Backlink from "@/components/core/backlink/backlink";
+import { useHotelListingPostMutation } from "@/redux/services/hotel-listing";
 
 const ConfirmHotel = () => {
+  const [hotelListingPost, response] = useHotelListingPostMutation();
   // router
   const router = useRouter();
   // hotelData
@@ -44,16 +46,27 @@ const ConfirmHotel = () => {
         { ...hotelData, confirmHotel: confirmhotel },
         "1h"
       );
-        // need to hit API to save these data in DB
-      console.log({registerData, hotelData, rooms})
+      // need to hit API to save these data in DB
+      console.log({ registerData, hotelData, rooms });
 
-      // router
-      // router.push("/dashboard");
+      const dataForRegistering = { ...hotelData, rooms };
+
+      hotelListingPost(dataForRegistering)
+        .unwrap()
+        .then(() => {
+          router.push("/dashboard");
+        })
+        .then((error) => {
+          console.log(error);
+        });
     }
   };
   return (
     <div className="py-5 max-w-[500px]">
-      <Backlink link="/register/hotel/important-info" text="Important information" />
+      <Backlink
+        link="/register/hotel/important-info"
+        text="Important information"
+      />
       <div className="grid grid-cols-1 gap-4">
         <div className="border rounded-md p-5 space-y-4">
           <h4 className="text-lg">
