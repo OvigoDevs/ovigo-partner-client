@@ -13,7 +13,7 @@ const Hero = () => {
           <div className="items-center lg:flex">
             <div className="w-full lg:w-1/2">
               <div className="lg:max-w-lg">
-                <h6 className="text-[#101010] dark:text-white text-[20px] mb-5 font-semibold">
+                <h6 className="text-[#101010] dark:text-white text-[20px] mb-5 font-semibold leading-[38px]">
                   Register your properties on free in 15 mins only
                 </h6>
                 <h1 className="text-[48px] text-[#101828] dark:text-white font-bold leading-[72px] ">

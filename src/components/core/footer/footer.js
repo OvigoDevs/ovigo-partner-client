@@ -46,7 +46,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-[#105D36] dark:bg-[#105D36]">
+    <footer className="bg-[#105D36] dark:bg-[#105D36] overflow-hidden">
       <div className="container px-6 py-8 mx-auto">
         <div className="flex flex-col lg:flex-row lg:justify-between items-center text-center">
           <div className="w-[164px] h-[134px] relative">
