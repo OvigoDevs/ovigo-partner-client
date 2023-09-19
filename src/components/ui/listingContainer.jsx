@@ -4,7 +4,7 @@ import ListingContent from "./listingContent";
 const ListingContainer = () => {
   return (
     <div className="flex justify-center w-full">
-      <div className="lg:w-[1100px] mx-auto bg-[#E7F8F7] dark:bg-gray-700 rounded-3xl p-10 shadow-lg">
+      <div className="lg:w-[1000px] mx-auto bg-[#E7F8F7] dark:bg-gray-700 rounded-3xl p-10 shadow-lg">
         <h2 className="text-[#081634] dark:text-white text-[36px] font-bold capitalize mb-6 leading-[38px]">
           create your listing
         </h2>
