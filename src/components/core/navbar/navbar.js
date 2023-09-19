@@ -1,6 +1,9 @@
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import Image from "next/image";
 import Link from "next/link";
+import { HiOutlineDevicePhoneMobile } from "react-icons/hi2";
+import { AiOutlineQuestionCircle } from "react-icons/ai";
+import { FaRegBell } from "react-icons/fa";
 
 const Navbar = () => {
   const Links = [
@@ -11,7 +14,7 @@ const Navbar = () => {
     },
   ];
   return (
-    <nav className="container flex items-center justify-between gap-5 py-2 backdrop-blur sticky top-0 z-50 border-b">
+    <div className="container flex items-center justify-between py-[29px] gap-5  backdrop-blur sticky top-0 z-50 ">
       <Link href="/">
         <div className="cursor-default lg:cursor-pointer">
           <Image
@@ -23,22 +26,23 @@ const Navbar = () => {
           />
         </div>
       </Link>
-      <ul>
-        {Links.map((item) => (
-          <li key={item.id}>
-            <Link
-              href={item.link}
-              className="hover:text-primary dark:hover:text-gray-300"
-            >
-              {item.text}
-            </Link>
-          </li>
-        ))}
-      </ul>
-      <div>
-        <ModeToggle />
-      </div>
-    </nav>
+      <nav className="flex items-center gap-[24px]">
+        <button className="sub-button flex items-center gap-2">
+          get App <HiOutlineDevicePhoneMobile />
+        </button>
+        <div className="flex items-center gap-2">
+          <span className="w-10 h-10 rounded-full bg-[#cff1ef] text-[#136f40] duration-300 flex items-center justify-center cursor-pointer">
+            <AiOutlineQuestionCircle className="text-xl" />
+          </span>
+
+          <span className="w-10 h-10 rounded-full bg-[#cff1ef] text-[#136f40] duration-300 flex items-center justify-center cursor-pointer">
+            <FaRegBell className="text-xl" />
+          </span>
+          <ModeToggle />
+        </div>
+        <button className="main-button">Register Service</button>
+      </nav>
+    </div>
   );
 };
 export default Navbar;
