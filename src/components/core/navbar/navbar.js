@@ -40,7 +40,10 @@ const Navbar = () => {
           </span>
           <ModeToggle />
         </div>
-        <button className="main-button">Register Service</button>
+
+        <Link href="/register/with-email" className="main-button">
+          Register Service
+        </Link>
       </nav>
     </div>
   );
