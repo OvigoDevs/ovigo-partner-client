@@ -166,7 +166,10 @@ const BreakfastDetails = () => {
   }, []);
   return (
     <div className="grid grid-cols-1 gap-2 section-d max-w-[500px]">
-      <Backlink link="/register/hotel/popular-facilities" text="Popular facilities" />
+      <Backlink
+        link="/register/hotel/popular-facilities"
+        text="Popular facilities"
+      />
       <h2 className="font-bold">Breakfast details</h2>
       <div className="grid grid-cols-1 gap-5">
         <CustomRadio
@@ -193,6 +196,7 @@ const BreakfastDetails = () => {
                   <div className="grid grid-cols-1 gap-2">
                     <label>Breakfast price per person, per day</label>
                     <input
+                      className="form-input"
                       name="pricePerPersonAndDay"
                       placeholder="e.g. 500"
                       onChange={handleOnChange}

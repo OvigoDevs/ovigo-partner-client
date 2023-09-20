@@ -50,6 +50,7 @@ const RoomName = () => {
       <div className="grid grid-cols-1 gap-2 ">
         <label>Room name</label>
         <input
+          className="form-input"
           defaultValue={roomname}
           onChange={(e) => {
             setRoomname(e.target.value);

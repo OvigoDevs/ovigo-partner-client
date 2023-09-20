@@ -99,13 +99,14 @@ const HouseRules = () => {
   }, []);
   return (
     <div className="py-5">
-      <Backlink link="/register/hotel/languages" text="Languages"/>
+      <Backlink link="/register/hotel/languages" text="Languages" />
       <h4 className="font-bold">House Rules</h4>
       <div className="grid lg:grid-cols-2 gap-4 my-5">
         <div className="grid grid-cols-1 gap-5">
           <h4 className="font-bold">
             What are your check-in and check-out times?
           </h4>
+
           <CheckInOut
             handleOnChange={handleOnChange}
             defaultValue={formData}
@@ -118,6 +119,7 @@ const HouseRules = () => {
             type="out"
             errors={errors}
           />
+
           <hr className="py-2" />
 
           <CustomRadio
@@ -145,10 +147,10 @@ const HouseRules = () => {
           {formData.allowPet === "Yes, pets can stay for paid" ? (
             <>
               <input
+                className="form-input mx-2"
                 type="number"
                 name="petFee"
                 placeholder="Price in BDT per night (If applicable)"
-                className="mx-2"
                 onChange={handleOnChange}
                 defaultValue={formData.petFee}
               />

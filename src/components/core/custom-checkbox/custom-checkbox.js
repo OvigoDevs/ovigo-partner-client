@@ -30,7 +30,7 @@ const CustomCheckbox = ({
       <p>{label}</p>
       <div
         className={`grid grid-cols-1 ${
-          options.length > 9 ? "md:grid-cols-2" : ""
+          options.length > 9 ? "md:grid-cols-1" : ""
         } gap-3`}
       >
         {options.map((option) => (

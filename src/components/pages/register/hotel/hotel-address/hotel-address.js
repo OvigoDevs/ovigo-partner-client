@@ -82,11 +82,17 @@ const HotelAddress = () => {
           <div className="mt-5 space-y-3">
             <div className="grid grid-cols-1 gap-2">
               <label>Country/Region</label>
-              <input name="country" readOnly defaultValue={address.country} />
+              <input
+                className="form-input"
+                name="country"
+                readOnly
+                defaultValue={address.country}
+              />
             </div>
             <div className="grid grid-cols-1 gap-2">
               <label>Street Name and House Number</label>
               <input
+                className="form-input"
                 name="streetAddress"
                 type="text"
                 value={address.streetAddress}
@@ -98,6 +104,7 @@ const HotelAddress = () => {
             <div className="grid grid-cols-1 gap-2">
               <label>ZIP Code</label>
               <input
+                className="form-input"
                 name="zipCode"
                 type="number"
                 value={address.zipCode}
@@ -109,6 +116,7 @@ const HotelAddress = () => {
             <div className="grid grid-cols-1 gap-2">
               <label>City</label>
               <input
+                className="form-input"
                 name="city"
                 type="text"
                 value={address.city}

@@ -98,6 +98,7 @@ const HotelInformation = () => {
           <div className="grid grid-cols-1 gap-2">
             <label>Property name</label>
             <input
+              className="form-input"
               name="propertyName"
               onChange={handleOnChange}
               defaultValue={formData.propertyName}
@@ -140,6 +141,7 @@ const HotelInformation = () => {
                   <div className="grid grid-cols-1 gap-2">
                     <label>Name of your company, group, or chain</label>
                     <input
+                      className="form-input"
                       name="managementEntityName"
                       onChange={handleOnChange}
                       defaultValue={formData.managementEntityName}
