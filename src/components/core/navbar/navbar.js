@@ -14,7 +14,7 @@ const Navbar = () => {
     },
   ];
   return (
-    <div className="container flex items-center justify-between py-[20px] gap-5  backdrop-blur sticky top-0 z-50 border-b overflow-hidden">
+    <div className="container flex items-center justify-between py-[20px] gap-5  backdrop-blur sticky top-0 z-50 border-b ">
       <Link href="/">
         <div className="cursor-default lg:cursor-pointer">
           <Image
@@ -40,7 +40,10 @@ const Navbar = () => {
           </span>
           <ModeToggle />
         </div>
-        <button className="main-button">Register Service</button>
+
+        <Link href="/register/with-email" className="main-button">
+          Register Service
+        </Link>
       </nav>
     </div>
   );
