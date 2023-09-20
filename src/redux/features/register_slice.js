@@ -1,4 +1,3 @@
-import { getCookie } from "@/lib/cookie";
 import { createSlice } from "@reduxjs/toolkit";
 
 // is in client side ?

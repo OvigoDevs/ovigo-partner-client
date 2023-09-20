@@ -1,68 +1,90 @@
-import InputError from "@/components/core/input-error/input-error";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { PHONE_REGEX } from "@/lib/regexes";
+import { registerInfo } from "@/redux/features/register_slice";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { registerPhoneInfo } from "@/redux/features/register_slice";
-import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { FiPhoneCall } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
-import { setCookie } from "@/lib/cookie";
-import Backlink from "@/components/core/backlink/backlink";
+import contactDetailsImg from "../../../../../../public/images/auth/contactDetails.png";
 
 const ContactDetails = () => {
   const router = useRouter();
-
-  const { registerData } = useSelector((state) => state.registerData);
-
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
   const dispatch = useDispatch();
+ 
+  const contactData = useSelector((state) => state.registerData.registerData.registerInfo)
+  // console.log(contactData)
 
-  const [phone, setPhone] = useState("");
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    if (registerData.phone) {
-      setPhone(registerData.phone);
-    }
-  }, [registerData]);
-
-  const handleOnSubmit = () => {
-    if (!phone) {
-      setError("Phone number is required");
-    } else {
-      setError("");
-      dispatch(
-        registerPhoneInfo({
-          phone,
-        })
-      );
-      setCookie("registerData", { ...registerData, phone });
-
-      router.push("/register/create-password");
-    }
+  const handleContactDetails = (data) => {  
+   const contact = {...data, ...contactData};
+   dispatch(
+    registerInfo({
+      registerInfo: contact,
+    })
+  );
+   
+    toast("Your Contact Number Added", {
+      icon: "👏",
+    });
+    router.push("/register/create-password");
   };
 
   return (
-    <div className="section-d">
-      <div className="max-w-[500px]">
-        <Backlink
-          link="/register/register-info"
-          text="Registration information"
-        />
-        <h1 className="font-bold mb-5">Contact details</h1>
-        <div className="col-span-2 grid grid-cols-1 gap-2">
-          <label>Phone</label>
-          <input
-            placeholder="e.g. +880**********"
-            onChange={(e) => setPhone(e.target.value)}
-            defaultValue={phone}
+    <div>
+      <div className="grid grid-cols-5 gap-5">
+        <div className="lg:h-2 h-1 bg-[#26DE81] rounded-md w-full"></div>
+        <div className="lg:h-2 h-1 bg-[#26DE81] rounded-md w-full"></div>
+        <div className="lg:h-2 h-1 bg-[#26DE81] rounded-md w-full"></div>
+        <div className="lg:h-2 h-1 bg-[#26DE81] rounded-md w-full"></div>
+      </div>
+      <div className="grid lg:grid-cols-2 grid-cols-1 lg:gap-5 gap-3">
+        <form
+          className="form_card lg:p-10 p-3 h-max lg:mt-20 mt-3"
+          onSubmit={handleSubmit(handleContactDetails)}
+        >
+          <h2 className="lg:text-4xl text-2xl text-[#000] font-semibold lg:mb-5 mb-3">
+            Contact details
+          </h2>
+          <h3 className="text-base text-[#101828] font-bold lg:mb-5">
+            Registration information
+          </h3>
+          <div>
+            <div className="col-span-2 grid grid-cols-1 gap-2">
+              <label className="text-base text-black font-normal">Phone</label>
+              <div className="flex justify-start gap-1 items-center border border-gray-400 rounded-md py-2 px-3 mt-4">
+                <FiPhoneCall size="22px" color="#b6b9be" />
+                <input
+                  required={true}
+                  type="number"
+                  placeholder="e.g. +880**********"
+                  {...register("phone", {
+                    required: "phone",
+                  })}
+                  className="w-full focus:outline-none rounded-md text-[#b6b9be] bg-transparent"
+                />
+              </div>
+            </div>
+          </div>
+          <Button className="mt-10 w-full" type="submit">
+            Continue
+          </Button>
+        </form>
+        <div className="xl:w-[550px] lg:ml-auto">
+          <Image
+            width="0"
+            height="0"
+            sizes="100vw"
+            style={{ width: "100%", height: "100%" }}
+            src={contactDetailsImg}
+            alt={contactDetailsImg}
           />
-          <InputError error={error} />
         </div>
       </div>
-
-      <Button onClick={handleOnSubmit} className="mt-10">
-        Next
-      </Button>
     </div>
   );
 };

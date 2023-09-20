@@ -7,10 +7,19 @@ import RegisterInfo from "@/components/pages/register/common/register-info/regis
 import RegisterWithEmail from "@/components/pages/register/common/register-with-email/register-with-email";
 import ServiceCategory from "@/components/pages/register/common/service-category/service-category";
 import Verification from "@/components/pages/register/common/verification/verification";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
 const RegisterDynamicComps = () => {
   const pathname = usePathname();
+  const params = useSearchParams();
+  const email = params.get('email');
+  // console.log(email)
+  // console.log(pathname)
+  // const [firstName, setFirstName] = useState("");
+  // const [lastName, setLastName] = useState("");
+  // const [contactNumber, setContactNumber] = useState("");
+  // console.log(firstName, lastName, contactNumber)
+  
   return (
     <div>
       {pathname.includes("landing") ? (
@@ -18,13 +27,13 @@ const RegisterDynamicComps = () => {
       ) : pathname.includes("with-email") ? (
         <RegisterWithEmail />
       ) : pathname.includes("register-info") ? (
-        <RegisterInfo />
+        <RegisterInfo   />
       ) : pathname.includes("verification") ? (
-        <Verification />
+        <Verification email={email} />
       ) : pathname.includes("create-password") ? (
-        <CreatePassword />
+        <CreatePassword  />
       ) : pathname.includes("contact-details") ? (
-        <ContactDetails />
+        <ContactDetails  />
       ) : pathname.includes("service-category") ? (
         <ServiceCategory />
       ) : (

@@ -1,17 +1,18 @@
 "use client";
 
-import "./globals.scss";
 import { Inter } from "next/font/google";
+import "./globals.scss";
 
 const inter = Inter({ subsets: ["latin"] });
 
-import { ThemeProvider } from "@/components/theme-provider";
-import { Toaster } from "@/components/ui/toaster";
-import Navbar from "@/components/core/navbar/navbar";
+import DashboardNavbar from "@/components/core/dashboard-navbar/dashboard-navbar";
 import Footer from "@/components/core/footer/footer";
+import Navbar from "@/components/core/navbar/navbar";
+import { ThemeProvider } from "@/components/theme-provider";
+import { CustomToaster } from "@/components/ui/customToaster";
 import StoreProvider from "@/redux/store-provider";
 import { usePathname } from "next/navigation";
-import DashboardNavbar from "@/components/core/dashboard-navbar/dashboard-navbar";
+import { Toaster } from "react-hot-toast";
 
 const RootLayout = ({ children }) => {
   const pathname = usePathname();
@@ -25,14 +26,16 @@ const RootLayout = ({ children }) => {
                 <>
                   <DashboardNavbar />
                   {children}
-                  <Toaster />
+                  <CustomToaster />
+                  <Toaster position="top-center" reverseOrder={false} />
                   <Footer />
                 </>
               ) : (
                 <>
                   <Navbar />
                   {children}
-                  <Toaster />
+                  <CustomToaster />
+                  <Toaster position="top-center" reverseOrder={false} />
                   <Footer />
                 </>
               )}
