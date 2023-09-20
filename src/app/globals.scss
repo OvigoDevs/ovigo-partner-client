@@ -153,6 +153,16 @@ label {
   @apply px-2 py-1 text-red-600 rounded-md flex items-center gap-2 inline-block min-w-[300px];
 }
 
+//button style 
+.main-button{
+  @apply px-[18px] py-[10px] bg-[#26DE81] rounded-lg text-[16px] font-semibold text-base text-[#fbfbfb] hover:bg-[#0FB8B1] 
+}
+
+.sub-button{
+  @apply px-[18px] py-[10px] text-[#26DE81] rounded-md text-[16px] font-semibold text-base border border-[#26DE81] capitalize hover:text-gray-800 duration-300 dark:hover:text-white
+}
+
+
 // custom scroll bar
 /* width */
 ::-webkit-scrollbar {

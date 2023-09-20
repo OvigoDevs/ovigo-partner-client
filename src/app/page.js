@@ -1,10 +1,16 @@
-
+import GuestContainer from "@/components/ui/guestContainer";
+import Hero from "@/components/ui/hero";
+import ListingContainer from "@/components/ui/listingContainer";
+import ServiceContainer from "@/components/ui/serviceContainer";
 
 const Home = () => {
   return (
-    <div className="container section-p min-h-screen">
-      <h1 className="pb-10 text-xl font-black">Home</h1>
-    </div>
+    <>
+      <Hero />
+      <ListingContainer />
+      <ServiceContainer />
+      <GuestContainer />
+    </>
   );
 };
 
