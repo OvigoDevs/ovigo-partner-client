@@ -25,10 +25,10 @@ const RegisterWithEmail = () => {
       })
     );
     fetch(
-      "https://ovigo-server-567i1qszj-nazmulbhuyian.vercel.app/businessUsersReg",
+      "https://ovigo-backend-nqj2iwkbs-nazmulbhuyian.vercel.app/businessUsersReg",
       {
         method: "POST",
-        headers: { "Content-type": "application/json" },
+        headers: { "content-type": "application/json" },
         body: JSON.stringify(data),
       }
     )

@@ -2,13 +2,46 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { BiHide, BiLockAlt, BiShow } from "react-icons/bi";
 import { HiOutlineMail } from "react-icons/hi";
 import loginImage from "../../../../public/images/auth/loginImg.png";
 
 const Login = () => {
   const [password, setPassword] = useState(true);
+  const router = useRouter();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+  const handleLogin = (data) => {
+    fetch("https://ovigo-backend-nqj2iwkbs-nazmulbhuyian.vercel.app/businessUsersLog", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((loginData) => {
+        if (loginData?.status === "Failled") {
+          toast.error(loginData.message);
+        } else {
+          localStorage.setItem("ovigoLogInToken", loginData?.ovigoLogInToken);
+          toast(loginData.status, {
+            icon: "👏",
+          });
+          router.push("/");
+        }
+        console.log(loginData);
+      })
+      .catch((err) => console.log("error", err));
+    console.log(data);
+  };
   return (
     <div>
       <div className="container">
@@ -25,7 +58,7 @@ const Login = () => {
               <h2 className="lg:text-4xl text-2xl text-[#000] font-semibold lg:mb-10 mb-5">
                 Get Started Now
               </h2>
-              <form className="form_card lg:p-10 p-3">
+              <form className="form_card lg:p-10 p-3" onSubmit={handleSubmit(handleLogin)}>
                 <div className="lg:m-auto xl:w-[490px]">
                   <h2 className="text-base text-[#101828] font-bold lg:mb-7">
                     Create your partner account
@@ -36,6 +69,9 @@ const Login = () => {
                       type="email"
                       placeholder="Email address"
                       required={true}
+                      {...register("email", {
+                        required: "email",
+                      })}
                       className="w-full focus:outline-none rounded-md text-[#b6b9be] bg-transparent"
                     />
                   </div>
@@ -45,6 +81,9 @@ const Login = () => {
                       type={password ? "password" : "text"}
                       required={true}
                       placeholder="Password"
+                      {...register("password", {
+                        required: "password",
+                      })}
                       className="w-full focus:outline-none rounded-md text-[#b6b9be] "
                     />
                     {password ? (

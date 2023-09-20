@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 // icon import form from "react-icon"
 import Image from "next/image";
@@ -10,7 +9,7 @@ import { useSelector } from "react-redux";
 import createPasswordImg from "../../../../../../public/images/auth/createPassword.png";
 
 const CreatePassword = () => {
-  const router = useRouter();
+  // const router = useRouter();
   const {
     register,
     formState: { errors },
@@ -20,7 +19,7 @@ const CreatePassword = () => {
   const [newPassword, setNewPassword] = useState(true);
   
   const validPassword = useSelector((state) => state.registerData.registerData.registerInfo)
-// console.log(validPassword)
+// console.log("djfj", validPassword)
   const handleCreatePassword = (data) => {
     // console.log(data)
     if (data?.confirm_password == data.password) {
@@ -28,9 +27,38 @@ const CreatePassword = () => {
       // console.log(password)
       const passwordData = {...validPassword, password}  
       console.log("main Data",passwordData)
-      toast("Added A New Password", {
-        icon: "👏",
-      });
+      fetch(
+        "https://ovigo-backend-nqj2iwkbs-nazmulbhuyian.vercel.app/businessUsersReg",
+        {
+          method: "PATCH",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(passwordData),
+        }
+      )
+        .then((response) => response.json())
+        .then((registerData) => {
+          console.log(registerData);
+          if (registerData?.status === "Successfully Updated") {
+            toast(registerData.status, {
+              icon: "👏",
+            });
+            // console.log(findMail)
+            // router.push(
+            //   `/register/verification/?email=${registerData?.data?.email}`
+            // );
+          } else {
+            toast.error(registerData.message);
+          }
+        })
+      
+        .catch((errors) => {
+          console.log(errors);
+        });
+
+
+      // toast("Added A New Password", {
+      //   icon: "👏",
+      // });
     } else {
       toast.error("password not match");
     }
@@ -61,7 +89,7 @@ const CreatePassword = () => {
               {...register("password", {
                 required: "password",
               })}
-              className="w-full focus:outline-none rounded-md text-[#b6b9be] "
+              className="w-full focus:outline-none rounded-md text-[#b6b9be] bg-transparent"
             />
             {password ? (
               <div className="absolute right-1 top-2">
@@ -86,13 +114,13 @@ const CreatePassword = () => {
           <div className="flex justify-start gap-1 items-center border border-gray-400 rounded-md py-2 px-3 mt-7 relative">
             <BiLockAlt size="22px" color="#b6b9be" />
             <input
-              type={password ? "password" : "text"}
+              type={newPassword ? "password" : "text"}
               required={true}
               placeholder="Confirm Password"
               {...register("confirm_password", {
                 required: "confirm_password",
               })}
-              className="w-full focus:outline-none rounded-md text-[#b6b9be] "
+              className="w-full focus:outline-none rounded-md text-[#b6b9be] bg-transparent"
             />
             {newPassword ? (
               <div className="absolute right-1 top-2">
