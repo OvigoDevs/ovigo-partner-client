@@ -1,103 +1,89 @@
 "use client";
-
-import Backlink from "@/components/core/backlink/backlink";
-import InputError from "@/components/core/input-error/input-error";
 import { Button } from "@/components/ui/button";
-import { setCookie } from "@/lib/cookie";
-import { NAME_REGEX } from "@/lib/regexes";
 import { registerInfo } from "@/redux/features/register_slice";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
+import registerInfoImg from "../../../../../../public/images/auth/registerInfo.png";
 
 const RegisterInfo = () => {
-  const router = useRouter();
-  const { registerData } = useSelector((state) => state.registerData);
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
   const dispatch = useDispatch();
-
-  const [formData, setFormData] = useState(
-    registerData.registerInfo
-      ? registerData.registerInfo
-      : {
-          firstName: "",
-          lastName: "",
-        }
-  );
-  const [edited, setEdited] = useState(false);
-  const [errors, setErrors] = useState(edited ? formData : {});
-
-  const handleOnChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-    setEdited(true);
+  const router = useRouter();
+ 
+  const email = useSelector((state) => state.registerData.registerData.registerInfo)
+  console.log(email)
+  const handleRegistrationInfo = (data) => {
+    const registrationInfoData = {...data, email};
+   console.log(registrationInfoData)
+    dispatch(
+      registerInfo({
+        registerInfo: registrationInfoData,
+      })
+    );
+    toast("Your First Name And Last Name Added", {
+      icon: "👏",
+    });
+    router.push("/register/contact-details");
   };
-
-  const handleOnSubmit = () => {
-    setErrors(validator(formData));
-  };
-
-  const validator = (data) => {
-    let obj = {};
-    if (!data.firstName.trim()) {
-      obj.firstName = "First name is required!";
-    } else if (!NAME_REGEX.test(data.firstName)) {
-      obj.firstName = "Invalid first name!";
-    }
-    if (!data.lastName.trim()) {
-      obj.lastName = "Last name is required!";
-    }
-    return obj;
-  };
-
-  useEffect(() => {
-    console.log({ formData, errors });
-    if (Object.keys(errors).length === 0 && edited) {
-      // update redux store
-      dispatch(
-        registerInfo({
-          registerInfo: formData,
-        })
-      );
-      setCookie("registerData", { ...registerData, registerInfo: formData });
-      router.push("/register/contact-details");
-    }
-  }, [errors]);
-
-  useEffect(() => {
-    setEdited(true);
-  }, []);
-
   return (
-    <div className="section-d">
-      <div className="max-w-[500px]">
-      <Backlink link="/register/verification" text="Verification" />
-        <h1 className="font-bold mb-5">Registration information</h1>
-        <div className="grid grid-cols-1 gap-2">
-          <div className="grid grid-cols-1 gap-1">
-            <label>Firstname</label>
+    <div>
+      <div className="grid grid-cols-5 gap-5 lg:mb-20 mb-5">
+        <div className="lg:h-2 h-1 bg-[#26DE81] rounded-md w-full"></div>
+        <div className="lg:h-2 h-1 bg-[#26DE81] rounded-md w-full"></div>
+        <div className="lg:h-2 h-1 bg-[#26DE81] rounded-md w-full"></div>
+      </div>
+      <div className="grid lg:grid-cols-2 grid-cols-1 lg:gap-5 gap-3">
+        <form
+          className="form_card lg:p-10 p-3 h-max lg:mt-5 mt-3"
+          onSubmit={handleSubmit(handleRegistrationInfo)}
+        >
+          <h2 className="text-base text-[#101828] font-bold lg:mb-7">
+            Registration information{" "}
+          </h2>
+          <div>
             <input
-              name="firstName"
-              placeholder="e.g. John"
-              onChange={handleOnChange}
-              defaultValue={formData.firstName}
+              type="text"
+              required={true}
+              className="w-full border border-gray-400 py-2 px-3 mt-4 focus:outline-none rounded-md text-[#b6b9be] bg-transparent"
+              placeholder="First Name"
+              {...register("first_name", {
+                required: "first_name",
+              })}
             />
-            <InputError error={errors.firstName} />
           </div>
-          <div className="grid grid-cols-1 gap-1">
-            <label>Lastname</label>
+          <div>
             <input
-              name="lastName"
-              placeholder="e.g. Doe"
-              onChange={handleOnChange}
-              defaultValue={formData.lastName}
+              type="text"
+              required={true}
+              className="w-full border border-gray-400 py-2 px-3 mt-4 focus:outline-none rounded-md text-[#b6b9be] bg-transparent"
+              placeholder="Last Name"
+              {...register("last_name", {
+                required: "last_name",
+              })}
             />
-            <InputError error={errors.lastName} />
           </div>
+          <Button className="mt-10 w-full" type="submit">
+            Continue
+          </Button>
+        </form>
+        <div className="xl:w-[520px] xl:ml-auto">
+          <Image
+            width="0"
+            height="0"
+            sizes="100vw"
+            style={{ width: "100%" }}
+            src={registerInfoImg}
+            alt={registerInfoImg}
+          />
         </div>
       </div>
-      <Button className="mt-10 min-w-[100px]" onClick={handleOnSubmit}>
-        Next
-      </Button>
     </div>
   );
 };
