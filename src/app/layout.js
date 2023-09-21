@@ -13,6 +13,7 @@ import { CustomToaster } from "@/components/ui/customToaster";
 import StoreProvider from "@/redux/store-provider";
 import { usePathname } from "next/navigation";
 import { Toaster } from "react-hot-toast";
+import ReactQueryProvider from "@/react-query/ReactQueryProvider";
 
 const RootLayout = ({ children }) => {
   const pathname = usePathname();
@@ -20,27 +21,29 @@ const RootLayout = ({ children }) => {
     <html lang="en">
       <body className={inter.className}>
         <StoreProvider>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <>
-              {pathname.includes("dashboard") ? (
-                <>
-                  <DashboardNavbar />
-                  {children}
-                  <CustomToaster />
-                  <Toaster position="top-center" reverseOrder={false} />
-                  <Footer />
-                </>
-              ) : (
-                <>
-                  <Navbar />
-                  {children}
-                  <CustomToaster />
-                  <Toaster position="top-center" reverseOrder={false} />
-                  <Footer />
-                </>
-              )}
-            </>
-          </ThemeProvider>
+          <ReactQueryProvider>
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              <>
+                {pathname.includes("dashboard") ? (
+                  <>
+                    <DashboardNavbar />
+                    {children}
+                    <CustomToaster />
+                    <Toaster position="top-center" reverseOrder={false} />
+                    <Footer />
+                  </>
+                ) : (
+                  <>
+                    <Navbar />
+                    {children}
+                    <CustomToaster />
+                    <Toaster position="top-center" reverseOrder={false} />
+                    <Footer />
+                  </>
+                )}
+              </>
+            </ThemeProvider>
+          </ReactQueryProvider>
         </StoreProvider>
       </body>
     </html>

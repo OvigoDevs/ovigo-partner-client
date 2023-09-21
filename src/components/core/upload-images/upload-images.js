@@ -18,12 +18,11 @@ const UploadImages = ({ func, name, defaultValue }) => {
 
       if (file.size < 5 * 1024 * 1024) {
         const base64 = await convertToBase64(file);
+        console.log(base64);
         files.push(base64);
         setErrors(null);
       } else {
-        setErrors(
-          `File size can't be more than 5 MB!`
-        );
+        setErrors(`File size can't be more than 5 MB!`);
       }
     }
     setPostImage({ ...postImage, myFile: [...postImage.myFile, ...files] });

@@ -96,7 +96,7 @@ const HotelDetailsCompletion = () => {
               <h4 className="font-semibold">Rooms</h4>
               {rooms.map((room) => {
                 const { roomName, addPhotos, roomDetails } = room.roomData;
-                const { unitType, roomSize, roomSizeUnit } = roomDetails;
+                const { unitType, roomSize, roomSizeUnit } = roomDetails || {};
                 console.log(roomDetails);
                 return (
                   <div

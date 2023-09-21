@@ -12,9 +12,7 @@ const AddPhotos = () => {
   // router
   const router = useRouter();
   // roomdata
-  const { roomData, rooms } = useSelector(
-    (state) => state.registerData
-  );
+  const { roomData, rooms } = useSelector((state) => state.registerData);
   // disptach
   const dispatch = useDispatch();
   // formdata
@@ -33,6 +31,7 @@ const AddPhotos = () => {
   // handleinputs
   const handleOnChange = (e) => {
     const { name, value } = e.target;
+    console.log("addphoto:", name, value);
     setFormData({ ...formData, [name]: value });
     if (!edited) {
       setEdited(true);
