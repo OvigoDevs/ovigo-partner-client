@@ -38,20 +38,7 @@ const Languages = () => {
       <div className="grid grid-cols-1 gap-3 py-5">
         <CustomCheckbox
           label="What languages you or your staff speak?"
-          options={[
-            "English",
-            "Bangla",
-            "Hindi",
-            "Urdu",
-            "Arabic",
-            "French",
-            "Latin",
-            "Russian",
-            "Japanese",
-            "Chinese",
-            "Korean",
-            "Malay",
-          ]}
+          options={["English", "Bangla", "Hindi", "Urdu", "Arabic"]}
           handleOnChange={handleOnChange}
           name="languages"
           defaultValue={languages}

@@ -48,17 +48,21 @@ const RoomPrice = () => {
 
       <div className="grid grid-cols-1 gap-4 pt-5">
         <div className="space-y-3">
-          <h4 className="">
-            How much do you want to charge per night?
-          </h4>
+          <h4 className="">How much do you want to charge per night?</h4>
           <div className="space-y-1">
             <p>Price guests pay</p>
-            <input className="w-full" type="number" placeholder="Enter amount in BDT" defaultValue={roomprice} onChange={(e) => {
-              setRoomprice(e.target.value);
-              if(errorMessage){
-                setErrorMessage(null)
-              }
-            }}/>
+            <input
+              className="w-full form-input"
+              type="number"
+              placeholder="Enter amount in BDT"
+              defaultValue={roomprice}
+              onChange={(e) => {
+                setRoomprice(e.target.value);
+                if (errorMessage) {
+                  setErrorMessage(null);
+                }
+              }}
+            />
             <p>including taxes, commision and fees</p>
             <InputError error={errorMessage} />
           </div>
@@ -95,7 +99,9 @@ const RoomPrice = () => {
       </div>
 
       <div className="pt-5">
-        <Button className='w-full' onClick={handleOnSubmit}>Submit</Button>
+        <Button className="w-full" onClick={handleOnSubmit}>
+          Submit
+        </Button>
       </div>
     </div>
   );

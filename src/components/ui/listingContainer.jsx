@@ -1,5 +1,6 @@
 import React from "react";
 import ListingContent from "./listingContent";
+import Link from "next/link";
 
 const ListingContainer = () => {
   return (
@@ -19,9 +20,12 @@ const ListingContainer = () => {
           </p>
         </div>
         <div className="flex justify-center mt-10">
-          <button className="main-button md:w-[614px] w-full">
+          <Link
+            href="/register/service-category"
+            className="main-button md:w-[614px] w-full"
+          >
             Get Started
-          </button>
+          </Link>
         </div>
       </div>
     </div>

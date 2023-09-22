@@ -96,11 +96,21 @@ const HotelDetailsCompletion = () => {
               <h4 className="font-semibold">Rooms</h4>
               {rooms.map((room) => {
                 const { roomName, addPhotos, roomDetails } = room.roomData;
-                const {unitType, roomSize, roomSizeUnit} = roomDetails;
+                const { unitType, roomSize, roomSizeUnit } = roomDetails || {};
+                console.log(roomDetails);
                 return (
-                  <div key={room.id} className="border rounded-md flex items-center">
+                  <div
+                    key={room.id}
+                    className="border rounded-md flex items-center"
+                  >
                     <div>
-                      <Image src={addPhotos.mainImage[0]} alt="" height={100} width={100} className="max-h-[60px] w-auto"/>
+                      <Image
+                        src={addPhotos.mainImage[0]}
+                        alt=""
+                        height={100}
+                        width={100}
+                        className="max-h-[60px] w-auto"
+                      />
                     </div>
                     <div className="p-[0.5rem] grid grid-cols-1 gap-[0.1rem]">
                       <h4 className="font-semibold">{`${roomName} - ${unitType}`}</h4>

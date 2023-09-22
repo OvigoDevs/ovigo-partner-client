@@ -15,19 +15,20 @@ const NoOfHotel = () => {
   const options = [
     {
       id: 0,
-      text: "One hotel with one or multiple rooms that guests can book",
+      text: "Multiple hotels with one or multiple rooms that guests can book",
       icon: (
         <IconWrapper>
-          <Hotel />
+          <Newspaper />
         </IconWrapper>
       ),
     },
     {
       id: 1,
-      text: "Multiple hotels with one or multiple rooms that guests can book",
+      text: "One hotel with one or multiple rooms that guests can book",
+
       icon: (
         <IconWrapper>
-          <Newspaper />
+          <Hotel />
         </IconWrapper>
       ),
     },
@@ -58,7 +59,10 @@ const NoOfHotel = () => {
   }, []);
   return (
     <div className="section-d max-w-[500px]">
-      <Backlink link="/register/hotel/hotel-categories" text="Hotel categories" />
+      <Backlink
+        link="/register/hotel/hotel-categories"
+        text="Hotel categories"
+      />
       <p>How many hotel are you listing?</p>
 
       <div className="rounded-md mt-5 grid grid-cols-1 gap-4">

@@ -11,6 +11,11 @@ import { ThumbsUp } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { districts } from "../allPlacesData/districts";
+import { subDistricts } from "../allPlacesData/sub-district";
+import { FiChevronDown, FiChevronUp } from "react-icons/fi";
+import { divisions } from "../allPlacesData/divisions";
+import { useQuery } from "@tanstack/react-query";
 
 const HotelAddress = () => {
   const router = useRouter();
@@ -20,10 +25,58 @@ const HotelAddress = () => {
     country: "Bangladesh",
     streetAddress: "",
     zipCode: "",
-    city: "",
   });
   const [edited, setEdited] = useState(false);
   const [errors, setErrors] = useState(edited ? address : {});
+
+  //division, district, and sub-district toggle icon
+  const [divisionToggleIcon, setDivisionToggleIcon] = useState(false);
+  const [districtToggleIcon, setDistrictToggleIcon] = useState(false);
+  const [subDistrictToggleIcon, setSubDistrictToggleIcon] = useState(false);
+
+  //division, district, and sub-district state
+  const [allDistricts, setAllDistricts] = useState([]);
+  const [allSubDistrict, setAllSubDistrict] = useState([]);
+  const [division, setDivision] = useState("");
+  const [district, setDistrict] = useState("");
+  const [sub_district, setSubDistrict] = useState("");
+
+  console.log("division:", division, "dist:", district, "sub:", sub_district);
+  // get Division, district and sub-district Value
+  const getDivisionValue = (e) => {
+    setDivision(e.target.textContent);
+    setAddress({ ...address, division: e.target.textContent });
+    setDivisionToggleIcon(false);
+  };
+
+  const getDistrictValue = (e) => {
+    setDistrict(e.target.textContent);
+    setAddress({ ...address, district: e.target.textContent });
+    setSubDistrictToggleIcon(false);
+  };
+
+  const getSubDistrictValue = (e) => {
+    setSubDistrict(e.target.textContent);
+    setAddress({ ...address, subDistrict: e.target.textContent });
+    setDistrictToggleIcon(false);
+  };
+
+  //get to district from division
+  const getDistrictFromDivision = (division) => {
+    const getDistrict = districts.filter(
+      (district) => district.division_id === division.id
+    );
+    console.log(getDistrict);
+    setAllDistricts(getDistrict);
+  };
+
+  // get subDistrict from districts
+  const getSubDistrictFromDivision = (district) => {
+    const getUpazilla = subDistricts.filter(
+      (upazilla) => upazilla.district_id === district.id
+    );
+    setAllSubDistrict(getUpazilla);
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -36,6 +89,7 @@ const HotelAddress = () => {
   const handleSubmit = () => {
     setErrors(validator(address));
   };
+
   const validator = (data) => {
     let obj = {};
     if (!data.streetAddress.trim()) {
@@ -44,9 +98,9 @@ const HotelAddress = () => {
     if (!data.zipCode.trim()) {
       obj.zipCode = "Street address is required!";
     }
-    if (!data.city.trim()) {
-      obj.city = "Street address is required!";
-    }
+    // if (!data.city.trim()) {
+    //   obj.city = "Street address is required!";
+    // }
 
     return obj;
   };
@@ -63,12 +117,14 @@ const HotelAddress = () => {
       router.push("/register/hotel/hotel-information");
     }
   }, [errors]);
+
   useEffect(() => {
     setEdited(true);
     if (hotelData.hotelAddress) {
       setAddress(hotelData.hotelAddress);
     }
   }, []);
+
   return (
     <div className="py-5">
       <Backlink
@@ -82,11 +138,17 @@ const HotelAddress = () => {
           <div className="mt-5 space-y-3">
             <div className="grid grid-cols-1 gap-2">
               <label>Country/Region</label>
-              <input name="country" readOnly defaultValue={address.country} />
+              <input
+                className="form-input"
+                name="country"
+                readOnly
+                defaultValue={address.country}
+              />
             </div>
             <div className="grid grid-cols-1 gap-2">
               <label>Street Name and House Number</label>
               <input
+                className="form-input"
                 name="streetAddress"
                 type="text"
                 value={address.streetAddress}
@@ -98,6 +160,7 @@ const HotelAddress = () => {
             <div className="grid grid-cols-1 gap-2">
               <label>ZIP Code</label>
               <input
+                className="form-input"
                 name="zipCode"
                 type="number"
                 value={address.zipCode}
@@ -106,16 +169,147 @@ const HotelAddress = () => {
               />
               <InputError error={errors.zipCode} />
             </div>
-            <div className="grid grid-cols-1 gap-2">
-              <label>City</label>
-              <input
-                name="city"
-                type="text"
-                value={address.city}
-                onChange={handleInputChange}
-                placeholder="Enter Hotel City"
-              />
-              <InputError error={errors.city} />
+            {/* //division */}
+            <div>
+              <label
+                htmlFor="division"
+                className="text-black dark:text-white text-base font-semibold mb-3"
+              >
+                Division
+              </label>
+              <div
+                className="relative w-ful mt-3 rounded cursor-pointer"
+                onClick={() => setDivisionToggleIcon(!divisionToggleIcon)}
+              >
+                <input
+                  type="text"
+                  placeholder="Select Division"
+                  value={division}
+                  className="form-input w-full"
+                />
+                <InputError error={errors.division} />
+                <div className="absolute right-3 top-2">
+                  {divisionToggleIcon ? (
+                    <>
+                      <FiChevronUp className="text-gray-900 dark:text-white text-2xl cursor-pointer" />
+                    </>
+                  ) : (
+                    <>
+                      <FiChevronDown className="text-gray-900 dark:text-white text-2xl cursor-pointer" />
+                    </>
+                  )}
+                </div>
+                {divisionToggleIcon && (
+                  <ul className="dark:bg-slate-800 bg-[#f2f3f3] px-2 pt-2 pb-3 dark:text-white text-gray-900">
+                    {divisions.map((division) => (
+                      <li
+                        key={division.id}
+                        onClick={() => getDistrictFromDivision(division)}
+                        className="cursor-pointer text-base my-2"
+                      >
+                        <span onClick={(e) => getDivisionValue(e)}>
+                          {division.name}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </div>
+
+            {/* //District */}
+            <div>
+              <label
+                htmlFor="division"
+                className="text-black dark:text-white text-base font-semibold mb-3"
+              >
+                District
+              </label>
+              <div
+                className="relative w-ful mt-3 rounded cursor-pointer"
+                onClick={() => setDistrictToggleIcon(!districtToggleIcon)}
+              >
+                <input
+                  type="text"
+                  placeholder="Select District"
+                  value={district}
+                  className="form-input w-full"
+                />
+                <InputError error={errors.district} />
+                <div className="absolute right-3 top-2">
+                  {districtToggleIcon ? (
+                    <>
+                      <FiChevronUp className="text-gray-900 dark:text-white text-2xl cursor-pointer" />
+                    </>
+                  ) : (
+                    <>
+                      <FiChevronDown className="text-gray-900 dark:text-white text-2xl cursor-pointer" />
+                    </>
+                  )}
+                </div>
+                {districtToggleIcon && (
+                  <ul className="dark:bg-slate-800 bg-[#f2f3f3] px-2 pt-2 pb-3 dark:text-white text-gray-900">
+                    {allDistricts?.map((district) => (
+                      <li
+                        key={district.id}
+                        onClick={() => getSubDistrictFromDivision(district)}
+                        className="cursor-pointer text-base my-2"
+                      >
+                        <span onClick={(e) => getDistrictValue(e)}>
+                          {district.name}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </div>
+            {/* //Sub District */}
+            <div>
+              <label
+                htmlFor="division"
+                className="text-black dark:text-white text-base font-semibold mb-3"
+              >
+                Sub District
+              </label>
+              <div
+                className="relative w-ful mt-3 rounded cursor-pointer"
+                onClick={() => setSubDistrictToggleIcon(!subDistrictToggleIcon)}
+              >
+                <input
+                  type="text"
+                  placeholder="Select Sub District"
+                  value={sub_district}
+                  className="form-input w-full"
+                />
+                <InputError error={errors.subDistrict} />
+                <div className="absolute right-3 top-2">
+                  {subDistrictToggleIcon ? (
+                    <>
+                      <FiChevronUp className="text-gray-900 dark:text-white text-2xl cursor-pointer" />
+                    </>
+                  ) : (
+                    <>
+                      <FiChevronDown className="text-gray-900 dark:text-white text-2xl cursor-pointer" />
+                    </>
+                  )}
+                </div>
+                {subDistrictToggleIcon && (
+                  <ul className="dark:bg-slate-800 bg-[#f2f3f3] px-2 pt-2 pb-3 dark:text-white text-gray-900">
+                    {allSubDistrict?.map((district) => (
+                      <li
+                        key={district.id}
+                        // onClick={() => getSubDistrictFromDivision(district)}
+                        className="cursor-pointer text-base my-2"
+                      >
+                        <span onClick={(e) => getSubDistrictValue(e)}>
+                          {district.name}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
             </div>
           </div>
           <hr className="my-5" />

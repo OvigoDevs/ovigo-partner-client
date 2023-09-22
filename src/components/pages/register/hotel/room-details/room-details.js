@@ -184,8 +184,8 @@ const RoomDetails = () => {
     }
     if (!data.roomSizeUnit) {
       obj.roomSizeUnit = "Room size unit is required!";
-    } 
-     
+    }
+
     return obj;
   };
   // useEffect > dispatch > setcookie > router
@@ -209,7 +209,7 @@ const RoomDetails = () => {
   }, []);
   return (
     <div className="py-5 max-w-[500px]">
-      <Backlink link="/register/hotel/hotel-details-completion" text="Back"/>
+      <Backlink link="/register/hotel/hotel-details-completion" text="Back" />
       <h4 className="font-bold">Room Details</h4>
 
       {/* Bed Details Container */}
@@ -245,10 +245,10 @@ const RoomDetails = () => {
             How many rooms of this type do you have?
           </h4>
           <input
+            className="form-input w-full"
             min={0}
             type="number"
             name="sameTypeRooms"
-            className="w-full"
             placeholder="Enter the quantity of this type of room"
             onChange={(e) =>
               handleOnChange({
@@ -325,13 +325,13 @@ const RoomDetails = () => {
 
       <div className="grid grid-cols-1 gap-2 py-[1rem] my-[1rem] border rounded-md p-[1rem]">
         <h3>How big is this room?</h3>
-        <div className="grid grid-cols-3">
+        <div className="grid grid-cols-3 gap-3">
           <input
             type="number"
             name="roomSize"
             defaultValue={formData.roomSize}
             onChange={handleOnChange}
-            className="col-span-2"
+            className="col-span-2 form-input"
           />
           <Select
             onValueChange={(value) =>

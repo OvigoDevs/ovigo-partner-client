@@ -25,7 +25,7 @@ const ServiceCategory = () => {
     },
   ];
   return (
-    <div className="pt-5">
+    <div className="pt-5 lg:mb-20 mb-5">
       <Backlink link="/register/create-password" text="Create Password" />
       <h2 className="text-sm font-semibold pb-2">Service Category</h2>
       <p>List your service on Ovigo and start welcoming your customer</p>
