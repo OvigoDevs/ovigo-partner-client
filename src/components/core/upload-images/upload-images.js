@@ -1,6 +1,8 @@
 import { X } from "lucide-react";
-import Image from "next/image";
-import { useEffect, useState } from "react";
+// import Image from "next/image";
+import imageUploader from "@/components/ui/imageUploader";
+import { useState } from "react";
+import toast from "react-hot-toast";
 import IconWrapper from "../icon-wrapper/icon-wrapper";
 import InputError from "../input-error/input-error";
 
@@ -8,34 +10,49 @@ const UploadImages = ({ func, name, defaultValue }) => {
   const [postImage, setPostImage] = useState({
     myFile: defaultValue ? defaultValue : [],
   });
-  const [imageName, setImageName] = useState("Upload picture");
+  console.log(postImage)
+  const [imageName, setImageName] = useState([]);
   const [errors, setErrors] = useState(null);
 
-  const handleFileUpload = async (e) => {
-    let files = [];
-    for (let i = 0; i < e.target.files.length; i++) {
-      const file = e.target.files[i];
-
-      if (file.size < 5 * 1024 * 1024) {
-        const base64 = await convertToBase64(file);
-        console.log(base64);
-        files.push(base64);
-        setErrors(null);
-      } else {
-        setErrors(`File size can't be more than 5 MB!`);
-      }
+  const handleFileUpload = async (fieldName) => {
+    console.log("dsk",fieldName)
+    toast.error("Please wait a minute");
+    if (imageName?.length == 0) {
+      const image = await imageUploader(fieldName[0]);
+      console.log(image)
+      if (image[1] == "OK") {
+        const updatedImage = image[0];
+        setImageName(updatedImage);
+        toast.success("Now Add Another Picture");
+      } else toast.error("Something Wrong");
     }
-    setPostImage({ ...postImage, myFile: [...postImage.myFile, ...files] });
+  
+    // for (let i = 0; i < e.target.files.length; i++) {
+    //   const file = e.target.files[i];
+    //   const imgUrl = imageUploader(file)
+    //   console.log(imgUrl)
+      // if (file.size < 5 * 1024 * 1024) {
+      //   const base64 = await convertToBase64(file);
+      //   // console.log("image Name",base64);
+      //    
+      //    console.log("Img url", imgUrl)
+      //   // files.push(");
+      //   setErrors(null);
+      // } else {
+      //   setErrors(`File size can't be more than 5 MB!`);
+      // }
+    // }
+    // setPostImage({ ...postImage, myFile: [...postImage.myFile, ...files] });
   };
 
-  useEffect(() => {
-    func({
-      target: {
-        name: name,
-        value: postImage.myFile,
-      },
-    });
-  }, [postImage]);
+  // useEffect(() => {
+  //   func({
+  //     target: {
+  //       name: name,
+  //       value: postImage.myFile,
+  //     },
+  //   });
+  // }, [postImage]);
   return (
     <div className="rounded-md border dark:border-gray-800 p-2">
       {postImage.myFile.length ? (
@@ -44,28 +61,29 @@ const UploadImages = ({ func, name, defaultValue }) => {
             return (
               <div key={index} className="relative">
                 <div
-                  className="absolute right-0 top-0 m-1 cursor-pointer text-gray-400 hover:text-red-400"
-                  onClick={() => {
-                    setPostImage({
-                      ...postImage,
-                      myFile: [
-                        ...postImage.myFile.filter((image) => image !== item),
-                      ],
-                    });
-                  }}
+                  className="absolute right-0 top-0 m-1 cursor-pointer text-gray-400 hover:text-red-400"                  
                 >
+                  <input
+                  key={index}
+                  type="file"
+                  onChange={(e) =>
+                    handleFileUpload("overview", e.target.files)
+                  }
+                  // ref={(ref) => (fileInputRefsOverview.current[index] = ref)}
+                  className="file-input w-full max-w-xs mt-3"
+                />
                   <IconWrapper>
                     <X className="bg-white border rounded-full dark:text-gray-600" />
                   </IconWrapper>
                 </div>
 
-                <Image
+                {/* <Image
                   src={item}
                   alt="image"
                   height={100}
                   width={100}
                   className="h-[100px] w-[100px] rounded-md"
-                />
+                /> */}
               </div>
             );
           })}
