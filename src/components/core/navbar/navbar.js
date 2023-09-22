@@ -14,7 +14,7 @@ const Navbar = () => {
     },
   ];
   return (
-    <div>
+    <div className=" md:backdrop-blur md:sticky md:top-0 md:z-50 border-b">
       <div className="px-7 py-2 border-b flex w-full items-center justify-between md:hidden">
         <button className="rounded-md text-[16px] font-semibold text-base border border-[#26DE81] capitalize hover:text-gray-800 duration-300 dark:hover:text-white h-[40px] px-[12px]  flex items-center gap-2  ">
           get App <HiOutlineDevicePhoneMobile />
@@ -30,7 +30,7 @@ const Navbar = () => {
           <ModeToggle />
         </div>
       </div>
-      <div className="container flex items-center justify-between py-[20px] gap-5  backdrop-blur sticky top-0 z-50 border-b ">
+      <div className="container flex items-center justify-between py-[20px] gap-5  ">
         <Link href="/">
           <div className="cursor-default lg:cursor-pointer">
             <Image
