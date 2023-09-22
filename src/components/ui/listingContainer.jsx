@@ -22,7 +22,7 @@ const ListingContainer = () => {
         <div className="flex justify-center mt-10">
           <Link
             href="/register/service-category"
-            className="main-button md:w-[614px] w-full"
+            className="main-button md:w-[614px] w-full text-center"
           >
             Get Started
           </Link>

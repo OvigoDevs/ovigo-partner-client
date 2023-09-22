@@ -78,7 +78,7 @@ const HouseRules = () => {
 
     return obj;
   };
-  // useEffect > dispatch > setCookie > router
+
   useEffect(() => {
     if (Object.keys(errors).length === 0 && edited) {
       // dispatch
@@ -89,10 +89,13 @@ const HouseRules = () => {
       );
       // setcookie
       setCookie("hotelData", { ...hotelData, houseRules: formData }, "1h");
-      // router
+      // routing
       router.push("/register/hotel/hotel-details-completion");
     }
   }, [errors]);
+
+  console.log("form data is: ", formData);
+
   // useEffect > edited
   useEffect(() => {
     setEdited(true);
@@ -144,7 +147,7 @@ const HouseRules = () => {
           />
           <InputError error={errors.allowPet} />
 
-          {formData.allowPet === "Yes, pets can stay for paid" ? (
+          {formData?.allowPet === "Yes, pets can stay for paid" ? (
             <>
               <input
                 className="form-input mx-2"

@@ -109,7 +109,9 @@ const HotelInformation = () => {
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify({ place_name: e.target.value }),
+        body: JSON.stringify({
+          place_name: e.target.value || hotelData.hotelInformation.placeName,
+        }),
       }
     )
       .then((res) => res.json())
@@ -212,7 +214,6 @@ const HotelInformation = () => {
             </label>
             <select
               onChange={handlePrimaryPlaceName}
-              value={hotelData.hotelInformation.placeName}
               className="form-input w-full text-black dark:text-white mt-3"
               id="place"
             >

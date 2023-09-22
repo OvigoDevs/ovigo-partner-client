@@ -348,7 +348,10 @@ const RoomDetails = () => {
               <SelectValue placeholder="Size unit" />
             </SelectTrigger>
             <SelectContent>
-              <SelectGroup className="grid grid-cols-1 gap-2">
+              <SelectGroup
+                className="grid grid-cols-1 gap-2"
+                placeholder="select teher"
+              >
                 {[
                   {
                     id: 0,

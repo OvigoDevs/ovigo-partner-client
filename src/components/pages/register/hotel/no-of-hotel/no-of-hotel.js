@@ -13,15 +13,15 @@ import InputError from "@/components/core/input-error/input-error";
 
 const NoOfHotel = () => {
   const options = [
-    {
-      id: 0,
-      text: "Multiple hotels with one or multiple rooms that guests can book",
-      icon: (
-        <IconWrapper>
-          <Newspaper />
-        </IconWrapper>
-      ),
-    },
+    // {
+    //   id: 0,
+    //   text: "Multiple hotels with one or multiple rooms that guests can book",
+    //   icon: (
+    //     <IconWrapper>
+    //       <Newspaper />
+    //     </IconWrapper>
+    //   ),
+    // },
     {
       id: 1,
       text: "One hotel with one or multiple rooms that guests can book",
