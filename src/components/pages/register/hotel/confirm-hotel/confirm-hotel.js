@@ -44,8 +44,8 @@ const ConfirmHotel = () => {
         { ...hotelData, confirmHotel: confirmhotel },
         "1h"
       );
-        // need to hit API to save these data in DB
-      console.log({registerData, hotelData, rooms})
+      //TODO: need to hit API to save these data in DB
+      console.log({ registerData, hotelData, rooms });
 
       // router
       // router.push("/dashboard");
@@ -53,7 +53,10 @@ const ConfirmHotel = () => {
   };
   return (
     <div className="py-5 max-w-[500px]">
-      <Backlink link="/register/hotel/important-info" text="Important information" />
+      <Backlink
+        link="/register/hotel/important-info"
+        text="Important information"
+      />
       <div className="grid grid-cols-1 gap-4">
         <div className="border rounded-md p-5 space-y-4">
           <h4 className="text-lg">

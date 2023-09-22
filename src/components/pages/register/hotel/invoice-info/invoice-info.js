@@ -117,7 +117,7 @@ const InvoiceInfo = () => {
                   Legal Company Name (Please specify)
                 </h4>
                 <input
-                  className="w-full mt-2"
+                  className="form-input w-full mt-2"
                   name="legalCompanyName"
                   type="text"
                   placeholder="Legal Company Name"

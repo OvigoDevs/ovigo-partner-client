@@ -161,7 +161,7 @@ label {
 }
 
 .sub-button {
-  @apply px-[18px] py-[10px] text-[#26DE81] rounded-md text-[16px] font-semibold text-base border border-[#26DE81] capitalize hover:text-gray-800 duration-300 dark:hover:text-white;
+  @apply px-[18px] py-[5px] md:py-[10px] text-[#26DE81] rounded-md text-[16px] font-semibold text-base border border-[#26DE81] capitalize hover:text-gray-800 duration-300 dark:hover:text-white;
 }
 
 // custom scroll bar

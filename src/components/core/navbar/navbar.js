@@ -14,23 +14,12 @@ const Navbar = () => {
     },
   ];
   return (
-    <div className="container flex items-center justify-between py-[20px] gap-5  backdrop-blur sticky top-0 z-50 border-b ">
-      <Link href="/">
-        <div className="cursor-default lg:cursor-pointer">
-          <Image
-            src="/images/OvigoLogo.svg"
-            alt="Logo"
-            width={30}
-            height={30}
-            className="w-[100px]"
-          />
-        </div>
-      </Link>
-      <nav className="flex items-center gap-[24px]">
-        <button className="sub-button flex items-center gap-2">
+    <div>
+      <div className="px-7 py-2 border-b flex w-full items-center justify-between md:hidden">
+        <button className="rounded-md text-[16px] font-semibold text-base border border-[#26DE81] capitalize hover:text-gray-800 duration-300 dark:hover:text-white h-[40px] px-[12px]  flex items-center gap-2  ">
           get App <HiOutlineDevicePhoneMobile />
         </button>
-        <div className="flex items-center gap-2">
+        <div className=" flex justify-end items-center  py-3 gap-2 ">
           <span className="w-10 h-10 rounded-full bg-[#cff1ef] text-[#136f40] duration-300 flex items-center justify-center cursor-pointer">
             <AiOutlineQuestionCircle className="text-xl" />
           </span>
@@ -40,11 +29,39 @@ const Navbar = () => {
           </span>
           <ModeToggle />
         </div>
-
-        <Link href="/register/with-email" className="main-button">
-          Register Service
+      </div>
+      <div className="container flex items-center justify-between py-[20px] gap-5  backdrop-blur sticky top-0 z-50 border-b ">
+        <Link href="/">
+          <div className="cursor-default lg:cursor-pointer">
+            <Image
+              src="/images/OvigoLogo.svg"
+              alt="Logo"
+              width={30}
+              height={30}
+              className="w-[100px]"
+            />
+          </div>
         </Link>
-      </nav>
+        <nav className="flex items-center gap-[24px]">
+          <button className="sub-button md:flex items-center gap-2 hidden ">
+            get App <HiOutlineDevicePhoneMobile />
+          </button>
+          <div className="md:flex items-center gap-2 hidden">
+            <span className="w-10 h-10 rounded-full bg-[#cff1ef] text-[#136f40] duration-300 flex items-center justify-center cursor-pointer">
+              <AiOutlineQuestionCircle className="text-xl" />
+            </span>
+
+            <span className="w-10 h-10 rounded-full bg-[#cff1ef] text-[#136f40] duration-300 flex items-center justify-center cursor-pointer">
+              <FaRegBell className="text-xl" />
+            </span>
+            <ModeToggle />
+          </div>
+
+          <Link href="/register/with-email" className="main-button">
+            Register Service
+          </Link>
+        </nav>
+      </div>
     </div>
   );
 };

@@ -218,7 +218,7 @@ const HotelInformation = () => {
               id="place"
             >
               <option value="">please choose one</option>
-              {uniqueArray.map((allPlace) => (
+              {uniqueArray?.map((allPlace) => (
                 <option key={allPlace._id} value={allPlace.primary_place_name}>
                   {allPlace.primary_place_name}
                 </option>
