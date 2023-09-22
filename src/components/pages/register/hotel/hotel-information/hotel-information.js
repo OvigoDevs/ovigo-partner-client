@@ -8,6 +8,8 @@ import InputError from "@/components/core/input-error/input-error";
 import { Button } from "@/components/ui/button";
 import Backlink from "@/components/core/backlink/backlink";
 import { useQuery } from "@tanstack/react-query";
+import IconWrapper from "@/components/core/icon-wrapper/icon-wrapper";
+import { X } from "lucide-react";
 
 const HotelInformation = () => {
   // router instance
@@ -15,6 +17,11 @@ const HotelInformation = () => {
   // redux data
   const { hotelData } = useSelector((state) => state.registerData);
   const dispatch = useDispatch();
+
+  const [spotName, setSpotName] = useState([]);
+  const [selected, setSelected] = useState([]);
+
+  console.log("selected value", selected);
 
   // form state
   const [formData, setFormData] = useState(
@@ -25,10 +32,9 @@ const HotelInformation = () => {
           hotelRating: "",
           propertyManagementEntity: "",
           managementEntityName: "",
+          spotNames: selected,
         }
   );
-
-  // const [primaryPlaceName, setPrimaryPlaceName] = useState(null);
 
   const { district, division, subDistrict } = hotelData.hotelAddress;
 
@@ -93,6 +99,7 @@ const HotelInformation = () => {
 
   //handlePrimaryPlaceName
   const handlePrimaryPlaceName = (e) => {
+    //placename save into localhost
     setFormData({ ...formData, placeName: e.target.value });
 
     fetch(
@@ -106,10 +113,12 @@ const HotelInformation = () => {
       }
     )
       .then((res) => res.json())
-      .then((data) => console.log("spot name data", data))
+      .then((data) => {
+        setSpotName(data);
+      })
       .catch((err) => console.log(err));
   };
-  // console.log("primary-place-name: ", primaryPlaceName);
+  console.log("Spot name data: ", spotName);
 
   //TODO: spot_name working, and input verify working and add cold loading animation tomorrow
 
@@ -162,6 +171,10 @@ const HotelInformation = () => {
     setEdited(true);
   }, []);
 
+  useEffect(() => {
+    setFormData({ ...formData, spotNames: selected });
+  }, [selected]);
+
   if (isLoading) {
     return (
       <h2 className="text-4xl text-red-600 text-center">Loading...........</h2>
@@ -199,9 +212,11 @@ const HotelInformation = () => {
             </label>
             <select
               onChange={handlePrimaryPlaceName}
+              value={hotelData.hotelInformation.placeName}
               className="form-input w-full text-black dark:text-white mt-3"
               id="place"
             >
+              <option value="">please choose one</option>
               {uniqueArray.map((allPlace) => (
                 <option key={allPlace._id} value={allPlace.primary_place_name}>
                   {allPlace.primary_place_name}
@@ -209,6 +224,50 @@ const HotelInformation = () => {
               ))}
             </select>
           </div>
+
+          {/* //spot name start here  */}
+          <div className="grid grid-cols-1 gap-2">
+            <div>
+              <label>What type of breakfast do you offer?</label>
+              <p className="text-gray-400 dark:text-gray-600">
+                Select all that apply
+              </p>
+            </div>
+            <ul className="flex flex-wrap items-start justify-start gap-2">
+              {spotName?.data?.map((item) => {
+                return (
+                  <li
+                    key={item._id}
+                    className={`relative px-2 py-1 rounded-md border text-xs   hover:border-gray-600 lg:cursor-pointer flex items-center justify-center gap-2 ${
+                      selected.find((li) => li._id === item._id)
+                        ? "border-red-400 hover:border-red-600"
+                        : "dark:border-gray-800 dark:hover:border-gray-400"
+                    }`}
+                    onClick={() => {
+                      if (selected.find((li) => li._id === item._id)) {
+                        setSelected([
+                          ...selected.filter((li) => li._id !== item._id),
+                        ]);
+                      } else {
+                        setSelected([...selected, item]);
+                      }
+                    }}
+                  >
+                    {item.spot_name}
+                    {selected.find((li) => li._id === item._id) ? (
+                      <div className="border-l pl-1">
+                        <IconWrapper>
+                          <X className="text-red-400 hover:text-red-600" />
+                        </IconWrapper>
+                      </div>
+                    ) : null}
+                  </li>
+                );
+              })}
+            </ul>
+            <InputError error={errors.breakfastsTypes} />
+          </div>
+          {/* //spot name end here  */}
           <hr />
           <div className="grid grid-cols-1 gap-2">
             <CustomRadio
