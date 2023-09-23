@@ -1,17 +1,15 @@
-import Image from "next/image";
-import CustomCheckbox from "@/components/core/custom-checkbox/custom-checkbox";
-import { Button } from "@/components/ui/button";
-import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
-import { setCookie } from "@/lib/cookie";
-import InputError from "@/components/core/input-error/input-error";
-import {
-  MaxID_generator,
-  addNewHotel,
-  confirmHotel,
-} from "@/redux/features/register_slice";
-import { useRouter } from "next/navigation";
 import Backlink from "@/components/core/backlink/backlink";
+import CustomCheckbox from "@/components/core/custom-checkbox/custom-checkbox";
+import InputError from "@/components/core/input-error/input-error";
+import { Button } from "@/components/ui/button";
+import { setCookie } from "@/lib/cookie";
+import {
+  confirmHotel
+} from "@/redux/features/register_slice";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const ConfirmHotel = () => {
   // router
@@ -20,6 +18,10 @@ const ConfirmHotel = () => {
   const { hotelData, rooms, registerData } = useSelector(
     (state) => state.registerData
   );
+  
+console.log("first", hotelData)
+console.log("sec", rooms)
+
   // dispatch
   const dispatch = useDispatch();
   // confirmhotelState

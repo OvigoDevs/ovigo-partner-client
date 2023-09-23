@@ -4,7 +4,13 @@ const configNext = {
     FrontendHost: "http://localhost:3000",
   },
   images: {
-    domains: ["i.ibb.co"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      }
+    ],
+    
   },
 };
 
