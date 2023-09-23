@@ -16,7 +16,7 @@ const Navbar = () => {
   return (
     <div className=" md:backdrop-blur md:sticky md:top-0 md:z-50 border-b">
       <div className="px-7 py-2 border-b flex w-full items-center justify-between md:hidden">
-        <button className="rounded-md text-[16px] font-semibold text-base border border-[#26DE81] capitalize hover:text-gray-800 duration-300 dark:hover:text-white h-[40px] px-[12px]  flex items-center gap-2  ">
+        <button className="rounded-md text-[16px] text-[#26DE81] font-semibold text-base border border-[#26DE81] capitalize hover:text-gray-800 duration-300 dark:hover:text-white h-[40px] px-[12px]  flex items-center gap-2  ">
           get App <HiOutlineDevicePhoneMobile />
         </button>
         <div className=" flex justify-end items-center  py-3 gap-2 ">
