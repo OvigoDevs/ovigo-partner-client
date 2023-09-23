@@ -94,8 +94,6 @@ const HouseRules = () => {
     }
   }, [errors]);
 
-  console.log("form data is: ", formData);
-
   // useEffect > edited
   useEffect(() => {
     setEdited(true);
