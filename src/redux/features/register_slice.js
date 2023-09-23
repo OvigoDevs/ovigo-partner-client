@@ -34,7 +34,7 @@ const initialState = {
   hotelData,
   roomData,
   rooms,
-  tourPackageData
+  tourPackageData,
 };
 
 // maximum id generator
@@ -127,10 +127,10 @@ export const registerSlice = createSlice({
       state.roomData = {};
     },
     tourOrganizer: (state, action) => {
-      state.tourPackageData.tourOrganizer = action.payload.tourOrganizer
+      state.tourPackageData.tourOrganizer = action.payload.tourOrganizer;
     },
     tourDateAndTime: (state, action) => {
-      state.tourPackageData.tourDateAndTime = action.payload.tourDateAndTime
+      state.tourPackageData.tourDateAndTime = action.payload.tourDateAndTime;
     },
   },
 });
@@ -161,6 +161,6 @@ export const {
   houseRules,
   addNewHotel,
   tourOrganizer,
-  tourDateAndTime
+  tourDateAndTime,
 } = registerSlice.actions;
 export default registerSlice.reducer;

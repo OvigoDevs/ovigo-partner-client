@@ -23,7 +23,7 @@ const RoomFeatures = () => {
           generalAmenities: [],
           outdoorsAndViews: [],
           foodAndDrink: [],
-          mainView: "",
+          // mainView: "",
         }
   );
   // edited
@@ -59,7 +59,6 @@ const RoomFeatures = () => {
     if (!data.foodAndDrink.length) {
       obj.foodAndDrink = "At least select one please!";
     }
-
     if (data.outdoorsAndViews.length) {
       if (formData.outdoorsAndViews.find((item) => item === "View")) {
         if (!data.mainView.trim()) {
@@ -135,6 +134,7 @@ const RoomFeatures = () => {
                     name="mainView"
                     onChange={handleOnChange}
                     defaultValue={formData.mainView}
+                    className="form-input"
                   />
                 </div>
               ) : null}

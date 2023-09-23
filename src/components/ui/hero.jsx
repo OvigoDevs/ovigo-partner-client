@@ -8,7 +8,8 @@ import hero4 from "../../assets/home/hero-4.png";
 const Hero = () => {
   return (
     <div>
-      <div className="bg-white dark:bg-[#020817]">
+      {/* dark:bg-[#020817] */}
+      <div className="bg-white dark:bg-[#101010]">
         <div className="container px-6 py-10 mx-auto">
           <div className="items-center lg:flex">
             <div className="w-full lg:w-1/2">

@@ -10,20 +10,26 @@ import Backlink from "@/components/core/backlink/backlink";
 import { useQuery } from "@tanstack/react-query";
 import IconWrapper from "@/components/core/icon-wrapper/icon-wrapper";
 import { X } from "lucide-react";
+import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
 const HotelInformation = () => {
   // router instance
   const router = useRouter();
-  // redux data
+  //* redux data
   const { hotelData } = useSelector((state) => state.registerData);
   const dispatch = useDispatch();
 
   const [spotName, setSpotName] = useState([]);
   const [selected, setSelected] = useState([]);
+  const [primaryPlaceName, setPrimaryPlaceName] = useState("");
+  const [placeName, setPlaceName] = useState("");
+  const [placeNameToggleIcon, setPlaceNameToggleIcon] = useState(false);
 
-  console.log("selected value", selected);
+  const getDivisionValue = (e) => {
+    setDivisionToggleIcon(false);
+  };
 
-  // form state
+  //? form state
   const [formData, setFormData] = useState(
     hotelData.hotelInformation
       ? hotelData.hotelInformation
@@ -32,6 +38,7 @@ const HotelInformation = () => {
           hotelRating: "",
           propertyManagementEntity: "",
           managementEntityName: "",
+          distanceToSpot: "",
           spotNames: selected,
         }
   );
@@ -69,20 +76,6 @@ const HotelInformation = () => {
       enabled: division !== "" && district !== "" && subDistrict !== "",
     }
   );
-  console.log(allPlaces);
-  const seenPrimaryPlaceNames = {};
-
-  // Use the filter method to keep only unique objects based on primary_place_name
-  const uniqueArray = allPlaces?.data?.filter((item) => {
-    const { primary_place_name } = item;
-
-    if (!seenPrimaryPlaceNames[primary_place_name]) {
-      seenPrimaryPlaceNames[primary_place_name] = true;
-      return true;
-    }
-
-    return false;
-  });
 
   // is edited
   const [edited, setEdited] = useState(false);
@@ -98,9 +91,14 @@ const HotelInformation = () => {
   };
 
   //handlePrimaryPlaceName
-  const handlePrimaryPlaceName = (e) => {
+  const handlePlaceName = (spotName) => {
     //placename save into localhost
-    setFormData({ ...formData, placeName: e.target.value });
+    setFormData({
+      ...formData,
+      placeName: spotName,
+      primaryPlaceName: primaryPlaceName,
+    });
+    setPlaceName(spotName);
 
     fetch(
       "https://ovigo-backend-dhtei9k72-nazmulbhuyian.vercel.app/allTouristSpot/hotelNearSpot",
@@ -109,7 +107,10 @@ const HotelInformation = () => {
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify({ place_name: e.target.value }),
+        body: JSON.stringify({
+          place_name:
+            primaryPlaceName || hotelData.hotelInformation.primaryPlaceName,
+        }),
       }
     )
       .then((res) => res.json())
@@ -118,9 +119,7 @@ const HotelInformation = () => {
       })
       .catch((err) => console.log(err));
   };
-  console.log("Spot name data: ", spotName);
-
-  //TODO: spot_name working, and input verify working and add cold loading animation tomorrow
+  console.log("place name ", placeName);
 
   // on submit
   const handleOnSubmit = () => {
@@ -137,6 +136,9 @@ const HotelInformation = () => {
     }
     if (!data.propertyManagementEntity.trim()) {
       obj.propertyManagementEntity = "Property management entity is required!";
+    }
+    if (!data.distanceToSpot.trim()) {
+      obj.distanceToSpot = "Distance to hotel is required!";
     }
     if (data.propertyManagementEntity.trim()) {
       if (data.propertyManagementEntity === "Yes") {
@@ -203,26 +205,49 @@ const HotelInformation = () => {
             </p>
           </div>
 
-          <div className="mt-4">
-            <label
-              htmlFor="place"
-              className="text-black dark:text-white font-semibold mb-2"
+          {/* //!spot name and primary place name */}
+          <div>
+            <label htmlFor="division">Place Name</label>
+            <div
+              className="relative w-ful mt-3 rounded cursor-pointer"
+              onClick={() => setPlaceNameToggleIcon(!placeNameToggleIcon)}
             >
-              Choose your place
-            </label>
-            <select
-              onChange={handlePrimaryPlaceName}
-              value={hotelData.hotelInformation.placeName}
-              className="form-input w-full text-black dark:text-white mt-3"
-              id="place"
-            >
-              <option value="">please choose one</option>
-              {uniqueArray.map((allPlace) => (
-                <option key={allPlace._id} value={allPlace.primary_place_name}>
-                  {allPlace.primary_place_name}
-                </option>
-              ))}
-            </select>
+              <input
+                type="text"
+                placeholder="Choose your place name"
+                value={placeName}
+                className="form-input w-full"
+              />
+              <InputError error={errors.subDistrict} />
+              <div className="absolute right-3 top-2">
+                {placeNameToggleIcon ? (
+                  <>
+                    <FiChevronUp className="text-gray-900 dark:text-white text-2xl cursor-pointer" />
+                  </>
+                ) : (
+                  <>
+                    <FiChevronDown className="text-gray-900 dark:text-white text-2xl cursor-pointer" />
+                  </>
+                )}
+              </div>
+              {placeNameToggleIcon && (
+                <ul className="dark:bg-slate-800 bg-[#f2f3f3] px-2 pt-2 pb-3 dark:text-white text-gray-900">
+                  {allPlaces?.data?.map((item) => (
+                    <li
+                      key={item?._id}
+                      onClick={() =>
+                        setPrimaryPlaceName(item?.primary_place_name)
+                      }
+                      className="cursor-pointer text-base my-2"
+                    >
+                      <span onClick={() => handlePlaceName(item.spot_name)}>
+                        {item?.spot_name}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
           </div>
 
           {/* //spot name start here  */}
@@ -268,6 +293,20 @@ const HotelInformation = () => {
             <InputError error={errors.breakfastsTypes} />
           </div>
           {/* //spot name end here  */}
+          {/* //*distance to spot name */}
+          <div className="grid grid-cols-1 gap-2 mt-2">
+            <label>Spot Name to Distance</label>
+            <input
+              className="form-input"
+              name="distanceToSpot"
+              onChange={handleOnChange}
+              defaultValue={formData.distanceToSpot}
+            />
+            <InputError error={errors.distanceToSpot} />
+            <p className="text-gray-400 dark:text-gray-600 text-xs">
+              Guest will see this name when they search place to stay
+            </p>
+          </div>
           <hr />
           <div className="grid grid-cols-1 gap-2">
             <CustomRadio

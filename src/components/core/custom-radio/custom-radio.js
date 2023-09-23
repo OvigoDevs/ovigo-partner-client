@@ -1,5 +1,3 @@
-
-
 import { CheckCircle } from "lucide-react";
 import { Circle } from "lucide-react";
 import { useState } from "react";
@@ -20,13 +18,16 @@ const CustomRadio = ({
       : { text: "", value: false }
   );
 
+  console.log("navOptions", nativeOptions);
   return (
     <div className="grid grid-cols-1 gap-2">
       <label>{label}</label>
       {nativeOptions.map((option) => {
         return (
           <div
-            className={`flex items-center space-x-2 ${!option.value ? "md:cursor-pointer": "cursor-not-allowed"}`}
+            className={`flex items-center space-x-2 ${
+              !option.value ? "md:cursor-pointer" : "cursor-not-allowed"
+            }`}
             key={option.text}
             onClick={() => {
               setNativeOptions([
