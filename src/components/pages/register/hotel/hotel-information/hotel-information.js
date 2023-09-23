@@ -250,21 +250,6 @@ const HotelInformation = () => {
             </div>
           </div>
 
-          {/* //*distance to spot name */}
-          <div className="grid grid-cols-1 gap-2">
-            <label>Spot Name to Distance</label>
-            <input
-              className="form-input"
-              name="distanceToSpot"
-              onChange={handleOnChange}
-              defaultValue={formData.distanceToSpot}
-            />
-            <InputError error={errors.distanceToSpot} />
-            <p className="text-gray-400 dark:text-gray-600 text-xs">
-              Guest will see this name when they search place to stay
-            </p>
-          </div>
-
           {/* //spot name start here  */}
           <div className="grid grid-cols-1 gap-2">
             <div>
@@ -308,6 +293,20 @@ const HotelInformation = () => {
             <InputError error={errors.breakfastsTypes} />
           </div>
           {/* //spot name end here  */}
+          {/* //*distance to spot name */}
+          <div className="grid grid-cols-1 gap-2 mt-2">
+            <label>Spot Name to Distance</label>
+            <input
+              className="form-input"
+              name="distanceToSpot"
+              onChange={handleOnChange}
+              defaultValue={formData.distanceToSpot}
+            />
+            <InputError error={errors.distanceToSpot} />
+            <p className="text-gray-400 dark:text-gray-600 text-xs">
+              Guest will see this name when they search place to stay
+            </p>
+          </div>
           <hr />
           <div className="grid grid-cols-1 gap-2">
             <CustomRadio
