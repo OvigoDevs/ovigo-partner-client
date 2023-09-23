@@ -27,7 +27,7 @@ const HouseRules = () => {
           checkoutuntil: "",
           allowChildren: "",
           allowPet: "",
-          petFee: "",
+          // petFee: "",
         }
   );
   //edited
@@ -68,13 +68,13 @@ const HouseRules = () => {
       obj.allowPet = "Selection is required!";
     }
 
-    if (data.allowPet) {
-      if (data.allowPet !== "No") {
-        if (!data.petFee.trim()) {
-          obj.petFee = "Pet fee is required!";
-        }
-      }
-    }
+    // if (data.allowPet) {
+    //   if (data.allowPet !== "No") {
+    //     if (!data.petFee.trim()) {
+    //       obj.petFee = "Pet fee is required!";
+    //     }
+    //   }
+    // }
 
     return obj;
   };

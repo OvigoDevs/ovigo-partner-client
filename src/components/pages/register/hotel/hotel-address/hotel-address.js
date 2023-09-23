@@ -25,6 +25,7 @@ const HotelAddress = () => {
     country: "Bangladesh",
     streetAddress: "",
     zipCode: "",
+    division: "",
   });
   const [edited, setEdited] = useState(false);
   const [errors, setErrors] = useState(edited ? address : {});
@@ -41,7 +42,6 @@ const HotelAddress = () => {
   const [district, setDistrict] = useState("");
   const [sub_district, setSubDistrict] = useState("");
 
-  console.log("division:", division, "dist:", district, "sub:", sub_district);
   // get Division, district and sub-district Value
   const getDivisionValue = (e) => {
     setDivision(e.target.textContent);
@@ -98,9 +98,9 @@ const HotelAddress = () => {
     if (!data.zipCode.trim()) {
       obj.zipCode = "Street address is required!";
     }
-    // if (!data.city.trim()) {
-    //   obj.city = "Street address is required!";
-    // }
+    if (!data.division.trim()) {
+      obj.division = "Division is required!";
+    }
 
     return obj;
   };
@@ -183,9 +183,11 @@ const HotelAddress = () => {
               >
                 <input
                   type="text"
+                  name="division"
                   placeholder="Select Division"
-                  value={division}
+                  value={address.division}
                   className="form-input w-full"
+                  required
                 />
                 <InputError error={errors.division} />
                 <div className="absolute right-3 top-2">
