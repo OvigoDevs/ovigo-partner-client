@@ -102,7 +102,6 @@ const ConfirmHotel = () => {
         breakfastsTypes,
       } = hotelData.breakfastDetails;
 
-      //TODO: useContext r kaj korte hobe kal k.
       // router
       // router.push("/dashboard");
     }
