@@ -19,21 +19,21 @@ const DefaultSteps = [
     link: "/register/hotel/room-details",
     buttonText: "Add room",
   },
-  {
-    id: 2,
-    title: "Step 3: Photos",
-    description: "Add photos of your room",
-    icon: (
-      <IconWrapper>
-        <PlusSquare />
-      </IconWrapper>
-    ),
-    link: "/register/hotel/room-photos",
-    buttonText: "Add photos",
-  },
+  // {
+  //   id: 2,
+  //   title: "Step 3: Photos",
+  //   description: "Add photos of your room",
+  //   icon: (
+  //     <IconWrapper>
+  //       <PlusSquare />
+  //     </IconWrapper>
+  //   ),
+  //   link: "/register/hotel/room-photos",
+  //   buttonText: "Add photos",
+  // },
   {
     id: 3,
-    title: "Step 4: Final",
+    title: "Step 3: Final",
     description: "Complete registration",
     icon: (
       <IconWrapper>
@@ -68,10 +68,10 @@ const HotelDetailsCompletion = () => {
         </div>
       ) : null}
       <div className="grid grid-cols-1 gap-[1rem]">
-        <div className="grid grid-cols-1 gap-[1rem]">
-          {/* <h3 className="font-semibold">Your Service</h3>
-          {/* //!Edit information are commited for the figma design*/}
-          {/* <div className="flex items-center justify-between gap-5 p-[1rem] rounded-md border">
+        {/* <div className="grid grid-cols-1 gap-[1rem]">
+          <h3 className="font-semibold">Your Service</h3>
+          Edit information are commited for the figma design
+      <div className="flex items-center justify-between gap-5 p-[1rem] rounded-md border">
             <div className="grid grid-cols-1 gap-2">
               <p className="font-semibold">
                 {hotelData?.hotelInformation?.propertyName}
@@ -87,7 +87,7 @@ const HotelDetailsCompletion = () => {
               </IconWrapper>
               Edit
             </Button>
-          </div>  */}
+          </div>  
           {rooms.length ? (
             <div className="border-t py-[1rem] grid grid-cols-1 gap-[1rem]">
               <h4 className="font-semibold">Rooms</h4>
@@ -101,13 +101,13 @@ const HotelDetailsCompletion = () => {
                     className="border rounded-md flex items-center"
                   >
                     <div>
-                      {/* <Image
+                     <Image
                         src={addPhotos.mainImage[0]}
                         alt=""
                         height={100}
                         width={100}
                         className="max-h-[60px] w-auto"
-                      /> */}
+                      /> 
                     </div>
                     <div className="p-[0.5rem] grid grid-cols-1 gap-[0.1rem]">
                       <h4 className="font-semibold">{`${roomName} - ${unitType}`}</h4>
@@ -118,7 +118,7 @@ const HotelDetailsCompletion = () => {
               })}
             </div>
           ) : null}
-        </div>
+        </div> */}
         <hr />
         {steps.map((step) => {
           const { id, title, description, icon, link, buttonText } = step;

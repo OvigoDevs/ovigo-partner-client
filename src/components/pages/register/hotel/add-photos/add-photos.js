@@ -29,21 +29,21 @@ const AddPhotos = () => {
   const multiInputRefs = useRef([]);
   const [imageName, setImageName] = useState("");
   const [multiImage, setMultiImage] = useState([]);
-  // console.log("mlt",multiImage)
-
+  const allImage = multiImage?.map((image) => ({ image: image }))
+    // console.log("My All Image",allImage)
     // formdata
-    const [formData, setFormData] = useState(
-      roomData.addPhotos
-        ? roomData.addPhotos
-        : {
-            mainImage: imageName,
-            otherImages: multiImage,
-          }
-    );
+    // const [formData, setFormData] = useState(
+    //   roomData.addPhotos
+    //     ? roomData.addPhotos
+    //     : {
+    //         mainImage: imageName,
+    //         otherImages: multiImage,
+    //       }
+    // );  
+    // const alll = useSelector(status=> status)
+    // console.log(alll)
+    // handleinputs
 
-  const alll = useSelector(status=> status)
-  console.log(alll)
-  // handleinputs
   const handleOnChange = async (fieldName) => {
     console.log("img file", fieldName);    
     if (imageName?.length == 0) {
@@ -84,8 +84,11 @@ const AddPhotos = () => {
     }   
   }
 
-  console.log("Multi Image",multiImage) 
+  const allImagesData = {imageName, allImage}
+  // console.log(allImagesData)
+  // console.log("Multi Image",formData) 
   // handle delete img
+
   const handleDeleteImg = () => {
     fileInputRefs.current.forEach((inputRef) => {
       inputRef.value = "";
@@ -96,13 +99,15 @@ const AddPhotos = () => {
     const mulImage = multiImage.filter(image => image !== item)
     setMultiImage(mulImage)
   };
+
   // const allImagesAdd = {}
   // const allImageData = useSelector((state) => state.)
   // console.log("mayn Email",email)
+  
   const handleAddImage = (data) => {
     // dispatch
     const roomID = MaxID_generator(rooms);
-    const updatedRoomData = { ...roomData, addPhotos: formData };
+    const updatedRoomData = { ...roomData, addPhotos: allImagesData };
     const roomDetailsToSet = {
       id: roomID,
       roomData: updatedRoomData,
@@ -114,22 +119,7 @@ const AddPhotos = () => {
     // router
     router.push("/register/hotel/hotel-details-completion");
   }
-  console.log(imageName);
-const allImage = multiImage?.map((image) => ({ image: image }))
-console.log("My All Image",allImage)
-
-
-
-
-
-
-
-
-
-// useEffect > dispatch > setCookie > router
-
-
-
+  // console.log(imageName);
 
   return (
     <div className="section-d grid grid-cols-1 gap-5 max-w-[500px] lg:my-16 mb-5">
@@ -165,7 +155,7 @@ console.log("My All Image",allImage)
           ref={(ref) => (fileInputRefs.current[0] = ref)}
         />
       </div>
-      <div>
+      <div className="mt-5">
         <p className="mb-3">Add other photos</p>
         <div className="border border-gray-300 rounded-sm p-3">
         
