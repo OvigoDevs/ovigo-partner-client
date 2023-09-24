@@ -17,8 +17,142 @@ const ConfirmHotel = () => {
     (state) => state.registerData
   );
 
-  console.log("first", hotelData);
-  console.log("sec", rooms);
+  //!hotel address
+  const { country, district, division, streetAddress, subDistrict, zipCode } =
+    hotelData?.hotelAddress;
+  console.log(
+    "hotel address data:",
+    district,
+    division,
+    subDistrict,
+    zipCode,
+    streetAddress
+  );
+
+  //! hotel Categories
+  const { title, description } = hotelData?.hotelCategories;
+  console.log("hotel category data:", title, description);
+
+  //! hotel information
+  const {
+    hotelName,
+    hotelRating,
+    managementEntityName,
+    placeName,
+    primaryPlaceName,
+    propertyManagementEntity,
+    distanceToSpot,
+    spotNames,
+  } = hotelData?.hotelInformation;
+  console.log(
+    "Hotel Information data: ",
+    hotelName,
+    hotelRating,
+    managementEntityName,
+    distanceToSpot,
+    placeName,
+    primaryPlaceName,
+    propertyManagementEntity,
+    spotNames
+  );
+
+  //! house rules
+  const {
+    allowChildren,
+    allowPet,
+    checkinfrom,
+    checkinuntil,
+    checkoutfrom,
+    checkoutuntill,
+  } = hotelData?.houseRules;
+  console.log(
+    "House Rules data: ",
+    allowChildren,
+    allowPet,
+    checkinuntil,
+    checkinfrom,
+    checkoutfrom,
+    checkoutuntill
+  );
+
+  //! parking details
+  const { available, located, reserve, type } = hotelData?.parkingDetails;
+  console.log("Parking Details data: ", available, located, reserve, type);
+
+  //! here is the popularFacilities  are array[]
+  console.log("Popular Facilities data: ", hotelData.popularFacilities);
+
+  //! hotelLanguage []
+  console.log("Hotel Language data: ", hotelData.registerLanguages);
+
+  //!noOfHotels
+  const { text } = hotelData?.noOfHotels;
+  console.log("NO Of Hotel data: ", text);
+
+  //! breakfastDetails
+  const { priceIncluded, pricePerPersonAndDay, serveToGuest, breakfastsTypes } =
+    hotelData?.breakfastDetails;
+  console.log(
+    "Breakfast Details data: ",
+    priceIncluded,
+    pricePerPersonAndDay,
+    serveToGuest,
+    breakfastsTypes
+  );
+
+  // ?room details data start
+  //!room data to room details
+  const {
+    bunkBeds,
+    cribsAllowed,
+    fullBeds,
+    guestsNumber,
+    kingBeds,
+    queenBeds,
+    roomSize,
+    roomSizeUnit,
+    sameTypeRooms,
+    smookingAllow,
+    sofaBeds,
+    twinBeds,
+    unitType,
+  } = rooms[0].roomData?.roomDetails;
+  console.log(
+    "Room Details Data: ",
+    bunkBeds,
+    cribsAllowed,
+    fullBeds,
+    guestsNumber,
+    kingBeds,
+    queenBeds,
+    roomSize,
+    roomSizeUnit,
+    sameTypeRooms,
+    smookingAllow,
+    sofaBeds,
+    twinBeds,
+    unitType
+  );
+
+  //!bathroom details : [bathroomItems] are array
+  const { privateBathroom, bathroomItems } = rooms[0].roomData?.bathroomDetails;
+  console.log("Bathroom Details Data: ", privateBathroom, bathroomItems);
+
+  //!room features : [foodAndDrink, outdoorsAndViews]
+  const { foodAndDrink, mainView, outdoorsAndViews } =
+    rooms[0].roomData?.roomFeatures;
+  console.log("Room Features Data: ", foodAndDrink, mainView, outdoorsAndViews);
+
+  //!room name, room price
+  const { roomName, roomPrice } = rooms[0].roomData;
+  console.log("Room Name and Room Price: ", roomName, roomPrice);
+
+  //!image URL
+  console.log("All Image: ", rooms[0].roomData.addPhotos.allImage);
+  console.log("Main Image Name:", rooms[0].roomData.addPhotos.imageName);
+
+  // console.log("first", hotelData);
+  // console.log("sec", rooms);
 
   // dispatch
   const dispatch = useDispatch();
@@ -47,89 +181,7 @@ const ConfirmHotel = () => {
       //TODO: need to hit API to save these data in DB
       console.log({ registerData, hotelData, rooms });
 
-      //!hotel address
-      const {
-        country,
-        district,
-        division,
-        streetAddress,
-        subDistrict,
-        zipCode,
-      } = hotelData.hotelAddress;
-
-      //! hotel Categories
-      const { title, description } = hotelData.hotelCategories;
-
-      //! hotel information
-      const {
-        hotelName,
-        hotelRating,
-        managementEntityName,
-        placeName,
-        primaryPlaceName,
-        propertyManagementEntity,
-        distanceToSpot,
-        spotNames,
-      } = hotelData.hotelInformation;
-
-      //! house rules
-      const {
-        allowChildren,
-        allowPet,
-        checkinfrom,
-        checkinuntil,
-        checkoutfrom,
-        checkoutuntill,
-      } = hotelData.houseRules;
-
-      //! parking details
-      const { available, located, reserve, type } = hotelData.parkingDetails;
-
-      //! here is the popularFacilities  are array[]
-      hotelData.popularFacilities;
-
-      //! hotelLanguage []
-      hotelData.registerLanguages;
-
-      //!noOfHotels
-      const { text } = hotelData.noOfHotels;
-
-      //! breakfastDetails
-      const {
-        priceIncluded,
-        pricePerPersonAndDay,
-        serveToGuest,
-        breakfastsTypes,
-      } = hotelData.breakfastDetails;
-
-      //!room data to room details
-      const {
-        bunkBeds,
-        cribsAllowed,
-        fullBeds,
-        guestsNumber,
-        kingBeds,
-        queenBeds,
-        roomSize,
-        roomSizeUnit,
-        sameTypeRooms,
-        smookingAllow,
-        sofaBeds,
-        twinBeds,
-        unitType,
-      } = roomData.roomDetails;
-
-      //!bathroom details : [bathroomItems] are array
-      const { privateBathroom, bathroomItems } = roomData.bathroomDetails;
-
-      //!room features : [foodAndDrink, outdoorsAndViews]
-
-      const { foodAndDrink, mainView, outdoorsAndViews } =
-        roomData.roomFeatures;
-
-      //!room name, room price
-      const { roomName, roomPrice } = roomData;
-
+      // console.log("allphoto added:", rooms?.roomData);
       // router
       // router.push("/dashboard");
     }
