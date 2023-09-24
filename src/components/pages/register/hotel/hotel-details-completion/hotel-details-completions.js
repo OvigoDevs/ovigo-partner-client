@@ -1,11 +1,7 @@
 import Backlink from "@/components/core/backlink/backlink";
 import IconWrapper from "@/components/core/icon-wrapper/icon-wrapper";
 import { Button } from "@/components/ui/button";
-import { Edit2Icon } from "lucide-react";
-import { BadgeCheckIcon } from "lucide-react";
-import { Check } from "lucide-react";
-import { PlusSquare } from "lucide-react";
-import Image from "next/image";
+import { BadgeCheckIcon, Check, PlusSquare } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -105,13 +101,13 @@ const HotelDetailsCompletion = () => {
                     className="border rounded-md flex items-center"
                   >
                     <div>
-                      <Image
+                      {/* <Image
                         src={addPhotos.mainImage[0]}
                         alt=""
                         height={100}
                         width={100}
                         className="max-h-[60px] w-auto"
-                      />
+                      /> */}
                     </div>
                     <div className="p-[0.5rem] grid grid-cols-1 gap-[0.1rem]">
                       <h4 className="font-semibold">{`${roomName} - ${unitType}`}</h4>

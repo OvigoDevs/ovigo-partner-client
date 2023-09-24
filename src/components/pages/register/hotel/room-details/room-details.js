@@ -126,6 +126,8 @@ const RoomDetails = () => {
           roomSizeUnit: "",
         }
   );
+
+  console.log(formData);
   // edited
   const [edited, setEdited] = useState(false);
   // error
@@ -142,6 +144,9 @@ const RoomDetails = () => {
   const handleOnSubmit = () => {
     setErrors(validator(formData));
   };
+
+  //checking validator
+
   // validator
   const validator = (data) => {
     let obj = {};
@@ -151,24 +156,25 @@ const RoomDetails = () => {
     if (data.sameTypeRooms < 1) {
       obj.sameTypeRooms = "Input is required!";
     }
+
     if (data.twinBeds < 1) {
       obj.twinBeds = "Twin beds number is required!";
     }
     if (data.fullBeds < 1) {
       obj.fullBeds = "Full beds number is required!";
     }
-    // if (data.kingBeds < 1) {
-    //   obj.kingBeds = "King beds number is required!";
-    // }
-    // if (data.queenBeds < 1) {
-    //   obj.queenBeds = "Queen beds number is required!";
-    // }
-    // if (data.bunkBeds < 1) {
-    //   obj.bunkBeds = "Bunk beds number is required!";
-    // }
-    // if (data.sofaBeds < 1) {
-    //   obj.sofaBeds = "Sofa beds number is required!";
-    // }
+    if (data.kingBeds < 1) {
+      obj.kingBeds = "King beds number is required!";
+    }
+    if (data.queenBeds < 1) {
+      obj.queenBeds = "Queen beds number is required!";
+    }
+    if (data.bunkBeds < 1) {
+      obj.bunkBeds = "Bunk beds number is required!";
+    }
+    if (data.sofaBeds < 1) {
+      obj.sofaBeds = "Sofa beds number is required!";
+    }
     if (data.guestsNumber < 1) {
       obj.guestsNumber = "Guests number is required!";
     }
