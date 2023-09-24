@@ -123,8 +123,8 @@ export const registerSlice = createSlice({
     },
     addPhotos: (state, action) => {
       state.roomData.addPhotos = action.payload.addPhotos;
-      // state.roomData = {};
-      // state.rooms = [...state.rooms, action.payload];
+      state.roomData = {};
+      state.rooms = [...state.rooms, action.payload];
     },
     tourOrganizer: (state, action) => {
       state.tourPackageData.tourOrganizer = action.payload.tourOrganizer;
