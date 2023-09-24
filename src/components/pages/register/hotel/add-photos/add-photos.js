@@ -2,44 +2,37 @@ import Backlink from "@/components/core/backlink/backlink";
 // import UploadImages from "@/components/core/upload-images/upload-images";
 import { Button } from "@/components/ui/button";
 import imageUploader from "@/components/ui/imageUploader";
+import { addPhotos } from "@/redux/features/register_slice";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 // import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
+import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const AddPhotos = () => {
-  // router
-  // const router = useRouter();
-  // roomdata
-  // const { roomData, rooms } = useSelector((state) => state.registerData);
-  // disptach
-  // const dispatch = useDispatch();
-  // formdata
-  // const [formData, setFormData] = useState(
-  //   roomData.addPhotos
-  //     ? roomData.addPhotos
-  //     : {
-  //         mainImage: [],
-  //         otherImages: [],
-  //       }
-  // );
-  // edited
-  // const [edited, setEdited] = useState(false);
-  // errors
-  // const [errors, setErrors] = useState(edited ? formData : {});
+  const {   
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+
+   // disptach
+   const dispatch = useDispatch();
+   const router = useRouter();
   const fileInputRefs = useRef([]);
   const multiInputRefs = useRef([]);
   const [imageName, setImageName] = useState("");
   const [multiImage, setMultiImage] = useState([]);
   console.log("mlt",multiImage)
 
-
+  const alll = useSelector(status=> status)
+  console.log(alll)
   // handleinputs
   const handleOnChange = async (fieldName) => {
-    console.log("img file", fieldName);
-    toast.error("Please wait a minute");
+    console.log("img file", fieldName);    
     if (imageName?.length == 0) {
+      toast.error("Please wait a minute");
       const image = await imageUploader(fieldName[0]);
       if (image[1] == "OK") {
         const updatedImage = image[0];
@@ -47,31 +40,36 @@ const AddPhotos = () => {
         setImageName(updatedImage);
         toast.success("Now Add Another Picture");
       } else toast.error("Something Wrong");
+    }else{
+      toast.error("Delete the previous image first");
     }
   };
 
   const handleMuilOnChange = async (fieldName) => {
-    console.log("img file", fieldName);
-    toast.error("Please wait a minute");
-    if (multiImage?.length == 0) {
-      const image = await imageUploader(fieldName[0]);
-      if (image[1] == "OK") {
-        const updatedImage = [...multiImage, image[0]];
-        setMultiImage(updatedImage);
-        toast.success("Now Add Another Picture");
-      } else toast.error("Something Wrong");
-    } else {
-      const image = await imageUploader(fieldName[0]);
-      if (image[1] == "OK") {
-        const updatedImage = [...multiImage, image[0]];
-        setMultiImage(updatedImage);
-        toast.success("Now Add Another Picture");
-      } else toast.error("Something Wrong");
+    if(multiImage.length >= 3){
+      toast.error("only three images are allowed")   
     }
+    else{
+      toast.error("Please wait a minute");
+      if (multiImage?.length == 0) {
+        const image = await imageUploader(fieldName[0]);
+        if (image[1] == "OK") {
+          const updatedImage = [...multiImage, image[0]];
+          setMultiImage(updatedImage);
+          toast.success("Now Add Another Picture");
+        } else toast.error("Something Wrong");
+      } else {
+        const image = await imageUploader(fieldName[0]);
+        if (image[1] == "OK") {
+          const updatedImage = [...multiImage, image[0]];
+          setMultiImage(updatedImage);
+          toast.success("Now Add Another Picture");
+        } else toast.error("Something Wrong");
+      }
+    }   
   }
 
-  console.log("Multi Image",multiImage)
-
+  console.log("Multi Image",multiImage) 
   // handle delete img
   const handleDeleteImg = () => {
     fileInputRefs.current.forEach((inputRef) => {
@@ -83,22 +81,30 @@ const AddPhotos = () => {
     const mulImage = multiImage.filter(image => image !== item)
     setMultiImage(mulImage)
   };
-
-
+  // const allImagesAdd = {}
+  // const allImageData = useSelector((state) => state.)
+  // console.log("mayn Email",email)
+  const handleAddImage = (data) => {
+    const myData = {
+      list: multiImage,
+      url:imageName
+    }
+    dispatch(addPhotos({addPhotos: myData}));
+    console.log(myData)     
+    router.push("/register/hotel/hotel-details-completion");
+  }
   console.log(imageName);
-  // handlesubmit
-  const handleOnSubmit = () => {
-    setErrors(validator(formData));
-  };
-
-  const allImage = multiImage?.map((image) => ({ image: image }))
+const allImage = multiImage?.map((image) => ({ image: image }))
 console.log("My All Image",allImage)
+
 
   return (
     <div className="section-d grid grid-cols-1 gap-5 max-w-[500px] lg:my-16 mb-5">
       <Backlink link="/register/hotel/hotel-details-completion" text="Back" />
       <h2 className="font-semibold">What does your hotel look like?</h2>
-        <p>Upload a main photo that makes a good girst impression</p>        
+        <p>Upload a main photo that makes a good girst impression</p>
+        {/*   */}
+        <form  onSubmit={handleSubmit(handleAddImage)}> 
       <div className="border border-gray-300 p-3 rounded-sm">
         {imageName ? (
           <div className="h-[70px] w-[100px] rounded-md relative">
@@ -168,7 +174,8 @@ console.log("My All Image",allImage)
         </div>
        
       </div>
-      <Button onClick={handleOnSubmit}>Next</Button>
+      <Button type="submit" className="mt-5">Next</Button>
+      </form>      
     </div>
   );
 };
