@@ -1,4 +1,7 @@
 "use client";
+import Backlink from "@/components/core/backlink/backlink";
+import CustomRadio from "@/components/core/custom-radio/custom-radio";
+import InputError from "@/components/core/input-error/input-error";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -8,16 +11,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { BedDouble } from "lucide-react";
-import Counter from "./counter";
-import { useRouter } from "next/navigation";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import InputError from "@/components/core/input-error/input-error";
-import CustomRadio from "@/components/core/custom-radio/custom-radio";
-import { roomDetails } from "@/redux/features/register_slice";
 import { setCookie } from "@/lib/cookie";
-import Backlink from "@/components/core/backlink/backlink";
+import { roomDetails } from "@/redux/features/register_slice";
+import { BedDouble } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import Counter from "./counter";
 
 const BedTypes = [
   {
@@ -113,12 +114,14 @@ const RoomDetails = () => {
       : {
           unitType: "",
           sameTypeRooms: 0,
-          twinBeds: 0,
-          fullBeds: 0,
-          queenBeds: 0,
-          kingBeds: 0,
-          bunkBeds: 0,
-          sofaBeds: 0,
+          bed_name: "",
+          bed_number: 0,
+          // twinBeds: 0,
+          // fullBeds: 0,
+          // queenBeds: 0,
+          // kingBeds: 0,
+          // bunkBeds: 0,
+          // sofaBeds: 0,
           guestsNumber: 0,
           cribsAllowed: "",
           smookingAllow: "",
@@ -126,6 +129,8 @@ const RoomDetails = () => {
           roomSizeUnit: "",
         }
   );
+
+  
   // edited
   const [edited, setEdited] = useState(false);
   // error
@@ -144,31 +149,34 @@ const RoomDetails = () => {
   };
   // validator
   const validator = (data) => {
+    // console.log(data)
+    
+
+    const badData = { twinBeds: data.twinBeds, fullBeds: data.fullBeds, queenBeds: data.queenBeds, kingBeds: data.kingBeds, bunkBeds: data.bunkBeds, sofaBeds: data.sofaBeds};
+    // console.log(data, badData);
+    // console.log(badData)
+    let countGreaterThanOne = 0;
+    let countEqualToOne = 0;
+
+    // Iterate through the data
+    for (const key in badData) {
+      if (badData[key] >= 1) {
+        countGreaterThanOne++;
+      }
+      if (badData[key] === 1) {
+        countEqualToOne++;
+      }
+    }  
     let obj = {};
+    
+    
     if (!data.unitType.trim()) {
       obj.unitType = "Unit type is required!";
     }
     if (data.sameTypeRooms < 1) {
       obj.sameTypeRooms = "Input is required!";
     }
-    if (data.twinBeds < 1) {
-      obj.twinBeds = "Twin beds number is required!";
-    }
-    if (data.fullBeds < 1) {
-      obj.fullBeds = "Full beds number is required!";
-    }
-    // if (data.kingBeds < 1) {
-    //   obj.kingBeds = "King beds number is required!";
-    // }
-    // if (data.queenBeds < 1) {
-    //   obj.queenBeds = "Queen beds number is required!";
-    // }
-    // if (data.bunkBeds < 1) {
-    //   obj.bunkBeds = "Bunk beds number is required!";
-    // }
-    // if (data.sofaBeds < 1) {
-    //   obj.sofaBeds = "Sofa beds number is required!";
-    // }
+    
     if (data.guestsNumber < 1) {
       obj.guestsNumber = "Guests number is required!";
     }
@@ -183,8 +191,27 @@ const RoomDetails = () => {
       obj.roomSize = "Room size is required!";
     }
     if (!data.roomSizeUnit) {
-      obj.roomSizeUnit = "Room size unit is required!";
+      obj.roomSizeUnit = "Room size bed is required!";
     }
+    if (countGreaterThanOne === 0 && countEqualToOne === 0) {
+      // obj.badData = "Only one type of bed number is required!";
+      toast.error("Only one type of bed number is required!")
+    } else if (countGreaterThanOne >= 2) {
+      // obj.badData = "Only one type of bed number is required!";
+      toast.error("Only one type of bed number is required!")
+    } else {
+      // console.log("jdjf", Object.entries(badData))
+      const keysAndValuesWithValueNotZero = Object.entries(badData)
+      .filter(([key, value]) => value !== 0);
+      // console.log(keysAndValuesWithValueNotZero)
+      const bedData =   keysAndValuesWithValueNotZero[0];
+      console.log(bedData[0])
+      console.log(bedData[1])
+      formData.bed_name = bedData[0]
+      formData.bed_number = bedData[1]
+      // router.push("/register/hotel/bath-details")
+      // localStorage.removeItem(roomData)
+    }
 
     return obj;
   };
@@ -304,7 +331,7 @@ const RoomDetails = () => {
             defaultValue={formData.guestsNumber}
             handleOnChange={handleOnChange}
             name="guestsNumber"
-            className="border border-4 w-full"
+            className="border-4 w-full"
           />
         </div>
 

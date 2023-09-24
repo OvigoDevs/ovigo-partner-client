@@ -1,22 +1,22 @@
+import Backlink from "@/components/core/backlink/backlink";
 import CustomCheckbox from "@/components/core/custom-checkbox/custom-checkbox";
 import CustomRadio from "@/components/core/custom-radio/custom-radio";
 import IconWrapper from "@/components/core/icon-wrapper/icon-wrapper";
+import InputError from "@/components/core/input-error/input-error";
+import { Button } from "@/components/ui/button";
+import { setCookie } from "@/lib/cookie";
+import { bathroomDetails } from "@/redux/features/register_slice";
 import { Lightbulb } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { bathroomDetails } from "@/redux/features/register_slice";
-import { Button } from "@/components/ui/button";
 import { useDispatch, useSelector } from "react-redux";
-import InputError from "@/components/core/input-error/input-error";
-import { setCookie } from "@/lib/cookie";
-import Backlink from "@/components/core/backlink/backlink";
 
 const BathroomDetails = () => {
   const router = useRouter();
   const dispatch = useDispatch();
 
   const { roomData } = useSelector((state) => state.registerData);
-
+console.log("ay ",roomData)
   const [formData, setFormData] = useState(
     roomData.bathroomDetails
       ? roomData.bathroomDetails
