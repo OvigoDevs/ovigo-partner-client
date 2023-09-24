@@ -19,13 +19,16 @@ const Login = () => {
     handleSubmit,
   } = useForm();
   const handleLogin = (data) => {
-    fetch("https://ovigo-backend-nqj2iwkbs-nazmulbhuyian.vercel.app/businessUsersLog", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
+    fetch(
+      "https://ovigo-backend-nqj2iwkbs-nazmulbhuyian.vercel.app/businessUsersLog",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    )
       .then((res) => res.json())
       .then((loginData) => {
         if (loginData?.status === "Failled") {
@@ -35,7 +38,7 @@ const Login = () => {
           toast(loginData.status, {
             icon: "👏",
           });
-          router.push("/");
+          router.push("/register/service-category");
         }
         console.log(loginData);
       })
@@ -58,7 +61,10 @@ const Login = () => {
               <h2 className="lg:text-4xl text-2xl text-[#000] font-semibold lg:mb-10 mb-5">
                 Get Started Now
               </h2>
-              <form className="form_card lg:p-10 p-3" onSubmit={handleSubmit(handleLogin)}>
+              <form
+                className="form_card lg:p-10 p-3"
+                onSubmit={handleSubmit(handleLogin)}
+              >
                 <div className="lg:m-auto xl:w-[490px]">
                   <h2 className="text-base text-[#101828] font-bold lg:mb-7">
                     Create your partner account
@@ -120,7 +126,10 @@ const Login = () => {
                 </div>
                 <div className="flex items-center justify-center gap-1 text-base border-t border-gray-400 xl:mt-20 mt-3 pt-5 xl:pb-5 pb-2">
                   <p> Already {"don't"} have an account? </p>{" "}
-                  <Link href="/register/with-email" className="text-[#0A7B76] font-medium">
+                  <Link
+                    href="/register/with-email"
+                    className="text-[#0A7B76] font-medium"
+                  >
                     Sign Up
                   </Link>
                 </div>

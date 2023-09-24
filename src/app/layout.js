@@ -14,6 +14,7 @@ import StoreProvider from "@/redux/store-provider";
 import { usePathname } from "next/navigation";
 import { Toaster } from "react-hot-toast";
 import ReactQueryProvider from "@/react-query/ReactQueryProvider";
+import AuthProvider from "@/components/context/AuthProvider";
 
 const RootLayout = ({ children }) => {
   const pathname = usePathname();
@@ -22,27 +23,33 @@ const RootLayout = ({ children }) => {
       <body className={inter.className}>
         <StoreProvider>
           <ReactQueryProvider>
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-              <>
-                {pathname.includes("dashboard") ? (
-                  <>
-                    <DashboardNavbar />
-                    {children}
-                    <CustomToaster />
-                    <Toaster position="top-center" reverseOrder={false} />
-                    <Footer />
-                  </>
-                ) : (
-                  <>
-                    <Navbar />
-                    {children}
-                    <CustomToaster />
-                    <Toaster position="top-center" reverseOrder={false} />
-                    <Footer />
-                  </>
-                )}
-              </>
-            </ThemeProvider>
+            <AuthProvider>
+              <ThemeProvider
+                attribute="class"
+                defaultTheme="system"
+                enableSystem
+              >
+                <>
+                  {pathname.includes("dashboard") ? (
+                    <>
+                      <DashboardNavbar />
+                      {children}
+                      <CustomToaster />
+                      <Toaster position="top-center" reverseOrder={false} />
+                      <Footer />
+                    </>
+                  ) : (
+                    <>
+                      <Navbar />
+                      {children}
+                      <CustomToaster />
+                      <Toaster position="top-center" reverseOrder={false} />
+                      <Footer />
+                    </>
+                  )}
+                </>
+              </ThemeProvider>
+            </AuthProvider>
           </ReactQueryProvider>
         </StoreProvider>
       </body>

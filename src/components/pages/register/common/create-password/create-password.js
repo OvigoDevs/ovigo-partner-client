@@ -7,9 +7,10 @@ import toast from "react-hot-toast";
 import { BiHide, BiLockAlt, BiShow } from "react-icons/bi";
 import { useSelector } from "react-redux";
 import createPasswordImg from "../../../../../../public/images/auth/createPassword.png";
+import { useRouter } from "next/navigation";
 
 const CreatePassword = () => {
-  // const router = useRouter();
+  const router = useRouter();
   const {
     register,
     formState: { errors },
@@ -17,18 +18,20 @@ const CreatePassword = () => {
   } = useForm();
   const [password, setPassword] = useState(true);
   const [newPassword, setNewPassword] = useState(true);
-  
-  const validPassword = useSelector((state) => state.registerData.registerData.registerInfo)
-// console.log("djfj", validPassword)
+
+  const validPassword = useSelector(
+    (state) => state.registerData.registerData.registerInfo
+  );
+  // console.log("djfj", validPassword)
   const handleCreatePassword = (data) => {
     // console.log(data)
     if (data?.confirm_password == data.password) {
-      const password = data?.password;    
+      const password = data?.password;
       // console.log(password)
-      const passwordData = {...validPassword, password}  
-      console.log("main Data",passwordData)
+      const passwordData = { ...validPassword, password };
+      console.log("main Data", passwordData);
       fetch(
-        "https://ovigo-backend-nqj2iwkbs-nazmulbhuyian.vercel.app/businessUsersReg",
+        "https://ovigo-backend-4m56z0cqc-nazmulbhuyian.vercel.app/businessUsersReg",
         {
           method: "PATCH",
           headers: { "content-type": "application/json" },
@@ -43,18 +46,15 @@ const CreatePassword = () => {
               icon: "👏",
             });
             // console.log(findMail)
-            // router.push(
-            //   `/register/verification/?email=${registerData?.data?.email}`
-            // );
+            router.push(`/login`);
           } else {
             toast.error(registerData.message);
           }
         })
-      
+
         .catch((errors) => {
           console.log(errors);
         });
-
 
       // toast("Added A New Password", {
       //   icon: "👏",
