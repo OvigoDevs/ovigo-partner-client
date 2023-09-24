@@ -102,6 +102,34 @@ const ConfirmHotel = () => {
         breakfastsTypes,
       } = hotelData.breakfastDetails;
 
+      //!room data to room details
+      const {
+        bunkBeds,
+        cribsAllowed,
+        fullBeds,
+        guestsNumber,
+        kingBeds,
+        queenBeds,
+        roomSize,
+        roomSizeUnit,
+        sameTypeRooms,
+        smookingAllow,
+        sofaBeds,
+        twinBeds,
+        unitType,
+      } = roomData.roomDetails;
+
+      //!bathroom details : [bathroomItems] are array
+      const { privateBathroom, bathroomItems } = roomData.bathroomDetails;
+
+      //!room features : [foodAndDrink, outdoorsAndViews]
+
+      const { foodAndDrink, mainView, outdoorsAndViews } =
+        roomData.roomFeatures;
+
+      //!room name, room price
+      const { roomName, roomPrice } = roomData;
+
       // router
       // router.push("/dashboard");
     }

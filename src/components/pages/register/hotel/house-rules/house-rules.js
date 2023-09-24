@@ -14,6 +14,7 @@ const HouseRules = () => {
   const router = useRouter();
   // redux
   const { hotelData } = useSelector((state) => state.registerData);
+
   // dispatch
   const dispatch = useDispatch();
   // formdata

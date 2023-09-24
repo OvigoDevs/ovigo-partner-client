@@ -19,44 +19,6 @@ import { roomDetails } from "@/redux/features/register_slice";
 import { setCookie } from "@/lib/cookie";
 import Backlink from "@/components/core/backlink/backlink";
 
-const BedTypes = [
-  {
-    id: 0,
-    title: "Twin Bed(s)",
-    sizes: "35-51 inches wide",
-    name: "twinBeds",
-  },
-  {
-    id: 1,
-    title: "Full Bed(s)",
-    sizes: "52-59 inches wide",
-    name: "fullBeds",
-  },
-  {
-    id: 2,
-    title: "Queen Bed(s)",
-    sizes: "60-70 inches wide",
-    name: "queenBeds",
-  },
-  {
-    id: 3,
-    title: "King Bed(s)",
-    sizes: "71-81 inches wide",
-    name: "kingBeds",
-  },
-  {
-    id: 4,
-    title: "Bunk Bed(s)",
-    sizes: "Varying sizes",
-    name: "bunkBeds",
-  },
-  {
-    id: 5,
-    title: "Sofa Bed(s)",
-    sizes: "Varying sizes",
-    name: "sofaBeds",
-  },
-];
 const roomTypes = [
   {
     id: 1,
@@ -100,6 +62,53 @@ const roomTypes = [
   },
 ];
 const RoomDetails = () => {
+  const [bedTypes, setBedTypes] = useState([
+    {
+      id: 0,
+      title: "Twin Bed(s)",
+      sizes: "35-51 inches wide",
+      name: "twinBeds",
+      count: 0,
+    },
+    {
+      id: 1,
+      title: "Full Bed(s)",
+      sizes: "52-59 inches wide",
+      name: "fullBeds",
+      count: 0,
+    },
+    {
+      id: 2,
+      title: "Queen Bed(s)",
+      sizes: "60-70 inches wide",
+      name: "queenBeds",
+      count: 0,
+    },
+    {
+      id: 3,
+      title: "King Bed(s)",
+      sizes: "71-81 inches wide",
+      name: "kingBeds",
+      count: 0,
+    },
+    {
+      id: 4,
+      title: "Bunk Bed(s)",
+      sizes: "Varying sizes",
+      name: "bunkBeds",
+      count: 0,
+    },
+    {
+      id: 5,
+      title: "Sofa Bed(s)",
+      sizes: "Varying sizes",
+      name: "sofaBeds",
+      count: 0,
+    },
+  ]);
+
+  const [show, setShow] = useState(true);
+
   // router
   const router = useRouter();
   // redux
@@ -127,7 +136,20 @@ const RoomDetails = () => {
         }
   );
 
-  console.log(formData);
+  //!disable function to other bed types
+  // const handleBedTypeClick = (index) => {
+  //   const updatedBedTypes = [...bedTypes];
+
+  //   // Disable counts for other bed types
+  //   updatedBedTypes.forEach((bedType, i) => {
+  //     if (i !== index) {
+  //       bedType.disabled = true;
+  //     }
+  //   });
+
+  //   setBedTypes(updatedBedTypes);
+  // };
+
   // edited
   const [edited, setEdited] = useState(false);
   // error
@@ -213,6 +235,7 @@ const RoomDetails = () => {
   useEffect(() => {
     setEdited(true);
   }, []);
+
   return (
     <div className="py-5 max-w-[500px]">
       <Backlink link="/register/hotel/hotel-details-completion" text="Back" />
@@ -279,9 +302,37 @@ const RoomDetails = () => {
           </h4>
 
           {/* Twin Bed */}
-          {BedTypes.map((item) => {
+
+          {/* <div>
+            {bedTypes.map((bedType, index) => (
+              <div
+                key={index}
+                className={`bed-type ${bedType.disabled ? "disabled" : ""}`}
+                onClick={() => handleBedTypeClick(index)}
+              >
+                <span>{bedType.name}:</span>
+                <span className="count">{bedType.count}</span>
+              </div>
+            ))}
+            <style jsx>{`
+              .bed-type {
+                margin-bottom: 10px;
+                cursor: pointer;
+              }
+              .disabled {
+                pointer-events: none;
+              }
+            `}</style>
+          </div> */}
+
+          {/* //!previous mapping bed type  */}
+          {bedTypes.map((item, index) => {
             return (
-              <div className="grid grid-cols-2" key={item.id}>
+              <div
+                className={`grid grid-cols-2 ${item.disabled ? "" : ""}`}
+                key={item.id}
+                onClick={() => handleBedTypeClick(index)}
+              >
                 <div className="flex gap-4">
                   <BedDouble width={30} height={30} />
                   <div className="text-start">
@@ -289,10 +340,11 @@ const RoomDetails = () => {
                     <p>{item.sizes} wide</p>
                   </div>
                 </div>
-                <div className="max-w-[120px] min-w-[100px] ml-auto">
+                <div className={`max-w-[120px] min-w-[100px] ml-auto `}>
                   <Counter
                     handleOnChange={handleOnChange}
                     name={item.name}
+                    item={item}
                     defaultValue={formData[item.name]}
                   />
                 </div>
