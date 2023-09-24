@@ -18,7 +18,6 @@ const CustomRadio = ({
       : { text: "", value: false }
   );
 
-  console.log("navOptions", nativeOptions);
   return (
     <div className="grid grid-cols-1 gap-2">
       <label>{label}</label>

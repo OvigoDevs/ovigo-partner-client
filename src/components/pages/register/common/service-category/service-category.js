@@ -9,6 +9,7 @@ const ServiceCategory = () => {
       id: 0,
       icon: "hotel.svg",
       title: "Hotel",
+      serviceType: "stay",
       link: "/register/hotel/hotel-categories",
     },
     // {

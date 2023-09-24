@@ -3,9 +3,7 @@ import CustomCheckbox from "@/components/core/custom-checkbox/custom-checkbox";
 import InputError from "@/components/core/input-error/input-error";
 import { Button } from "@/components/ui/button";
 import { setCookie } from "@/lib/cookie";
-import {
-  confirmHotel
-} from "@/redux/features/register_slice";
+import { confirmHotel } from "@/redux/features/register_slice";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -18,9 +16,9 @@ const ConfirmHotel = () => {
   const { hotelData, rooms, registerData } = useSelector(
     (state) => state.registerData
   );
-  
-console.log("first", hotelData)
-console.log("sec", rooms)
+
+  console.log("first", hotelData);
+  console.log("sec", rooms);
 
   // dispatch
   const dispatch = useDispatch();
@@ -49,6 +47,62 @@ console.log("sec", rooms)
       //TODO: need to hit API to save these data in DB
       console.log({ registerData, hotelData, rooms });
 
+      //!hotel address
+      const {
+        country,
+        district,
+        division,
+        streetAddress,
+        subDistrict,
+        zipCode,
+      } = hotelData.hotelAddress;
+
+      //! hotel Categories
+      const { title, description } = hotelData.hotelCategories;
+
+      //! hotel information
+      const {
+        hotelName,
+        hotelRating,
+        managementEntityName,
+        placeName,
+        primaryPlaceName,
+        propertyManagementEntity,
+        distanceToSpot,
+        spotNames,
+      } = hotelData.hotelInformation;
+
+      //! house rules
+      const {
+        allowChildren,
+        allowPet,
+        checkinfrom,
+        checkinuntil,
+        checkoutfrom,
+        checkoutuntill,
+      } = hotelData.houseRules;
+
+      //! parking details
+      const { available, located, reserve, type } = hotelData.parkingDetails;
+
+      //! here is the popularFacilities  are array[]
+      hotelData.popularFacilities;
+
+      //! hotelLanguage []
+      hotelData.registerLanguages;
+
+      //!noOfHotels
+      const { text } = hotelData.noOfHotels;
+
+      //! breakfastDetails
+      const {
+        priceIncluded,
+        pricePerPersonAndDay,
+        serveToGuest,
+        breakfastsTypes,
+      } = hotelData.breakfastDetails;
+
+      //TODO: useContext r kaj korte hobe kal k.
       // router
       // router.push("/dashboard");
     }

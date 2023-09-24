@@ -91,14 +91,15 @@ const HotelInformation = () => {
   };
 
   //handlePrimaryPlaceName
-  const handlePlaceName = (spotName) => {
+  const handlePlaceName = (item) => {
+    setPrimaryPlaceName(item?.primary_place_name);
     //placename save into localhost
     setFormData({
       ...formData,
-      placeName: spotName,
-      primaryPlaceName: primaryPlaceName,
+      placeName: item?.spot_name,
+      primaryPlaceName: item?.primary_place_name,
     });
-    setPlaceName(spotName);
+    setPlaceName(item?.spot_name);
 
     fetch(
       "https://ovigo-backend-dhtei9k72-nazmulbhuyian.vercel.app/allTouristSpot/hotelNearSpot",
@@ -109,7 +110,8 @@ const HotelInformation = () => {
         },
         body: JSON.stringify({
           place_name:
-            primaryPlaceName || hotelData.hotelInformation.primaryPlaceName,
+            item.primary_place_name ||
+            hotelData.hotelInformation.primaryPlaceName,
         }),
       }
     )
@@ -235,12 +237,12 @@ const HotelInformation = () => {
                   {allPlaces?.data?.map((item) => (
                     <li
                       key={item?._id}
-                      onClick={() =>
-                        setPrimaryPlaceName(item?.primary_place_name)
-                      }
+                      // onClick={() =>
+                      //   setPrimaryPlaceName(item?.primary_place_name)
+                      // }
                       className="cursor-pointer text-base my-2"
                     >
-                      <span onClick={() => handlePlaceName(item.spot_name)}>
+                      <span onClick={() => handlePlaceName(item)}>
                         {item?.spot_name}
                       </span>
                     </li>
@@ -253,9 +255,9 @@ const HotelInformation = () => {
           {/* //spot name start here  */}
           <div className="grid grid-cols-1 gap-2">
             <div>
-              <label>What type of breakfast do you offer?</label>
+              <label>Near Spot Name</label>
               <p className="text-gray-400 dark:text-gray-600">
-                Select all that apply
+                Select all nearest spot name
               </p>
             </div>
             <ul className="flex flex-wrap items-start justify-start gap-2">
