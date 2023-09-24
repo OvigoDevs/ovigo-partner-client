@@ -2,10 +2,12 @@ import Backlink from "@/components/core/backlink/backlink";
 // import UploadImages from "@/components/core/upload-images/upload-images";
 import { Button } from "@/components/ui/button";
 import imageUploader from "@/components/ui/imageUploader";
-import { addPhotos } from "@/redux/features/register_slice";
+
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 // import { useRouter } from "next/navigation";
+import { setCookie } from "@/lib/cookie";
+import { MaxID_generator, addPhotos } from "@/redux/features/register_slice";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -16,6 +18,9 @@ const AddPhotos = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
+  const { roomData, rooms } = useSelector(
+    (state) => state.registerData
+  );  
 
    // disptach
    const dispatch = useDispatch();
@@ -24,7 +29,17 @@ const AddPhotos = () => {
   const multiInputRefs = useRef([]);
   const [imageName, setImageName] = useState("");
   const [multiImage, setMultiImage] = useState([]);
-  console.log("mlt",multiImage)
+  // console.log("mlt",multiImage)
+
+    // formdata
+    const [formData, setFormData] = useState(
+      roomData.addPhotos
+        ? roomData.addPhotos
+        : {
+            mainImage: imageName,
+            otherImages: multiImage,
+          }
+    );
 
   const alll = useSelector(status=> status)
   console.log(alll)
@@ -85,17 +100,35 @@ const AddPhotos = () => {
   // const allImageData = useSelector((state) => state.)
   // console.log("mayn Email",email)
   const handleAddImage = (data) => {
-    const myData = {
-      list: multiImage,
-      url:imageName
-    }
-    dispatch(addPhotos({addPhotos: myData}));
-    console.log(myData)     
+    // dispatch
+    const roomID = MaxID_generator(rooms);
+    const updatedRoomData = { ...roomData, addPhotos: formData };
+    const roomDetailsToSet = {
+      id: roomID,
+      roomData: updatedRoomData,
+    };
+    dispatch(addPhotos(roomDetailsToSet));
+    // setCookie
+    setCookie("roomData", {}, "1h");
+    setCookie("rooms", [...rooms, roomDetailsToSet], "1h");
+    // router
     router.push("/register/hotel/hotel-details-completion");
   }
   console.log(imageName);
 const allImage = multiImage?.map((image) => ({ image: image }))
 console.log("My All Image",allImage)
+
+
+
+
+
+
+
+
+
+// useEffect > dispatch > setCookie > router
+
+
 
 
   return (
