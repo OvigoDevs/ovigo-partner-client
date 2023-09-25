@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 const Counter = ({ defaultValue, handleOnChange, name, data }) => {
   const [count, setCount] = useState(defaultValue ? defaultValue : 0);
-  console.log("My item",data)
+  console.log("My item", data);
   useEffect(() => {
     handleOnChange({
       target: {

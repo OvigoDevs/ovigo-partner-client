@@ -11,6 +11,7 @@ import { useQuery } from "@tanstack/react-query";
 import IconWrapper from "@/components/core/icon-wrapper/icon-wrapper";
 import { X } from "lucide-react";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
+import Loader from "@/components/Loader/Loader";
 
 const HotelInformation = () => {
   // router instance
@@ -121,7 +122,6 @@ const HotelInformation = () => {
       })
       .catch((err) => console.log(err));
   };
-  console.log("place name ", placeName);
 
   // on submit
   const handleOnSubmit = () => {
@@ -180,9 +180,7 @@ const HotelInformation = () => {
   }, [selected]);
 
   if (isLoading) {
-    return (
-      <h2 className="text-4xl text-red-600 text-center">Loading...........</h2>
-    );
+    return <Loader />;
   }
   return (
     <div className="section-d max-w-[500px]">
@@ -300,6 +298,7 @@ const HotelInformation = () => {
             <label>Spot Name to Distance</label>
             <input
               className="form-input"
+              placeholder="e.g. 1 km distance"
               name="distanceToSpot"
               onChange={handleOnChange}
               defaultValue={formData.distanceToSpot}

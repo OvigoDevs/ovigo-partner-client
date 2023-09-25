@@ -130,7 +130,6 @@ const RoomDetails = () => {
         }
   );
 
-  
   // edited
   const [edited, setEdited] = useState(false);
   // error
@@ -150,9 +149,15 @@ const RoomDetails = () => {
   // validator
   const validator = (data) => {
     // console.log(data)
-    
 
-    const badData = { twinBeds: data.twinBeds, fullBeds: data.fullBeds, queenBeds: data.queenBeds, kingBeds: data.kingBeds, bunkBeds: data.bunkBeds, sofaBeds: data.sofaBeds};
+    const badData = {
+      twinBeds: data.twinBeds,
+      fullBeds: data.fullBeds,
+      queenBeds: data.queenBeds,
+      kingBeds: data.kingBeds,
+      bunkBeds: data.bunkBeds,
+      sofaBeds: data.sofaBeds,
+    };
     // console.log(data, badData);
     // console.log(badData)
     let countGreaterThanOne = 0;
@@ -166,17 +171,16 @@ const RoomDetails = () => {
       if (badData[key] === 1) {
         countEqualToOne++;
       }
-    }  
+    }
     let obj = {};
-    
-    
+
     if (!data.unitType.trim()) {
       obj.unitType = "Unit type is required!";
     }
     if (data.sameTypeRooms < 1) {
       obj.sameTypeRooms = "Input is required!";
     }
-    
+
     if (data.guestsNumber < 1) {
       obj.guestsNumber = "Guests number is required!";
     }
@@ -195,23 +199,26 @@ const RoomDetails = () => {
     }
     if (countGreaterThanOne === 0 && countEqualToOne === 0) {
       // obj.badData = "Only one type of bed number is required!";
-      toast.error("Only one type of bed number is required!")
+      toast.error("Only one type of bed number is required!");
+      obj.bed_number = "Only one type of bed number is required!";
     } else if (countGreaterThanOne >= 2) {
       // obj.badData = "Only one type of bed number is required!";
-      toast.error("Only one type of bed number is required!")
+      toast.error("Only one type of bed number is required!");
+      obj.bed_number = "Only one type of bed number is required!";
     } else {
       // console.log("jdjf", Object.entries(badData))
-      const keysAndValuesWithValueNotZero = Object.entries(badData)
-      .filter(([key, value]) => value !== 0);
+      const keysAndValuesWithValueNotZero = Object.entries(badData).filter(
+        ([key, value]) => value !== 0
+      );
       // console.log(keysAndValuesWithValueNotZero)
-      const bedData =   keysAndValuesWithValueNotZero[0];
-      console.log(bedData[0])
-      console.log(bedData[1])
-      formData.bed_name = bedData[0]
-      formData.bed_number = bedData[1]
+      const bedData = keysAndValuesWithValueNotZero[0];
+      console.log(bedData[0]);
+      console.log(bedData[1]);
+      formData.bed_name = bedData[0];
+      formData.bed_number = bedData[1];
       // router.push("/register/hotel/bath-details")
       // localStorage.removeItem(roomData)
-    }
+    }
 
     return obj;
   };
