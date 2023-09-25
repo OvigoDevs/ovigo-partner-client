@@ -70,6 +70,9 @@ export const registerSlice = createSlice({
     createPassword: (state, action) => {
       state.registerData.createPassword = action.payload.createPassword;
     },
+    serviceType: (state, action) => {
+      state.hotelData.serviceType = action.payload.serviceType;
+    },
     hotelCategories: (state, action) => {
       state.hotelData.hotelCategories = action.payload.hotelCategories;
     },
@@ -140,6 +143,7 @@ export const {
   verification,
   registerInfo,
   createPassword,
+  serviceType,
   hotelCategories,
   noOfHotels,
   hotelAddress,

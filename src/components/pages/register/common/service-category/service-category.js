@@ -3,13 +3,15 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 
+import { useDispatch, useSelector } from "react-redux";
+
 const ServiceCategory = () => {
   const serviceCategories = [
     {
       id: 0,
       icon: "hotel.svg",
       title: "Hotel",
-      serviceType: "stay",
+      category: "stay",
       link: "/register/hotel/hotel-categories",
     },
     // {
@@ -22,9 +24,19 @@ const ServiceCategory = () => {
       id: 2,
       icon: "tour-package.svg",
       title: "Tour Package",
+      category: "tour",
       link: "/register/tour-package/organizer",
     },
   ];
+
+  // const { hotelData } = useSelector((state) => state.registerData);
+
+  // const dispatch = useDispatch();
+
+  const handleOnNext = (category) => {
+    localStorage.setItem("serviceType", category);
+    // setCookie("hotelData", { ...hotelData, serviceType: category }, "1h");
+  };
   return (
     <div className="pt-5 lg:mb-20 mb-5">
       <Backlink link="/register/create-password" text="Create Password" />
@@ -32,7 +44,7 @@ const ServiceCategory = () => {
       <p>List your service on Ovigo and start welcoming your customer</p>
       <div className="grid md:grid-cols-3 gap-4 mt-10 w-full">
         {serviceCategories.map((service) => {
-          const { id, icon, title, link } = service;
+          const { id, icon, title, link, category } = service;
 
           return (
             <div
@@ -48,7 +60,9 @@ const ServiceCategory = () => {
               />
               <h3 className="text-sm pb-5">{title}</h3>
               <Link href={link}>
-                <Button>List Service</Button>
+                <Button onClick={() => handleOnNext(category)}>
+                  List Service
+                </Button>
               </Link>
             </div>
           );

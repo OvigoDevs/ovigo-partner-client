@@ -44,12 +44,17 @@ const DefaultSteps = [
     buttonText: "Complete listing",
   },
 ];
+
 const HotelDetailsCompletion = () => {
+  const [show, setShow] = useState(true);
   const { hotelData, rooms } = useSelector((state) => state.registerData);
   const [steps, setSteps] = useState([DefaultSteps[0]]);
+
   useEffect(() => {
     rooms.length && setSteps(DefaultSteps);
+    rooms.length && setShow(false);
   }, [rooms]);
+
   return (
     <div className="section-d max-w-[500px] min-h-[80vh]">
       <Backlink link="/register/hotel/house-rules" text="House rules" />
@@ -64,7 +69,7 @@ const HotelDetailsCompletion = () => {
           <IconWrapper>
             <BadgeCheckIcon />
           </IconWrapper>
-          {`Step 2 is completed: All the details of your Rooms are collected. You may add some rooms again!`}
+          {`Step 2 is completed: All the details of your Rooms are collected.`}
         </div>
       ) : null}
       <div className="grid grid-cols-1 gap-[1rem]">
@@ -131,12 +136,34 @@ const HotelDetailsCompletion = () => {
                 <h4 className="font-bold">{title}</h4>
                 <p>{description}</p>
               </div>
-              <Link href={link}>
-                <Button variant="outline" className="flex items-center gap-1">
-                  {" "}
-                  {icon} {buttonText}
-                </Button>
-              </Link>
+
+              {id === 1 ? (
+                <>
+                  {show === true && (
+                    <Link href={link}>
+                      <Button
+                        variant="outline"
+                        className="flex items-center gap-1"
+                        onClick={() => setShow(false)}
+                      >
+                        {" "}
+                        {icon} {buttonText}
+                      </Button>
+                    </Link>
+                  )}
+                </>
+              ) : (
+                <></>
+              )}
+
+              {id === 3 && (
+                <Link href={link}>
+                  <Button variant="outline" className="flex items-center gap-1">
+                    {" "}
+                    {icon} {buttonText}
+                  </Button>
+                </Link>
+              )}
             </div>
           );
         })}
