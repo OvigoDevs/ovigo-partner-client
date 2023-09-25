@@ -1,13 +1,13 @@
-import CustomRadio from "@/components/core/custom-radio/custom-radio";
-import { Button } from "@/components/ui/button";
-import CheckInOut from "./check-in-out";
-import { useEffect, useState } from "react";
-import InputError from "@/components/core/input-error/input-error";
-import { useRouter } from "next/navigation";
-import { useDispatch, useSelector } from "react-redux";
-import { houseRules } from "@/redux/features/register_slice";
-import { setCookie } from "@/lib/cookie";
 import Backlink from "@/components/core/backlink/backlink";
+import CustomRadio from "@/components/core/custom-radio/custom-radio";
+import InputError from "@/components/core/input-error/input-error";
+import { Button } from "@/components/ui/button";
+import { setCookie } from "@/lib/cookie";
+import { houseRules } from "@/redux/features/register_slice";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import CheckInOut from "./check-in-out";
 
 const HouseRules = () => {
   // router
@@ -28,7 +28,7 @@ const HouseRules = () => {
           checkoutuntil: "",
           allowChildren: "",
           allowPet: "",
-          // petFee: "",
+          petFee: "",
         }
   );
   //edited

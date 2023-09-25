@@ -2,12 +2,12 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 // icon import form from "react-icon"
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { BiHide, BiLockAlt, BiShow } from "react-icons/bi";
 import { useSelector } from "react-redux";
 import createPasswordImg from "../../../../../../public/images/auth/createPassword.png";
-import { useRouter } from "next/navigation";
 
 const CreatePassword = () => {
   const router = useRouter();
@@ -31,7 +31,7 @@ const CreatePassword = () => {
       const passwordData = { ...validPassword, password };
       console.log("main Data", passwordData);
       fetch(
-        "https://ovigo-backend-4m56z0cqc-nazmulbhuyian.vercel.app/businessUsersReg",
+        "https://ovigo-backend-6duwsqi2k-nazmulbhuyian.vercel.app/businessUsersReg",
         {
           method: "PATCH",
           headers: { "content-type": "application/json" },

@@ -16,18 +16,11 @@ const ConfirmHotel = () => {
   const { hotelData, rooms, registerData } = useSelector(
     (state) => state.registerData
   );
-
+  
   //!hotel address
   const { country, district, division, streetAddress, subDistrict, zipCode } =
     hotelData?.hotelAddress;
-  console.log(
-    "hotel address data:",
-    district,
-    division,
-    subDistrict,
-    zipCode,
-    streetAddress
-  );
+
 
   //! hotel Categories
   const { title, description } = hotelData?.hotelCategories;
@@ -44,17 +37,11 @@ const ConfirmHotel = () => {
     distanceToSpot,
     spotNames,
   } = hotelData?.hotelInformation;
-  console.log(
-    "Hotel Information data: ",
-    hotelName,
-    hotelRating,
-    managementEntityName,
-    distanceToSpot,
-    placeName,
-    primaryPlaceName,
-    propertyManagementEntity,
-    spotNames
-  );
+ 
+const {popularFacilities} = hotelData;
+
+// console.log("sdf", hotelData?.registerLanguages)
+const {registerLanguages} = hotelData;
 
   //! house rules
   const {
@@ -64,41 +51,16 @@ const ConfirmHotel = () => {
     checkinuntil,
     checkoutfrom,
     checkoutuntill,
+    petFee
   } = hotelData?.houseRules;
-  console.log(
-    "House Rules data: ",
-    allowChildren,
-    allowPet,
-    checkinuntil,
-    checkinfrom,
-    checkoutfrom,
-    checkoutuntill
-  );
-
   //! parking details
   const { available, located, reserve, type } = hotelData?.parkingDetails;
-  console.log("Parking Details data: ", available, located, reserve, type);
-
-  //! here is the popularFacilities  are array[]
-  console.log("Popular Facilities data: ", hotelData.popularFacilities);
-
-  //! hotelLanguage []
-  console.log("Hotel Language data: ", hotelData.registerLanguages);
-
   //!noOfHotels
   const { text } = hotelData?.noOfHotels;
-  console.log("NO Of Hotel data: ", text);
-
   //! breakfastDetails
   const { priceIncluded, pricePerPersonAndDay, serveToGuest, breakfastsTypes } =
     hotelData?.breakfastDetails;
-  console.log(
-    "Breakfast Details data: ",
-    priceIncluded,
-    pricePerPersonAndDay,
-    serveToGuest,
-    breakfastsTypes
-  );
+
 
   // ?room details data start
   //!room data to room details
@@ -117,35 +79,20 @@ const ConfirmHotel = () => {
     twinBeds,
     unitType,
   } = rooms[0].roomData?.roomDetails;
-  console.log(
-    "Room Details Data: ",
-    bunkBeds,
-    cribsAllowed,
-    fullBeds,
-    guestsNumber,
-    kingBeds,
-    queenBeds,
-    roomSize,
-    roomSizeUnit,
-    sameTypeRooms,
-    smookingAllow,
-    sofaBeds,
-    twinBeds,
-    unitType
-  );
+  
 
   //!bathroom details : [bathroomItems] are array
   const { privateBathroom, bathroomItems } = rooms[0].roomData?.bathroomDetails;
-  console.log("Bathroom Details Data: ", privateBathroom, bathroomItems);
+
 
   //!room features : [foodAndDrink, outdoorsAndViews]
   const { foodAndDrink, mainView, outdoorsAndViews } =
     rooms[0].roomData?.roomFeatures;
-  console.log("Room Features Data: ", foodAndDrink, mainView, outdoorsAndViews);
+
 
   //!room name, room price
   const { roomName, roomPrice } = rooms[0].roomData;
-  console.log("Room Name and Room Price: ", roomName, roomPrice);
+ 
 
   //!image URL
   console.log("All Image: ", rooms[0].roomData.addPhotos.allImage);
@@ -154,6 +101,90 @@ const ConfirmHotel = () => {
   // console.log("first", hotelData);
   // console.log("sec", rooms);
 
+  const service_type = localStorage.getItem("serviceType");
+
+ console.log()
+    
+      
+       
+  const info = {    
+    service_type,
+    stay_type: title,
+    stay_type_description: description,
+    how_many_hotel_text: text,
+    country,
+    street_name: streetAddress,
+    sub_district: subDistrict,
+    district,
+    zip_code: zipCode,
+    division,
+    primary_place_name: primaryPlaceName,
+    place_name: placeName,
+    near_spot_names: spotNames.map((item) => ({
+      near_spot_name: item?.spot_name,
+      about: item?.about,
+      activity: item?.activity,
+      district: item?.district,
+      division: item?.division,
+      image: item?.image,
+      known_as: item?.known_as,
+      primary_place_name: item?.primary_place_name,
+      remarkable_address: item?.remarkable_address,
+      sub_district: item?.sub_district,
+    })),
+    spot_to_hotel_distance: distanceToSpot,
+    hotel_name: hotelName,
+    hotel_star: hotelRating,
+    property_company_chain: propertyManagementEntity,
+    property_company_name: managementEntityName,
+    hotel_pacilities: popularFacilities.map((item) => ({
+      pacilitie_name: item
+    })), 
+    serve_breakfast: serveToGuest,
+    breakfast_include_main_price: priceIncluded,
+    price_person_day: pricePerPersonAndDay,
+    breakfast_type : breakfastsTypes.map((item) => ({
+      food_type: item?.text
+    })),
+    parking_available:available,
+    reserve_parking_spot: reserve,
+    parking_location: located,
+    parking_type: type,
+    hotel_staff_speak: registerLanguages.map((item) => ({
+      staff_speak: item
+    })),
+    check_in_time_from: checkinfrom,
+    check_in_time_to: checkinuntil,
+    check_out_time_from: checkoutfrom,
+    check_out_time_to: checkoutuntill,
+    allow_children: allowChildren,
+    allow_pets: allowPet,
+    allow_petPrice: petFee,
+    room_type: "",
+    total_room: "",
+    bed_name: "",
+    bed_number: "",
+    total_person_stay: "",
+    room_size: "",
+    allow_smoking: "",
+    bathroom_private: "",
+    bathroom_service: [],
+    room_general_amenities: [],
+    outdoor_view: [],
+    outdoor_view_main: "",
+    room_food_drinks: [],   
+    room_name: "",
+    room_price: "",
+    room_main_image: "",
+    room_another_image: [],
+    charge_credit_card: "",
+    invoice_name: "",
+    invoice_legal_company_name: "",
+    legal_company_recipient_same_address: "",
+    owner_email: ""
+  }
+  console.log("All Page Data",info?.allow_petPrice)
+// console.log( type)
   // dispatch
   const dispatch = useDispatch();
   // confirmhotelState
@@ -178,32 +209,9 @@ const ConfirmHotel = () => {
         { ...hotelData, confirmHotel: confirmhotel },
         "1h"
       );
-      //TODO: need to hit API to save these data in DB
-      console.log({ registerData, hotelData, rooms });
+ 
 
-      console.log(
-        "Hotel Information data: ",
-        hotelName,
-        hotelRating,
-        managementEntityName,
-        distanceToSpot,
-        placeName,
-        primaryPlaceName,
-        propertyManagementEntity,
-        spotNames
-      );
 
-      const hotelRegisterInfo = {
-        country,
-        street_name: streetAddress,
-        district,
-        sub_district: subDistrict,
-        division,
-        Zip_code: zipCode,
-        place_name: placeName,
-        hotel_name: hotelName,
-        hotel_star: hotelRating,
-      };
 
       // router
       // router.push("/dashboard");
