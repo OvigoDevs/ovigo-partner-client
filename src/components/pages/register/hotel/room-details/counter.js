@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
-const Counter = ({ defaultValue, handleOnChange, name, item }) => {
+const Counter = ({ defaultValue, handleOnChange, name, data }) => {
   const [count, setCount] = useState(defaultValue ? defaultValue : 0);
-
+  console.log("My item", data);
   useEffect(() => {
     handleOnChange({
       target: {
@@ -13,18 +13,18 @@ const Counter = ({ defaultValue, handleOnChange, name, item }) => {
   }, [count]);
   return (
     <div className="w-full">
-      <div
-        className={`grid grid-cols-3 gap-4 border p-2 text-center rounded-md `}
-      >
+      <div className="grid grid-cols-3 gap-4 border p-2 text-center rounded-md">
         <button
-          className={`w-full ${count === 0 && "cursor-not-allowed"} `}
+          className={`w-full ${count === 0 && "cursor-not-allowed"}`}
           onClick={() => count > 0 && setCount(count - 1)}
           disabled={count === 0}
         >
           -
         </button>
         <p className="font-medium">{count}</p>
-        <button onClick={() => setCount(count + 1)}>+</button>
+        <button className="w-full" onClick={() => setCount(count + 1)}>
+          +
+        </button>
       </div>
     </div>
   );
