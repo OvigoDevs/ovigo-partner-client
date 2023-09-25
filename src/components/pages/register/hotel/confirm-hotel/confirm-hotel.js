@@ -181,7 +181,30 @@ const ConfirmHotel = () => {
       //TODO: need to hit API to save these data in DB
       console.log({ registerData, hotelData, rooms });
 
-      // console.log("allphoto added:", rooms?.roomData);
+      console.log(
+        "Hotel Information data: ",
+        hotelName,
+        hotelRating,
+        managementEntityName,
+        distanceToSpot,
+        placeName,
+        primaryPlaceName,
+        propertyManagementEntity,
+        spotNames
+      );
+
+      const hotelRegisterInfo = {
+        country,
+        street_name: streetAddress,
+        district,
+        sub_district: subDistrict,
+        division,
+        Zip_code: zipCode,
+        place_name: placeName,
+        hotel_name: hotelName,
+        hotel_star: hotelRating,
+      };
+
       // router
       // router.push("/dashboard");
     }
