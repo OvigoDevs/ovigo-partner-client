@@ -41,7 +41,7 @@ const CreatePassword = () => {
         .then((response) => response.json())
         .then((registerData) => {
           console.log(registerData);
-          if (registerData?.status === "Successfully Updated") {
+          if (registerData?.data?.modifiedCount > 0) {
             toast(registerData.status, {
               icon: "👏",
             });
