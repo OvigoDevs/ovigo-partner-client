@@ -6,6 +6,7 @@ import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { FaRegBell } from "react-icons/fa";
 import { useContext } from "react";
 import { AuthContext } from "@/components/context/AuthProvider";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
   // const Links = [
@@ -15,8 +16,15 @@ const Navbar = () => {
   //     link: "/register/landing",
   //   },
   // ];
+  const router = useRouter();
 
   const { userEmail } = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    localStorage.removeItem("ovigoLogInToken");
+    router.push("/");
+    window.location.reload();
+  };
 
   console.log("user email: ", userEmail);
 
@@ -64,9 +72,19 @@ const Navbar = () => {
             <ModeToggle />
           </div>
 
-          <Link href="/register/with-email" className="main-button">
-            Register Service
-          </Link>
+          {userEmail ? (
+            <>
+              <button className="main-button" onClick={() => handleLogOut()}>
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link href="/register/with-email" className="main-button">
+                Register Service
+              </Link>
+            </>
+          )}
         </nav>
       </div>
     </div>

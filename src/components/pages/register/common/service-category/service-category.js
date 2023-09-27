@@ -25,7 +25,7 @@ const ServiceCategory = () => {
       icon: "tour-package.svg",
       title: "Tour Package",
       category: "tour",
-      link: "/register/tour-package/organizer",
+      link: "/",
     },
   ];
 
