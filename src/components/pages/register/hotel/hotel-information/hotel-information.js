@@ -53,7 +53,7 @@ const HotelInformation = () => {
       queryFn: async () => {
         if (division && district && subDistrict) {
           const res = await fetch(
-            `https://ovigo-backend-dhtei9k72-nazmulbhuyian.vercel.app/allTouristSpot/hotelAddPlace`,
+            `http://159.223.78.171:5000/allTouristSpot/hotelAddPlace`,
             {
               method: "POST", // Use the GET method
               headers: {
@@ -102,20 +102,17 @@ const HotelInformation = () => {
     });
     setPlaceName(item?.spot_name);
 
-    fetch(
-      "https://ovigo-backend-dhtei9k72-nazmulbhuyian.vercel.app/allTouristSpot/hotelNearSpot",
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({
-          place_name:
-            item.primary_place_name ||
-            hotelData.hotelInformation.primaryPlaceName,
-        }),
-      }
-    )
+    fetch("http://159.223.78.171:5000/allTouristSpot/hotelNearSpot", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        place_name:
+          item.primary_place_name ||
+          hotelData.hotelInformation.primaryPlaceName,
+      }),
+    })
       .then((res) => res.json())
       .then((data) => {
         setSpotName(data);

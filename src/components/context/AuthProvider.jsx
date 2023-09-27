@@ -16,7 +16,7 @@ const AuthProvider = ({ children }) => {
       if (token) {
         try {
           const response = await fetch(
-            "https://ovigo-backend-4m56z0cqc-nazmulbhuyian.vercel.app/getMe",
+            "http://159.223.78.171:5000/getMe",
             {
               method: "GET",
               headers: {
