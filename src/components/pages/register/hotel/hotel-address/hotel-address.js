@@ -66,7 +66,7 @@ const HotelAddress = () => {
     const getDistrict = districts.filter(
       (district) => district.division_id === division.id
     );
-    console.log(getDistrict);
+
     setAllDistricts(getDistrict);
   };
 
