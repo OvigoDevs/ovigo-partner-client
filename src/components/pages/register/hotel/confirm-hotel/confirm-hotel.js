@@ -1,39 +1,28 @@
+import { AuthContext } from "@/components/context/AuthProvider";
 import Backlink from "@/components/core/backlink/backlink";
-import CustomCheckbox from "@/components/core/custom-checkbox/custom-checkbox";
-import InputError from "@/components/core/input-error/input-error";
 import { Button } from "@/components/ui/button";
-import { setCookie } from "@/lib/cookie";
-import { confirmHotel } from "@/redux/features/register_slice";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useContext } from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 const ConfirmHotel = () => {
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
   // router
   const router = useRouter();
   // hotelData
-  const { hotelData, rooms, registerData } = useSelector(
+  const { hotelData, rooms, registerData, roomData } = useSelector(
     (state) => state.registerData
   );
-
-  //!hotel address
   const { country, district, division, streetAddress, subDistrict, zipCode } =
     hotelData?.hotelAddress;
-  console.log(
-    "hotel address data:",
-    district,
-    division,
-    subDistrict,
-    zipCode,
-    streetAddress
-  );
-
-  //! hotel Categories
   const { title, description } = hotelData?.hotelCategories;
-  console.log("hotel category data:", title, description);
-
-  //! hotel information
   const {
     hotelName,
     hotelRating,
@@ -44,170 +33,162 @@ const ConfirmHotel = () => {
     distanceToSpot,
     spotNames,
   } = hotelData?.hotelInformation;
-  console.log(
-    "Hotel Information data: ",
-    hotelName,
-    hotelRating,
-    managementEntityName,
-    distanceToSpot,
-    placeName,
-    primaryPlaceName,
-    propertyManagementEntity,
-    spotNames
-  );
-
-  //! house rules
+  const { popularFacilities } = hotelData;
+  const { registerLanguages } = hotelData;
   const {
     allowChildren,
     allowPet,
     checkinfrom,
     checkinuntil,
     checkoutfrom,
-    checkoutuntill,
+    checkoutuntil,
+    petFee,
   } = hotelData?.houseRules;
-  console.log(
-    "House Rules data: ",
-    allowChildren,
-    allowPet,
-    checkinuntil,
-    checkinfrom,
-    checkoutfrom,
-    checkoutuntill
-  );
-
-  //! parking details
+  console.log(hotelData?.houseRules)
   const { available, located, reserve, type } = hotelData?.parkingDetails;
-  console.log("Parking Details data: ", available, located, reserve, type);
-
-  //! here is the popularFacilities  are array[]
-  console.log("Popular Facilities data: ", hotelData.popularFacilities);
-
-  //! hotelLanguage []
-  console.log("Hotel Language data: ", hotelData.registerLanguages);
-
-  //!noOfHotels
   const { text } = hotelData?.noOfHotels;
-  console.log("NO Of Hotel data: ", text);
-
-  //! breakfastDetails
   const { priceIncluded, pricePerPersonAndDay, serveToGuest, breakfastsTypes } =
     hotelData?.breakfastDetails;
-  console.log(
-    "Breakfast Details data: ",
-    priceIncluded,
-    pricePerPersonAndDay,
-    serveToGuest,
-    breakfastsTypes
-  );
-
-  // ?room details data start
-  //!room data to room details
   const {
-    bunkBeds,
-    cribsAllowed,
-    fullBeds,
     guestsNumber,
-    kingBeds,
-    queenBeds,
     roomSize,
-    roomSizeUnit,
+    bed_number,
+    bed_name,
     sameTypeRooms,
-    smookingAllow,
-    sofaBeds,
-    twinBeds,
+    smookingAllow, 
     unitType,
   } = rooms[0].roomData?.roomDetails;
-  console.log(
-    "Room Details Data: ",
-    bunkBeds,
-    cribsAllowed,
-    fullBeds,
-    guestsNumber,
-    kingBeds,
-    queenBeds,
-    roomSize,
-    roomSizeUnit,
-    sameTypeRooms,
-    smookingAllow,
-    sofaBeds,
-    twinBeds,
-    unitType
-  );
-
-  //!bathroom details : [bathroomItems] are array
   const { privateBathroom, bathroomItems } = rooms[0].roomData?.bathroomDetails;
-  console.log("Bathroom Details Data: ", privateBathroom, bathroomItems);
-
-  //!room features : [foodAndDrink, outdoorsAndViews]
-  const { foodAndDrink, mainView, outdoorsAndViews } =
+  const { foodAndDrink, mainView, outdoorsAndViews , generalAmenities} =
     rooms[0].roomData?.roomFeatures;
-  console.log("Room Features Data: ", foodAndDrink, mainView, outdoorsAndViews);
-
-  //!room name, room price
   const { roomName, roomPrice } = rooms[0].roomData;
-  console.log("Room Name and Room Price: ", roomName, roomPrice);
-
-  //!image URL
-  console.log("All Image: ", rooms[0].roomData.addPhotos.allImage);
-  console.log("Main Image Name:", rooms[0].roomData.addPhotos.imageName);
-
-  // console.log("first", hotelData);
-  // console.log("sec", rooms);
-
-  // dispatch
-  const dispatch = useDispatch();
-  // confirmhotelState
-  const [confirmhotel, setConfirmhotel] = useState(
-    hotelData.confirmHotel ? hotelData.confirmHotel : []
-  );
-  const [errorMessage, setErrorMessage] = useState(null);
-  // submit & validation
+  const roomAnotherImage = rooms[0]?.roomData?.addPhotos?.allImage;
+  console.log("jdf",roomAnotherImage)
+  const room_main_image  = rooms[0]?.roomData?.addPhotos?.imageName;
+  const service_type = localStorage.getItem("serviceType");
+  const {guestPayment } = (roomData)
+  const {invoiceName ,sameAddress, legalCompanyName} = (roomData.invoiceInfo)
+  const { userEmail } = useContext(AuthContext); 
+  // Submit All Data
   const handleOnSubmit = () => {
-    if (confirmhotel.length !== 2) {
-      setErrorMessage("Select all agreements!");
-    } else {
-      // dispatch
-      dispatch(
-        confirmHotel({
-          confirmHotel: confirmhotel,
-        })
-      );
-      // setCookie
-      setCookie(
-        "hotelData",
-        { ...hotelData, confirmHotel: confirmhotel },
-        "1h"
-      );
-      //TODO: need to hit API to save these data in DB
-      console.log({ registerData, hotelData, rooms });
+    const info = {
+      service_type,
+      stay_type: title,
+      stay_type_description: description,
+      how_many_hotel_text: text,
+      country,
+      street_name: streetAddress,
+      sub_district: subDistrict,
+      district,
+      zip_code: zipCode,
+      division,
+      primary_place_name: primaryPlaceName,
+      place_name: placeName,
+      near_spot_names: spotNames.map((item) => ({
+        near_spot_name: item?.spot_name,
+        about: item?.about,
+        activity: item?.activity,
+        district: item?.district,
+        division: item?.division,
+        image: item?.image,
+        known_as: item?.known_as,
+        primary_place_name: item?.primary_place_name,
+        remarkable_address: item?.remarkable_address,
+        sub_district: item?.sub_district,
+      })),
+      spot_to_hotel_distance: distanceToSpot,
+      hotel_name: hotelName,
+      hotel_star: hotelRating,
+      property_company_chain: propertyManagementEntity,
+      property_company_name: managementEntityName,
+      hotel_pacilities: popularFacilities.map((item) => ({
+        pacilitie_name: item,
+      })),
+      serve_breakfast: serveToGuest,
+      breakfast_include_main_price: priceIncluded,
+      price_person_day: pricePerPersonAndDay,
+      breakfast_type: breakfastsTypes.map((item) => ({
+        food_type: item?.text,
+      })),
+      parking_available: available,
+      reserve_parking_spot: reserve,
+      parking_location: located,
+      parking_type: type,
+      hotel_staff_speak: registerLanguages.map((item) => ({
+        staff_speak: item,
+      })),
+      check_in_time_from: checkinfrom,
+      check_in_time_to: checkinuntil,
+      check_out_time_from: checkoutfrom,
+      check_out_time_to: checkoutuntil,
+      allow_children: allowChildren,
+      allow_pets: allowPet,
+      allow_petPrice: petFee,
+      unit_type: unitType,
+      total_room: sameTypeRooms,
+      bed_name,
+      bed_number,
+      total_person_stay: guestsNumber,
+      room_size: roomSize,
+      allow_smoking: smookingAllow,
+      bathroom_private: privateBathroom,
+      bathroom_service: bathroomItems.map((item) => ({
+        service_name: item,
+      })),
+      room_general_amenities: generalAmenities?.map((item) => ({
+        service_name: item,
+      })),
+      outdoor_view: outdoorsAndViews?.map((item) => ({
+        outdoor_view: item,
+      })),
+      outdoor_view_main: mainView,
+      room_food_drinks: foodAndDrink?.map((item) => ({
+        service_name: item,
+      })),
+      room_name:roomName,
+      room_price: roomPrice,
+      room_main_image,
+      room_another_image: roomAnotherImage.map((item) => ({
+        another_image: item.image,
+      })),
+      charge_credit_card: guestPayment,
+      invoice_name: invoiceName,
+      invoice_legal_company_name: legalCompanyName,
+      legal_company_recipient_same_address: sameAddress,
+      owner_email: userEmail,
+    };
+    // console.log("All Page Data", info?.room_another_image);
 
-      console.log(
-        "Hotel Information data: ",
-        hotelName,
-        hotelRating,
-        managementEntityName,
-        distanceToSpot,
-        placeName,
-        primaryPlaceName,
-        propertyManagementEntity,
-        spotNames
-      );
-
-      const hotelRegisterInfo = {
-        country,
-        street_name: streetAddress,
-        district,
-        sub_district: subDistrict,
-        division,
-        Zip_code: zipCode,
-        place_name: placeName,
-        hotel_name: hotelName,
-        hotel_star: hotelRating,
-      };
-
-      // router
-      // router.push("/dashboard");
-    }
+    fetch(
+      "http://159.223.78.171:5000/businessServicesAdd",
+      {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(info),
+      }
+    )
+      .then((response) => response.json())
+      .then((infoData) => {
+        console.log(infoData);
+        if (infoData?.status === "Successfully") {
+          localStorage.removeItem("hotelData")
+          localStorage.removeItem("rooms")
+          localStorage.removeItem("registerData")
+          localStorage.removeItem("roomData")
+          localStorage.removeItem("serviceType")
+          toast.success(infoData.status, {
+            icon: "👏",
+          });    
+          // router
+            router.push("/");      
+        } else {
+          toast.error(infoData?.error);
+        }
+      })
+      .catch((errors) => {
+        console.log(errors);
+      });
+      
   };
   return (
     <div className="py-5 max-w-[500px]">
@@ -256,25 +237,43 @@ const ConfirmHotel = () => {
             </div>
           </div>
           <hr />
-
-          <CustomCheckbox
-            options={[
-              "I certify that this is a legitimate accomodation business with all necessary licenses and permits, which can be shown upon request. Ovigo reserves the right to verify and investigate any details provided in this registration.",
-              "I have read, accepted, and agreed to the General Delivery Terms.",
-            ]}
-            name="confirmhotel"
-            label="Please check all the agreement"
-            defaultValue={confirmhotel}
-            handleOnChange={(e) => setConfirmhotel(e.target.value)}
-          />
-          <InputError error={errorMessage} />
-        </div>
-      </div>
-      <div className="pt-5">
-        <Button className="w-full" onClick={handleOnSubmit}>
+          <form onSubmit={handleSubmit(handleOnSubmit)}>
+          <div className="flex justify-start gap-2 items-center lg:mt-10 mb-5 mt-3">
+                <input
+                  required={true}
+                  {...register("checkbox", {
+                    required: "checkbox",
+                  })}
+                  type="checkbox"
+                  className="checkbox-sm bg-transparent "
+                />
+                <p className="m-0 text-[#344054] lg:text-base">
+                I certify that this is a legitimate accomodation business with all necessary licenses and permits, which can be shown upon request. Ovigo reserves the right to verify and investigate any details provided in this registration.
+                </p>
+              </div>
+              <div className="flex justify-start gap-2 items-center lg:mt-10 mb-5 mt-3">
+                <input
+                  required={true}
+                  {...register("checkbox", {
+                    required: "checkbox",
+                  })}
+                  type="checkbox"
+                  className="checkbox-sm bg-transparent "
+                />
+                <p className="m-0 text-[#344054] lg:text-base">
+                I have read, accepted, and agreed to the General Delivery Terms.
+                </p>
+              </div>
+              <div className="pt-5">
+        <Button className="w-full" type="submit">
           Submit
         </Button>
       </div>
+          </form>
+          
+        </div>
+      </div>
+      
     </div>
   );
 };

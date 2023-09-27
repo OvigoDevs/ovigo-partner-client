@@ -25,7 +25,7 @@ const RegisterWithEmail = () => {
       })
     );
     fetch(
-      "https://ovigo-backend-nqj2iwkbs-nazmulbhuyian.vercel.app/businessUsersReg",
+      "http://159.223.78.171:5000/businessUsersReg",
       {
         method: "POST",
         headers: { "content-type": "application/json" },
