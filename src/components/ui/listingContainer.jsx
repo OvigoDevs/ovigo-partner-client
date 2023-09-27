@@ -1,8 +1,12 @@
-import React from "react";
+"use client";
+
+import React, { useContext } from "react";
 import ListingContent from "./listingContent";
 import Link from "next/link";
+import { AuthContext } from "../context/AuthProvider";
 
 const ListingContainer = () => {
+  const { userEmail } = useContext(AuthContext);
   return (
     <div className="flex justify-center w-full px-2 mt-20">
       <div className="lg:w-[1000px] mx-auto bg-[#E7F8F7] dark:bg-gray-700 rounded-3xl p-10 shadow-lg">
@@ -20,12 +24,25 @@ const ListingContainer = () => {
           </p>
         </div>
         <div className="flex justify-center mt-10">
-          <Link
-            href="/register/service-category"
-            className="main-button md:w-[614px] w-full text-center"
-          >
-            Get Started
-          </Link>
+          {userEmail ? (
+            <>
+              <Link
+                href="/register/service-category"
+                className="main-button md:w-[614px] w-full text-center"
+              >
+                Get Started
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link
+                href="/login"
+                className="main-button md:w-[614px] w-full text-center"
+              >
+                Login First
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </div>

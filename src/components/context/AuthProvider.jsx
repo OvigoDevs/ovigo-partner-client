@@ -1,3 +1,5 @@
+"use client";
+
 import React, { createContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext(null);
@@ -15,16 +17,13 @@ const AuthProvider = ({ children }) => {
 
       if (token) {
         try {
-          const response = await fetch(
-            "http://159.223.78.171:5000/getMe",
-            {
-              method: "GET",
-              headers: {
-                "content-type": "application/json",
-                authorization: `bearer ${token}`,
-              },
-            }
-          );
+          const response = await fetch("http://159.223.78.171:5000/getMe", {
+            method: "GET",
+            headers: {
+              "content-type": "application/json",
+              authorization: `bearer ${token}`,
+            },
+          });
           const data = await response.json();
           if (data?.status === "Successfully") {
             setUserEmail(data?.email);

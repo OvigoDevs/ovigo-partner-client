@@ -1,11 +1,16 @@
+"use client";
 import Image from "next/image";
 import horn from "../../assets/home/horn.png";
 import hero1 from "../../assets/home/hero-1.png";
 import hero2 from "../../assets/home/hero-2.png";
 import hero3 from "../../assets/home/hero-3.png";
 import hero4 from "../../assets/home/hero-4.png";
+import Link from "next/link";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthProvider";
 
 const Hero = () => {
+  const { userEmail } = useContext(AuthContext);
   return (
     <div>
       {/* dark:bg-[#020817] */}
@@ -24,7 +29,22 @@ const Hero = () => {
                 <p className="text-[36px] font-medium text-[#2F2F2F] mt-4 dark:text-gray-500">
                   List Resorts now!
                 </p>
-                <button className="main-button mt-10">Register Now</button>
+
+                {userEmail ? (
+                  <>
+                    <Link href="/register/service-category">
+                      <button className="main-button mt-10">Get Started</button>
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <Link href="/register/with-email">
+                      <button className="main-button mt-10">
+                        Register Now
+                      </button>
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
 
