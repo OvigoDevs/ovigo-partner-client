@@ -31,7 +31,7 @@ const CreatePassword = () => {
       const passwordData = { ...validPassword, password };
       console.log("main Data", passwordData);
       fetch(
-        "https://ovigo-backend-6duwsqi2k-nazmulbhuyian.vercel.app/businessUsersReg",
+        "http://159.223.78.171:5000/businessUsersReg",
         {
           method: "PATCH",
           headers: { "content-type": "application/json" },

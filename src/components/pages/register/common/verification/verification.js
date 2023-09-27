@@ -18,7 +18,7 @@ const Verification = ({ email }) => {
     const bodydata = { otp, email };
     console.log(data);
     fetch(
-      "https://ovigo-backend-nqj2iwkbs-nazmulbhuyian.vercel.app/businessUsersReg/verifyOTP",
+      "https://ovigo-backend-ahpkvl6su-nazmulbhuyian.vercel.app/businessUsersReg/verifyOTP",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -42,7 +42,7 @@ const Verification = ({ email }) => {
     const resentData = { email };
     console.log(resentData);
     fetch(
-      "https://ovigo-backend-nqj2iwkbs-nazmulbhuyian.vercel.app/businessUsersReg/resendOTP",
+      "https://ovigo-backend-ahpkvl6su-nazmulbhuyian.vercel.app/businessUsersReg/resendOTP",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

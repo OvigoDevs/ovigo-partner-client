@@ -20,7 +20,7 @@ const Login = () => {
   } = useForm();
   const handleLogin = (data) => {
     fetch(
-      "https://ovigo-backend-nqj2iwkbs-nazmulbhuyian.vercel.app/businessUsersLog",
+      "http://159.223.78.171:5000/businessUsersLog",
       {
         method: "POST",
         headers: {
@@ -35,7 +35,7 @@ const Login = () => {
           toast.error(loginData.message);
         } else {
           localStorage.setItem("ovigoLogInToken", loginData?.ovigoLogInToken);
-          toast(loginData.status, {
+          toast("Successfully Login", {
             icon: "👏",
           });
           router.push("/register/service-category");
