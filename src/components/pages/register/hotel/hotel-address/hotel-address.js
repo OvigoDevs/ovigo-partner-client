@@ -1,21 +1,18 @@
 "use client";
 
-import Backlink from "@/components/core/backlink/backlink";
 import IconWrapper from "@/components/core/icon-wrapper/icon-wrapper";
 import InputError from "@/components/core/input-error/input-error";
 import { Button } from "@/components/ui/button";
 import { setCookie } from "@/lib/cookie";
 import { hotelAddress } from "@/redux/features/register_slice";
-import { Lightbulb } from "lucide-react";
-import { ThumbsUp } from "lucide-react";
+import { Lightbulb, ThumbsUp } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { districts } from "../allPlacesData/districts";
-import { subDistricts } from "../allPlacesData/sub-district";
-import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { divisions } from "../allPlacesData/divisions";
-import { useQuery } from "@tanstack/react-query";
+import { subDistricts } from "../allPlacesData/sub-district";
 
 const HotelAddress = () => {
   const router = useRouter();
@@ -126,15 +123,12 @@ const HotelAddress = () => {
   }, []);
 
   return (
-    <div className="py-5">
-      <Backlink
-        link="/register/hotel/hotel-type-confirmation"
-        text="Hotel type confirmation"
-      />
-      <p>Where is the property that you are listing?</p>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2">
-        <div>
+    <div className="lg:py-14 py-5">
+      <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-10 gap-3">
+        <div className="card">
+          <p className="sub_title text-black">
+            Where is the property that you are listing?
+          </p>
           <div className="mt-5 space-y-3">
             <div className="grid grid-cols-1 gap-2">
               <label>Country/Region</label>
@@ -315,17 +309,19 @@ const HotelAddress = () => {
             </div>
           </div>
           <hr className="my-5" />
-          <Button className="max-w-[150px]" onClick={handleSubmit}>
-            Next
-          </Button>
+          <div className="flex justify-end">
+            <Button className="max-w-[150px]" onClick={handleSubmit}>
+              Continue
+            </Button>
+          </div>
         </div>
-        <div className="grid grid-cols-1 gap-4 py-5 pl-5">
-          <div className="flex gap-3 p-2 border rounded-md">
+        <div className="flex flex-col items-center justify-center gap-10">
+          <div className="flex gap-3 p-5 border rounded-md h-max w-full">
             <IconWrapper>
-              <ThumbsUp className="mt-[4px]" />
+              <ThumbsUp className="mt-[4px] text-[#26DE81]" />
             </IconWrapper>
             <div className="space-y-3">
-              <h3 className="font-semibold">
+              <h3 className="sub_title text-black">
                 What needs to be included in my address?
               </h3>
               <ul className="list-disc space-y-1">
@@ -344,12 +340,12 @@ const HotelAddress = () => {
               </ul>
             </div>
           </div>
-          <div className="flex gap-3 p-2 border rounded-md">
+          <div className="flex gap-3 p-5 border rounded-md w-full h-[150px]">
             <IconWrapper>
-              <Lightbulb className="mt-[4px]" />
+              <Lightbulb className="mt-[4px] text-[#26DE81]" />
             </IconWrapper>
             <div className="space-y-3">
-              <h3 className="font-semibold">
+              <h3 className="sub_title text-black">
                 Why do i need to add my address?
               </h3>
               <p>

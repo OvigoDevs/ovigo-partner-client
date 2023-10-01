@@ -1,7 +1,6 @@
+import { CheckSquare, Square } from "lucide-react";
 import { useEffect, useState } from "react";
 import IconWrapper from "../icon-wrapper/icon-wrapper";
-import { Square } from "lucide-react";
-import { CheckSquare } from "lucide-react";
 
 const CustomCheckbox = ({
   options,
@@ -27,7 +26,7 @@ const CustomCheckbox = ({
   }, [defaultValue]);
   return (
     <div className="grid grid-cols-1 gap-3">
-      <p>{label}</p>
+      <p className="text-base font-semibold mb-3">{label}</p>
       <div
         className={`grid grid-cols-1 ${
           options.length > 9 ? "md:grid-cols-1" : ""

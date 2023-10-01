@@ -142,8 +142,8 @@ label {
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
   border-radius: 16px;
 }
-.form-input{
-  @apply border border-gray-200 dark:border-gray-600 px-2 py-[9px] rounded-md focus:outline-none focus:border-gray-400 dark:bg-[#00000000]
+.form-input {
+  @apply border border-gray-200 dark:border-gray-600 px-2 py-[9px] rounded-md focus:outline-none focus:border-gray-400 dark:bg-[#00000000];
 }
 // input,
 // textarea,
@@ -184,4 +184,23 @@ label {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+.title {
+  @apply font-semibold text-[#081634] text-4xl;
+}
+
+.sub_title {
+  @apply text-base font-semibold;
+}
+.card_btn {
+  @apply bg-primary py-5 text-center rounded-b-[15px] text-base font-semibold text-white;
+}
+
+.back_btn {
+  @apply bg-white px-[18px] py-[10px] shadow-sm rounded-md border text-base text-[#344054] font-medium;
+}
+
+.card {
+  @apply px-10 py-6 border rounded-[15px];
 }

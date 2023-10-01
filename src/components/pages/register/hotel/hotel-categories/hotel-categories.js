@@ -1,10 +1,10 @@
-import Backlink from "@/components/core/backlink/backlink";
 import IconWrapper from "@/components/core/icon-wrapper/icon-wrapper";
 import InputError from "@/components/core/input-error/input-error";
 import { Button } from "@/components/ui/button";
 import { setCookie } from "@/lib/cookie";
 import { hotelCategories } from "@/redux/features/register_slice";
 import { Check } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -121,11 +121,12 @@ const HotelCategories = () => {
     }
   }, []);
   return (
-    <div className="section-d">
+    <div className="lg:py-14 py-10">
       <div className="grid grid-cols-1 gap-2">
-        <Backlink link="/register/service-category" text="Service category" />
-        <h3 className="font-bold">Hotel categories</h3>
-        <p>
+        <h3 className="title mb-3">
+          <span className="text-[#26DE81]">Hotel </span> categories
+        </h3>
+        <p className="sub_title text-black">
           From the list below, which property category is the best fit for your
           place?
         </p>
@@ -160,14 +161,20 @@ const HotelCategories = () => {
       </div>
 
       <InputError error={errors} />
-      <Button
-        onClick={() => {
-          selectedHotel ? handleOnNext() : setErrors("Select at least one!");
-        }}
-        className="mt-5"
-      >
-        Next
-      </Button>
+      <div className="flex items-center justify-end gap-5">
+        <div>
+          <Link href="/register/service-category" className="back_btn">
+            Back
+          </Link>
+        </div>
+        <Button
+          onClick={() => {
+            selectedHotel ? handleOnNext() : setErrors("Select at least one!");
+          }}
+        >
+          Continue
+        </Button>
+      </div>
     </div>
   );
 };

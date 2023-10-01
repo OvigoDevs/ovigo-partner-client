@@ -1,27 +1,25 @@
-import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
-import { Check } from "lucide-react";
 import IconWrapper from "@/components/core/icon-wrapper/icon-wrapper";
-import { Hotel } from "lucide-react";
-import { Newspaper } from "lucide-react";
-import { useDispatch, useSelector } from "react-redux";
-import { useRouter } from "next/navigation";
-import { noOfHotels } from "@/redux/features/register_slice";
-import { setCookie } from "@/lib/cookie";
-import Backlink from "@/components/core/backlink/backlink";
 import InputError from "@/components/core/input-error/input-error";
+import { Button } from "@/components/ui/button";
+import { setCookie } from "@/lib/cookie";
+import { noOfHotels } from "@/redux/features/register_slice";
+import { Check, Hotel, Newspaper } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const NoOfHotel = () => {
   const options = [
-    // {
-    //   id: 0,
-    //   text: "Multiple hotels with one or multiple rooms that guests can book",
-    //   icon: (
-    //     <IconWrapper>
-    //       <Newspaper />
-    //     </IconWrapper>
-    //   ),
-    // },
+    {
+      id: 0,
+      text: "Multiple hotels with one or multiple rooms that guests can book",
+      icon: (
+        <IconWrapper>
+          <Newspaper />
+        </IconWrapper>
+      ),
+    },
     {
       id: 1,
       text: "One hotel with one or multiple rooms that guests can book",
@@ -58,13 +56,10 @@ const NoOfHotel = () => {
     }
   }, []);
   return (
-    <div className="section-d max-w-[500px]">
-      <Backlink
-        link="/register/hotel/hotel-categories"
-        text="Hotel categories"
-      />
-      <p>How many hotel are you listing?</p>
-
+    <div className="lg:py-14 py-5 max-w-[500px]">
+      <p className="sub_title text-black lg:mb-6 mb-3">
+        How many hotel are you listing?
+      </p>
       <div className="rounded-md mt-5 grid grid-cols-1 gap-4">
         {options.map((item) => {
           const { id, text, icon } = item;
@@ -96,14 +91,21 @@ const NoOfHotel = () => {
       {errors ? <hr className="my-5" /> : null}
       <InputError error={errors} />
       <hr className="my-5" />
-      <Button
-        className="max-w-[150px]"
-        onClick={() => {
-          selectedOption ? handleOnNext() : setErrors("Select at least one!");
-        }}
-      >
-        Continue
-      </Button>
+      <div className="flex items-center justify-end gap-5">
+        <div>
+          <Link href="/register/hotel/hotel-categories" className="back_btn">
+            Back
+          </Link>
+        </div>
+        <Button
+          className="max-w-[150px]"
+          onClick={() => {
+            selectedOption ? handleOnNext() : setErrors("Select at least one!");
+          }}
+        >
+          Continue
+        </Button>
+      </div>
     </div>
   );
 };
